@@ -12,12 +12,17 @@
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
 <script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="jsp/js/myhy.js"></script>
+
 <style>
 <!--
 body,td,th {
 	font-size: 14px;
 }
 -->
+	* {margin:0;padding:0;}
+#imglist {list-style:none; width:500px; margin:50px auto;}
+#imglist li {float:left; margin-top:10px;}
 </style>
 <script language="javascript">
 function calcIdCard(){
@@ -291,6 +296,7 @@ change3(0);
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
 						<td align="left" colspan="5">
+						<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 							<c:if test="${!empty  client.photoPath}">
 								<img src='${client.photoPath} 'class="pimg" width="120" height="120">
 							</c:if>

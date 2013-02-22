@@ -929,11 +929,13 @@ change3(0);
 					<tr>
 						
 						<td align="right"  >贷款本金(元)</td>
-						<td align="left"><c:out value="${salePrice-onePay } "/></td>
+						<td align="left"><c:out value="${totalPrice-selfAmount } "/></td>
 						<td align="right"  ></td>
 						<td align="left"></td>
 						<td  align="right">每月还款日</td>
-						<td align="left"><input type="text" name="clientJob.monthOfDate"  value ="${clientJob.monthOfDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>			 
+						
+						<td align="left">
+						<input type="text" name="clientJob.monthOfDate"  value ="<fmt:formatDate value="${monthOfDay}" type="date" pattern="yyyy-MM-dd"/>"/></td>			 
 					</tr>
 
 					<tr>
