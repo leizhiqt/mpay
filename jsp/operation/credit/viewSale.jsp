@@ -771,27 +771,17 @@ change3(0);
 						<td align="left"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>			 
 					</tr>
 
+				<c:forEach var="bank" items="${banks}" varStatus="s">
 					<tr>
-					    
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
 						<td align="left"> <c:out value="${bank.debitCard} "/></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
 				        <td align="left"><c:out value="${bank.bankName}"/></td>
 						<td  align="right">月花费(元/月)</td>
 						<td align="left"><c:out value="${bank.monthPay} "/></td>
-					
-					</tr>
-
-					<tr>
-						
-						<td align="right"  >第二银行卡号</td>
-						<td align="left"><c:out value="${bank2.debitCard} "/></td>
-						<td align="right"  >第二银行卡开户银行</td>
-				    	<td align="left"><c:out value="${bank2.bankName} "/></td>
-					  
-						
-					</tr>
-
+					</tr>	
+				</c:forEach>
+				
 				</table>
 			</div>
 

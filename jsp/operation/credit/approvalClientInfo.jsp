@@ -1113,31 +1113,27 @@ table.tab_css_1 td.td_css{
 		                                       </td>
 		  </tr>
 		
-			<tr>
-				<td align="right"   class="td_css">
+			
+
+				
+				<c:forEach var="bank" items="${banks}" varStatus="s">
+				<tr>
+								<td align="right"   class="td_css">
 					客户银行卡号/账号:
 				</td>
-			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out   value="${bank2.bankName }" /></td>
+			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out   value="${bank.debitCard }" /></td>
 							<td align="right" class="td_css">
 								客户开户银行:
 							</td>
-						  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out   value="${bank2.bankName }"
+						  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out   value="${bank.bankName }"
 	 /></td>
 							<td align="right" class="td_css">
 								月花费(元/月):
 							</td>
-						  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-				<td align="right"  class="td_css">
-					第二银行卡号:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-		
-				<td align="right"  class="td_css">
-					第二银行卡开户银行:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-		
-								  </tr>
+						  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${bank.monthPay }"/></td>
+					</tr>	
+				</c:forEach>
+
 								</tbody>
 							</table>
 

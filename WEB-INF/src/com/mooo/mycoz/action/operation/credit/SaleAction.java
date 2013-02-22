@@ -701,6 +701,10 @@ public class SaleAction extends BaseSupport {
 			client.retrieve();
 			request.setAttribute("client",client );
 
+			Bank bank = new Bank();
+			bank.setClientId(client.getId());
+			request.setAttribute("banks", bank.searchAndRetrieveList());
+			
 			// 处理户籍地址
 			AddressBook censusAddressBook = new AddressBook();
 			censusAddressBook.setId(client.getCensusAddressBookId());

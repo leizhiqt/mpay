@@ -15,6 +15,7 @@ import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
+import com.mooo.mycoz.dbobj.wineBranch.Bank;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
@@ -198,6 +199,10 @@ public class ClientInfoAction extends BaseSupport {
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
 		
+			Bank bank = new Bank();
+			bank.setClientId(client.getId());
+			request.setAttribute("banks", bank.searchAndRetrieveList());
+			
 			//处理座机号在其他合同中出现
 			MultiDBObject dbobject6 = new MultiDBObject();
 			dbobject6.addTable(ClientJob.class,"clientJob" );
