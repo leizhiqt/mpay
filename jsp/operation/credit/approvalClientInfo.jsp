@@ -1061,30 +1061,33 @@ table.tab_css_1 td.td_css{
         	<table class="tab_css_1" width="98%" >
 					<tbody>
 						<tr>
-                        	<td rowspan="3" width="100px" class="td_css"><strong> 信用信息 </strong></td>
+                        	<td rowspan="2" width="100px" class="td_css"><strong> 信用信息 </strong></td>
 							<td align="right"  class="td_css">
 								产品:
 							</td>
 							<td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${financialProduct.financialName }"/></td>
-				<td align="right"  class="td_css">
-					商品总价:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out    value="${clientJob.totalPrice }"  /></td>
-				<td align="right" class="td_css">
-					贷款用途:
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${clientJob.byUse }"/></td>
-				<td align="right"  class="td_css">
-					自付金额(元):
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${clientJob.selfAmount }"/></td>
-				<td align="right"  class="td_css">
-					分期期数:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out value="${financialProduct.cycleTotal }"/> </td>
+						<td align="right"  class="td_css">
+							商品总价:
+						</td>
+					  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out    value="${clientJob.totalPrice }"  /></td>
+						<td align="right" class="td_css">
+							贷款用途:
+						</td>
+					  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${clientJob.byUse }"/></td>
+						<td align="right"  class="td_css">
+							自付金额(元):
+						</td>
+					  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${clientJob.selfAmount }"/></td>
+						<td align="right"  class="td_css">
+							分期期数:
+						</td>
+					  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out value="${financialProduct.cycleTotal }"/> </td>
 		  </tr>
-		
-			<tr>
+								</tbody>
+							</table>
+		<table class="tab_css_1"  width="98%">
+				<tr>
+				<td rowspan="2" width="100px" class="td_css"><strong> 银行卡信息 </strong></td>
 				<td align="right"  class="td_css">
 					每月还款额(元):
 				</td>
@@ -1092,7 +1095,6 @@ table.tab_css_1 td.td_css{
 				<td align="right"  class="td_css">
 					贷款本金(元):<c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/>
 				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"></td>
 				
 			  <td align="left" id="guest_info56" style="padding-left:4px;"></td>
 				<td align="right"  class="td_css">
@@ -1110,7 +1112,8 @@ table.tab_css_1 td.td_css{
 		                                      					<input type="checkbox" name="contract.crAgentPay"
 										value="银行代扣还款" id="contract.crAgentPay-1"
 										checked="checked" disabled="disabled" size="10">
-		                                       </td>
+		        </td>
+		        <td></td><td></td>
 		  </tr>
 		
 			
@@ -1133,9 +1136,8 @@ table.tab_css_1 td.td_css{
 						  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${bank.monthPay }"/></td>
 					</tr>	
 				</c:forEach>
-
-								</tbody>
-							</table>
+							
+		</table>
 
 		  <table class="tab_css_1"  width="98%" >
 		<tbody>
