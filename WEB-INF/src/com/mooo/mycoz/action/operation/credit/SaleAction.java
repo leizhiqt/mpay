@@ -566,10 +566,10 @@ public class SaleAction extends BaseSupport {
 			if(tBank.getDebitCard()!=null){
 				nextId = IDGenerator.getNextID(tx.getConnection(),
 						Bank.class);
-				uf.bindData(oBank, "oBank");
-				oBank.setId(nextId);
+				uf.bindData(tBank, "tBank");
+				tBank.setId(nextId);
 				
-				oBank.add(tx.getConnection());
+				tBank.add(tx.getConnection());
 			}
 			tx.commit();
 		} catch (Exception e) {
