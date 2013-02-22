@@ -898,7 +898,7 @@ change3(0);
 						<td align="left"><c:out value="${financialProduct.financialName }"/><input type="hidden" name="clientJob.financialProductId" value="${pId }"/></td>
 						<td align="right">商品总价</td>
 						<td align="left">
-							<c:out value="${totalPrice }"/><input type="text" name="clientJob.totalPrice"  value="${totalPrice }"/>
+							<c:out value="${totalPrice }"/><input type="hidden" name="clientJob.totalPrice"  value="${totalPrice }"/>
 						</td>
 					  	<td align="right">贷款用途</td>
 						<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
