@@ -173,7 +173,7 @@
 	</c:url>
 	
 	<c:url value="/Sale.do" var="editURL">
-		<c:param name="method">list</c:param>
+		<c:param name="method">promptEdit</c:param>
 		<c:param name="id">${item.clientJob.id }</c:param>
 	</c:url>
 	
