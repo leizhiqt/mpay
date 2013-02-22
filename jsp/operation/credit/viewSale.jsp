@@ -469,7 +469,7 @@ change3(0);
 				  	  <td align="left"><c:out value="${livingAddressBook.community}"/>
                       </td>
 					  <td align="right"  >栋/单元/房间号</td>
-					  <td align="left"><c:out value="${livingAddressBookhouseNo}"/>
+					  <td align="left"><c:out value="${livingAddressBook.houseNo}"/>
                       </td>
 					</tr>
 					<tr  >
@@ -522,7 +522,7 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 				        <td align="left"><c:out value="${homeAddressBook.community}"/> </td>
 					    <td align="right"  >栋/单元/房间号</td>
-				        <td align="left"><c:out value="${homeAddressBookhouseNo}"/></td>
+				        <td align="left"><c:out value="${homeAddressBook.houseNo}"/></td>
 					    <td align="right"  >其它</td>
 					    <td align="left"><c:out value="${homeAddressBook.other}"/></td>
 					</tr>
