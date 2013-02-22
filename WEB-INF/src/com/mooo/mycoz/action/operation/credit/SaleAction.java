@@ -23,6 +23,7 @@ import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
+import com.mooo.mycoz.dbobj.wineBranch.Bank;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
@@ -551,6 +552,25 @@ public class SaleAction extends BaseSupport {
 				tSale.add(tx.getConnection());
 			}
 			
+			Bank oBank = new Bank();
+			oBank.setClientId(client.getId());
+			nextId = IDGenerator.getNextID(tx.getConnection(),
+					Bank.class);
+			uf.bindData(oBank, "oBank");
+			oBank.setId(nextId);
+			oBank.add(tx.getConnection());
+
+			Bank tBank = new Bank();
+			tBank.setClientId(client.getId());
+			uf.bindData(tBank, "tBank");
+			if(tBank.getDebitCard()!=null){
+				nextId = IDGenerator.getNextID(tx.getConnection(),
+						Bank.class);
+				uf.bindData(oBank, "oBank");
+				oBank.setId(nextId);
+				
+				oBank.add(tx.getConnection());
+			}
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

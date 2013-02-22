@@ -1090,7 +1090,7 @@ table.tab_css_1 td.td_css{
 				</td>
 			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${clientJob.monthOfPay }"  /></td>
 				<td align="right"  class="td_css">
-					贷款本金(元):<c:out value="${clientJob.totalPay-clientJob.selfAmount }"/>
+					贷款本金(元):<c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/>
 				</td>
 			  <td align="left" id="guest_info54" style="padding-left:4px;"></td>
 				

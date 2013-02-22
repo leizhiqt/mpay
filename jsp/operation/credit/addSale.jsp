@@ -941,24 +941,22 @@ change3(0);
 					<tr>
 					    
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
-						<td align="left"><input type="text" name="bank.debitCard"
+						<td align="left"><input type="text" name="oBank.debitCard"
 							maxlength="24" /></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
-				        <td align="left"><input type="text" name="bank.bankName"
+				        <td align="left"><input type="text" name="oBank.bankName"
 							maxlength="50" /></td>
 						<td  align="right">月花费(元/月)</td>
-						<td align="left"><input type="text" name="bank.monthPay" /></td>
+						<td align="left"><input type="text" name="oBank.monthPay" /></td>
 					
 					</tr>
 
 					<tr>
 						
 						<td align="right"  >第二银行卡号</td>
-						<td align="left"><input type="text" name="bank2.debitCard" /></td>
+						<td align="left"><input type="text" name="tBank.debitCard" /></td>
 						<td align="right"  >第二银行卡开户银行</td>
-				    	<td align="left"><input type="text" name="bank2.bankName" /></td>
-					  
-						
+				    	<td align="left"><input type="text" name="tBank.bankName" /></td>
 					</tr>
 
 				</table>

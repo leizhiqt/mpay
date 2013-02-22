@@ -237,14 +237,14 @@ public class Test {
 //		bd.dbToBean("payBranch","StoreUser");
 
 //		bd.dbToBean("payShared","JobCheck");
-//		bd.dbToBean("payBranch","ClientJobCheck");
+		bd.dbToBean("payBranch","Bank");
 
 //		bd.dbToBean("payShared","Store");
 //		bd.dbToBean("payShared","StoreType");
 //		bd.dbToBean("payShared","FinancialProduct");
 
 		
-		bd.dbToBean("payBranch","ClientJobTrack");
+//		bd.dbToBean("payBranch","ClientJobTrack");
 		
 //		bd.dbToBean("wineBranch","Product");
 
