@@ -271,7 +271,8 @@ public class SaleAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 
 			dbobject.setRetrieveField("store", "storeName");
-			dbobject.setOrderBy("clientJob", "jobDate","DESC");
+			
+			dbobject.setOrderBy("clientJobTrack", "jobDate","DESC");
 			
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());

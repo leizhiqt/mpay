@@ -148,7 +148,9 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("jobType", "nextState");
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("store", "storeName");
-			dbobject.setOrderBy("clientJob", "id");
+			
+			dbobject.setOrderBy("clientJobTrack", "jobDate","DESC");
+			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
