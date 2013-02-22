@@ -179,7 +179,7 @@
 	
 	<a href="${viewURL }"><fmt:message key="View"/></a>
 	
-	<c:if test="${item.jobType.jobKey=='T' }">
+	<c:if test="${item.jobType.jobKey=='T'}">
 		<a href="${editURL }"><fmt:message key="Edit"/></a>
 	</c:if>
 	<%--

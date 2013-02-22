@@ -1020,8 +1020,7 @@ table.tab_css_1 td.td_css{
 						<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
 							<td>
-							
-								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
+							<a href="${clientDoc.filepath}">附件${s.index }</a>
 							</td>
 							</c:forEach>
 						</tr>
@@ -1122,12 +1121,10 @@ table.tab_css_1 td.td_css{
 				</td>
 			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${clientJob.monthOfPay }"  /></td>
 				<td align="right"  class="td_css">
-					贷款本金(元):
+					贷款本金(元):<c:out value="${clientJob.totalPay-clientJob.selfAmount }"/>
 				</td>
 			  <td align="left" id="guest_info54" style="padding-left:4px;"></td>
-				<td align="right"  class="td_css">
-					首次还款日:
-				</td>
+				
 			  <td align="left" id="guest_info56" style="padding-left:4px;"></td>
 				<td align="right"  class="td_css">
 					每月还款日:
