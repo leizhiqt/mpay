@@ -1030,62 +1030,31 @@ table.tab_css_1 td.td_css{
 		</tr>
         </table>
         <table class="tab_css_1" width="98%" >
-					<tbody>
-						<tr>
-                        <td align="center" width="100px" class="td_css"><strong>
-			  商品1
-			</strong></td>
-							<td align="right" class="td_css">
-								商品:
-							</td>
-							<td align="left" id="guest_info52" style="padding-left:4px;">1</td>
-				<td align="right"  class="td_css">
-					商品类型:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;">2</td>
-				<td align="right"  class="td_css">
-					价格(元):
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;">3</td>
-				<td align="right"  class="td_css">
-					品牌:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;">4</td>
-				<td align="right"  class="td_css">
-					型号:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;">5</td>
-					  </tr>
-					</tbody>
-				</table>
-        	 <table class="tab_css_1" width="98%">
-					<tbody>
-						<tr>
-                        <td align="center" width="100px" class="td_css"><strong>
-			  商品2
-			</strong></td>
-							<td align="right"  class="td_css">
-								商品:
-							</td>
-							<td align="left" id="guest_info52" style="padding-left:4px;">1</td>
-				<td align="right" class="td_css">
-					商品类型:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;">2</td>
-				<td align="right" class="td_css">
-					价格(元):
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;">3</td>
-				<td align="right"  class="td_css">
-					品牌:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;">4</td>
-				<td align="right"  class="td_css">
-					型号:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;">5</td>
-					  </tr>
-					</tbody>
+        
+        					<c:forEach var="sale" items="${sales}" varStatus="s">
+								<tr  >
+									<th colspan="6" align="left" class="tr8"><strong>商品 ${s.index }</strong></th>
+								</tr>
+								<tr>
+			
+									<td align="right"  ><b style="color:red">*</b> 商品 ${s.index }</td>
+									<td align="left"><c:out value="${sale.saleName}"/></td>
+									<td align="right"  >商品类型</td>
+							        <td align="left"></td>
+								    <td align="right"  >价格（元）</td>
+									<td align="left"><c:out value="${sale.salePrice}"/></td>
+								</tr>
+								
+								<tr>
+
+									<td align="right"  >品牌</td>
+									<td align="left"><c:out value="${sale.brand}"/></td>
+									<td align="right"  >型号</td>
+							        <td align="left"><c:out value="${sale.modelNo}"/></td>
+								    <td align="right"  ></td>
+									<td></td>
+								</tr>
+							</c:forEach>
 				</table>
         	
             

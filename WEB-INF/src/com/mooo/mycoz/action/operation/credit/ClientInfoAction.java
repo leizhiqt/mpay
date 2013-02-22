@@ -19,6 +19,7 @@ import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobCheck;
+import com.mooo.mycoz.dbobj.wineBranch.ClientJobSale;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
 import com.mooo.mycoz.dbobj.wineBranch.StoreUser;
 import com.mooo.mycoz.dbobj.wineBranch.User;
@@ -183,6 +184,10 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setId(new Integer(clientJobId));
 			clientJob.retrieve();
 			request.setAttribute("clientJob", clientJob);
+			
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			request.setAttribute("sales",clientJobSale.searchAndRetrieveList());
 			
 			Client client = new Client();
 			client.setId(clientJob.getClientId());
