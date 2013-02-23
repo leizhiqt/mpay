@@ -916,7 +916,7 @@ change3(0);
 						<td align="right"  >自付金额(元)</td>
 						
 						<td align="left">
-							<c:out value="${selfAmount }"/><input type="text" name="clientJob.selfAmount"  value="${selfAmount }"/>
+							<c:out value="${selfAmount }"/><input type="hidden" name="clientJob.selfAmount"  value="${selfAmount }"/>
 						</td>
 						<td align="right"  >分期期数</td>
 						
