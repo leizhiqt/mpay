@@ -267,8 +267,7 @@ public class ClientInfoAction extends BaseSupport {
 			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(clientJob.getId());
-			clientJobTrack.setProcessId(0);
-			clientJobTrack.setJobTypeId(2);
+			clientJobTrack.setProcessId(-1);
 			
 			if(clientJobTrack.count()>0){
 				clientJobTrack.retrieve();
@@ -590,9 +589,13 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("processAddCheck");
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		String clientJobId=request.getParameter("id");
+		Transaction tx = null;
 		try {
+			tx = new Transaction();
+			tx.start();
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
@@ -614,24 +617,35 @@ public class ClientInfoAction extends BaseSupport {
 			int nextId=0;
 			
 			if(checkCount>0){
-				clientJobTrack.retrieve();
-				
-				nextId = IDGenerator.getNextInt(ClientJobCheck.class);
-				ClientJobCheck clientJobCheck = new ClientJobCheck();
-				ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
-				
-				clientJobCheck.setId(nextId);
-				clientJobCheck.setJobTrackId(clientJobTrack.getId());
-				clientJobCheck.add();
+				clientJobTrack.retrieve(tx.getConnection());
+			}else{
+				nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
+				clientJobTrack.setId(nextId);
+				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.setProcessId(-1);
+				clientJobTrack.add();
 			}
+			
+			nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
+			ClientJobCheck clientJobCheck = new ClientJobCheck();
+			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
+			
+			clientJobCheck.setId(nextId);
+			clientJobCheck.setJobTrackId(clientJobTrack.getId());
+			clientJobCheck.add(tx.getConnection());
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
+			tx.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
+	
+		} finally {
+			tx.end();
 		}
 		return "promptApproval";
 	}
@@ -696,6 +710,8 @@ public class ClientInfoAction extends BaseSupport {
 					clientJobTrack.setProcessId(0);
 					clientJobTrack.add(tx.getConnection());
 				}
+				
+				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
 				tx.rollback();
