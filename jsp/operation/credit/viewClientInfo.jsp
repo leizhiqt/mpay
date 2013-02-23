@@ -1202,7 +1202,7 @@ table.tab_css_1 td.td_css{
 				<td><c:out value="${clientJobTracks.clientJobTrack.id}"></c:out>  </td>
 				<td><c:out value="${clientJobTracks.user.name }"/></td>
 				<td><c:out value="${clientJobTracks.jobType.jobKey }"/></td>
-				<td><c:out value="${clientJobTracks.jobType.jobRemark }"/></td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.jobRemark }"/></td>
 				<td><fmt:formatDate value="${clientJobTracks.clientJobTrack.jobDate }" type="both" /></td>
 				</tr>
 				</c:forEach>

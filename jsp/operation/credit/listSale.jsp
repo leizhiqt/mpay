@@ -212,6 +212,7 @@
 	<option value="FQHT">分期合同</option>
 	<option value="HTZY">还款指引</option>
 	<option value="SPJF">商品交付书</option>
+	<option value="HKS">化款授权书</option>
 </select>
 		
 <jsp:include page="../../incl/actionb.jsp">

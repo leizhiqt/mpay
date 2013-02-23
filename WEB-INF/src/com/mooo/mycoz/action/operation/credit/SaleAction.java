@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -589,65 +588,6 @@ public class SaleAction extends BaseSupport {
 		return "list";
 	}
 
-	
-	/*
-	public String processConfirm(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processConfirm");
-		Integer sessionId = ActionSession.getInteger(request,ActionSession.USER_SESSION_KEY);
-		
-		Transaction tx =new Transaction();
-		try {
-			String[] ids =  request.getParameterValues("id");
-			
-			if(ids==null)
-				throw new Exception("Please select delete object");
-			
-			if(ids!=null)
-				for(int i=0;i<ids.length;i++){
-					
-					ClientJobTrack clientJobTrack = new ClientJobTrack();
-					clientJobTrack.setClientJobId(new Integer(ids[i]));
-					clientJobTrack.setProcessId(0);
-					clientJobTrack.setJobTypeId(2);
-					
-					int checkCount = clientJobTrack.count(tx.getConnection());
-					
-					if(checkCount > 0 ){
-						throw new Exception("已经提交 请耐心等待审核!");
-					}
-					
-					ClientJobTrack orgTrack = new ClientJobTrack();
-					orgTrack.setClientJobId(new Integer(ids[i]));
-					int jobCount = orgTrack.count(tx.getConnection());
-					
-					orgTrack.setProcessId(0);
-					orgTrack.retrieve(tx.getConnection());
-					
-					orgTrack.setProcessId(jobCount);
-					orgTrack.update(tx.getConnection());
-					
-					clientJobTrack = new ClientJobTrack();
-					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-					clientJobTrack.setUserId(sessionId);
-					clientJobTrack.setJobDate(new Date());
-					clientJobTrack.setJobRemark(orgTrack.getJobRemark());
-					clientJobTrack.setProcessId(0);
-					clientJobTrack.setClientJobId(new Integer(ids[i]));
-					clientJobTrack.setJobTypeId(2);
-					clientJobTrack.add(tx.getConnection());
-				}
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-
-			request.setAttribute("error", e.getMessage());
-			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
-		}
-		return "list";
-	}
-	*/
 	public String processDelete(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -927,19 +867,25 @@ public class SaleAction extends BaseSupport {
 		try{
 			String xmlStr = null;
 			if(noteType.equals("FQHT")){
-				xmlStr=xmlFQHT(request,response);
+//				xmlStr=xmlFQHT(request,response);
 				xslt="hts.xsl";
 				noteName="FQHT";
 			}else if(noteType.equals("HTZY")){
-				xmlStr=xmlHTZY(request,response);
+//				xmlStr=xmlHTZY(request,response);
 				xslt="hkzys.xsl";
 				noteName="HTZY";
 			}else if(noteType.equals("SPJF")){
-				xmlStr=xmlSPJF(request,response);
+//				xmlStr=xmlSPJF(request,response);
 				xslt="spjhs.xsl";
 				noteName="SPJF";
+			}else if(noteType.equals("HKS")){
+//				xmlStr=xmlSPJF(request,response);
+				xslt="hks.xsl";
+				noteName="HKS";
 			}
 			
+			xmlStr=xmlFQHT(request,response);
+
 			xml=physicalPath+"tmp/"+System.currentTimeMillis()+".xml";
 			xslt=physicalPath+"jsp/xslt/"+xslt;
 			
@@ -995,9 +941,31 @@ public class SaleAction extends BaseSupport {
 			buffer.append("<StoreName>"+store.getStoreName()+"</StoreName>\n");
 			buffer.append("<StoreKey>"+store.getStoreKey()+"</StoreKey>\n");
 			
+			buffer.append("<TotalPrice>"+clientJob.getTotalPrice()+"</TotalPrice>\n");
+			buffer.append("<SelfAmount>"+clientJob.getSelfAmount()+"</SelfAmount>\n");
+			buffer.append("<MonthOfPay>"+clientJob.getMonthOfPay()+"</MonthOfPay>\n");
+			buffer.append("<MonthOfDate>"+clientJob.getMonthOfDate()+"</MonthOfDate>\n");
+			buffer.append("<JobDate>"+clientJob.getJobDate()+"</JobDate>\n");
+			buffer.append("<IdNo>"+client.getIdNo()+"</IdNo>\n");
+
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			
+			buffer.append("<TotalPay>"+(clientJob.getMonthOfPay()*financialProduct.getCycleTotal())+"</TotalPay>\n");
+
+			buffer.append("<CycleTotal>"+financialProduct.getCycleTotal()+"</CycleTotal>\n");
+
 			ClientJobSale clientJobSale = new ClientJobSale();
 			clientJobSale.setClientJobId(clientJob.getId());
 			
+			Bank bank = new Bank();
+			bank.setClientId(client.getId());
+			bank.retrieve();
+			
+			buffer.append("<BankName>"+bank.getBankName()+"</BankName>\n");
+			buffer.append("<DebitCard>"+bank.getDebitCard()+"</DebitCard>\n");
+
 			List sales = clientJobSale.searchAndRetrieveList();
 			
 			for(Object obj:sales){
@@ -1020,7 +988,7 @@ public class SaleAction extends BaseSupport {
 
 		return buffer.toString();
 	}
-	
+	/*
 	public String xmlHTZY(HttpServletRequest request,HttpServletResponse response) {
 		
 		StringBuilder buffer = new StringBuilder();
@@ -1110,4 +1078,5 @@ public class SaleAction extends BaseSupport {
 		buffer.append("</SN>\n");
 		return buffer.toString();
 	}
+	*/
 }

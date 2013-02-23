@@ -41,15 +41,11 @@ exclude-result-prefixes="fo">
 		</fo:block>
 		<!-- 1 table -->
 		<fo:table border="1pt solid black" >  
-		<fo:table-column column-width="6cm"/>
-		<fo:table-column column-width="6cm"/>
-		<fo:table-column column-width="6cm"/>
+		<fo:table-column column-width="8cm"/>
+		<fo:table-column column-width="8cm"/>
 		
 		<fo:table-header>
 		  <fo:table-row>
-		    <fo:table-cell  border="1pt solid black" >
-		      <fo:block  space-before="1mm"  text-align="left" padding-left="2mm" font-size="8pt">应付总金额（元）:<xsl:value-of select="TotalMoney"/>￥ </fo:block>
-		    </fo:table-cell>
 		    <fo:table-cell  border="1pt solid black" font-size="8pt">
 		      <fo:block  space-before="1mm" text-align="left" padding-left="2mm" >每月还款额:<xsl:value-of select="MonthOfDate"/>￥ </fo:block>
 		    </fo:table-cell>
@@ -62,10 +58,10 @@ exclude-result-prefixes="fo">
 		<fo:table-body>
 		  <fo:table-row>
 		    <fo:table-cell  border="1pt solid black">
-		      <fo:block  space-before="1mm" font-size="8pt">首次还款日:</fo:block>
+		      <fo:block  space-before="1mm" font-size="8pt" >首次还款日:<xsl:value-of select="MonthOfDate"/></fo:block>
 		    </fo:table-cell>
-		    <fo:table-cell  border="1pt solid black" number-columns-spanned="2" > //number-columns-spanned="2"
-		      <fo:block  space-before="1mm" font-size="8pt"> 每月还款日：</fo:block>
+		    <fo:table-cell  border="1pt solid black"> 
+		      <fo:block  space-before="1mm" font-size="8pt" > 每月还款日：<xsl:value-of select="JobDate"/></fo:block>
 		    </fo:table-cell>
 		    
 		  </fo:table-row>
@@ -131,7 +127,7 @@ exclude-result-prefixes="fo">
 		<fo:block  space-before="1mm" font-size="8pt"> 开户银行：</fo:block>
 		</fo:table-cell>
 		<fo:table-cell  border="1pt solid black">
-		<fo:block  space-before="1mm" font-size="8pt">中国银行</fo:block>
+		<fo:block  space-before="1mm" font-size="8pt"><xsl:value-of select="BankName"/></fo:block>
 		</fo:table-cell>
 		</fo:table-row>
 		<fo:table-row>
@@ -139,7 +135,7 @@ exclude-result-prefixes="fo">
 		<fo:block  space-before="1mm" font-size="8pt">户名：</fo:block>
 		</fo:table-cell>
 		<fo:table-cell  border="1pt solid black">
-		<fo:block  space-before="1mm" font-size="8pt">$48000</fo:block>
+		<fo:block  space-before="1mm" font-size="8pt"><xsl:value-of select="ClientName"/></fo:block>
 		</fo:table-cell>
 		</fo:table-row>
 		<fo:table-row>
@@ -147,7 +143,7 @@ exclude-result-prefixes="fo">
 		<fo:block  space-before="1mm" font-size="8pt">指定还款账号：</fo:block>
 		</fo:table-cell>
 		<fo:table-cell  border="1pt solid black">
-		<fo:block  space-before="1mm" font-size="8pt">$48000</fo:block>
+		<fo:block  space-before="1mm" font-size="8pt"><xsl:value-of select="DebitCard"/></fo:block>
 		</fo:table-cell>
 		</fo:table-row>
 		</fo:table-body>
