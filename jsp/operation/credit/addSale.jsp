@@ -295,6 +295,13 @@ change3(0);
 						<th align="left" colspan="6" class="tr8"  ><strong>客户资料</strong></th>
 					</tr>
 					<tr>
+						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
+						<td align="left" colspan="2"><input type="file" name="clientPhoto"  /> </td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
 
 						<td align="right" ><b style="color:red">*</b> 姓名</td>
 						<td align="left" width="240px" ><input type="text" name="client.clientName" value="${client.clientName }" onBlur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
@@ -377,7 +384,6 @@ change3(0);
 					    <td align="right"  >电子邮箱</td>
 					    <td align="left"><input type="text" name="client.email" value="${client.email}"/></td>
 					</tr>
-
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>配偶资料</strong></th>
 
@@ -848,7 +854,7 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 商品1</td>
 						<td align="left"><input type="text" name="oSale.saleName" value="${oSale.saleName }"/></td>
 						<td align="right"  >商品类型</td>
-				        <td align="left"><input type="text" name="" value="${ }"/></td>
+				        <td align="left"><input type="text" name="" value=""/></td>
 					    <td align="right"  >价格（元）</td>
 						<td align="left"><input type="text" name="oSale.salePrice" value="${oSale.salePrice }"/></td>
 					</tr>
