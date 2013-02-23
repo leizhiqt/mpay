@@ -521,6 +521,7 @@ public class SaleAction extends BaseSupport {
 			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),ClientJob.class, "jobNo", IDGenerator.getBatchSN(store.getStoreKey(), 6)));
 			clientJob.setStoreId(store.getId());
 			clientJob.setBranchId(branchId);
+			clientJob.setJobDate(new Date());
 			clientJob.add(tx.getConnection());
 
 			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
