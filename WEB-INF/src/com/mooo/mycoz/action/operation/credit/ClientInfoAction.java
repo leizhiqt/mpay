@@ -382,8 +382,6 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 			if (log.isDebugEnabled())
 				log.debug("promptApproval");
-			Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-
 			String clientJobId=request.getParameter("id");
 			String value = null;
 
@@ -676,10 +674,6 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.setId(new Integer(clientJobId));
 				clientJob.retrieve(tx.getConnection());
 				request.setAttribute("clientJob", clientJob);
-				String cc=request.getParameter("cc");
-				String oc=request.getParameter("oo");
-				clientJob.setCc(cc);
-				clientJob.setOc(oc);
 				clientJob.update(tx.getConnection());
 
 				//写入日志文件
@@ -713,6 +707,15 @@ public class ClientInfoAction extends BaseSupport {
 					clientJobTrack.setProcessId(0);
 					clientJobTrack.add(tx.getConnection());
 				}
+				
+				ClientJobCheck clientJobCheck = new ClientJobCheck();
+				ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
+				
+				int nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
+				clientJobCheck.setId(nextId);
+				clientJobCheck.setJobTrackId(clientJobTrack.getId());
+				clientJobCheck.setCheckTime(new Date());
+				clientJobCheck.add(tx.getConnection());
 				
 				tx.commit();
 			} catch (Exception e) {
