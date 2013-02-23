@@ -30,6 +30,7 @@
 	operation.addChildAction(new Action(sessionId,"LoginStore","LoginStore.do"));
 	operation.addChildAction(new Action(sessionId,"Sales","Sale.do"));
 	operation.addChildAction(new Action(sessionId,"Approval","ClientInfo.do"));
+	operation.addChildAction(new Action(sessionId,"Audit","Audit.do"));
 
 	mainMenu.add(operation);
 	/*

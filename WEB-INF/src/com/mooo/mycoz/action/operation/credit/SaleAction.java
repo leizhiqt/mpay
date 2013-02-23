@@ -248,10 +248,10 @@ public class SaleAction extends BaseSupport {
 				dbobject.setField("clientJob", "storeId", new Integer(value));
 			
 			if(!StringUtils.isNull(startDate))
-				dbobject.setGreaterEqual("clientJobTrack", "jobDate", startDate);
+				dbobject.setGreaterEqual("clientJob", "jobDate", startDate);
 			
 			if(!StringUtils.isNull(endDate))
-				dbobject.setLessEqual("clientJobTrack", "jobDate", endDate);
+				dbobject.setLessEqual("clientJob", "jobDate", endDate);
 			
 			dbobject.setField("clientJobTrack", "processId", 0);
 

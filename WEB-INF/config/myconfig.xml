@@ -261,6 +261,11 @@
 			<result name="processAddCheck"></result>
 		</action>
 		
+		<action	name="Audit" default="list"
+			class="com.mooo.mycoz.action.operation.credit.AuditAction">
+			<result name="list">/jsp/operation/credit/listAudit.jsp</result>
+		</action>
+		
 		<!-- Report -->
 		<action	name="Report" default="patrolReport"
 			class="com.mooo.mycoz.action.report.ReportAction">

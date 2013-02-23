@@ -29,6 +29,7 @@ import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
@@ -125,10 +126,10 @@ public class ClientInfoAction extends BaseSupport {
 				dbobject.setField("clientJob", "storeId", new Integer(value));
 			
 			if(!StringUtils.isNull(startDate))
-				dbobject.setGreaterEqual("clientJobTrack", "jobDate", startDate);
+				dbobject.setGreaterEqual("clientJob", "jobDate", startDate);
 			
 			if(!StringUtils.isNull(endDate))
-				dbobject.setLessEqual("clientJobTrack", "jobDate", endDate);
+				dbobject.setLessEqual("clientJob", "jobDate", endDate);
 			
 			dbobject.setField("clientJobTrack", "processId", 0);
 
@@ -141,7 +142,7 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("clientJob", "selfAmount");
 			dbobject.setRetrieveField("clientJob", "monthOfPay");
 			dbobject.setRetrieveField("clientJob", "jobNo");
-			dbobject.setRetrieveField("clientJobTrack", "jobDate");
+			dbobject.setRetrieveField("clientJob", "jobDate");
 			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
 			dbobject.setRetrieveField("user", "name");
 			dbobject.setRetrieveField("jobType", "jobKey");
@@ -149,7 +150,12 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("store", "storeName");
 			
-			dbobject.setOrderBy("clientJobTrack", "jobDate","DESC");
+			dbobject.setOrderBy("clientJob", "jobDate","DESC");
+			
+			Page page = new Page();
+			page.buildComponent(request, dbobject.count());
+			
+			dbobject.setRecord(page.getOffset(),page.getPageSize());
 			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
