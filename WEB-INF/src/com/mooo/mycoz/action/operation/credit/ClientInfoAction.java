@@ -619,17 +619,17 @@ public class ClientInfoAction extends BaseSupport {
 			if(checkCount>0){
 				clientJobTrack.retrieve(tx.getConnection());
 			}else{
-				nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
+				nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class);
 				clientJobTrack.setId(nextId);
 				clientJobTrack.setUserId(sessionId);
 				clientJobTrack.setProcessId(-1);
 				clientJobTrack.add();
 			}
 			
-			nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
 			ClientJobCheck clientJobCheck = new ClientJobCheck();
 			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
 			
+			nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
 			clientJobCheck.setId(nextId);
 			clientJobCheck.setJobTrackId(clientJobTrack.getId());
 			clientJobCheck.add(tx.getConnection());

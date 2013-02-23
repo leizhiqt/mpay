@@ -1192,7 +1192,7 @@ table.tab_css_1 td.td_css{
             <tr>
 					<td  class="textr"><fmt:message key="No."/></td>
 					<td  class="textr"><fmt:message key="UserName"/></td>
-					<td  class="textr"><fmt:message key="jobType"/></td>
+					<td  class="textr"><fmt:message key="JobType"/></td>
 					<td  class="textr"><fmt:message key="JobRemark"/></td>
 					<td  class="textr"><fmt:message key="JobDate"/></td>
 					
