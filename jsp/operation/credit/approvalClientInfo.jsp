@@ -1163,7 +1163,7 @@ table.tab_css_1 td.td_css{
 							结果
 						</td>
 						<td align="left"  class="td_css" style="padding-left:4px;">
-			审查员
+			备注
 		</td>
 		<td align="left"  class="td_css" style="padding-left:4px;">
 				审查时间
@@ -1176,7 +1176,7 @@ table.tab_css_1 td.td_css{
 					<td><c:out value="${item.jobCheck.checkType }"/></td>
 					<td><c:out value="${item.jobCheck.checkName }"/></td>
 					<td><c:out value="${item.clientJobCheck.checkRemark }"/></td>
-					<td><c:out value="${item.jobCheck.checkType }"/></td>
+					<td><fmt:formatDate value="${item.clientJobCheck.checkTime }" type="both" /></td>
 				 </tr>
 				</c:forEach>
 			</tbody>
@@ -1227,7 +1227,7 @@ table.tab_css_1 td.td_css{
 				备注
 			:</td>
 			<td  colspan="3">
-				<input type="text" name="cc" size="120" value="${clientJobCheck.checkRemark}">
+				<input type="text" name="clientJobCheck.checkRemark" size="120" value="${clientJobCheck.checkRemark}">
 		  </td>
 		
 		 <td id="guest_info75" >
@@ -1354,10 +1354,10 @@ table.tab_css_1 td.td_css{
 			</table>
 		<table class="tab_css_1" width="98%">
             <tbody>
-            <tr>	<td  class="textr"><fmt:message key="No."/></td>
+            <tr>	<td  class="textr"><fmt:message key="ID"/></td>
 					<td  class="textr"><fmt:message key="UserName"/></td>
-					<td  class="textr"><fmt:message key="NextState"/></td>
-					<td  class="textr"><fmt:message key="jobType"/></td>
+					<td  class="textr"><fmt:message key="State"/></td>
+					<td  class="textr"><fmt:message key="JobType"/></td>
 					<td  class="textr"><fmt:message key="JobRemark"/></td>
 					<td  class="textr"><fmt:message key="JobDate"/></td>
 					

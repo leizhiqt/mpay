@@ -282,7 +282,8 @@ public class ClientInfoAction extends BaseSupport {
 				dbobject.setRetrieveField("jobCheck", "checkType");
 				dbobject.setRetrieveField("jobCheck", "checkName");
 				dbobject.setRetrieveField("clientJobCheck", "checkRemark");
-	
+				dbobject.setRetrieveField("clientJobCheck", "checkTime");
+
 				request.setAttribute("jobChecks", dbobject.searchAndRetrieveList());
 			}
 			
@@ -494,7 +495,8 @@ public class ClientInfoAction extends BaseSupport {
 					dbobject.setRetrieveField("jobCheck", "checkType");
 					dbobject.setRetrieveField("jobCheck", "checkName");
 					dbobject.setRetrieveField("clientJobCheck", "checkRemark");
-		
+					dbobject.setRetrieveField("clientJobCheck", "checkTime");
+
 					request.setAttribute("jobChecks", dbobject.searchAndRetrieveList());
 				}
 				
