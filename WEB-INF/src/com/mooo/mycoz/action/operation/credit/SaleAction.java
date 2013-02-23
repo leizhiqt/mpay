@@ -1092,20 +1092,17 @@ public class SaleAction extends BaseSupport {
 			
 			SimpleDateFormat dformat = new SimpleDateFormat("yyyy年MM月dd日");
 			Date vDate = clientJob.getMonthOfDate();
-			
 			buffer.append("<MonthOfDate>"+dformat.format(vDate)+"</MonthOfDate>\n");
 			
 			vDate = clientJob.getJobDate();
-			
 			buffer.append("<JobDate>"+dformat.format(vDate)+"</JobDate>\n");
-			
-			vDate = clientJob.getMonthOfDate();
-			dformat = new SimpleDateFormat("dd日");
-			
-			buffer.append("<PayOfMonth>"+dformat.format(vDate)+"</PayOfMonth>\n");
 			
 			vDate = clientJob.getJobDate();
 			buffer.append("<PayFirst>"+dformat.format(vDate)+"</PayFirst>\n");
+			
+			dformat = new SimpleDateFormat("dd日");
+			vDate = clientJob.getMonthOfDate();
+			buffer.append("<PayOfMonth>"+dformat.format(vDate)+"</PayOfMonth>\n");
 
 			buffer.append("<IdNo>"+client.getIdNo()+"</IdNo>\n");
 

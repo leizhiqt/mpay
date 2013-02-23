@@ -19,30 +19,28 @@ exclude-result-prefixes="fo">
 <fo:page-sequence master-reference="simpleA4">
 
     <fo:flow flow-name="xsl-region-body">
-		<fo:block font-size="16pt" font-weight="bold" space-before="5mm" text-align="center">
+		<fo:block font-size="18pt" font-weight="bold" space-before="5mm" text-align="center">
 			划款授权书
 		</fo:block>
-		<fo:block font-size="14pt" font-weight="bold" space-before="5mm"  text-align="left">		
+		<fo:block font-size="16pt" font-weight="bold" space-before="5mm"  text-align="left">		
 			成都汉易联信商贸有限公司：
 		</fo:block>
 			
-		<fo:block font-size="12pt"   text-align="left" space-before="5mm">
+		<fo:block font-size="12pt" margin-left="1cm"  text-align="left" space-before="5mm">
         	我为方便、快捷、安全的与贵公司开展货款支付业务，自愿向贵公司作如下授权：
         </fo:block>
         <fo:block font-size="12pt"   text-align="left" space-before="5mm">
-      		一、本人自愿授权通过 成都汉易联信商贸有限公司 按照<xsl:value-of select="ClientName"/>（身份证号<xsl:value-of select="IdNo"/>）购货及欠款情况将本人储蓄卡（折）
-      		
-      	</fo:block >
-      	<fo:block font-size="12pt"   text-align="left" space-before="1mm">
-      	，无需在每次划款前征求本人意见。
-        </fo:block>
+      		一、本人自愿授权通过 成都汉易联信商贸有限公司 按照<xsl:value-of select="ClientName"/>（身份证号<xsl:value-of select="IdNo"/>）购货及欠款情况将本人
+      		</fo:block>
+      		<fo:block  font-size="12pt"   text-align="left" space-before="5mm">
+      			储蓄卡（折），无需在每次划款前征求本人意见。
+       		 </fo:block>
 		<fo:block font-size="12pt"   text-align="left" space-before="5mm" >
-      		二、本人授权指定的划款账户户名为<xsl:value-of select="ClientName"/>，开户行为<xsl:value-of select="BankName"/>，</fo:block>
-      		<fo:block font-size="12pt"   text-align="left" space-before="1mm">
-      		（或卡号）为<xsl:value-of select="DebitCard"/>，身份证件类型 第二代  ，本人身份证件号：<xsl:value-of select="IdNo"/> 。
-        </fo:block>
+      		二、本人授权指定的划款账户户名为<xsl:value-of select="ClientName"/>，开户行为<xsl:value-of select="BankName"/>,（或卡号）为<xsl:value-of select="DebitCard"/>，身份证件类型 第二代 ，</fo:block>
+      		<fo:block font-size="12pt"   text-align="left" space-before="5mm">本人身份证件号：<xsl:value-of select="IdNo"/> 。</fo:block>
+        
         <fo:block font-size="12pt"   text-align="left" space-before="5mm" >
-      		三、本人承认对贵公司按第一条进行的划款行为，均视同本人自行划款的行为，其后果由我本人承担。                             。
+      		三、本人承认对贵公司按第一条进行的划款行为，均视同本人自行划款的行为，其后果由我本人承担。
         </fo:block>
         <fo:block font-size="12pt"   text-align="left" space-before="5mm" >
       		四、在本人书面提出"终止划款授权通知书"之前，本授权书始终有效。 
