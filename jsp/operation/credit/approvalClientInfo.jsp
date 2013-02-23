@@ -1217,7 +1217,7 @@ table.tab_css_1 td.td_css{
 				备注
 			:</td>
 			<td  colspan="3">
-				<c:out  value="${clientJobCheck.checkRemark}"  />
+				<input type="text" name="cc" size="120" value="${clientJobCheck.checkRemark}">
 		  </td>
 		
 		 <td id="guest_info75" >

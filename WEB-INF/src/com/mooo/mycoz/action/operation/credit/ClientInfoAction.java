@@ -632,6 +632,7 @@ public class ClientInfoAction extends BaseSupport {
 			nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobCheck.class);
 			clientJobCheck.setId(nextId);
 			clientJobCheck.setJobTrackId(clientJobTrack.getId());
+			clientJobCheck.setCheckTime(new Date());
 			clientJobCheck.add(tx.getConnection());
 			
 			if (log.isDebugEnabled())

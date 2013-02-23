@@ -759,9 +759,9 @@ change3(0);
 					    <td align="right">邮寄地址</td>
 						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
 							>
+							<option value="现居地址">现居地址</option>
 					        <option value="户籍地址">户籍地址</option>
 						    <option value="家庭地址">家庭地址</option>
-						     <option value="现居地址">现居地址</option>
 				        </select></td>
 					</tr>
 
