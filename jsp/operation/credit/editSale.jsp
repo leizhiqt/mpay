@@ -369,13 +369,12 @@ change3(0);
 			    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 				<td align="left"><select name="client.educationId" id="educationId"
 					>	
-						<option value="${client.educationId}"><c:out value="${client.educationId}"/></option>
-						<option value="0">小学</option>
-						<option value="1">初中</option>
-						<option value="2">高中</option>
-						<option value="3">职高，中专，技术学校</option>
-						<option value="4">大学</option>
-						<option value="5">硕士及以上</option>
+						<option value="小学">小学</option>
+						<option value="初中">初中</option>
+						<option value="高中">高中</option>
+						<option value="职高，中专，技术学校">职高，中专，技术学校</option>
+						<option value="大学">大学</option>
+						<option value="硕士及以上">硕士及以上</option>
 						
 				</select></td>
 			</tr>

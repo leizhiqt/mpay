@@ -484,41 +484,33 @@ public class ClientInfoAction extends BaseSupport {
 				String oc=request.getParameter("oo");
 				clientJob.setCc(cc);
 				clientJob.setOc(oc);
-				clientJob.update(tx.getConnection());;
+				clientJob.update(tx.getConnection());
+
 				//写入日志文件
 				ClientJobTrack clientJobTrack = new ClientJobTrack();
-				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
 				clientJobTrack.setClientJobId(new Integer(clientJobId));
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.setJobDate(new Date());
-				clientJobTrack.setBranchId(0);
-				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+clientJobTrack.getJobTypeId());
-				clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-				//clientJobTrack.setProcessId(0);
-				//clientJobTrack.setJobTypeId(2);
-				clientJobTrack.add(tx.getConnection());
-				tx.commit();
-//				int checkCount = clientJobTrack.count(tx.getConnection());
-//				if(checkCount > 0 ){
-//					ClientJobTrack orgTrack = new ClientJobTrack();
-//					orgTrack.setClientJobId(new Integer(clientJobId));
-//					int jobCount = orgTrack.count(tx.getConnection());
-//					
-//					orgTrack.setProcessId(0);
-//					orgTrack.retrieve();
-//					
-//					orgTrack.setProcessId(jobCount);
-//					orgTrack.update(tx.getConnection());
-//					
-//					clientJobTrack.retrieve();
-//					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
-//					
-//					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-//					clientJobTrack.setUserId(sessionId);
-//					clientJobTrack.setJobDate(new Date());
-//					clientJobTrack.setProcessId(0);
-//					clientJobTrack.add(tx.getConnection());
-//				}
+				
+				int checkCount = clientJobTrack.count(tx.getConnection());
+				if(checkCount > 0 ){
+					ClientJobTrack orgTrack = new ClientJobTrack();
+					orgTrack.setClientJobId(new Integer(clientJobId));
+					int jobCount = orgTrack.count(tx.getConnection());
+					
+					orgTrack.setProcessId(0);
+					orgTrack.retrieve();
+					
+					orgTrack.setProcessId(jobCount);
+					orgTrack.update(tx.getConnection());
+					
+					clientJobTrack.retrieve();
+					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
+					
+					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+					clientJobTrack.setUserId(sessionId);
+					clientJobTrack.setJobDate(new Date());
+					clientJobTrack.setProcessId(0);
+					clientJobTrack.add(tx.getConnection());
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();

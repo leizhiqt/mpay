@@ -20,7 +20,7 @@ public class Client extends DBObject {
 	private String marry;
 	private Integer childs;
 	private String housing;
-	private Integer educationId;
+	private String educationId;
 	private String homePhoneName;
 	private String homePhone;
 	private String telePhone;
@@ -178,7 +178,7 @@ public class Client extends DBObject {
 		this.housing = housing;
 	}
 
-	public Integer getEducationId() {
+	public String getEducationId() {
 		return educationId;
 	}
 
@@ -190,7 +190,7 @@ public class Client extends DBObject {
 		this.photoPath = photoPath;
 	}
 
-	public void setEducationId(Integer educationId) {
+	public void setEducationId(String educationId) {
 		this.educationId = educationId;
 	}
 

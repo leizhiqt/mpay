@@ -923,15 +923,15 @@ public class SaleAction extends BaseSupport {
 			String xmlStr = null;
 			if(noteType.equals("FQHT")){
 				xmlStr=xmlFQHT(request,response);
-				xslt="ht.xsl";
+				xslt="hts.xsl";
 				noteName="FQHT";
 			}else if(noteType.equals("HTZY")){
 				xmlStr=xmlHTZY(request,response);
-				xslt="hkzy.xsl";
+				xslt="hkzys.xsl";
 				noteName="HTZY";
 			}else if(noteType.equals("SPJF")){
 				xmlStr=xmlSPJF(request,response);
-				xslt="ht.xsl";
+				xslt="spjhs.xsl";
 				noteName="SPJF";
 			}
 			
@@ -990,26 +990,27 @@ public class SaleAction extends BaseSupport {
 			buffer.append("<StoreName>"+store.getStoreName()+"</StoreName>\n");
 			buffer.append("<StoreKey>"+store.getStoreKey()+"</StoreKey>\n");
 			
-			buffer.append("<Lookup>\n");
-			buffer.append("<ProductName>"+""+"</ProductName>\n");
-			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
-			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
-			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
-			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
-			buffer.append("</Lookup>\n");
-	
-			buffer.append("<Lookup>\n");
-			buffer.append("<ProductName>"+""+"</ProductName>\n");
-			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
-			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
-			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
-			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
-			buffer.append("</Lookup>\n");
-		
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			
+			List sales = clientJobSale.searchAndRetrieveList();
+			
+			for(Object obj:sales){
+				clientJobSale = (ClientJobSale)obj;
+				
+				buffer.append("<Lookup>\n");
+				buffer.append("<ProductName>"+clientJobSale.getSaleName()+"</ProductName>\n");
+				buffer.append("<ProductPrice>"+clientJobSale.getSalePrice()+"</ProductPrice>\n");
+				buffer.append("<ProductQuantity>"+"1"+"</ProductQuantity>\n");
+				buffer.append("<ProductModelNo>"+clientJobSale.getModelNo()+"</ProductModelNo>\n");
+				buffer.append("<ProductBrand>"+clientJobSale.getBrand()+"</ProductBrand>\n");
+				buffer.append("</Lookup>\n");
+			}
 		}catch(Exception e){
 			request.setAttribute("error", e.getMessage());
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 		}
+		
 		buffer.append("</SN>\n");
 
 		return buffer.toString();

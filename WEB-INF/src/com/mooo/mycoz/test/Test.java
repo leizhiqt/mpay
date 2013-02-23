@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,8 +50,8 @@ public class Test {
 		
 		
 		Test t = new Test();
-		t.dbTools();
-		
+//		t.dbTools();
+		t.test();
 	}
 
     /** 
@@ -324,7 +326,9 @@ public class Test {
 	
 	
 	public void test(){
-		System.out.println("Name:"+this.getClass().getPackage());
+		SimpleDateFormat dformat = new SimpleDateFormat("yyyy年MM月dd日");
+		System.out.println(dformat.format(new Date()));
+
 	}
 
 }
