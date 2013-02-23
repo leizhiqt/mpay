@@ -958,7 +958,7 @@ public class SaleAction extends BaseSupport {
 			request.setAttribute("homeAddressBook",homeAddressBook );
 			
 			AddressBook officeAddressBook = new AddressBook();
-			officeAddressBook.setId(client.getHomeAddressBookId());
+			officeAddressBook.setId(client.getOfficeAddressBookId());
 			officeAddressBook.retrieve();
 			request.setAttribute("officeAddressBook",officeAddressBook );
 			

@@ -140,7 +140,7 @@ table.tab_css_1 td.td_css{
                   <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
-                              <td align="left" colspan="11">&nbsp;</td>
+                              <td align="left" colspan="11"> <c:out value="${clientJob.saleRemark }"/></td>
             
                             </tr>
                         </tbody>

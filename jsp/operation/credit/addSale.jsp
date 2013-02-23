@@ -722,11 +722,11 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 						<td align="left"><select id="onWorkTime" name="client.onWorkTime">
 								<option value="0-1年">0-1年</option>
-								<option value="0-1年">1-2年</option>
-								<option value="0-1年">2-3年</option>
-								<option value="0-1年">3-5年</option>
-								<option value="0-1年">5-10年</option>
-								<option value="0-1年">大于10年</option>
+								<option value="1-2年">1-2年</option>
+								<option value="2-3年">2-3年</option>
+								<option value="3-5年">3-5年</option>
+								<option value="5-10年">5-10年</option>
+								<option value="大于10年">大于10年</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
 				        <td align="left"><input type="text" name="" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
