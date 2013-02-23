@@ -66,6 +66,16 @@ public class Client extends DBObject {
 	private String qq;
 	private String tbao;
 
+	private Integer  nowWorkingTime;
+	
+	public Integer getNowWorkingTime() {
+		return nowWorkingTime;
+	}
+
+	public void setNowWorkingTime(Integer nowWorkingTime) {
+		this.nowWorkingTime = nowWorkingTime;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,6 +37,7 @@ import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
+import com.mooo.mycoz.dbobj.wineShared.StoreType;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.component.UploadFile;
@@ -1070,11 +1072,16 @@ public class SaleAction extends BaseSupport {
 			store.setId(clientJob.getStoreId());
 			store.retrieve();
 			
+			StoreType storeType = new StoreType();
+			store.setId(store.getStoreTypeId());
+			store.retrieve();
+			request.setAttribute("storeType",storeType );
+			
 			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
 			buffer.append("<ClientID>"+client.getIdNo()+"</ClientID>\n");
 			buffer.append("<Address>"+addressBook.getProvince()+addressBook.getCity()+addressBook.getCounty()+addressBook.getTown()+addressBook.getStreet()+"</Address>\n");
-			buffer.append("<FromIn>"+client.getOnCompanyName()+"</FromIn>\n");
-			buffer.append("<TelePhone>"+client.getTelePhone()+"</TelePhone>\n");
+			buffer.append("<FromIn>"+client.getOnFullName()+"</FromIn>\n");
+			buffer.append("<TelePhone>"+client.getOnOfficePhone()+"</TelePhone>\n");
 			buffer.append("<Email>"+client.getEmail()+"</Email>\n");
 			buffer.append("<StoreName>"+store.getStoreName()+"</StoreName>\n");
 			buffer.append("<StoreKey>"+store.getStoreKey()+"</StoreKey>\n");
@@ -1082,10 +1089,29 @@ public class SaleAction extends BaseSupport {
 			buffer.append("<TotalPrice>"+clientJob.getTotalPrice()+"</TotalPrice>\n");
 			buffer.append("<SelfAmount>"+clientJob.getSelfAmount()+"</SelfAmount>\n");
 			buffer.append("<MonthOfPay>"+clientJob.getMonthOfPay()+"</MonthOfPay>\n");
-			buffer.append("<MonthOfDate>"+clientJob.getMonthOfDate()+"</MonthOfDate>\n");
-			buffer.append("<JobDate>"+clientJob.getJobDate()+"</JobDate>\n");
+			
+			SimpleDateFormat dformat = new SimpleDateFormat("yyyy年MM月dd日");
+			Date vDate = clientJob.getMonthOfDate();
+			
+			buffer.append("<MonthOfDate>"+dformat.format(vDate)+"</MonthOfDate>\n");
+			
+			vDate = clientJob.getJobDate();
+			
+			buffer.append("<JobDate>"+dformat.format(vDate)+"</JobDate>\n");
+			
+			vDate = clientJob.getMonthOfDate();
+			dformat = new SimpleDateFormat("dd日");
+			
+			buffer.append("<PayOfMonth>"+dformat.format(vDate)+"</PayOfMonth>\n");
+			
+			vDate = clientJob.getJobDate();
+			buffer.append("<PayFirst>"+dformat.format(vDate)+"</PayFirst>\n");
+
 			buffer.append("<IdNo>"+client.getIdNo()+"</IdNo>\n");
 
+			buffer.append("<StoreTypeKey>"+storeType.getTypeKey()+"</StoreTypeKey>\n");
+			buffer.append("<StoreTypeName>"+storeType.getTypeName()+"</StoreTypeName>\n");
+			
 			FinancialProduct financialProduct = new FinancialProduct();
 			financialProduct.setId(clientJob.getFinancialProductId());
 			financialProduct.retrieve();
@@ -1126,95 +1152,4 @@ public class SaleAction extends BaseSupport {
 
 		return buffer.toString();
 	}
-	/*
-	public String xmlHTZY(HttpServletRequest request,HttpServletResponse response) {
-		
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		buffer.append("<SN>\n");
-		
-		try {
-			String id = request.getParameter("id");
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(id));
-			clientJob.retrieve();
-			
-
-			Client client = new Client();
-			client.setId(clientJob.getClientId());
-			client.retrieve();
-			
-			FinancialProduct financialProduct = new FinancialProduct();
-			financialProduct.setId(clientJob.getFinancialProductId());
-			financialProduct.retrieve();
-			
-			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
-			buffer.append("<TotalMoney>"+clientJob.getMonthOfPay()*financialProduct.getCycleTotal()+"</TotalMoney>\n");
-			buffer.append("<MonthOfDate>"+clientJob.getMonthOfPay()+"</MonthOfDate>\n");
-			buffer.append("<CycleTotal>"+financialProduct.getCycleTotal()+"</CycleTotal>\n");
-			
-			}catch(Exception e){
-				request.setAttribute("error", e.getMessage());
-				if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
-			}
-		buffer.append("</SN>\n");
-		return buffer.toString();
-	}
-	private static SimpleDateFormat ddf=new SimpleDateFormat("yyyy年MM月dd日");
-	public String xmlSPJF(HttpServletRequest request,HttpServletResponse response) {
-		
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		buffer.append("<SN>\n");
-		try {
-			String id = request.getParameter("id");
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(id));
-			clientJob.retrieve();
-			
-			Client client = new Client();
-			client.setId(clientJob.getClientId());
-			client.retrieve();
-			
-			AddressBook addressBook = new AddressBook();
-			addressBook.setId(client.getLivingAddressBookId());
-			addressBook.retrieve();
-			
-			Store store = new Store();
-			store.setId(clientJob.getStoreId());
-			store.retrieve();
-			
-			//处理商品
-			ClientJobSale clientJobSale = new ClientJobSale();
-			clientJobSale.setClientJobId(clientJob.getId());
-			
-			List sales = clientJobSale.searchAndRetrieveList();
-			
-			for(Object obj:sales){
-				clientJobSale = (ClientJobSale)obj;
-				
-				buffer.append("<Lookup>\n");
-				buffer.append("<ProductName>"+clientJobSale.getSaleName()+"</ProductName>\n");
-				buffer.append("<ProductPrice>"+clientJobSale.getSalePrice()+"</ProductPrice>\n");
-				buffer.append("<ProductQuantity>"+"1"+"</ProductQuantity>\n");
-				buffer.append("<ProductModelNo>"+clientJobSale.getModelNo()+"</ProductModelNo>\n");
-				buffer.append("<ProductBrand>"+clientJobSale.getBrand()+"</ProductBrand>\n");
-				buffer.append("</Lookup>\n");
-			}
-			
-			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
-			buffer.append("<ClientID>"+client.getIdNo()+"</ClientID>\n");
-			buffer.append("<JobDate>"+ddf.format(clientJob.getJobDate())+"</JobDate>\n");
-			buffer.append("<SelfAmount>"+clientJob.getSelfAmount()+"</SelfAmount>\n");
-			
-		}catch(Exception e){
-			request.setAttribute("error", e.getMessage());
-			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
-		}
-		buffer.append("</SN>\n");
-		return buffer.toString();
-	}
-	*/
 }

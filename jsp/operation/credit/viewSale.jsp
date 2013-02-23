@@ -603,7 +603,7 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 						<td align="left"><c:out value="${client.onWorkTime}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
-				        <td align="left"> <c:out value="${client.onWorkTime}"/></td>
+				        <td align="left"> <c:out value="${client.nowWorkingTime}"/></td>
 					    <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>

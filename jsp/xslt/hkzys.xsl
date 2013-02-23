@@ -47,7 +47,7 @@ exclude-result-prefixes="fo">
 		<fo:table-header>
 		  <fo:table-row>
 		    <fo:table-cell  border="1pt solid black" font-size="8pt">
-		      <fo:block  space-before="1mm" text-align="left" padding-left="2mm" >每月还款额:<xsl:value-of select="MonthOfDate"/>￥ </fo:block>
+		      <fo:block  space-before="1mm" text-align="left" padding-left="2mm" >每月还款额:<xsl:value-of select="MonthOfPay"/>元</fo:block>
 		    </fo:table-cell>
 		      <fo:table-cell  border="1pt solid black" font-size="8pt">
 		      	<fo:block  space-before="1mm"  text-align="left" padding-left="2mm">分期期数：<xsl:value-of select="CycleTotal"/></fo:block>
@@ -58,10 +58,10 @@ exclude-result-prefixes="fo">
 		<fo:table-body>
 		  <fo:table-row>
 		    <fo:table-cell  border="1pt solid black">
-		      <fo:block  space-before="1mm" font-size="8pt" >首次还款日:<xsl:value-of select="MonthOfDate"/></fo:block>
+		      <fo:block  space-before="1mm" font-size="8pt" >首次还款日:<xsl:value-of select="PayFirst"/></fo:block>
 		    </fo:table-cell>
 		    <fo:table-cell  border="1pt solid black"> 
-		      <fo:block  space-before="1mm" font-size="8pt" > 每月还款日：<xsl:value-of select="JobDate"/></fo:block>
+		      <fo:block  space-before="1mm" font-size="8pt" > 每月还款日：<xsl:value-of select="PayOfMonth"/></fo:block>
 		    </fo:table-cell>
 		    
 		  </fo:table-row>

@@ -729,7 +729,7 @@ change3(0);
 								<option value="大于10年">大于10年</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
-				        <td align="left"><input type="text" name="" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
+				        <td align="left"><input type="text" name="client.nowWorkingTime"  value="${client.nowWorkingTime }" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
 					    <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>
