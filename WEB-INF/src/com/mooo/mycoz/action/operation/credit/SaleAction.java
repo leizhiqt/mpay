@@ -478,7 +478,7 @@ public class SaleAction extends BaseSupport {
 			if(StringUtils.isNull(client.getIdAuthority())){
 				throw new Exception("请填写发证机关");
 			}
-			if(StringUtils.isNull(client.getMobilePhone()) || client.getMobilePhone().length() != 11 ){
+			if(StringUtils.isNull(client.getMobilePhone())){
 				throw new Exception("请填写本人手机号或格式错误");
 			}
 			if(StringUtils.isNull(client.getMobileAddress())){
@@ -599,7 +599,6 @@ public class SaleAction extends BaseSupport {
 				throw new Exception("请输入商品名称");
 			}
 			
-			System.out.println("dd:"+client.getIdNo().length());
 			if(client.getIdNo()==null || (client.getIdNo().length()!=15 && client.getIdNo().length()!=18)){
 				throw new Exception("身份证非法输入");
 			}

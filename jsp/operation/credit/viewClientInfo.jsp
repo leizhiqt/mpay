@@ -1208,23 +1208,8 @@ table.tab_css_1 td.td_css{
 				</c:forEach>
 				</tbody>
 		</table>
-		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0"
-			id="tab2">
-			<tbody>
-				<tr>
-					<td width="52%" style="height: 22px;" >
-					<center>
-						<jsp:include page="../../incl/actionb.jsp" >
-							<jsp:param name="key" value="Confirm" />
-							<jsp:param name="action" value="ClientInfo.do" />
-							<jsp:param name="method" value="processApproval" />
-						</jsp:include>
-					</center>
-					</td>
-			</tr>
-		</tbody>
-					</table>
-				</form>
+
+		</form>
 </body>
 	</html>
 </fmt:bundle>
