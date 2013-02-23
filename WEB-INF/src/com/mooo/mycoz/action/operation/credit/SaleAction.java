@@ -264,6 +264,7 @@ public class SaleAction extends BaseSupport {
 			dbobject.setRetrieveField("clientJob", "selfAmount");
 			dbobject.setRetrieveField("clientJob", "monthOfPay");
 			dbobject.setRetrieveField("clientJob", "jobNo");
+			dbobject.setRetrieveField("clientJob", "jobDate");
 			dbobject.setRetrieveField("clientJobTrack", "jobDate");
 			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
 			dbobject.setRetrieveField("user", "name");
