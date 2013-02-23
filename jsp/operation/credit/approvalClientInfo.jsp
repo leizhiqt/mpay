@@ -72,39 +72,66 @@ table.tab_css_1 td.td_css{
 			</jsp:include>
 		</div>
 		
+				<table class="tab_css_1" width="98%" >
+            		<tr>
 		
+                <td width="100px" align="center"  class="td_css"><strong>
+                  销售顾问备注:
+                </strong></td>
+                <td width="88%">
+                  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                              <td align="left" colspan="11"> <c:out value="${clientJob.saleRemark }"/></td>
+            
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+				</tr>
+            </table>
 		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0" >
 				<tbody>
 				
 					<tr height="10px">
+						<td width="170px">
 			  			<c:out value="身份证号在下列合同中出现："/>
+			  			</td>
+			  			<td>
 			  			<c:forEach var="selfIdNoList" items="${selfIdNoList}" varStatus="s">
 								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${selfIdNoList.clientJob.id }' ><c:out value="${selfIdNoList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>	
 						<c:forEach var="spuseIdNoList" items="${spuseIdNoList}" varStatus="s">
 								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${spuseIdNoList.clientJob.id }' ><c:out value="${spuseIdNoList.clientJob.jobNo }"/></a>
-						</c:forEach>				
+						</c:forEach>	
+						</td>			
 					</tr>
+
 					<tr height="10px">
-						
-			  			
-					</tr>
-					<tr height="10px">
+						<td>
 						<c:out value="手机号在下列合同中出现："/>
+						</td>
+						<td>
 			  			<c:forEach var="selfPhoneList" items="${selfPhoneList}" varStatus="s">
 								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${selfPhoneList.clientJob.id }"><c:out value="${selfPhoneList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>
 						<c:forEach var="spusePhoneNoList" items="${spusePhoneNoList}" varStatus="s">
 								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${spusePhoneNoList.clientJob.id }"><c:out value="${spusePhoneNoList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>
+						</td>
 					</tr>
 					<tr height="10px">
+					<td>
 						<c:out value="座机号在下列合同中出现："/>
+					</td>
+					<td>
 			  			<c:forEach var="homePhoneNoList" items="${homePhoneNoList}" varStatus="s">
 								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${homePhoneNoList.clientJob.id }' ><c:out value="${homePhoneNoList.clientJob.jobNo }"/></a>
 						</c:forEach>
+					</td>
 					</tr>
-					
+		</table>
+		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0" >
 					<tr height="10px">
 		
 						<td height="28" colspan="2" align="right">
@@ -130,24 +157,7 @@ table.tab_css_1 td.td_css{
 				
 			</tbody>
 		</table>
-		<table class="tab_css_1" width="98%" >
-            		<tr>
-		
-                <td width="100px" align="center"  class="td_css"><strong>
-                  销售顾问备注:
-                </strong></td>
-                <td width="88%">
-                  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                              <td align="left" colspan="11"> <c:out value="${clientJob.saleRemark }"/></td>
-            
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-				</tr>
-            </table>
+
 		<table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0" >
 			<tbody>
 				<tr>
@@ -1326,7 +1336,9 @@ table.tab_css_1 td.td_css{
                   <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
-                              <td align="left" colspan="11">&nbsp;</td>
+                              <td align="left" colspan="11">
+									<c:out value="${clientJob.saleRemark }"/>
+							</td>
             
                             </tr>
                         </tbody>
