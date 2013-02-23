@@ -622,6 +622,7 @@ public class ClientInfoAction extends BaseSupport {
 				nextId = IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class);
 				clientJobTrack.setId(nextId);
 				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.setJobTypeId(2);
 				clientJobTrack.setProcessId(-1);
 				clientJobTrack.add();
 			}
@@ -705,6 +706,7 @@ public class ClientInfoAction extends BaseSupport {
 					clientJobTrack.setUserId(sessionId);
 					clientJobTrack.setJobDate(new Date());
 					clientJobTrack.setProcessId(0);
+					clientJobTrack.setJobTypeId(2);
 					clientJobTrack.add(tx.getConnection());
 				}
 				

@@ -415,7 +415,7 @@ public class SaleAction extends BaseSupport {
 			storeUser.setUserId(sessionId);
 			storeUser.setActive("Y");
 			
-			int acount=storeUser.count();
+			int acount=storeUser.count(tx.getConnection());
 			
 			if(acount<1)
 				throw new Exception("请先登录店铺");
