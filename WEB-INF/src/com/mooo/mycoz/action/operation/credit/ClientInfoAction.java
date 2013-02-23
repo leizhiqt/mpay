@@ -2,6 +2,8 @@ package com.mooo.mycoz.action.operation.credit;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -157,7 +159,25 @@ public class ClientInfoAction extends BaseSupport {
 			
 			dbobject.setRecord(page.getOffset(),page.getPageSize());
 			
-			request.setAttribute("clients", dbobject.searchAndRetrieveList());
+			List clients = dbobject.searchAndRetrieveList();
+			for(Object orow:clients){
+				Map rowm = (Map)orow;
+				
+				ClientJob clientJob = (ClientJob) rowm.get("clientJob");
+				
+				ClientJobTrack clientJobTrack = new ClientJobTrack();
+				clientJobTrack.setClientJobId(clientJob.getId());
+				clientJobTrack.setJobTypeId(1);
+				clientJobTrack.retrieve();
+				
+				User user = new User();
+				user.setId(clientJobTrack.getUserId());
+				user.retrieve();
+				
+				rowm.put("seller", user.getName());
+			}
+			
+			request.setAttribute("clients", clients);
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());

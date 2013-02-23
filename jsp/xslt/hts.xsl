@@ -60,12 +60,6 @@ exclude-result-prefixes="fo">
 						<fo:block font-size="7pt"   
 							 >
 							销售方
-							
-							<xsl:value-of select="Address"/>
-							<xsl:variable name="urlImagen">data:image/auto;base64,
-								<xsl:value-of select="java:com.tragsega.promis.graficos.ImgCreator.getEncodedString('${nombre}','/img/')"/>
-							</xsl:variable>
-							<fo:external-graphic  content-height="10em" content-width="13em" src="url({$ImgURL})"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
