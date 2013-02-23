@@ -256,8 +256,8 @@ public class SaleAction extends BaseSupport {
 			if(!StringUtils.isNull(endDate))
 				dbobject.setLessEqual("clientJob", "jobDate", endDate);
 			
-			dbobject.setField("jobType", "id", 1);
-//			dbobject.setField("clientJobTrack", "processId", 0);
+//			dbobject.setField("jobType", "id", 1);
+			dbobject.setField("clientJobTrack", "processId", 0);
 
 			dbobject.setRetrieveField("client", "id");
 			dbobject.setRetrieveField("client", "idNo");
@@ -284,7 +284,26 @@ public class SaleAction extends BaseSupport {
 			
 			dbobject.setRecord(page.getOffset(),page.getPageSize());
 			
-			request.setAttribute("clients", dbobject.searchAndRetrieveList());
+			List clients = dbobject.searchAndRetrieveList();
+			for(Object orow:clients){
+				Map rowm = (Map)orow;
+				
+				ClientJob clientJob = (ClientJob) rowm.get("clientJob");
+				
+				ClientJobTrack clientJobTrack = new ClientJobTrack();
+				clientJobTrack.setClientJobId(clientJob.getId());
+				clientJobTrack.setJobTypeId(1);
+				clientJobTrack.retrieve();
+				
+				User user = new User();
+				user.setId(clientJobTrack.getUserId());
+				user.retrieve();
+				
+				rowm.put("seller", user.getName());
+			}
+			
+			request.setAttribute("clients", clients);
+			
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());

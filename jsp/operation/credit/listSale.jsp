@@ -159,7 +159,7 @@
 <td><c:out value="${item.clientJob.totalPrice-item.clientJob.selfAmount }"/></td>
 <td><c:out value="${item.financialProduct.cycleTotal }"/></td>
 <td><c:out value="${item.clientJob.monthOfPay }"/></td>
-<td><c:out value="${item.user.name }"/></td>
+<td><c:out value="${item.seller}"/></td>
 
 <td>
 	<c:url value="/Sale.do" var="viewURL">
