@@ -26,8 +26,8 @@ exclude-result-prefixes="fo">
 			(一式三份）
 		</fo:block>
 			
-		<fo:block font-size="12pt"   text-align="left" space-before="5mm">本人<xsl:value-of select="ClientName"/>（身份证号 <xsl:value-of select="ClientID"/>）于<xsl:value-of select="JobDate"/>与成都汉易联信非融资性担保有限公司</fo:block>
-        <fo:block font-size="12pt"   text-align="left" space-before="1mm" space-after="5mm">签订分期付款消费合同，购买商品:</fo:block>
+		<fo:block font-size="12pt" margin-left="5mm"  text-align="left" space-before="5mm">本人<xsl:value-of select="ClientName"/>（身份证号 <xsl:value-of select="ClientID"/>）于<xsl:value-of select="JobDate"/>与成都汉易联信非融</fo:block>
+        <fo:block font-size="12pt"   text-align="left" space-before="1mm" space-after="5mm">资性担保有限公司签订分期付款消费合同，购买商品:</fo:block>
 		<fo:block font-size="12pt"   text-align="left" space-before="1mm" space-after="5mm">商品信息描述如下：</fo:block>
 		
 		<!-- 1 table -->
@@ -75,17 +75,18 @@ exclude-result-prefixes="fo">
  
       	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（1）以上商品描述准确； </fo:block>
    
-      	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（2）客户已支付<xsl:value-of select="SelfAmount"/> 元首付款，该首付款已由成都汉易联信非融资性担保有限公司委托客户直接支付 <xsl:value-of select="StoreName"/></fo:block>
+      	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（2）客户已支付<xsl:value-of select="SelfAmount"/> 元首付款，该首付款已由成都汉易联信非融资性担保有限公司</fo:block> 
+      	<fo:block margin-left="9mm" space-before="1mm">委托客户直接支付 <xsl:value-of select="StoreName"/></fo:block>
       	
       	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（3）成都汉易联信非融资性担保有限公司已通过商家将货物直接交付与客户； </fo:block>
    
       	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（4）客户已取得该商品或取货凭证；并且商品与分期消费合同中的描述一致； </fo:block>
   
-      	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（5）成都汉易联信非融资性担保有限公司依据与客户签署的分期付款消费合同承担的质保责任，由商家向客户承担。</fo:block>
+      	<fo:block font-size="12pt"  text-align="left" space-before="1mm">（5）成都汉易联信非融资性担保有限公司依据与客户签署的分期付款消费合同承担的质保责任，</fo:block> <fo:block space-before="1mm"  margin-left="9mm"> 由商家向客户承担。</fo:block>
    
       	<fo:block font-size="12pt"  text-align="left" space-before="2cm">商家名称（盖章)：<xsl:value-of select="StoreName"/></fo:block>
    
-      	<fo:block font-size="12pt"  text-align="left" space-before="5mm">商家店员姓名 ：____________________________</fo:block>
+      	<fo:block font-size="12pt"  text-align="left" space-before="5mm">商家店员姓名 ：________________________</fo:block>
   
       	<fo:block font-size="12pt"  text-align="left" space-before="5mm">客户签名 ：____________________________</fo:block>
   

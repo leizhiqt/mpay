@@ -219,7 +219,7 @@ dsy.add("0_32",["台湾","其他"])
 <SCRIPT LANGUAGE = JavaScript>
 
 
-var s=["censusAddressBookprovince","censusAddressBookcity"];
+var s=["1","12"];
 var opt0 = ["请选择","请选择"];
 function setup()
 {
@@ -228,7 +228,7 @@ document.getElementById(s[i]).onchange=new Function("change("+(i+1)+")");
 change(0);
 }
 
-var st=["livingAddressBookprovince","livingAddressBookcity"];
+var st=["1","12"];
 var opt0 = ["请选择","请选择"];
 function setups()
 {
@@ -237,7 +237,7 @@ document.getElementById(st[i]).onchange=new Function("change1("+(i+1)+")");
 change1(0);
 }
 
-var sk=["homeAddressBookprovince","homeAddressBookcity"];
+var sk=["1","12"];
 var opt0 = ["请选择","请选择"];
 function setupss()
 {
@@ -246,7 +246,7 @@ document.getElementById(sk[i]).onchange=new Function("change2("+(i+1)+")");
 change2(0);
 }
 
-var sv=["officeAddressBook","officeAddressBookcity"];
+var sv=["1","12"];
 var opt0 = ["请选择","请选择"];
 function setupsv()
 {
@@ -319,10 +319,10 @@ change3(0);
 					    <td align="right"><b style="color:red">*</b> 婚姻状况</td>
 						<td align="left"><select name="client.marry" id="marry"
 							>
-								<option value="未婚">未婚</option>
-								<option value="已婚">已婚</option>
-								<option value="离异">离异</option>
-								<option value="丧偶">丧偶</option>
+<option value="未婚" <c:if test="${client.marry=='未婚' }">selected</c:if> >未婚</option>
+<option value="已婚" <c:if test="${client.marry=='已婚' }">selected</c:if> >已婚</option>
+<option value="离异" <c:if test="${client.marry=='离异' }">selected</c:if> >离异</option>
+<option value="丧偶" <c:if test="${client.marry=='丧偶' }">selected</c:if> >丧偶</option>
 	          </select></td>
 					  <td align="right"  ><b style="color:red">*</b> 发证机关</td>
 						<td align="left"><input type="text" name="client.idAuthority" maxlength="50" value="${client.idAuthority }" onblur="calc(this)" data="msg3" maxlength="20" id="msg" /> <b id="msg3"></b></td>
@@ -335,11 +335,11 @@ change3(0);
 						<td align="right" width="260px" ><b style="color:red">*</b> 住房</td>
 						<td align="left"><select id="housing" name="client.housing"
 							>
-						  <option value="自有房">自有房</option>
-						  <option value="租住房">租住房</option>
-						  <option value="父母房产">父母房产</option>
-						  <option value="单位提供的福利房">单位提供的福利房</option>
-						  <option value="集体宿舍">集体宿舍</option>
+	<option value="自有房" <c:if test="${client.housing=='自有房' }">selected</c:if> >自有房</option>
+  <option value="租住房" <c:if test="${client.housing=='租住房' }">selected</c:if> >租住房</option>
+  <option value="父母房产" <c:if test="${client.housing=='父母房产' }">selected</c:if> >父母房产</option>
+  <option value="单位提供的福利房" <c:if test="${client.housing=='单位提供的福利房' }">selected</c:if> >单位提供的福利房</option>
+  <option value="集体宿舍" <c:if test="${client.housing=='集体宿舍' }">selected</c:if> >集体宿舍</option>
 				      </select></td>
 						<td align="right"  ><b style="color:red">*</b>本人手机号</td>
 					    <td align="left"><input type="text" onBlur="oncb()" name="client.mobilePhone" value="${client.mobilePhone }" id="mkoblep" onBlur="getphonearea(this.value)" /><b id="msg5"></b></td>
@@ -349,8 +349,8 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 性别</td>
 						<td align="left"><select name="client.sex" id="sex"
 							>
-								<option value="男">男</option>
-								<option value="女">女</option>
+<option value="男" <c:if test="${client.sex=='男' }">selected</c:if> >男</option>
+<option value="女" <c:if test="${client.sex=='女' }">selected</c:if> >女</option>
 						</select></td>
 					    <td align="right"  >住宅/宿舍电话</td>
 						<td align="left"><input type="text" name="client.homePhone" value="${client.homePhone }"/></td>
@@ -366,12 +366,12 @@ change3(0);
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 						<td align="left"><select name="client.educationId" id="educationId"
 							>
-								<option value="小学">小学</option>
-								<option value="初中">初中</option>
-								<option value="高中">高中</option>
-								<option value="职高，中专，技术学校">职高，中专，技术学校</option>
-								<option value="大学">大学</option>
-								<option value="硕士及以上">硕士及以上</option>
+<option value="小学" <c:if test="${client.educationId=='小学' }">selected</c:if> >小学</option>
+<option value="初中" <c:if test="${client.educationId=='初中' }">selected</c:if> >初中</option>
+<option value="高中" <c:if test="${client.educationId=='高中' }">selected</c:if> >高中</option>
+<option value="职高，中专，技术学校" <c:if test="${client.educationId=='职高，中专，技术学校' }">selected</c:if> >职高，中专，技术学校</option>
+<option value="大学" <c:if test="${client.educationId=='大学' }">selected</c:if> >大学</option>
+<option value="硕士及以上" <c:if test="${client.educationId=='硕士及以上' }">selected</c:if> >硕士及以上</option>
 								
 						</select></td>
 					</tr>
@@ -419,11 +419,42 @@ change3(0);
 			          <td align="left"><input type="text" name="censusAddressBook.zipCode" value="${censusAddressBook.zipCode}" id="censusAddressBookZipCode"
 						maxlength="20" /></td>
 				      <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-			          <td align="left"><select  name="censusAddressBook.province"  id="censusAddressBookprovince"
-						>
-							<option value="四川省">四川省</option>
-							<option value="湖南省">湖南省</option>
-							<option value="河北省">河北省</option>
+			          <td align="left"><select name="censusAddressBook.province" id="censusAddressBookprovince">
+			             <option value="北京市" <c:if test="${censusAddressBook.province=='北京市' }">selected</c:if> >北京市</option>
+   <option value="天津市" <c:if test="${censusAddressBook.province=='天津市' }">selected</c:if> >天津市</option>
+   <option value="河北省" <c:if test="${censusAddressBook.province=='河北省' }">selected</c:if> >河北省</option>
+   <option value="山西省" <c:if test="${censusAddressBook.province=='山西省' }">selected</c:if> >山西省</option>
+   <option value="内蒙古" <c:if test="${censusAddressBook.province=='内蒙古' }">selected</c:if> >内蒙古</option>
+   <option value="辽宁省" <c:if test="${censusAddressBook.province=='辽宁省' }">selected</c:if> >辽宁省</option>
+   <option value="吉林省" <c:if test="${censusAddressBook.province=='吉林省' }">selected</c:if> >吉林省</option>
+   <option value="黑龙江省" <c:if test="${censusAddressBook.province=='黑龙江省' }">selected</c:if> >黑龙江省</option>
+   <option value="上海市" <c:if test="${censusAddressBook.province=='上海市' }">selected</c:if> >上海市</option>
+   <option value="江苏省" <c:if test="${censusAddressBook.province=='江苏省' }">selected</c:if> >江苏省</option>
+   <option value="浙江省" <c:if test="${censusAddressBook.province=='浙江省' }">selected</c:if> >浙江省</option>
+   <option value="安徽省" <c:if test="${censusAddressBook.province=='安徽省' }">selected</c:if> >安徽省</option>
+   <option value="福建省" <c:if test="${censusAddressBook.province=='福建省' }">selected</c:if> >福建省</option>
+   <option value="江西省" <c:if test="${censusAddressBook.province=='江西省' }">selected</c:if> >江西省</option>
+   <option value="山东省" <c:if test="${censusAddressBook.province=='山东省' }">selected</c:if> >山东省</option>
+   <option value="河南省" <c:if test="${censusAddressBook.province=='河南省' }">selected</c:if> >河南省</option>
+   <option value="湖北省" <c:if test="${censusAddressBook.province=='湖北省' }">selected</c:if> >湖北省</option>
+   <option value="湖南省" <c:if test="${censusAddressBook.province=='湖南省' }">selected</c:if> >湖南省</option>
+   <option value="广东省" <c:if test="${censusAddressBook.province=='广东省' }">selected</c:if> >广东省</option>
+   <option value="广西自治区" <c:if test="${censusAddressBook.province=='广西自治区' }">selected</c:if> >广西自治区</option>
+   <option value="海南省" <c:if test="${censusAddressBook.province=='海南省' }">selected</c:if> >海南省</option>
+   <option value="重庆市" <c:if test="${censusAddressBook.province=='重庆市' }">selected</c:if> >重庆市</option>
+   <option value="四川省" <c:if test="${censusAddressBook.province=='四川省' }">selected</c:if> >四川省</option>
+   <option value="贵州省" <c:if test="${censusAddressBook.province=='贵州省' }">selected</c:if> >贵州省</option>
+   <option value="云南省" <c:if test="${censusAddressBook.province=='云南省' }">selected</c:if> >云南省</option>
+   <option value="西藏自治区" <c:if test="${censusAddressBook.province=='西藏自治区' }">selected</c:if> >西藏自治区</option>
+   <option value="陕西省" <c:if test="${censusAddressBook.province=='陕西省' }">selected</c:if> >陕西省</option>
+   <option value="甘肃省" <c:if test="${censusAddressBook.province=='甘肃省' }">selected</c:if> >甘肃省</option>
+   <option value="青海省" <c:if test="${censusAddressBook.province=='青海省' }">selected</c:if> >青海省</option>
+   <option value="宁夏回族自治区" <c:if test="${censusAddressBook.province=='宁夏回族自治区' }">selected</c:if> >宁夏回族自治区</option>
+   <option value="新疆维吾尔自治区" <c:if test="${censusAddressBook.province=='新疆维吾尔自治区' }">selected</c:if> >新疆维吾尔自治区</option>
+   <option value="香港特别行政区" <c:if test="${censusAddressBook.province=='香港特别行政区' }">selected</c:if> >香港特别行政区</option>
+   <option value="澳门特别行政区" <c:if test="${censusAddressBook.province=='澳门特别行政区' }">selected</c:if> >澳门特别行政区</option>
+   <option value="台湾省" <c:if test="${censusAddressBook.province=='台湾省' }">selected</c:if> >台湾省</option>
+   <option value="其它" <c:if test="${censusAddressBook.province=='其它' }">selected</c:if> >其它</option>
 					    </select></td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
 			          <td align="left"><input type="text" name="censusAddressBook.city" value="${censusAddressBook.city }" id="censusAddressBookcity" />
@@ -472,12 +503,43 @@ change3(0);
 					     <td align="left"><input type="text" name="livingAddressBook.zipCode" value="${livingAddressBook.zipCode }" id="livingAddressBookZipCode"
 								maxlength="10" /></td>
 						 <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-					     <td align="left"><select  name="livingAddressBook.province"  id="livingAddressBookprovince"
-								>
-									<option value="四川省">四川省</option>
-									<option value="湖南省">湖南省</option> 	 
-									<option value="河北省">河北省</option>
-							</select></td>
+					     <td align="left"><select name="livingAddressBook.province" id="livingAddressBookprovince">		
+	   <option value="北京市" <c:if test="${livingAddressBook.province=='北京市' }">selected</c:if> >北京市</option>
+   <option value="天津市" <c:if test="${livingAddressBook.province=='天津市' }">selected</c:if> >天津市</option>
+   <option value="河北省" <c:if test="${livingAddressBook.province=='河北省' }">selected</c:if> >河北省</option>
+   <option value="山西省" <c:if test="${livingAddressBook.province=='山西省' }">selected</c:if> >山西省</option>
+   <option value="内蒙古" <c:if test="${livingAddressBook.province=='内蒙古' }">selected</c:if> >内蒙古</option>
+   <option value="辽宁省" <c:if test="${livingAddressBook.province=='辽宁省' }">selected</c:if> >辽宁省</option>
+   <option value="吉林省" <c:if test="${livingAddressBook.province=='吉林省' }">selected</c:if> >吉林省</option>
+   <option value="黑龙江省" <c:if test="${livingAddressBook.province=='黑龙江省' }">selected</c:if> >黑龙江省</option>
+   <option value="上海市" <c:if test="${livingAddressBook.province=='上海市' }">selected</c:if> >上海市</option>
+   <option value="江苏省" <c:if test="${livingAddressBook.province=='江苏省' }">selected</c:if> >江苏省</option>
+   <option value="浙江省" <c:if test="${livingAddressBook.province=='浙江省' }">selected</c:if> >浙江省</option>
+   <option value="安徽省" <c:if test="${livingAddressBook.province=='安徽省' }">selected</c:if> >安徽省</option>
+   <option value="福建省" <c:if test="${livingAddressBook.province=='福建省' }">selected</c:if> >福建省</option>
+   <option value="江西省" <c:if test="${livingAddressBook.province=='江西省' }">selected</c:if> >江西省</option>
+   <option value="山东省" <c:if test="${livingAddressBook.province=='山东省' }">selected</c:if> >山东省</option>
+   <option value="河南省" <c:if test="${livingAddressBook.province=='河南省' }">selected</c:if> >河南省</option>
+   <option value="湖北省" <c:if test="${livingAddressBook.province=='湖北省' }">selected</c:if> >湖北省</option>
+   <option value="湖南省" <c:if test="${livingAddressBook.province=='湖南省' }">selected</c:if> >湖南省</option>
+   <option value="广东省" <c:if test="${livingAddressBook.province=='广东省' }">selected</c:if> >广东省</option>
+   <option value="广西自治区" <c:if test="${livingAddressBook.province=='广西自治区' }">selected</c:if> >广西自治区</option>
+   <option value="海南省" <c:if test="${livingAddressBook.province=='海南省' }">selected</c:if> >海南省</option>
+   <option value="重庆市" <c:if test="${livingAddressBook.province=='重庆市' }">selected</c:if> >重庆市</option>
+   <option value="四川省" <c:if test="${livingAddressBook.province=='四川省' }">selected</c:if> >四川省</option>
+   <option value="贵州省" <c:if test="${livingAddressBook.province=='贵州省' }">selected</c:if> >贵州省</option>
+   <option value="云南省" <c:if test="${livingAddressBook.province=='云南省' }">selected</c:if> >云南省</option>
+   <option value="西藏自治区" <c:if test="${livingAddressBook.province=='西藏自治区' }">selected</c:if> >西藏自治区</option>
+   <option value="陕西省" <c:if test="${livingAddressBook.province=='陕西省' }">selected</c:if> >陕西省</option>
+   <option value="甘肃省" <c:if test="${livingAddressBook.province=='甘肃省' }">selected</c:if> >甘肃省</option>
+   <option value="青海省" <c:if test="${livingAddressBook.province=='青海省' }">selected</c:if> >青海省</option>
+   <option value="宁夏回族自治区" <c:if test="${livingAddressBook.province=='宁夏回族自治区' }">selected</c:if> >宁夏回族自治区</option>
+   <option value="新疆维吾尔自治区" <c:if test="${livingAddressBook.province=='新疆维吾尔自治区' }">selected</c:if> >新疆维吾尔自治区</option>
+   <option value="香港特别行政区" <c:if test="${livingAddressBook.province=='香港特别行政区' }">selected</c:if> >香港特别行政区</option>
+   <option value="澳门特别行政区" <c:if test="${livingAddressBook.province=='澳门特别行政区' }">selected</c:if> >澳门特别行政区</option>
+   <option value="台湾省" <c:if test="${livingAddressBook.province=='台湾省' }">selected</c:if> >台湾省</option>
+   <option value="其它" <c:if test="${livingAddressBook.province=='其它' }">selected</c:if> >其它</option>
+	</select></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
 					      <td align="left"><input  name="livingAddressBook.city" value="${livingAddressBook.city}"  id="livingAddressBookcity" type="text"/>
 									</td>
@@ -514,14 +576,14 @@ change3(0);
 					    <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>
 				        <td align="left">
                         <select  name="client.homeType" >
-								<option value="请选择">请选择</option>                        
-								<option value="父亲">父亲</option>
-								<option value="母亲">母亲</option>
-								<option value="兄弟">兄弟</option>
- 								<option value="姐妹">姐妹</option>
-								<option value="儿子">儿子</option>
-								<option value="女儿">女儿</option>
-								<option value="其他">其他</option>
+<option value="请选择" <c:if test="${client.homeType=='请选择' }">selected</c:if> >请选择</option>                        
+<option value="父亲" <c:if test="${client.homeType=='父亲' }">selected</c:if> >父亲</option>
+<option value="母亲" <c:if test="${client.homeType=='母亲' }">selected</c:if> >母亲</option>
+<option value="兄弟" <c:if test="${client.homeType=='兄弟' }">selected</c:if> >兄弟</option>
+<option value="姐妹" <c:if test="${client.homeType=='姐妹' }">selected</c:if> >姐妹</option>
+<option value="儿子" <c:if test="${client.homeType=='儿子' }">selected</c:if> >儿子</option>
+<option value="女儿" <c:if test="${client.homeType=='女儿' }">selected</c:if> >女儿</option>
+<option value="其他" <c:if test="${client.homeType=='其他' }">selected</c:if> >其他</option>
 						</select>
                         </td>
 					    <td align="right"  ><b style="color:red">*</b>家庭成员电话号</td>
@@ -542,12 +604,43 @@ change3(0);
 				  		<td align="left"><input type="text" name="homeAddressBook.zipCode" id="homeAddressBookzipCode" value="${ homeAddressBook.zipCode}"
 							maxlength="20" /></td>
 					    <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-				        <td align="left"><select  name="homeAddressBook.province" id="homeAddressBookprovince"
-							>
-								<option value="四川省">四川省</option>
-								<option value="湖南省">湖南省</option>
-								<option value="河北省">河北省</option>
-						</select></td>
+				        <td align="left"><select name="homeAddressBook.province" id="homeAddressBookprovince">
+							<option value="北京市" <c:if test="${homeAddressBook.province=='北京市' }">selected</c:if> >北京市</option>
+   <option value="天津市" <c:if test="${homeAddressBook.province=='天津市' }">selected</c:if> >天津市</option>
+   <option value="河北省" <c:if test="${homeAddressBook.province=='河北省' }">selected</c:if> >河北省</option>
+   <option value="山西省" <c:if test="${homeAddressBook.province=='山西省' }">selected</c:if> >山西省</option>
+   <option value="内蒙古" <c:if test="${homeAddressBook.province=='内蒙古' }">selected</c:if> >内蒙古</option>
+   <option value="辽宁省" <c:if test="${homeAddressBook.province=='辽宁省' }">selected</c:if> >辽宁省</option>
+   <option value="吉林省" <c:if test="${homeAddressBook.province=='吉林省' }">selected</c:if> >吉林省</option>
+   <option value="黑龙江省" <c:if test="${homeAddressBook.province=='黑龙江省' }">selected</c:if> >黑龙江省</option>
+   <option value="上海市" <c:if test="${homeAddressBook.province=='上海市' }">selected</c:if> >上海市</option>
+   <option value="江苏省" <c:if test="${homeAddressBook.province=='江苏省' }">selected</c:if> >江苏省</option>
+   <option value="浙江省" <c:if test="${homeAddressBook.province=='浙江省' }">selected</c:if> >浙江省</option>
+   <option value="安徽省" <c:if test="${homeAddressBook.province=='安徽省' }">selected</c:if> >安徽省</option>
+   <option value="福建省" <c:if test="${homeAddressBook.province=='福建省' }">selected</c:if> >福建省</option>
+   <option value="江西省" <c:if test="${homeAddressBook.province=='江西省' }">selected</c:if> >江西省</option>
+   <option value="山东省" <c:if test="${homeAddressBook.province=='山东省' }">selected</c:if> >山东省</option>
+   <option value="河南省" <c:if test="${homeAddressBook.province=='河南省' }">selected</c:if> >河南省</option>
+   <option value="湖北省" <c:if test="${homeAddressBook.province=='湖北省' }">selected</c:if> >湖北省</option>
+   <option value="湖南省" <c:if test="${homeAddressBook.province=='湖南省' }">selected</c:if> >湖南省</option>
+   <option value="广东省" <c:if test="${homeAddressBook.province=='广东省' }">selected</c:if> >广东省</option>
+   <option value="广西自治区" <c:if test="${homeAddressBook.province=='广西自治区' }">selected</c:if> >广西自治区</option>
+   <option value="海南省" <c:if test="${homeAddressBook.province=='海南省' }">selected</c:if> >海南省</option>
+   <option value="重庆市" <c:if test="${homeAddressBook.province=='重庆市' }">selected</c:if> >重庆市</option>
+   <option value="四川省" <c:if test="${homeAddressBook.province=='四川省' }">selected</c:if> >四川省</option>
+   <option value="贵州省" <c:if test="${homeAddressBook.province=='贵州省' }">selected</c:if> >贵州省</option>
+   <option value="云南省" <c:if test="${homeAddressBook.province=='云南省' }">selected</c:if> >云南省</option>
+   <option value="西藏自治区" <c:if test="${homeAddressBook.province=='西藏自治区' }">selected</c:if> >西藏自治区</option>
+   <option value="陕西省" <c:if test="${homeAddressBook.province=='陕西省' }">selected</c:if> >陕西省</option>
+   <option value="甘肃省" <c:if test="${homeAddressBook.province=='甘肃省' }">selected</c:if> >甘肃省</option>
+   <option value="青海省" <c:if test="${homeAddressBook.province=='青海省' }">selected</c:if> >青海省</option>
+   <option value="宁夏回族自治区" <c:if test="${homeAddressBook.province=='宁夏回族自治区' }">selected</c:if> >宁夏回族自治区</option>
+   <option value="新疆维吾尔自治区" <c:if test="${homeAddressBook.province=='新疆维吾尔自治区' }">selected</c:if> >新疆维吾尔自治区</option>
+   <option value="香港特别行政区" <c:if test="${homeAddressBook.province=='香港特别行政区' }">selected</c:if> >香港特别行政区</option>
+   <option value="澳门特别行政区" <c:if test="${homeAddressBook.province=='澳门特别行政区' }">selected</c:if> >澳门特别行政区</option>
+   <option value="台湾省" <c:if test="${homeAddressBook.province=='台湾省' }">selected</c:if> >台湾省</option>
+   <option value="其它" <c:if test="${homeAddressBook.province=='其它' }">selected</c:if> >其它</option>
+							</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 				        <td align="left"><input type="text" name="homeAddressBook.city" name="${homeAddressBook.city }" id="homeAddressBookcity" value="${homeAddressBook.city }"/>
 							</td>
@@ -588,14 +681,14 @@ change3(0);
 					    <td align="right"  >与申请人关系</td>
 				        <td align="left"><select id="otherNexus" name="client.otherNexus"
 							>
-                            	<option value="请选择">请选择</option>
-								<option value="配偶">配偶</option>
-								<option value="父母">父母</option>
-								<option value="子女">子女</option>
-								<option value="亲戚">亲戚</option>
-								<option value="同事">同事</option>
-								<option value="同学">同学</option>
-								<option value="其他">其他</option>
+<option value="" <c:if test="${client.otherNexus=='请选择' }">selected</c:if> >请选择</option>
+<option value="配偶" <c:if test="${client.otherNexus=='配偶' }">selected</c:if> >配偶</option>
+<option value="父母" <c:if test="${client.otherNexus=='父母' }">selected</c:if> >父母</option>
+<option value="子女" <c:if test="${client.otherNexus=='子女' }">selected</c:if> >子女</option>
+<option value="亲戚" <c:if test="${client.otherNexus=='亲戚' }">selected</c:if> >亲戚</option>
+<option value="同事" <c:if test="${client.otherNexus=='同事' }">selected</c:if> >同事</option>
+<option value="同学" <c:if test="${client.otherNexus=='同学' }">selected</c:if> >同学</option>
+<option value="其他" <c:if test="${client.otherNexus=='其他' }">selected</c:if> >其他</option>
 
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 联系电话</td>
@@ -707,8 +800,8 @@ change3(0);
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 单位名称或大学名称</td>
 						<td align="left"><select id="onWorkTime" name="client.onShortName" >
-								<option value="公司或个人">公司或个人</option>
-								<option value="大学">大学</option>
+<option value="公司或个人" <c:if test="${client.onShortName=='公司或个人' }">selected</c:if> >公司或个人</option>
+<option value="大学" <c:if test="${client.onShortName=='大学' }">selected</c:if> >大学</option>
 						</select>
 						</td>
 						<td align="right"  ><b style="color:red">*</b> 单位/学校/个体全称</td>
@@ -721,12 +814,12 @@ change3(0);
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 						<td align="left"><select id="onWorkTime" name="client.onWorkTime">
-								<option value="0-1年">0-1年</option>
-								<option value="1-2年">1-2年</option>
-								<option value="2-3年">2-3年</option>
-								<option value="3-5年">3-5年</option>
-								<option value="5-10年">5-10年</option>
-								<option value="大于10年">大于10年</option>
+								<option value="0-1年" <c:if test="${client.onWorkTime=='0-1年' }">selected</c:if> >0-1年</option>
+								<option value="1-2年" <c:if test="${client.onWorkTime=='1-2年' }">selected</c:if>>1-2年</option>
+								<option value="2-3年" <c:if test="${client.onWorkTime=='2-3年' }">selected</c:if>>2-3年</option>
+								<option value="3-5年" <c:if test="${client.onWorkTime=='3-5年' }">selected</c:if>>3-5年</option>
+								<option value="5-10年" <c:if test="${client.onWorkTime=='5-10年' }">selected</c:if>>5-10年</option>
+								<option value="大于10年" <c:if test="${client.onWorkTime=='大于10年' }">selected</c:if>>大于10年</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
 				        <td align="left"><input type="text" name="client.nowWorkingTime"  value="${client.nowWorkingTime }" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
@@ -738,58 +831,57 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 行业类别</td>
 						<td align="left"><select id="onWorkTime" name="client.onSector" style="width:50px"
 							>
-								<option value="餐饮，酒店，旅游，美容美发保健">餐饮，酒店，旅游，美容美发保健</option>
-								<option value="农业，林业，畜牧业和渔业">农业，林业，畜牧业和渔业</option>
-								<option value="建筑">建筑</option>
-								<option value="文化，运动，娱乐，传媒，广告设计">文化，运动，娱乐，传媒，广告设计</option>
-								<option value="教育">教育</option>
-								<option value="金融机构，专业性事务机构">金融机构，专业性事务机构</option>
-								<option value="政府机构，社会团体">政府机构，社会团体</option>
-								<option value="计算机，电信，通讯，互联网">计算机，电信，通讯，互联网</option>
-								<option value="制造，快速消费品，耐用消费品">制造，快速消费品，耐用消费品</option>
-								<option value="军队">军队</option>
-								<option value="电力，煤气，和水的生产和供应">电力，煤气，和水的生产和供应</option>
-								<option value="能源，化工，矿产">能源，化工，矿产</option>
-								<option value="个体，自营，退休，居住，家政和其他服务">个体，自营，退休，居住，家政和其他服务</option>
-								<option value="科研技术服务和地质勘探">科研技术服务和地质勘探</option>
-								<option value="事业单位，公共设施，医疗卫生，社会保障和社会福利">事业单位，公共设施，医疗卫生，社会保障和社会福利</option>
-								<option value="租赁和商业服务">租赁和商业服务</option>
-								<option value="交通，运输，仓储，邮电和物流">交通，运输，仓储，邮电和物流</option>
-								<option value="批发和零售贸品">批发和零售贸品</option>
-								<option value="学生">学生</option>
+								<option value="餐饮，酒店，旅游，美容美发保健" <c:if test="${client.onSector=='餐饮，酒店，旅游，美容美发保健' }">selected</c:if> >餐饮，酒店，旅游，美容美发保健</option>
+<option value="农业，林业，畜牧业和渔业" <c:if test="${client.onSector=='农业，林业，畜牧业和渔业' }">selected</c:if> >农业，林业，畜牧业和渔业</option>
+<option value="建筑" <c:if test="${client.onSector=='建筑' }">selected</c:if> >建筑</option>
+<option value="文化，运动，娱乐，传媒，广告设计" <c:if test="${client.onSector=='文化，运动，娱乐，传媒，广告设计' }">selected</c:if> >文化，运动，娱乐，传媒，广告设计</option>
+<option value="教育" <c:if test="${client.onSector=='教育' }">selected</c:if> >教育</option>
+<option value="金融机构，专业性事务机构" <c:if test="${client.onSector=='金融机构，专业性事务机构' }">selected</c:if> >金融机构，专业性事务机构</option>
+<option value="政府机构，社会团体" <c:if test="${client.onSector=='政府机构，社会团体' }">selected</c:if> >政府机构，社会团体</option>
+<option value="计算机，电信，通讯，互联网" <c:if test="${client.onSector=='计算机，电信，通讯，互联网' }">selected</c:if> >计算机，电信，通讯，互联网</option>
+<option value="制造，快速消费品，耐用消费品" <c:if test="${client.onSector=='制造，快速消费品，耐用消费品' }">selected</c:if> >制造，快速消费品，耐用消费品</option>
+<option value="军队" <c:if test="${client.onSector=='军队' }">selected</c:if> >军队</option>
+<option value="电力，煤气，和水的生产和供应" <c:if test="${client.onSector=='电力，煤气，和水的生产和供应' }">selected</c:if> >电力，煤气，和水的生产和供应</option>
+<option value="能源，化工，矿产" <c:if test="${client.onSector=='能源，化工，矿产' }">selected</c:if> >能源，化工，矿产</option>
+<option value="个体，自营，退休，居住，家政和其他服务" <c:if test="${client.onSector=='个体，自营，退休，居住，家政和其他服务' }">selected</c:if> >个体，自营，退休，居住，家政和其他服务</option>
+<option value="科研技术服务和地质勘探" <c:if test="${client.onSector=='科研技术服务和地质勘探' }">selected</c:if> >科研技术服务和地质勘探</option>
+<option value="事业单位，公共设施，医疗卫生，社会保障和社会福利" <c:if test="${client.onSector=='事业单位，公共设施，医疗卫生，社会保障和社会福利' }">selected</c:if> >事业单位，公共设施，医疗卫生，社会保障和社会福利</option>
+<option value="租赁和商业服务" <c:if test="${client.onSector=='租赁和商业服务' }">selected</c:if> >租赁和商业服务</option>
+<option value="交通，运输，仓储，邮电和物流" <c:if test="${client.onSector=='交通，运输，仓储，邮电和物流' }">selected</c:if> >交通，运输，仓储，邮电和物流</option>
+<option value="批发和零售贸品" <c:if test="${client.onSector=='批发和零售贸品' }">selected</c:if> >批发和零售贸品</option>
+<option value="学生" <c:if test="${client.onSector=='学生' }">selected</c:if> >学生</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
 				        <td align="left"><select id="onOffice" name="client.onOffice" style="width:50px"
 							>
-								<option value="学生">学生</option>
-								<option value="高层管理人员/总监以上/局级以上干部">高层管理人员/总监以上/局级以上干部</option>
-								<option value="中层管理人员/经理以上/科级以上干部">中层管理人员/经理以上/科级以上干部</option>
-								<option value="基层管理人员/主管组长/科员">基层管理人员/主管组长/科员</option>
-								<option value="一般员工">一般员工</option>
-								<option value="工人（包括生产，加工，建筑和设备操作人员及有关人员）">工人（包括生产，加工，建筑和设备操作人员及有关人员）</option>
-								<option value="销售/中介/业务代表/促销">销售/中介/业务代表/促销</option>
-								<option value="商业，服务人员">商业，服务人员</option>
-								<option value="保安/治安/防损">保安/治安/防损</option>
-								<option value="农民">农民</option>
-								<option value="个体">个体</option>
-								<option value="专业技术人员">专业技术人员</option>
-								<option value="军人">军人</option>
-								<option value="司机">司机</option>
-								<option value="退休">退休</option>
-								<option value="其他">其他</option>
-								
+								<option value="学生" <c:if test="${client.onOffice=='学生' }">selected</c:if> >学生</option>
+<option value="高层管理人员/总监以上/局级以上干部" <c:if test="${client.onOffice=='高层管理人员/总监以上/局级以上干部' }">selected</c:if> >高层管理人员/总监以上/局级以上干部</option>
+<option value="中层管理人员/经理以上/科级以上干部" <c:if test="${client.onOffice=='中层管理人员/经理以上/科级以上干部' }">selected</c:if> >中层管理人员/经理以上/科级以上干部</option>
+<option value="基层管理人员/主管组长/科员" <c:if test="${client.onOffice=='基层管理人员/主管组长/科员' }">selected</c:if> >基层管理人员/主管组长/科员</option>
+<option value="一般员工" <c:if test="${client.onOffice=='一般员工' }">selected</c:if> >一般员工</option>
+<option value="工人（包括生产，加工，建筑和设备操作人员及有关人员）" <c:if test="${client.onOffice=='工人（包括生产，加工，建筑和设备操作人员及有关人员）' }">selected</c:if> >工人（包括生产，加工，建筑和设备操作人员及有关人员）</option>
+<option value="销售/中介/业务代表/促销" <c:if test="${client.onOffice=='销售/中介/业务代表/促销' }">selected</c:if> >销售/中介/业务代表/促销</option>
+<option value="商业，服务人员" <c:if test="${client.onOffice=='商业，服务人员' }">selected</c:if> >商业，服务人员</option>
+<option value="保安/治安/防损" <c:if test="${client.onOffice=='保安/治安/防损' }">selected</c:if> >保安/治安/防损</option>
+<option value="农民" <c:if test="${client.onOffice=='农民' }">selected</c:if> >农民</option>
+<option value="个体" <c:if test="${client.onOffice=='个体' }">selected</c:if> >个体</option>
+<option value="专业技术人员" <c:if test="${client.onOffice=='专业技术人员' }">selected</c:if> >专业技术人员</option>
+<option value="军人" <c:if test="${client.onOffice=='军人' }">selected</c:if> >军人</option>
+<option value="司机" <c:if test="${client.onOffice=='司机' }">selected</c:if> >司机</option>
+<option value="退休" <c:if test="${client.onOffice=='退休' }">selected</c:if> >退休</option>
+<option value="其他" <c:if test="${client.onOffice=='其他' }">selected</c:if> >其他</option>
 						</select></td>
 					    <td align="right"  >单位性质</td>
 						<td align="left"><select id="onFeature" name="client.onFeature"
 							>
-								<option value="国有企业">国有企业</option>
-								<option value="私有企业">私有企业</option>
-								<option value="个体">个体</option>
-								<option value="集体">集体</option>
-								<option value="外商独资">外商独资</option>
-								<option value="外商合资">外商合资</option>
-								<option value="其他">其他</option>
-								<option value="农民">农民</option>
+								<option value="国有企业" <c:if test="${client.onFeature=='国有企业' }">selected</c:if> >国有企业</option>
+<option value="私有企业" <c:if test="${client.onFeature=='私有企业' }">selected</c:if> >私有企业</option>
+<option value="个体" <c:if test="${client.onFeature=='个体' }">selected</c:if> >个体</option>
+<option value="集体" <c:if test="${client.onFeature=='集体' }">selected</c:if> >集体</option>
+<option value="外商独资" <c:if test="${client.onFeature=='外商独资' }">selected</c:if> >外商独资</option>
+<option value="外商合资" <c:if test="${client.onFeature=='外商合资' }">selected</c:if> >外商合资</option>
+<option value="其他" <c:if test="${client.onFeature=='其他' }">selected</c:if> >其他</option>
+<option value="农民" <c:if test="${client.onFeature=='农民' }">selected</c:if> >农民</option>
 						</select></td>
 					</tr>
 
@@ -810,10 +902,42 @@ change3(0);
 							maxlength="20" /></td>
 						<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 				        <td align="left">
-				        <select name="officeAddressBook.province"  id="officeAddressBook">
-								<option value="四川省">四川省</option>
-								<option value="湖南省">湖南省</option>
-								<option value="河北省">河北省</option>
+				        <select name="officeAddressBook.province" id="officeAddressBook">
+				           <option value="北京市" <c:if test="${officeAddressBook.province=='北京市' }">selected</c:if> >北京市</option>
+   <option value="天津市" <c:if test="${officeAddressBook.province=='天津市' }">selected</c:if> >天津市</option>
+   <option value="河北省" <c:if test="${officeAddressBook.province=='河北省' }">selected</c:if> >河北省</option>
+   <option value="山西省" <c:if test="${officeAddressBook.province=='山西省' }">selected</c:if> >山西省</option>
+   <option value="内蒙古" <c:if test="${officeAddressBook.province=='内蒙古' }">selected</c:if> >内蒙古</option>
+   <option value="辽宁省" <c:if test="${officeAddressBook.province=='辽宁省' }">selected</c:if> >辽宁省</option>
+   <option value="吉林省" <c:if test="${officeAddressBook.province=='吉林省' }">selected</c:if> >吉林省</option>
+   <option value="黑龙江省" <c:if test="${officeAddressBook.province=='黑龙江省' }">selected</c:if> >黑龙江省</option>
+   <option value="上海市" <c:if test="${officeAddressBook.province=='上海市' }">selected</c:if> >上海市</option>
+   <option value="江苏省" <c:if test="${officeAddressBook.province=='江苏省' }">selected</c:if> >江苏省</option>
+   <option value="浙江省" <c:if test="${officeAddressBook.province=='浙江省' }">selected</c:if> >浙江省</option>
+   <option value="安徽省" <c:if test="${officeAddressBook.province=='安徽省' }">selected</c:if> >安徽省</option>
+   <option value="福建省" <c:if test="${officeAddressBook.province=='福建省' }">selected</c:if> >福建省</option>
+   <option value="江西省" <c:if test="${officeAddressBook.province=='江西省' }">selected</c:if> >江西省</option>
+   <option value="山东省" <c:if test="${officeAddressBook.province=='山东省' }">selected</c:if> >山东省</option>
+   <option value="河南省" <c:if test="${officeAddressBook.province=='河南省' }">selected</c:if> >河南省</option>
+   <option value="湖北省" <c:if test="${officeAddressBook.province=='湖北省' }">selected</c:if> >湖北省</option>
+   <option value="湖南省" <c:if test="${officeAddressBook.province=='湖南省' }">selected</c:if> >湖南省</option>
+   <option value="广东省" <c:if test="${officeAddressBook.province=='广东省' }">selected</c:if> >广东省</option>
+   <option value="广西自治区" <c:if test="${officeAddressBook.province=='广西自治区' }">selected</c:if> >广西自治区</option>
+   <option value="海南省" <c:if test="${officeAddressBook.province=='海南省' }">selected</c:if> >海南省</option>
+   <option value="重庆市" <c:if test="${officeAddressBook.province=='重庆市' }">selected</c:if> >重庆市</option>
+   <option value="四川省" <c:if test="${officeAddressBook.province=='四川省' }">selected</c:if> >四川省</option>
+   <option value="贵州省" <c:if test="${officeAddressBook.province=='贵州省' }">selected</c:if> >贵州省</option>
+   <option value="云南省" <c:if test="${officeAddressBook.province=='云南省' }">selected</c:if> >云南省</option>
+   <option value="西藏自治区" <c:if test="${officeAddressBook.province=='西藏自治区' }">selected</c:if> >西藏自治区</option>
+   <option value="陕西省" <c:if test="${officeAddressBook.province=='陕西省' }">selected</c:if> >陕西省</option>
+   <option value="甘肃省" <c:if test="${officeAddressBook.province=='甘肃省' }">selected</c:if> >甘肃省</option>
+   <option value="青海省" <c:if test="${officeAddressBook.province=='青海省' }">selected</c:if> >青海省</option>
+   <option value="宁夏回族自治区" <c:if test="${officeAddressBook.province=='宁夏回族自治区' }">selected</c:if> >宁夏回族自治区</option>
+   <option value="新疆维吾尔自治区" <c:if test="${officeAddressBook.province=='新疆维吾尔自治区' }">selected</c:if> >新疆维吾尔自治区</option>
+   <option value="香港特别行政区" <c:if test="${officeAddressBook.province=='香港特别行政区' }">selected</c:if> >香港特别行政区</option>
+   <option value="澳门特别行政区" <c:if test="${officeAddressBook.province=='澳门特别行政区' }">selected</c:if> >澳门特别行政区</option>
+   <option value="台湾省" <c:if test="${officeAddressBook.province=='台湾省' }">selected</c:if> >台湾省</option>
+   <option value="其它" <c:if test="${officeAddressBook.province=='其它' }">selected</c:if> >其它</option>		
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 						<td align="left"><input type="text" id="city4" name="officeAddressBook.city" value="${officeAddressBook.city }"/>
@@ -903,12 +1027,12 @@ change3(0);
 					  	<td align="right">贷款用途</td>
 						<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
 						>
-								<option value="请选择">请选择</option>
-								<option value="家用电器">家用电器</option>
-                                <option value="家具及住宅装饰用品">家具及住宅装饰用品</option>
-                                <option value="计算机与办公室通讯（私人用途）">计算机与办公室通讯（私人用途）</option>
-                                <option value="时尚电子产品">时尚电子产品</option>
-                                <option value="其他">其他</option>
+								<option value="请选择" <c:if test="${clientJob.byUse=='请选择' }">selected</c:if> >请选择</option>
+<option value="家用电器" <c:if test="${clientJob.byUse=='家用电器' }">selected</c:if> >家用电器</option>
+<option value="家具及住宅装饰用品" <c:if test="${clientJob.byUse=='家具及住宅装饰用品' }">selected</c:if> >家具及住宅装饰用品</option>
+<option value="计算机与办公室通讯（私人用途）" <c:if test="${clientJob.byUse=='计算机与办公室通讯（私人用途）' }">selected</c:if> >计算机与办公室通讯（私人用途）</option>
+<option value="时尚电子产品" <c:if test="${clientJob.byUse=='时尚电子产品' }">selected</c:if> >时尚电子产品</option>
+<option value="其他" <c:if test="${clientJob.byUse=='其他' }">selected</c:if> >其他</option>
 						</select></td>
 					</tr>
 					<tr>

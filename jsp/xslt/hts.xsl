@@ -60,6 +60,12 @@ exclude-result-prefixes="fo">
 						<fo:block font-size="7pt"   
 							 >
 							销售方
+							
+							<xsl:value-of select="Address"/>
+							<xsl:variable name="urlImagen">data:image/auto;base64,
+								<xsl:value-of select="java:com.tragsega.promis.graficos.ImgCreator.getEncodedString('${nombre}','/img/')"/>
+							</xsl:variable>
+							<fo:external-graphic  content-height="10em" content-width="13em" src="url({$ImgURL})"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
@@ -473,7 +479,7 @@ exclude-result-prefixes="fo">
 							<fo:block></fo:block>2.2 消费者同意其签署的与本分期付款消费有关的合同文件由客户服务供应商保存；
 							<fo:block></fo:block>2.3 将担保方出具的担保审核意见书提供给销售方；
 							<fo:block></fo:block>2.4 协助消费者处理产品交付、维修、更换等；
-							<fo:block></fo:block>2.5 电话或短信提醒还款服务、客户咨询的热线电话服务（热线电话为：028-69164290），消费者提前还款结算服务等客户服务。
+							<fo:block></fo:block>2.5 电话或短信提醒还款服务、客户咨询的热线电话服务（热线电话为：028-66526698），消费者提前还款结算服务等客户服务。
 							<fo:block></fo:block>3、 消费者接受前述服务应向服务提供方支付服务费，服务费总金额为<xsl:value-of select="MonthOfPay"/>元按月分期支付，共分<xsl:value-of select="CycleTotal"/>期（以《还款指引》为准）。
 							<fo:block></fo:block>4、 如分期付款期间，消费者选择提前一次性支付所欠产品 价款的，则服务提供方按照《个人分期付款消费及相关服务合同》一次性收取消费者服务费，余下服务费不再收取。
 							<fo:block></fo:block>5、 服务提供方应当提前三日以电话或短信通知消费者还款（含担保费、服务费以及分期价款），服务提供方未尽通知义务导致

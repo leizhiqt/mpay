@@ -458,20 +458,24 @@ public class SaleAction extends BaseSupport {
 			
 			Bank oBank = new Bank();
 			uf.bindData(oBank, "oBank");
-			
+			request.setAttribute("oBank",oBank );
+
 			Bank tBank = new Bank();
 			tBank.setClientId(client.getId());
 			uf.bindData(tBank, "tBank");
-			
+			request.setAttribute("tBank",tBank );
+
 			ClientJobSale oSale = new ClientJobSale();
 			uf.bindData(oSale, "oSale");
-		
+			request.setAttribute("oSale",oSale );
+
 			ClientJobSale tSale = new ClientJobSale(); 
 			uf.bindData(tSale, "tSale");
-			
+			request.setAttribute("tSale",tSale );
+
 			//check
-			if(pictureName==null || pictureName.length<3){
-				throw new Exception("请上头像或图片");
+			if(pictureName==null || pictureName.length<2){
+				throw new Exception("请上传头像或图片");
 			}
 			
 			if(client.getAge()==null || client.getAge()==0){
@@ -1090,6 +1094,8 @@ public class SaleAction extends BaseSupport {
 			buffer.append("<SelfAmount>"+clientJob.getSelfAmount()+"</SelfAmount>\n");
 			buffer.append("<MonthOfPay>"+clientJob.getMonthOfPay()+"</MonthOfPay>\n");
 			
+			buffer.append("<ImgURL>"+client.getPhotoPath()+"</ImgURL>\n");
+
 			SimpleDateFormat dformat = new SimpleDateFormat("yyyy年MM月dd日");
 			Date vDate = clientJob.getMonthOfDate();
 			buffer.append("<MonthOfDate>"+dformat.format(vDate)+"</MonthOfDate>\n");
