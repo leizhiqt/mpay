@@ -562,9 +562,7 @@ public class SaleAction extends BaseSupport {
 			if(client.getHomeType().equals("请选择")){
 				throw new Exception("请输入家庭成员类型");
 			}
-			if(StringUtils.isNull(client.getHomePhoneName())){
-				throw new Exception("请输入家庭成员电话");
-			}
+
 			if(StringUtils.isNull(client.getClientName())){
 				throw new Exception("请输入申请人名字");
 			}
