@@ -11,3 +11,9 @@ git log
 git pull
 git push
 git checkout 
+
+#git pull not working
+
+git stash
+git pull
+git pop
