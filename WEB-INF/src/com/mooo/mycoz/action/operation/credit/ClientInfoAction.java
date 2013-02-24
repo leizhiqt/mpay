@@ -722,11 +722,13 @@ public class ClientInfoAction extends BaseSupport {
 					clientJobTrack.setProcessId(0);
 					clientJobTrack.update(tx.getConnection());
 				}else{
+					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
+
 					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
 					clientJobTrack.setUserId(sessionId);
 					clientJobTrack.setJobDate(new Date());
 					clientJobTrack.setProcessId(0);
-					clientJobTrack.setJobTypeId(2);
+//					clientJobTrack.setJobTypeId(2);
 					clientJobTrack.add(tx.getConnection());
 				}
 				
