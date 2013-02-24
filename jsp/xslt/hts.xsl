@@ -65,7 +65,7 @@ exclude-result-prefixes="fo">
 					<fo:table-cell  border="1pt solid black" >
 						<fo:block font-size="7pt"   
 							 >
-							指成都汉易联信非融资性担保有限公司。
+							指成都汉易联信商贸有限公司。
 						</fo:block>
 					</fo:table-cell>
 				</fo:table-row>
