@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> </title>
+<link id="skinCss" href="../public/ISCSSobjects_style5.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">    
+function GetCookie(sName)
+{
+    var aCookie = document.cookie.split("; ");
+    for (var i=0; i < aCookie.length; i++)
+    {
+        var aCrumb = aCookie[i].split("=");
+        if (sName == aCrumb[0])
+        {
+            return aCrumb[1];
+        }
+    }
+    return null;
+}
+
+function SetCookie(name, value, time, domain)
+{
+    var expdate = new Date();
+    var expires = time;
+    if(expires!=null){
+      expdate.setTime(expdate.getTime() + ( expires * 1000 ));
+      expd = "expires="+expdate.toGMTString()+";";
+    }else
+      expd = "";
+    if (domain)
+    {
+        domain = "domain="+ domain +"; path=/; ";
+    }
+    document.cookie = name + "=" + escape (value) + "; " + expd + domain;
+}
+var cookieTag = "nd_skin";
+var vSkin = GetCookie(cookieTag);
+
+//皮肤撤销初始化皮肤
+if(vSkin=="yx_subject0708"){setSkinColor('blue');}
+
+function setSkinColor(vSkinNum)
+{
+    SetCookie( cookieTag, vSkinNum, 60*60*24*30,"");
+    if(vSkinNum=="yx_subject0708"){vSkinNum="blue";}
+    document.getElementById("skinCss").href = "../public/"+vSkinNum+".css";
+}
+
+if( vSkin && vSkin!="Style" )
+{
+    document.getElementById("skinCss").href = "../public/"+vSkin+".css";
+}
+</script>    
+
+</head>
+
+<body>
+<div id="split_container">
+    <ul>
+	   <li id="hadden" style="display:none" class="btn_hadden" onClick="foldframe()" onMouseOver="this.className='btn_hadden_a'" onMouseOut="this.className='btn_hadden'" title="展开目录树">
+		</li>
+        
+		<li id="show" class="btn_show" onClick="foldframe()" onMouseOver="this.className='btn_show_a'" onMouseOut="this.className='btn_show'" title="隐藏目录树">
+		</li>
+	</ul>
+</div>
+</body>
+
+<script language="javascript" type="text/javascript">
+		var i = 0;
+	  function hiddenMenu()
+	  { 
+		var menu=window.parent.document.getElementsByTagName("frameset")[1]; 
+		menu.cols="0,6,*";
+		document.all.hadden.style.display="";
+		document.all.show.style.display="none";
+	  }
+	  function showMenu()
+	  { 
+		var menu=window.parent.document.getElementsByTagName("frameset")[1]; 
+		menu.cols="182,6,*";
+		document.all.hadden.style.display="none";
+		document.all.show.style.display="";
+	  }
+	  function foldframe()
+	  {
+	  	if(i==0)
+		{
+			hiddenMenu();
+			i=1;
+		}
+		else
+		{
+			showMenu();
+			i=0;
+		}
+	  }
+</script>
+
+</html>

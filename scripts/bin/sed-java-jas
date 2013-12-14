@@ -1,0 +1,9 @@
+#!/bin/bash
+
+jflist=`find  -name "*.java" -print`
+for jf in $jflist
+do
+	echo "sed $jf"
+	sed -i  's/colWidth\.add(value\.length())/colWidth.add(StringUtils\.length(value))/g' $jf
+	sed -i  's/, value\.length())/, StringUtils\.length(value))/g' $jf
+done

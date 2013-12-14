@@ -1,0 +1,8 @@
+#!/bin/bash
+
+jflist=`find  -name "*.jsp" -print`
+for jf in $jflist
+do
+     echo "sed $jf"
+	sed -i  's/\/browse/\/jsp/g' $jf
+done

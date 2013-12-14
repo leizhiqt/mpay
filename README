@@ -1,0 +1,13 @@
+leizhifesker@gmail.com
+2007/06/19
+native2ascii -encoding UTF8 MessageBundle.zh_CN MessageBundle_zh_CN.properties
+jar cvf myframework.jar *
+javadoc -d apidoc -subpackages com.mooo.mycoz
+
+2013/06/27
+git clone git@dasjkt.mooo.com:~/sfwine.git
+git show
+git log
+git pull
+git push
+git checkout 

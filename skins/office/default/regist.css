@@ -1,0 +1,671 @@
+html,body,form {
+	padding: 0px;
+	border: 0px solid #000000;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	font-family: Arial, Helvetica, sans-serif, "宋体";
+	font-size:14px;
+}
+
+div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,address,big,cite,code,del,em,font,img,ins,small, strong, var, b, u , i , center,dl,dt,dd,ol,ul,li,fieldset,label,legend {
+	padding: 0px;margin: 0px;
+}
+
+ol,ul {
+	list-style-type: none
+}
+
+:focus {
+	outline: 0
+}
+a img {
+	border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px
+}
+img {
+	vertical-align: middle
+}
+table {
+	empty-cells: show
+}
+ins {
+	text-decoration: none
+}
+del {
+	text-decoration: line-through
+}
+h1 {
+	font-size: 20px; font-family: arial,lucida,verdana,"microsoft yahei","ëîìå",helvetica,sans-serif
+}
+h2 {
+	font-size: 14px
+}
+h3 {
+	font-size: 14px
+}
+h4 {
+	font-size: 12px
+}
+h5 {
+	font-size: 12px
+}
+h6 {
+	font-size: 12px
+}
+.ftx01 {
+	color: #fcd410
+}
+.flk01 a:link {
+	color: #fcd410
+}
+.flk01 a:visited {
+	color: #fcd410
+}
+a.flk01:link {
+	color: #fcd410
+}
+a.flk01:visited {
+	color: #fcd410
+}
+.ftx02 {
+	color: #f90
+}
+.flk02 a:link {
+	color: #f90
+}
+.flk02 a:visited {
+	color: #f90
+}
+a.flk02:link {
+	color: #f90
+}
+a.flk02:visited {
+	color: #f90
+}
+.ftx03 {
+	color: #a0410a
+}
+.flk03 a:link {
+	color: #a0410a
+}
+.flk03 a:visited {
+	color: #a0410a
+}
+a.flk03:link {
+	color: #a0410a
+}
+a.flk03:visited {
+	color: #a0410a
+}
+.ftx04 {
+	color: #f00
+}
+.flk04 a:link {
+	color: #f00
+}
+.flk04 a:visited {
+	color: #f00
+}
+a.flk04:link {
+	color: #f00
+}
+a.flk04:visited {
+	color: #f00
+}
+.ftx05 {
+	color: #a40f00
+}
+.flk05 a:link {
+	color: #a40f00
+}
+.flk05 a:visited {
+	color: #a40f00
+}
+a.flk05:link {
+	color: #a40f00
+}
+a.flk05:visited {
+	color: #a40f00
+}
+.ftx11 {
+	color: #b8d1ea
+}
+.flk11 a:link {
+	color: #b8d1ea
+}
+.flk11 a:visited {
+	color: #b8d1ea
+}
+a.flk11:link {
+	color: #b8d1ea
+}
+a.flk11:visited {
+	color: #b8d1ea
+}
+.ftx12 {
+	color: #4589bf
+}
+.flk12 a:link {
+	color: #4589bf
+}
+.flk12 a:visited {
+	color: #4589bf
+}
+a.flk12:link {
+	color: #4589bf
+}
+a.flk12:visited {
+	color: #4589bf
+}
+.ftx13 {
+	color: #005aa0
+}
+.flk13 a:link {
+	color: #005aa0
+}
+.flk13 a:visited {
+	color: #005aa0
+}
+a.flk13:link {
+	color: #005aa0
+}
+a.flk13:visited {
+	color: #005aa0
+}
+.ftx14 {
+	color: #12a000
+}
+.flk14 a:link {
+	color: #12a000
+}
+.flk14 a:visited {
+	color: #12a000
+}
+a.flk14:link {
+	color: #12a000
+}
+a.flk14:visited {
+	color: #12a000
+}
+.ftx21 {
+	color: #fff
+}
+.flk21 a:link {
+	color: #fff
+}
+.flk21 a:visited {
+	color: #fff
+}
+a.flk21:link {
+	color: #fff
+}
+a.flk21:visited {
+	color: #fff
+}
+.ftx22 {
+	color: #ccc
+}
+.flk22 a:link {
+	color: #ccc
+}
+.flk22 a:visited {
+	color: #ccc
+}
+a.flk22:link {
+	color: #ccc
+}
+a.flk22:visited {
+	color: #ccc
+}
+.ftx23 {
+	color: #999
+}
+.flk23 a:link {
+	color: #999
+}
+.flk23 a:visited {
+	color: #999
+}
+a.flk23:link {
+	color: #999
+}
+a.flk23:visited {
+	color: #999
+}
+.ftx24 {
+	color: #666
+}
+.flk24 a:link {
+	color: #666
+}
+.flk24 a:visited {
+	color: #666
+}
+a.flk24:link {
+	color: #666
+}
+a.flk24:visited {
+	color: #666
+}
+.ftx25 {
+	color: #333
+}
+.flk25 a:link {
+	color: #333
+}
+.flk25 a:visited {
+	color: #333
+}
+a.flk25:link {
+	color: #333
+}
+a.flk25:visited {
+	color: #333
+}
+.ftx26 {
+	color: #000
+}
+.flk26 a:link {
+	color: #000
+}
+.flk26 a:visited {
+	color: #000
+}
+a.flk26:link {
+	color: #000
+}
+a.flk26:visited {
+	color: #000
+}
+body {
+	margin: 0px auto
+}
+.w {
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	margin: 0px auto;
+	width: 680px;
+	padding-top: 0px;
+	zoom: 1
+}
+body .fl {
+	float: left
+}
+body .fr {
+	float: right
+}
+body .fn {
+	float: none
+}
+body .al {
+	text-align: left
+}
+body .ac {
+	text-align: center
+}
+body .ar {
+	text-align: right
+}
+.clr {
+	clear: both; display: block; font-size: 0px; overflow: hidden; line-height: 0; height: 0px
+}
+.clearfix:unknown {
+	clear: both; display: block; visibility: hidden; height: 0px; content: "."
+}
+.clearfix {
+	
+}
+* html .clearfix {
+	height: 1%
+}
+.clearfix {
+	display: block
+}
+* + html .clearfix {
+	min-height: 1%
+}
+.overflow {
+	overflow: hidden
+}
+.block {
+	display: block; overflow: hidden; cursor: pointer
+}
+.hide {
+	display: none
+}
+.invisible {
+	visibility: hidden
+}
+.form label {
+	font-size: 12px; float: left
+}
+.form input {
+	font-size: 12px; float: left
+}
+.form select {
+	font-size: 12px; float: left
+}
+.form textarea {
+	font-size: 12px; float: left
+}
+.form button {
+	font-size: 12px; float: left
+}
+.form .label {
+	font-size: 12px; float: left
+}
+.form .item {
+	overflow: hidden; zoom: 1
+}
+.btn-img {
+	border-top-width: 0px; padding-right: 0px; padding-left: 0px; border-left-width: 0px; border-bottom-width: 0px; padding-bottom: 0px; margin: 0px; overflow: hidden; cursor: pointer; padding-top: 0px; text-align: center; border-right-width: 0px
+}
+.btn-text {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; overflow: hidden; cursor: pointer; padding-top: 0px; text-align: center
+}
+.btn-link {
+	display: block; overflow: hidden; text-align: center
+}
+.m {
+	overflow: hidden; zoom: 1
+}
+.mt {
+	overflow: hidden; zoom: 1
+}
+.mc {
+	overflow: hidden; zoom: 1
+}
+.mb {
+	overflow: hidden; zoom: 1
+}
+.mt .extra {
+	float: right
+}
+.m {
+	margin-bottom: 10px
+}
+.tab {
+	overflow: hidden; zoom: 1
+}
+.tab li {
+	float: left; text-align: center
+}
+.tab-item {
+	float: left; text-align: center
+}
+body {
+	font-size: 12px; color: #333; line-height: 150%; font-family: arial,"ëîìå",lucida,verdana,helvetica,sans-serif
+}
+a:link {
+	color: #333; text-decoration: none
+}
+a:visited {
+	color: #333; text-decoration: none
+}
+a:hover {
+	color: #f00; text-decoration: underline
+}
+a:active {
+	color: #f00; text-decoration: underline
+}
+#shortcut {
+	background: url(images/bg_shortcut.gif) #efefef repeat-x 0px -134px; width: 100%; height: 30px
+}
+#shortcut .collect {
+	padding-left: 15px; float: left; line-height: 30px; position: relative
+}
+#shortcut .collect b {
+	background: url(images/bg_tit_home.gif) -130px -274px; left: 2px; overflow: hidden; width: 10px; position: absolute; top: 9px; height: 10px
+}
+#shortcut ul {
+	z-index: 11; background: url(images/bg_shortcut.gif) repeat-x 0px -134px; float: right; position: relative; height: 30px
+}
+#shortcut li {
+	padding-right: 8px; padding-left: 8px; background: url(images/bg_shortcut.gif) no-repeat -260px -100px; float: left; padding-bottom: 2px; color: #acacac; line-height: 26px; padding-top: 2px; font-family: "ëîìå"; height: 26px
+}
+#shortcut .fore1 {
+	background: none transparent scroll repeat 0% 0%
+}
+#shortcut .link-regist {
+	color: #f60
+}
+#shortcut .fore2 {
+	padding-left: 50px; background: url(images/bg_shortcut.gif) no-repeat -130px -165px
+}
+#shortcut .sub {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 0px; width: 72px; padding-top: 0px
+}
+#shortcut li dl {
+	padding-right: 1px; padding-left: 1px; padding-bottom: 0px; overflow: hidden; padding-top: 0px
+}
+#shortcut li dt {
+	padding-right: 11px; padding-left: 8px; padding-bottom: 2px; overflow: hidden; padding-top: 2px; position: relative; height: 26px
+}
+#shortcut li dt b {
+	right: 3px; background: url(images/bg_shortcut.gif) no-repeat -210px -25px; width: 5px; position: absolute; top: 13px; height: 3px
+}
+#shortcut li dd {
+	display: none; padding-left: 8px; line-height: 20px
+}
+#shortcut li:hover dl {
+	border-right: #ccc 1px solid; padding-right: 0px; border-top: #ccc 0px solid; padding-left: 0px; background: #fff; padding-bottom: 0px; border-left: #ccc 1px solid; padding-top: 0px; border-bottom: #ccc 1px solid
+}
+#shortcut .hover dl {
+	border-right: #ccc 1px solid; padding-right: 0px; border-top: #ccc 0px solid; padding-left: 0px; background: #fff; padding-bottom: 0px; border-left: #ccc 1px solid; padding-top: 0px; border-bottom: #ccc 1px solid
+}
+#shortcut li:hover dd {
+	display: block
+}
+#shortcut .hover dd {
+	display: block
+}
+#shortcut li:hover b {
+	background-position: -220px -25px
+}
+#shortcut .hover b {
+	background-position: -220px -25px
+}
+* html #shortcut li.sub dl {
+	position: absolute
+}
+#footer {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 30px; padding-top: 20px; text-align: center
+}
+#footer .flinks a {
+	margin: 0px 10px
+}
+#footer .flinks span {
+	margin: 0px 10px
+}
+#footer .flinks span a {
+	margin: 0px
+}
+#footer .copyright {
+	margin: 10px 0px; font-family: arial
+}
+#footer .ilinks a {
+	margin: 0px 5px
+}
+#logo {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 10px; padding-top: 10px
+}
+
+#regist .mt {
+	background: url(images/tit_regist.jpg) repeat-x 0px -34px; height: 33px
+}
+#regist .mt h2 {
+	padding-left: 15px; background: url(images/tit_regist.jpg) no-repeat 0px 0px; float: left; line-height: 33px; height: 33px
+}
+#regist .mt span {
+	float: right; line-height: 33px; height: 33px; text-align: right
+}
+#regist .mt b {
+	background: url(images/tit_regist.jpg) no-repeat 0px -68px; float: right; width: 10px; height: 33px
+}
+#regist .mc {
+	border-right: #d1d1d1 1px solid;
+	padding-right: 20px;
+	border-top: #d1d1d1 0px solid;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	border-left: #d1d1d1 1px solid;
+	padding-top: 15px;
+	border-bottom: #d1d1d1 1px solid;
+	height: 320px;
+}
+#regist .tab {
+	padding-left: 135px;
+	margin-bottom: 25px;
+	overflow: visible;
+	border-bottom: #36a602 1px solid;
+	height: 29px
+}
+#regist .tab li {
+	font-size: 14px; width: 102px; color: #f79100; line-height: 27px; padding-top: 3px; height: 27px; text-align: center
+}
+#regist .tab .curr {
+	font-weight: bold; z-index: 10; background: url(images/bg_regist.jpg) no-repeat 0px -83px; color: #a0410a; position: relative
+}
+#regist .tab .line {
+	background: url(images/bg_shortcut_line.jpg) no-repeat right 7px
+}
+#regist .tab a:link {
+	display: block; margin: 0px auto; overflow: hidden; width: 74px; line-height: 23px; height: 23px
+}
+#regist .tab a:visited {
+	display: block; margin: 0px auto; overflow: hidden; width: 74px; line-height: 23px; height: 23px
+}
+#regist .tab a:hover {
+	background: url(images/bg_regist.jpg) no-repeat -167px 0px; color: #fff; text-decoration: none
+}
+#regist .tab a:active {
+	background: url(images/bg_regist.jpg) no-repeat -167px 0px; color: #fff; text-decoration: none
+}
+* html #regist .tab {
+	overflow: hidden
+}
+#regist .item {
+	line-height: 26px; padding-top: 5px; height: 50px
+}
+#regist .item a:link {
+	text-decoration: underline
+}
+#regist .item a:visited {
+	text-decoration: underline
+}
+#regist .label {
+	font-size: 14px; width: 300px; text-align: right
+}
+#regist .label b {
+	font-weight: normal; margin-right: 5px; font-family: "????"
+}
+#regist .text {
+	border-right: #bbb 1px solid; padding-right: 3px; border-top: #bbb 1px solid; padding-left: 3px; font-size: 14px; padding-bottom: 4px; border-left: #bbb 1px solid; width: 240px; padding-top: 4px; border-bottom: #bbb 1px solid; font-family: arial,"????"; height: 16px
+}
+#regist .text-1 {
+	width: 100px
+}
+#regist .blank {
+	margin: 2px 5px 0px; width: 16px; height: 16px
+}
+#regist .img img {
+	margin: 0px 5px; height: 26px
+}
+#regist .succeed {
+	background: url(images/pwdstrength.gif) no-repeat -105px 0px
+}
+#regist .btn-regist {
+	font-weight: bold;
+	font-size: 14px;
+	background: url(images/bg_regist.jpg) no-repeat 0px 0px;
+	width: 166px;
+	color: #fff;
+	height: 32px
+}
+#regist .highlight1 {
+	border-right: #ffcc66 2px solid; padding-right: 2px; border-top: #ffcc66 2px solid; padding-left: 2px; padding-bottom: 3px; border-left: #ffcc66 2px solid; padding-top: 3px; border-bottom: #ffcc66 2px solid; outline: 2px solid #ffdc97
+}
+#regist .highlight2 {
+	border-right: #f00 1px solid; border-top: #f00 1px solid; border-left: #f00 1px solid; color: #f00; border-bottom: #f00 1px solid; outline: 1px solid #ffc1c1
+}
+#regist .pwdbg {
+	background: #fff8eb
+}
+#regist .focus {
+	color: #999; line-height: 20px
+}
+#regist .null {
+	color: red; line-height: 20px
+}
+#regist .error {
+	color: red; line-height: 20px
+}
+#regist .checkbox {
+	margin-top: 2px
+}
+#regist #referrer {
+	font-size: 12px; color: #999
+}
+#pwdstrength {
+	padding-right: 10px; color: #999; line-height: 22px
+}
+#pwdstrength b {
+	margin-top: 3px; float: left; overflow: hidden; width: 104px; height: 13px
+}
+.strengtha b {
+	background: url(images/pwdstrength.gif) no-repeat 0px 0px
+}
+.strengthb b {
+	background: url(images/pwdstrength.gif) no-repeat 0px -13px
+}
+.strengthc b {
+	background: url(images/pwdstrength.gif) no-repeat 0px -26px
+}
+#protocol-con {
+	border-right: #ccc 1px solid; padding-right: 8px; border-top: #ccc 1px solid; overflow-y: scroll; padding-left: 8px; padding-bottom: 8px; margin: 0px auto; border-left: #ccc 1px solid; width: 600px; color: #666; padding-top: 8px; border-bottom: #ccc 1px solid; height: 80px
+}
+.service {
+	padding-right: 15px; padding-left: 15px; background: #f7f7f7; margin-bottom: 13px; padding-bottom: 15px; overflow: hidden; padding-top: 15px; zoom: 1
+}
+.service li {
+	padding-right: 17px; padding-left: 17px; font-size: 0px; float: left; background-image: url(images/bg20110922.png); padding-bottom: 0px; overflow: hidden; border-left: #ccc 1px solid; line-height: 100px; padding-top: 0px; background-repeat: no-repeat; height: 14px
+}
+.service li.fore {
+	border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: none
+}
+.service .bl1 {
+	background-position: 17px 0px; width: 162px
+}
+.service .bl2 {
+	background-position: 17px -15px; width: 187px
+}
+.service .bl3 {
+	background-position: 17px -30px; width: 162px
+}
+.service .bl4 {
+	background-position: 17px -45px; width: 254px
+}
+#protocol-con {
+	border-right: #cccccc 1px solid; padding-right: 8px; border-top: #cccccc 1px solid; overflow-y: scroll; padding-left: 8px; padding-bottom: 8px; margin: 0px auto; border-left: #cccccc 1px solid; width: 600px; color: #666666; padding-top: 8px; border-bottom: #cccccc 1px solid; height: 80px
+}
+#protocol-con h4 {
+	font-size: 14px; padding-bottom: 10px; text-align: center
+}
+#protocol-con h5 {
+	padding-right: 0px; padding-left: 0px; padding-bottom: 5px; text-indent: 2em; padding-top: 5px
+}
+#protocol-con p {
+	text-indent: 2em
+}
+#protocol-con em {
+	font-style: italic
+}
+#protocol-con span {
+	text-decoration: underline
+}
+#protocol-con strong {
+	margin-right: 5px
+}
+
+

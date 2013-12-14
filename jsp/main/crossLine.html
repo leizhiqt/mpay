@@ -1,0 +1,573 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title></title>
+<link id="skinCss" href="../public/ISCSSobjects_style5.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">    
+
+function GetCookie(sName)
+{
+    var aCookie = document.cookie.split("; ");
+    for (var i=0; i < aCookie.length; i++)
+    {
+        var aCrumb = aCookie[i].split("=");
+        if (sName == aCrumb[0])
+        {
+            return aCrumb[1];
+        }
+    }
+    return null;
+}
+
+function SetCookie(name, value, time, domain)
+{
+    var expdate = new Date();
+    var expires = time;
+    if(expires!=null){
+      expdate.setTime(expdate.getTime() + ( expires * 1000 ));
+      expd = "expires="+expdate.toGMTString()+";";
+    }else
+      expd = "";
+    if (domain)
+    {
+        domain = "domain="+ domain +"; path=/; ";
+    }
+    document.cookie = name + "=" + escape (value) + "; " + expd + domain;
+}
+var cookieTag = "nd_skin";
+var vSkin = GetCookie(cookieTag);
+
+//皮肤撤销初始化皮肤
+if(vSkin=="yx_subject0708"){setSkinColor('blue');}
+
+function setSkinColor(vSkinNum)
+{
+    SetCookie( cookieTag, vSkinNum, 60*60*24*30,"");
+    if(vSkinNum=="yx_subject0708"){vSkinNum="blue";}
+    document.getElementById("skinCss").href = "../public/"+vSkinNum+".css";
+}
+
+if( vSkin && vSkin!="Style" )
+{
+    document.getElementById("skinCss").href = "../public/"+vSkin+".css";
+}
+</script> 
+<script language="JavaScript" type="text/JavaScript">
+
+/*function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+*/
+
+
+</SCRIPT>
+<SCRIPT language="JavaScript" type="text/JavaScript"  src="../public/calendarUtil.js"></SCRIPT>
+<SCRIPT language="JavaScript" type="text/JavaScript"  src="../public/JTimer_1.2.js"></SCRIPT>
+<SCRIPT language="JavaScript" type="text/JavaScript"  src="../public/cookie.js"></SCRIPT>
+<SCRIPT language=JavaScript>
+
+  var hiddenFlag=0;
+function onload ()
+{
+    var url = window.location.href;
+	
+    var splittedUrl = url.split ("?");
+	
+    if (splittedUrl.length > 1)
+    {
+        var parameters = splittedUrl[1];
+        var parametersArray = parameters.split (",");
+        for (var temp = 0; temp < parametersArray.length; temp++)
+        {
+			//alert("display"+parametersArray[temp]+"()");
+			try  {
+				 eval ("display"+parametersArray[temp]+"()");
+             }
+             catch(exception) {
+                 alert(exception);
+             }
+
+			
+            //display(1);
+            //displaySave();
+            // alert("display"+parametersArray[temp]+"()");
+        }
+    } else
+     //   hideAll ();
+window.history.forward(1);
+}
+function logout ()
+{
+parent.parent.location="../main/logout.smis"
+
+}
+function notice ()
+{
+ parent.mainFrame.location= "../main/TopNotice.smis";
+
+}
+
+//选择功能
+function MM_selFunc (index)
+{
+    switch (index)
+            {
+        case 1:    //保存记录
+            parent.mainFrame.save ();
+            break;
+        case 2:    //增加一行记录
+            parent.mainFrame.addRecord ();
+            break;
+        case 3:    //清除一行记录
+            parent.mainFrame.deleteRecord ();
+            break;
+        case 4:    //打印
+            parent.mainFrame.print ();
+            break;
+        case 5://导出              
+				 if (parent.mainFrame.document.getElementById("startDate").value != null)
+                {                 
+              writeCookie ("startDate", parent.mainFrame.document.getElementById("startDate").value, 24);
+                }
+                if (parent.mainFrame.document.getElementById("endDate").value != null)
+                {
+                  writeCookie ("endDate", parent.mainFrame.document.getElementById("endDate").value, 24);
+                }
+               if (parent.mainFrame.document.getElementById("endDate").value < parent.mainFrame.document.getElementById("startDate").value)
+                {
+                     alert('终止时间不能小于起始时间！');
+                      return false;
+                }
+            parent.mainFrame.exportData ();
+            break;
+        case 6:    //时间段查询
+
+
+            if (document.getElementById("condition").style.display == '')
+            {
+               if (parent.mainFrame.document.getElementById("condition").value != null)
+                    parent.mainFrame.document.getElementById("condition").value = document.getElementById("conditionInput").value;
+                parent.mainFrame.singleSearch ();
+            } else if (document.getElementById("month").style.display == '')
+            {
+                if (parent.mainFrame.document.getElementById("month").value != null)
+                    parent.mainFrame.document.getElementById("month").value = document.getElementById("monthValue").value;
+                parent.mainFrame.monthSearch ();
+            } else if (document.getElementById("startDate").style.display == '')
+            {
+                if (parent.mainFrame.document.getElementById("startDate").value != null)
+                {
+                    parent.mainFrame.document.getElementById("startDate").value = document.getElementById("startDateInput").value;
+                   writeCookie ("startDate", document.getElementById("startDateInput").value, 24);
+                }
+                if (parent.mainFrame.document.getElementById("endDate").value != null)
+                {
+                    parent.mainFrame.document.getElementById("endDate").value = document.getElementById("endDateInput").value;
+                    writeCookie ("endDate", document.getElementById("endDateInput").value, 24);
+                }
+                if (parent.mainFrame.document.getElementById("endDate").value < parent.mainFrame.document.getElementById("startDate").value) 
+                {
+                     alert('终止时间不能小于起始时间！');
+                      return false;
+                }
+                parent.mainFrame.search ();
+            } else if (document.getElementById("date").style.display == '')
+            {
+                if (parent.mainFrame.document.getElementById("searchingDate").value != null)
+                    parent.mainFrame.document.getElementById("searchingDate").value = document.getElementById("dateValue").value;
+                parent.mainFrame.singleDateSearch ();
+            }else
+            {
+                parent.mainFrame.search ();
+            }
+            break;
+        case 7:    //新建
+            parent.mainFrame.newRecord ();
+            break;
+        case 8:    //删除
+            parent.mainFrame.deleteRecord ();
+            break;
+        case 9:    //修改
+            parent.mainFrame.modify ();
+            break;
+       case 10:    //组用户
+            parent.mainFrame.groupUser ();
+            break;
+        case 11:    //数据权限
+            parent.mainFrame.permission ();
+            break;
+        case 12://取消
+            parent.mainFrame.cancel ();
+            break;
+        case 13://后退
+            parent.mainFrame.back ();
+            break;
+        case 14://报表
+            parent.mainFrame.report ();
+            break;
+        case 15://下一步
+            parent.mainFrame.next ();
+            break;
+    }
+}
+
+//鼠标移入，高亮显示
+function MM_btnMouseOver (index)
+{
+    if(hiddenFlag==0){ 
+    //eval ("document.all.btn" + index + "0" + ".style.display='none'");
+   // eval ("document.all.btn" + index + "1" + ".style.display=''");
+	eval ("document.getElementById('btn"+index+"1"+"').style.display=''");
+	eval ("document.getElementById('btn"+index+"0"+"').style.display='none'");
+	}
+}
+//鼠标移出，还原
+function MM_btnMouseOut (index)
+{
+   if(hiddenFlag==0){ 
+   // eval ("document.all.btn" + index + "0" + ".style.display=''");
+   // eval ("document.all.btn" + index + "1" + ".style.display='none'");
+	eval ("document.getElementById('btn"+index+"0"+"').style.display=''");
+	eval ("document.getElementById('btn"+index+"1"+"').style.display='none'");
+	}
+}
+function display (index)
+{
+	//alert("document.all.btn" + index + "0" + ".style.display=''");
+   // eval ("document.all.btn" + index + "0" + ".style.display=''");
+   // eval ("document.all.btn" + index + "1" + ".style.display='none'");
+	eval ("document.getElementById('btn"+index+"0"+"').style.display=''");
+	eval ("document.getElementById('btn"+index+"1"+"').style.display='none'");
+	
+
+}
+function hide (index)
+{
+	eval ("document.getElementById('btn"+index+"0"+"').style.display='none'");
+	eval ("document.getElementById('btn"+index+"1"+"').style.display='none'");
+    //eval ("document.all.btn" + index + "0" + ".style.display='none'");
+   // eval ("document.all.btn" + index + "1" + ".style.display='none'");
+}
+function hideAll ()
+{
+    for (var index = 1; index <= 14; index++)
+    {
+        hide (index);
+    }
+}
+function displaySave ()
+{
+    display (1);
+}
+function displayAdd ()
+{
+    display (2);
+}
+function displayClear ()
+{
+    display (3);
+}
+function displayPrint ()
+{
+    display (4);
+}
+function displayExport ()
+{
+    //document.all.startDateInput.value = readCookie ("startDate");
+    //document.all.endDateInput.value = readCookie ("endDate");
+	document.getElementById('startDateInput').value = readCookie("startDate");
+	document.getElementById('endDateInput').value = readCookie("endDate");
+	
+    display (5);
+}
+
+function displaySingleSearch ()
+{
+    //eval ("document.all.condition.style.display=''");
+    //eval ("document.all.conditionInput.style.display=''");
+	eval ("document.getElementById('condition').style.display=''");
+	eval ("document.getElementById('conditionInput').style.display=''");
+    display (6);
+}
+function displayMonthSearch ()
+{
+   // eval ("document.all.month.style.display=''");
+   // eval ("document.all.monthValue.style.display=''");
+   // eval ("document.all.monthInputSelector.style.display=''");
+	eval ("document.getElementById('month').style.display=''");
+	eval ("document.getElementById('monthValue').style.display=''");
+	eval ("document.getElementById('monthInputSelector').style.display=''");
+    display (6);
+}
+
+function displaySingleDateSearch ()
+{
+    //eval ("document.all.date.style.display=''");
+    //eval ("document.all.dateValue.style.display=''");
+    //eval ("document.all.dateInputSelector.style.display=''");
+	eval ("document.getElementById('date').style.display=''");
+	eval ("document.getElementById('dateValue').style.display=''");
+	eval ("document.getElementById('dateInputSelector').style.display=''");
+    display (6);
+}
+
+function displaySearchIcon ()
+{
+    display (6);
+}
+function displaySearch ()
+{
+    /*eval ("document.all.startDate.style.display=''");
+    eval ("document.all.endDate.style.display=''");
+    eval ("document.all.startDateSelector.style.display=''");
+    eval ("document.all.endDateSelector.style.display=''");
+    eval ("document.all.startDateInput.style.display=''");
+    eval ("document.all.endDateInput.style.display=''"); 
+	*/
+	eval ("document.getElementById('startDate').style.display=''");
+	eval ("document.getElementById('endDate').style.display=''");
+	eval ("document.getElementById('startDateSelector').style.display=''");
+	eval ("document.getElementById('endDateSelector').style.display=''");
+	eval ("document.getElementById('startDateInput').style.display=''");
+	eval ("document.getElementById('endDateInput').style.display=''");
+    //document.all.startDateInput.value = readCookie ("startDate");
+    //document.all.endDateInput.value = readCookie ("endDate");
+	document.getElementById('startDateInput').value = readCookie("startDate");
+	document.getElementById('endDateInput').value = readCookie("endDate");
+
+
+    display (6);
+}
+
+function displayNew ()
+{
+    display (7);
+}
+function displayDelete ()
+{
+    display (8);
+}
+function displayModify ()
+{
+    display (9);
+}
+function displayGroupUser ()
+{
+    display (10);
+}
+function displayDataPower ()
+{
+    display (11);
+}
+function displayCancel ()
+{
+    display (12);
+}
+function displayBack ()
+{
+    display (13);
+}
+function displayReport ()
+{
+    display (14);
+}
+function displayNext ()
+{
+    display (15);
+}
+
+function hideSingleSearch ()
+{
+    //eval ("document.all.condition.style.display='none'");
+    //eval ("document.all.conditionInput.style.display='none'");
+	eval ("document.getElementById('condition').style.display='none'");
+	eval ("document.getElementById('conditionInput').style.display='none'");
+    hide (6);
+}
+function hideMonthSearch ()
+{
+    /*eval ("document.all.month.style.display='none'");
+    eval ("document.all.monthValue.style.display='none'");
+    eval ("document.all.monthInputSelector.style.display='none'");*/
+	eval ("document.getElementById('month').style.display='none'");
+	eval ("document.getElementById('monthValue').style.display='none'");
+	eval ("document.getElementById('monthInputSelector').style.display='none'");
+    hide (6);
+}
+function hideSearchIcon ()
+{
+    hide (6);
+}
+function hideSearch ()
+{
+    /*eval ("document.all.startDate.style.display='none'");
+    eval ("document.all.endDate.style.display='none'");
+    eval ("document.all.startDateSelector.style.display='none'");
+    eval ("document.all.endDateSelector.style.display='none'");
+    eval ("document.all.startDateInput.style.display='none'");
+    eval ("document.all.endDateInput.style.display='none'");
+    eval ("document.all.dateSplit.style.display='none'");
+	*/
+	eval ("document.getElementById('startDate').style.display='none'");
+	eval ("document.getElementById('endDate').style.display='none'");
+	eval ("document.getElementById('startDateSelector').style.display=none''");
+	eval ("document.getElementById('endDateSelector').style.display='none'");
+	eval ("document.getElementById('startDateInput').style.display='none'");
+	eval ("document.getElementById('endDateInput').style.display='none'");
+	eval ("document.getElementById('dateSplit').style.display='none'");
+    hide (6);
+}
+function hideSingleDateSearch ()
+{
+    /*eval ("document.all.date.style.display='none'");
+    eval ("document.all.dateValue.style.display='none'");
+    eval ("document.all.dateInputSelector.style.display='none'");*/
+	eval ("document.getElementById('date').style.display='none'");
+	eval ("document.getElementById('dateValue').style.display='none'");
+	eval ("document.getElementById('dateInputSelector').style.display='none'");
+    display (6);
+}
+
+function hideSave ()
+{
+    hide (1);
+}
+function hidePrint ()
+{
+    hide (4);
+}
+function hideAdd ()
+{
+    hide (2);
+}
+function hideClear ()
+{
+    hide (3);
+}
+function hideExport ()
+{
+    hide (5);
+}
+function hideNew ()
+{
+    hide (7);
+}
+function hideDelete ()
+{
+    hide (8);
+}
+function hideModify ()
+{
+    hide (9);
+}
+function hideGroupUser ()
+{
+    hide (10);
+}
+function hideDataPower ()
+{
+    hide (11);
+}
+function hideCancel ()
+{
+    hide (12);
+}
+function hideBack ()
+{
+    hide (13);
+}
+function hideReport ()
+{
+    hide (14);
+}
+function hideNext ()
+{
+    hide (15);
+}
+
+
+
+ function times(){
+   var datetime=new Date()
+   a=datetime.getFullYear();
+   b=datetime.getMonth()+1;
+   c=datetime.getDate();
+   e=datetime.getHours();
+   f=datetime.getMinutes();
+   g=datetime.getSeconds();
+   h=datetime.getDay();
+   i=Array("日","一","二","三","四","五","六");
+ if (e<10){ e="0"+e;}
+ if (f<10){f="0"+f;}
+ if (g<10){ g="0"+g;}
+   document.getElementById('time').innerHTML = a+"年"+b+"月"+c+"日 "+e+":"+f+":"+g+" 星期"+i[h]; 
+   setTimeout("times()",500);
+    }
+
+</SCRIPT>
+
+
+</head>
+
+<body onLoad="times();onload()" oncontextmenu ='self.event.returnValue=false'>
+<noscript><iframe src="*.html"></iframe></noscript>
+<!--工具栏容器 -->
+<div id="tools_container">
+
+<!--左边工具容器 -->
+	<div id="tools_left">
+    	<ul>
+        
+<!--当前日期显示 -->
+            <li class="time1" id="time">
+
+  </li>
+                
+<!--分隔线 -->
+            <li class="split"></li>
+<!--开始时间calendar('startDateInput') JTC.setday('startDateInput')-->
+			<li class="time1" style="display:none" id="startDate">起始日期</li>
+			<li class="selButton2" style="font-size:12px">
+			<input type="text" style="width:72px; height:14px;cursor:pointer ;display:none" class="INPUT" id="startDateInput" name="startDateInput" readonly="true" onClick="calendar('startDateInput')"></li>
+			 <li class="selButton1"><img src="../images/tools/date.png"  id="startDateSelector" width="14" height="16"  align="middle" style="cursor:pointer;display:none" onClick="JTC.setday('startDateInput')"  readonly="true"></li>
+
+<!--结束时间 calendar('endDateInput')-->
+			<li class="time1" style="display:none" id="endDate">终止日期</li>
+			<li class="selButton2" style="font-size:12px"><input type="text" style="width:72px; height:14px;cursor:pointer ;display:none" class="INPUT" id="endDateInput" name="endDateInput" readonly="true" onClick="JTC.setday('endDateInput')"></li>
+            <li class="selButton1"><img src="../images/tools/date.png"  id="endDateSelector" style="cursor:pointer;display:none" onClick="JTC.setday('endDateInput')"  readonly="true"></li>
+ 
+ <li class="selButton1"><img id="condition" src="../images/tools/condition.gif" style="display:none"></li>
+<li class="selButton2" style="font-size:12px"><input type="text" style="width:70px;display:none"
+                                                             class="INPUT" id="conditionInput"
+                                                             name="conditionInput"></li>
+<!-- Single date Search-->
+
+<li class="selButton1"><img id="date" src="../images/tools/date.gif" style="display:none" width="19" height="14"></li>
+
+<li class="selButton2" style="font-size:12px"><input type="text" style="width:70px;display:none" class="INPUT" id="dateValue" name="dateValue"
+           readonly="true"></li>
+<li class="selButton1">
+    <img src="../images/tools/date.gif" id="dateInputSelector" width="19" height="14" align="middle"
+         style="cursor:pointer;display:none" onClick="calendar('dateValue')">
+</li>
+ 
+   
+        </ul>
+
+	</div>
+    
+<!--LOGO -->
+	<div id="tools_logo" >
+    	<ul>
+        	<li class='tools_logo_li' onmouseover="this.className='tools_logo_li_a';" onmouseout="this.className='tools_logo_li';"></li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>

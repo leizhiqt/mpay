@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- <!DOCTYPE littleface SYSTEM "myconfig.dtd"> -->
+<struts>
+
+	<package name="xpc" namespace="/xpc" extends="struts-default">
+		<!-- configure cache -->
+		<cache name="action" size="1024" sizeUnit="K" time="24" timeUnit="HOUR" />
+		<!-- <cache name="dbobj" size="1024" sizeUnit="K" time="24" timeUnit="HOUR" /> -->
+
+		<plugins name="Auth" enable="true"/>
+		
+		<!-- Add actions here -->
+
+		<action name="Index" default="home"
+			class="com.mooo.mycoz.action.IndexAction">
+			<result name="home" allow="true">/home/home.jsp</result>
+			<result name="browseDocument" allow="true">/home/browseDocument.jsp</result>
+			<result name="questionnaire" allow="true">/home/questionnaire.jsp</result>
+		</action>
+		
+		<action name="Shop" default="browseShop"
+			class="com.mooo.mycoz.action.shop.ShopAction">
+			<result name="browseShop" allow="true">/shop/browseShop.jsp</result>
+		</action>
+		
+		<action name="Frame" default="execute"
+			class="com.mooo.mycoz.action.FrameAction">
+			<result name="execute">/jsp/main/frame.jsp</result>
+		</action>
+		
+		<action name="Login" default="promptLogin"
+			class="com.mooo.mycoz.action.LoginAction">
+			<result name="promptLogin" allow="true">/jsp/login.jsp</result>
+			<result name="processLogin" allow="true">/Frame.do</result>
+			<result name="promptRegister">/jsp/register.jsp</result>
+			<result name="processRegister">/jsp/registerSuccess.jsp</result>
+			<result name="processLogout">/Login.do</result>
+		</action>
+		
+		<!-- Main Menu -->
+		<action name="Main" default="menu"
+			class="com.mooo.mycoz.action.MainAction">
+			<result name="menu">/jsp/main/menu.jsp</result>
+			<result name="menuTop">/jsp/main/mainTop.jsp</result>
+		</action>
+		
+		<!-- Setup -->
+		<action	name="Setup" default="menu"
+			class="com.mooo.mycoz.action.setup.SetupAction">
+			<result name="menu">/jsp/setup/defPage.jsp</result>
+		</action>
+
+		<!-- Location -->
+		<action	name="Location" default="menu"
+			class="com.mooo.mycoz.action.setup.LocationAction">
+			<result name="menu">/jsp/setup/defPage.jsp</result>
+		</action>
+		
+		<action	name="BranchCategory" default="list"
+			class="com.mooo.mycoz.action.setup.BranchCategoryAction">
+			<result name="list">/jsp/setup/listBranchCategory.jsp</result>
+			<result name="promptAdd">/jsp/setup/addBranchCategory.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editBranchCategory.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+
+		<action	name="UserType" default="list"
+			class="com.mooo.mycoz.action.setup.UserTypeAction">
+			<result name="list">/jsp/setup/listUserType.jsp</result>
+			<result name="promptAdd">/jsp/setup/addUserType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editUserType.jsp</result>
+			<result name="processEdit"></result>
+		</action>		
+
+		<action	name="Branch" default="listBranch"
+			class="com.mooo.mycoz.action.setup.BranchAction">
+			<result name="listBranch">/jsp/setup/listBranch.jsp</result>
+			<result name="promptAdd">/jsp/setup/addBranch.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editBranch.jsp</result>
+			<result name="processEdit"></result>
+			<result name="export"></result>
+			<result name="print"></result>
+		</action>
+		
+		<!-- TypeDefinition -->
+		<action	name="TypeDefinition" default="menu"
+			class="com.mooo.mycoz.action.setup.TypeDefinitionAction">
+			<result name="menu">/jsp/setup/defPage.jsp</result>
+		</action>
+		
+		<action	name="JobType" default="listJobType"
+			class="com.mooo.mycoz.action.setup.JobTypeAction">
+			<result name="listJobType">/jsp/setup/listJobType.jsp</result>
+			<result name="promptAdd">/jsp/setup/addJobType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editJobType.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<action	name="CardType" default="list"
+			class="com.mooo.mycoz.action.setup.CardTypeAction">
+			<result name="list">/jsp/setup/listCardType.jsp</result>
+			<result name="promptAdd">/jsp/setup/addCardType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editCardType.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<action	name="WineType" default="listWineType"
+			class="com.mooo.mycoz.action.setup.WineTypeAction">
+			<result name="listWineType">/jsp/setup/listWineType.jsp</result>
+			<result name="promptAdd">/jsp/setup/addWineType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editWineType.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<action	name="WineLevel" default="listWineLevel"
+			class="com.mooo.mycoz.action.setup.WineLevelAction">
+			<result name="listWineLevel">/jsp/setup/listWineLevel.jsp</result>
+			<result name="promptAdd">/jsp/setup/addWineLevel.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editWineLevel.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+
+		<action	name="JobState" default="list"
+			class="com.mooo.mycoz.action.setup.JobStateAction">
+			<result name="list">/jsp/setup/listJobState.jsp</result>
+			<result name="promptAdd">/jsp/setup/addJobState.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editJobState.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<action	name="WarehouseItem" default="list"
+			class="com.mooo.mycoz.action.setup.WarehouseItemAction">
+			<result name="list">/jsp/setup/listWarehouseItem.jsp</result>
+			<result name="promptAdd">/jsp/setup/addWarehouseItem.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editWarehouseItem.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<action	name="WineTaster" default="list"
+			class="com.mooo.mycoz.action.setup.WineTasterAction">
+			<result name="list">/jsp/setup/listWineTaster.jsp</result>
+			<result name="promptAdd">/jsp/setup/addWineTaster.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/setup/editWineTaster.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<!-- Accounts -->
+		<action	name="Accounts" default="menu"
+			class="com.mooo.mycoz.action.setup.TypeDefinitionAction">
+			<result name="menu">/jsp/setup/defPage.jsp</result>
+		</action>
+		
+		
+		<!-- Miscellaneous -->
+		<action	name="Miscellaneous" default="menu"
+			class="com.mooo.mycoz.action.setup.TypeDefinitionAction">
+			<result name="menu">/jsp/setup/defPage.jsp</result>
+		</action>
+		
+		<!-- Profile -->
+		<action	name="Profile" default="menu"
+			class="com.mooo.mycoz.action.profile.ProfileAction">
+			<result name="menu">/jsp/profile/defPage.jsp</result>
+		</action>
+		
+		<action	name="Product" default="list"
+			class="com.mooo.mycoz.action.profile.ProductAction">
+			<result name="list">/jsp/profile/listProduct.jsp</result>
+			<result name="promptAdd">/jsp/profile/addProduct.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editProduct.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+
+		<action	name="CreditType" default="list"
+			class="com.mooo.mycoz.action.profile.CreditTypeAction">
+			<result name="list">/jsp/profile/listCreditType.jsp</result>
+			<result name="promptAdd">/jsp/profile/addCreditType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editCreditType.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+
+		<action	name="Store" default="list"
+			class="com.mooo.mycoz.action.profile.ProductAction">
+			<result name="list">/jsp/profile/listStore.jsp</result>
+			<result name="promptAdd">/jsp/profile/addStore.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editStore.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+
+		<action	name="Certificate" default="list"
+			class="com.mooo.mycoz.action.profile.CertificateAction">
+			<result name="list">/jsp/profile/listCertificate.jsp</result>
+			<result name="promptAdd">/jsp/profile/addCertificate.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editCertificate.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+						
+		<!-- Administrator -->
+		<action	name="Admin" default="menu"
+			class="com.mooo.mycoz.action.admin.AdminAction">
+			<result name="menu">/jsp/admin/defPage.jsp</result>
+		</action>
+		
+		<action	name="Permissions" default="menu"
+			class="com.mooo.mycoz.action.admin.PermissionsAction">
+			<result name="menu">/jsp/admin/defPage.jsp</result>
+		</action>
+		
+		<action	name="User" default="listUser"
+			class="com.mooo.mycoz.action.admin.UserAction">
+			<result name="listUser">/jsp/admin/listUser.jsp</result>
+			<result name="promptAdd">/jsp/admin/addUser.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/admin/editUser.jsp</result>
+			<result name="processEdit"></result>
+			<result name="export"></result>
+			<result name="print"></result>
+			<result name="promptAssignGroup">/jsp/admin/userAssignGroup.jsp</result>
+			<result name="processAssignGroup"></result>
+			<result name="processDisable"></result>
+		</action>
+		
+		<action	name="WorkGroup" default="listWorkGroup"
+			class="com.mooo.mycoz.action.admin.WorkGroupAction">
+			<result name="listWorkGroup">/jsp/admin/listWorkGroup.jsp</result>
+			<result name="promptAdd">/jsp/admin/addWorkGroup.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/admin/editWorkGroup.jsp</result>
+			<result name="processEdit"></result>
+			<result name="promptAssignUser">/jsp/admin/groupAssignUser.jsp</result>
+			<result name="processAssignUser"></result>
+			<result name="promptAssignRole">/jsp/admin/groupAssignRole.jsp</result>
+			<result name="processAssignRole"></result>
+		</action>
+		
+		<action	name="Role" default="listRole"
+			class="com.mooo.mycoz.action.admin.RoleAction">
+			<result name="listRole">/jsp/admin/listRole.jsp</result>
+			<result name="promptAdd">/jsp/admin/addRole.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/admin/editRole.jsp</result>
+			<result name="processEdit"></result>
+			<result name="promptAuthRole">/jsp/admin/authRole.jsp</result>
+			<result name="processAuthRole"></result>
+			<result name="promptAssignGroup">/jsp/admin/roleAssignGroup.jsp</result>
+			<result name="processAssignGroup"></result>
+		</action>
+		
+		<!-- Operating -->
+		<action	name="Operation" default="menu"
+			class="com.mooo.mycoz.action.operation.OperationAction">
+			<result name="menu">/jsp/operation/defPage.jsp</result>
+		</action>
+
+		<!-- "Client" -->
+		<action	name="Client" default="list"
+			class="com.mooo.mycoz.action.operation.label.ClientAction">
+			<result name="list">/jsp/operation/label/listClient.jsp</result>
+			<result name="promptAdd">/jsp/operation/label/addClient.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/operation/label/editClient.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<!-- Report -->
+		<action	name="Report" default="patrolReport"
+			class="com.mooo.mycoz.action.report.ReportAction">
+			<result name="patrolReport">/jsp/report/patrolReport.jsp</result>
+			<result name="export"></result>
+			<result name="print"></result>
+		</action>
+
+		<!-- Security Codes -->
+		<action	name="Package" default="list"
+			class="com.mooo.mycoz.action.operation.security.PackageAction">
+			<result name="list">/jsp/operation/security/listPackage.jsp</result>
+			<result name="viewPackage">/jsp/operation/security/viewPackage.jsp</result>
+			<result name="promptEdit">/jsp/operation/security/editPackage.jsp</result>
+			<result name="processEdit"></result>
+			<result name="processItemAdd"></result>
+			<result name="processItemDelete"></result>
+			<result name="processDelete"></result>
+			<result name="print">/jsp/incl/download.jsp</result>
+			<result name="export">/jsp/incl/download.jsp</result>
+		</action>
+
+		<action	name="Sale" default="list"
+			class="com.mooo.mycoz.action.operation.security.SaleAction">
+			<result name="list">/jsp/operation/security/listSale.jsp</result>
+			<result name="preview">/jsp/operation/security/previewForgeryCode.jsp</result>
+			<result name="check" allow="true">/jsp/operation/security/checkForgeryCode.jsp</result>
+		</action>
+
+		<!-- Help -->
+		<action	name="Help" default="version"
+			class="com.mooo.mycoz.action.help.HelpAction">
+			<result name="version">/jsp/help/version.jsp</result>
+			<result name="document">/jsp/help/document.jsp</result>
+		</action>
+	</package>
+</struts>
