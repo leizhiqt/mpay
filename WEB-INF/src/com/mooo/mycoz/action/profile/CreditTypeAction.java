@@ -13,76 +13,80 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineShared.Product;
+import com.mooo.mycoz.dbobj.wineBranch.Product;
+import com.mooo.mycoz.dbobj.wineShared.CreditType;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
-
-public class ProductAction extends BaseSupport {
+public class CreditTypeAction extends BaseSupport {
 
 	private static Log log = LogFactory.getLog(ProductAction.class);
-	
-	public String list(HttpServletRequest request,HttpServletResponse response) {
+
+	public String list(HttpServletRequest request,
+			HttpServletResponse response) {
 		String value = null;
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+		Integer sessionId = ActionSession.getInteger(request,
+				ActionSession.USER_SESSION_KEY);
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
-			dbobject.addTable(Product.class, "product");
-
+			dbobject.addTable(CreditType.class, "creditType");
 			
-			
-			value = request.getParameter("styleName");
+			value = request.getParameter("creditName");
 			if(!StringUtils.isNull(value)){
-				dbobject.setLike("product", "productName", value);
+				dbobject.setLike("creditType", "creditName", value);
 			}
 			
-			
-			
-			
-			dbobject.setRetrieveField("product", "id");
-			dbobject.setRetrieveField("product", "productName");
-			dbobject.setRetrieveField("product", "brand");
-			dbobject.setRetrieveField("product", "modelNo");
+			dbobject.setRetrieveField("creditType", "id");
+			dbobject.setRetrieveField("creditType", "creditName");
+			dbobject.setRetrieveField("creditType", "cycleTotal");
+			dbobject.setRetrieveField("creditType", "cycleUnit");
+			dbobject.setRetrieveField("creditType", "creditRate");
 
-			dbobject.setOrderBy("product", "id","DESC");
-			
+			dbobject.setOrderBy("creditType", "id", "DESC");
+
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
-			dbobject.setRecord(page.getOffset(),page.getPageSize());
+			dbobject.setRecord(page.getOffset(), page.getPageSize());
 			List<?> results = dbobject.searchAndRetrieveList();
-			
+
 			request.setAttribute("results", results);
+
+			if (log.isDebugEnabled())
+				log.debug("list success");
+
 		} catch (Exception e) {
-			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
 			e.printStackTrace();
-		}
-		
-		return "success";
+		} 
+		return "list";
 	}
-	
-	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
+	public String  promptAdd(HttpServletRequest request,
+			HttpServletResponse response){
+		
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
+		request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
 		return "success";
+		
 	}
-	
 	public String processAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("processAdd");
 		Transaction tx=new Transaction();
 		try {
 			tx.start();
 			
-			Product product = new Product();
-			ParamUtil.bindData(request, product,"product");
+			CreditType creditType = new CreditType();
+			ParamUtil.bindData(request, creditType,"creditType");
 			
-			int productId = IDGenerator.getNextID(tx.getConnection(),Product.class);
-			product.setId(productId);
+			int creditTypeId = IDGenerator.getNextID(tx.getConnection(),CreditType.class);
+			creditType.setId(creditTypeId);
 			
-			product.add(tx.getConnection());
+			creditType.add(tx.getConnection());
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -96,22 +100,20 @@ public class ProductAction extends BaseSupport {
 		}
 		return "list";
 	}
-	
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-		String productId = null;
+		String creditTypeId = null;
 		try{
-			productId = request.getParameter("id");
-			if(productId==null)
+			creditTypeId = request.getParameter("id");
+			if(creditTypeId==null)
 				throw new Exception("Please chose object");
 			
-			Product product = new Product();
-			product.setId(new Integer(productId));
-			product.retrieve();
+			CreditType creditType = new CreditType();
+			creditType.setId(new Integer(creditTypeId));
+			creditType.retrieve();
 
-			request.setAttribute("product", product);
-			
+			request.setAttribute("creditType", creditType);
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -125,10 +127,10 @@ public class ProductAction extends BaseSupport {
 		try{
 			tx.start();
 			
-			Product product = new Product();
-			ParamUtil.bindData(request, product, "product");
+			CreditType creditType = new CreditType();
+			ParamUtil.bindData(request, creditType, "creditType");
 			
-			product.update(tx.getConnection());
+			creditType.update(tx.getConnection());
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();
@@ -157,9 +159,9 @@ public class ProductAction extends BaseSupport {
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
 				
-				Product product = new Product();
-				product.setId(id);
-				product.delete(tx.getConnection());
+				CreditType creditType = new CreditType();
+				creditType.setId(id);
+				creditType.delete(tx.getConnection());
 			}
 			
 			tx.commit();
@@ -175,5 +177,4 @@ public class ProductAction extends BaseSupport {
 		}
 		return "list";
 	}
-	
 }

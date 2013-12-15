@@ -102,7 +102,9 @@ public class IDGenerator {
 				conn = DbConnectionManager.getConnection();
 			}
 
-			pstmt = conn.prepareStatement("SELECT MAX(" + field + ") nowCode FROM " + table + " WHERE " + field + " LIKE ?");
+			pstmt = conn
+					.prepareStatement("SELECT MAX(" + field + ") nowCode FROM "
+							+ table + " WHERE " + field + " LIKE ?");
 			pstmt.setString(1, prefix + "%");
 
 			result = pstmt.executeQuery();
@@ -195,8 +197,8 @@ public class IDGenerator {
 			BitMatrix bitMatrix = new MultiFormatWriter().encode(contents,
 					BarcodeFormat.EAN_13, codeWidth, height, null);
 
-			MatrixToImageWriter
-					.writeToFile(bitMatrix, "JPEG", new File(imgPath));
+			MatrixToImageWriter.writeToFile(bitMatrix, "JPEG",
+					new File(imgPath));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -437,15 +439,16 @@ public class IDGenerator {
 			dbobject.addTable(Winery.class, "winery");
 			if (enable)
 				dbobject.addCustomWhereClause("(winery.stateId=2 OR winery.stateId=4)");
-			
-			if(StringUtils.isNull(category)) category="";
-			
+
+			if (StringUtils.isNull(category))
+				category = "";
+
 			if (category.equals("Regulators")) {
 				dbobject.addTable(WineryMap.class, "wineryMap");
 				dbobject.setForeignKey("winery", "id", "wineryMap", "wineryId");
 
 				dbobject.setField("wineryMap", "userId", sessionId);
-			} else if ( category.equals("Bank")) {
+			} else if (category.equals("Bank")) {
 				dbobject.addTable(WineJar.class, "wineJar");
 				dbobject.setForeignKey("wineJar", "wineryId", "winery", "id");
 				dbobject.setForeignKey("wineJar", "branchId", "winery",
@@ -453,15 +456,14 @@ public class IDGenerator {
 
 				dbobject.setField("wineJar", "bankId", sessionId);
 				dbobject.setGroupBy("winery", "id");
-			}/*else if(category.equals("Tasting")){
-				User user = new User();
-				user.setId(sessionId);
-				user.retrieve();
-				
-				dbobject.setField("winery", "branchId", user.getBranchId());
-			}*/
-			dbobject.setOrderBy("winery", "id","DESC");
-			
+			}/*
+			 * else if(category.equals("Tasting")){ User user = new User();
+			 * user.setId(sessionId); user.retrieve();
+			 * 
+			 * dbobject.setField("winery", "branchId", user.getBranchId()); }
+			 */
+			dbobject.setOrderBy("winery", "id", "DESC");
+
 			dbobject.setRetrieveField("winery", "id");
 			dbobject.setRetrieveField("winery", "enterpriseName");
 
@@ -475,6 +477,10 @@ public class IDGenerator {
 	public synchronized static List<?> getWineryValues(int sessionId) {
 		return getWineryValues(sessionId, false);
 	}
+
+//	public synchronized static List<?> getCreditType(int sessionId) {
+//		return getWineryValues(sessionId, false);
+//	}
 
 	public static Object randomNo(Class<?> clazz) {
 		List<?> searchList = search(clazz);
@@ -686,61 +692,65 @@ public class IDGenerator {
 
 	public static String getNowSN() {
 
-		String nowDate = CalendarUtils.dformat2(Calendar.getInstance().getTime());
-		
-		if(nowDate==null || nowDate.length()!=6)
-			nowDate="000000";
-		
-        return nowDate;
-	}
-	
-	public static String getBatchSN(String prefix,int preSize) {
+		String nowDate = CalendarUtils.dformat2(Calendar.getInstance()
+				.getTime());
 
-		if(prefix==null || prefix.length()>preSize){
-			prefix="000000";
-		}else if(prefix.length()>0 && prefix.length()<preSize){
-			for(int i=prefix.length();i<preSize;i++){
-				prefix +="0";
+		if (nowDate == null || nowDate.length() != 6)
+			nowDate = "000000";
+
+		return nowDate;
+	}
+
+	public static String getBatchSN(String prefix, int preSize) {
+
+		if (prefix == null || prefix.length() > preSize) {
+			prefix = "000000";
+		} else if (prefix.length() > 0 && prefix.length() < preSize) {
+			for (int i = prefix.length(); i < preSize; i++) {
+				prefix += "0";
 			}
 		}
-		
-		String nowDate = CalendarUtils.dformat2(Calendar.getInstance().getTime());
-		
-		if(nowDate==null || nowDate.length()!=6)
-			nowDate="000000";
-		
-		prefix = prefix+nowDate;
-        
-        return prefix;
-	}
-	
-	public static String getSN(Connection conn,Class<?> clazz,String field,String prefix) {
-		return getSN(conn,clazz,field,prefix,16,4);
+
+		String nowDate = CalendarUtils.dformat2(Calendar.getInstance()
+				.getTime());
+
+		if (nowDate == null || nowDate.length() != 6)
+			nowDate = "000000";
+
+		prefix = prefix + nowDate;
+
+		return prefix;
 	}
 
-	public static String getSN(Connection conn,Class<?> clazz,String field,String prefix,int snMax,int snLength) {
+	public static String getSN(Connection conn, Class<?> clazz, String field,
+			String prefix) {
+		return getSN(conn, clazz, field, prefix, 16, 4);
+	}
 
-		
+	public static String getSN(Connection conn, Class<?> clazz, String field,
+			String prefix, int snMax, int snLength) {
+
 		String sn = "";
-		for(int i=0;i<snLength;i++){
-			sn +="0";
+		for (int i = 0; i < snLength; i++) {
+			sn += "0";
 		}
-		
-		DecimalFormat df = new DecimalFormat(sn); 
 
-		String exitsSN = getMaxPrefix(conn,clazz.getSimpleName(), field, prefix);
-		
-       if(exitsSN!=null && exitsSN.length()==snMax){
-			sn = exitsSN.substring(snMax-snLength);
+		DecimalFormat df = new DecimalFormat(sn);
+
+		String exitsSN = getMaxPrefix(conn, clazz.getSimpleName(), field,
+				prefix);
+
+		if (exitsSN != null && exitsSN.length() == snMax) {
+			sn = exitsSN.substring(snMax - snLength);
 			int number = new Integer(sn);
-			
+
 			number++;
-			
+
 			sn = df.format(number);
-        }else{
+		} else {
 			sn = df.format(1);
-        }
-        
-        return prefix+sn;
+		}
+
+		return prefix + sn;
 	}
 }

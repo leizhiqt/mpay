@@ -1,6 +1,5 @@
 package com.mooo.mycoz.action.profile;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,76 +12,78 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineShared.Product;
+import com.mooo.mycoz.dbobj.wineShared.CreditType;
+import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
-
-public class ProductAction extends BaseSupport {
+public class StoreAction extends BaseSupport {
 
 	private static Log log = LogFactory.getLog(ProductAction.class);
-	
-	public String list(HttpServletRequest request,HttpServletResponse response) {
+
+	public String list(HttpServletRequest request,
+			HttpServletResponse response) {
 		String value = null;
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+		Integer sessionId = ActionSession.getInteger(request,
+				ActionSession.USER_SESSION_KEY);
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
-			dbobject.addTable(Product.class, "product");
-
+			dbobject.addTable(Store.class, "store");
 			
-			
-			value = request.getParameter("styleName");
+			value = request.getParameter("storeName");
 			if(!StringUtils.isNull(value)){
-				dbobject.setLike("product", "productName", value);
+				dbobject.setLike("store", "storeName", value);
 			}
 			
-			
-			
-			
-			dbobject.setRetrieveField("product", "id");
-			dbobject.setRetrieveField("product", "productName");
-			dbobject.setRetrieveField("product", "brand");
-			dbobject.setRetrieveField("product", "modelNo");
+			dbobject.setRetrieveField("store", "id");
+			dbobject.setRetrieveField("store", "storeName");
+			dbobject.setRetrieveField("store", "storeAddress");
 
-			dbobject.setOrderBy("product", "id","DESC");
-			
+			dbobject.setOrderBy("store", "id", "DESC");
+
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
-			dbobject.setRecord(page.getOffset(),page.getPageSize());
+			dbobject.setRecord(page.getOffset(), page.getPageSize());
 			List<?> results = dbobject.searchAndRetrieveList();
-			
+
 			request.setAttribute("results", results);
+
+			if (log.isDebugEnabled())
+				log.debug("list success");
+
 		} catch (Exception e) {
-			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
 			e.printStackTrace();
-		}
-		
-		return "success";
+		} 
+		return "list";
 	}
-	
-	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
+	public String  promptAdd(HttpServletRequest request,
+			HttpServletResponse response){
+		
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
+		request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
 		return "success";
+		
 	}
-	
 	public String processAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("processAdd");
 		Transaction tx=new Transaction();
 		try {
 			tx.start();
 			
-			Product product = new Product();
-			ParamUtil.bindData(request, product,"product");
+			Store store=new Store();
+			ParamUtil.bindData(request,store,"store");
 			
-			int productId = IDGenerator.getNextID(tx.getConnection(),Product.class);
-			product.setId(productId);
+			int storeId = IDGenerator.getNextID(tx.getConnection(),Store.class);
+			store.setId(storeId);
 			
-			product.add(tx.getConnection());
+			store.add(tx.getConnection());
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -96,22 +97,20 @@ public class ProductAction extends BaseSupport {
 		}
 		return "list";
 	}
-	
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-		String productId = null;
+		String storeId = null;
 		try{
-			productId = request.getParameter("id");
-			if(productId==null)
+			storeId = request.getParameter("id");
+			if(storeId==null)
 				throw new Exception("Please chose object");
 			
-			Product product = new Product();
-			product.setId(new Integer(productId));
-			product.retrieve();
+			Store store=new Store();
+			store.setId(new Integer(storeId));
+			store.retrieve();
 
-			request.setAttribute("product", product);
-			
+			request.setAttribute("store", store);
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -125,10 +124,10 @@ public class ProductAction extends BaseSupport {
 		try{
 			tx.start();
 			
-			Product product = new Product();
-			ParamUtil.bindData(request, product, "product");
+			Store store=new Store();
+			ParamUtil.bindData(request, store, "store");
 			
-			product.update(tx.getConnection());
+			store.update(tx.getConnection());
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();
@@ -157,9 +156,9 @@ public class ProductAction extends BaseSupport {
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
 				
-				Product product = new Product();
-				product.setId(id);
-				product.delete(tx.getConnection());
+				Store store=new Store();
+				store.setId(id);
+				store.delete(tx.getConnection());
 			}
 			
 			tx.commit();
@@ -175,5 +174,4 @@ public class ProductAction extends BaseSupport {
 		}
 		return "list";
 	}
-	
 }

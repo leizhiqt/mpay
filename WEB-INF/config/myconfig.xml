@@ -204,7 +204,7 @@
 		</action>
 
 		<action	name="Store" default="list"
-			class="com.mooo.mycoz.action.profile.ProductAction">
+			class="com.mooo.mycoz.action.profile.StoreAction">
 			<result name="list">/jsp/profile/listStore.jsp</result>
 			<result name="promptAdd">/jsp/profile/addStore.jsp</result>
 			<result name="processAdd"></result>

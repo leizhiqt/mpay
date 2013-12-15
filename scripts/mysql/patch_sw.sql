@@ -1,6 +1,8 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 //Pay System Database Version1.0
+use payBranch;
+
 CREATE TABLE `Client` (
   `id` int(11) NOT NULL DEFAULT '0',
   `clientName` varchar(16) DEFAULT NULL,
@@ -146,6 +148,8 @@ CREATE TABLE `SaleDetail` (
 	CONSTRAINT `SaleDetail_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `payShared`.`Product` (`id`),
 	CONSTRAINT `SaleDetail_ibfk_3` FOREIGN KEY (`branchId`) REFERENCES `payShared`.`Branch` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+use payShared;
 
 CREATE TABLE `Product` (
   `id` int(11) NOT NULL DEFAULT '0',

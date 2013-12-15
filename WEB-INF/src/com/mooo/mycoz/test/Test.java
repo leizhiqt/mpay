@@ -222,7 +222,10 @@ public class Test {
 //		bd.dbToBean("wineBranch","SampleProduct");
 //		bd.dbToBean("wineBranch","SampleItem");
 //		bd.dbToBean("wineBranch","SampleTasting");
-		bd.dbToBean("wineBranch","SampleTest");
+		//bd.dbToBean("wineBranch","SampleTest");
+		
+		bd.dbToBean("payShared","Certificate");
+		
 		
 //		bd.dbToBean("wineBranch","Product");
 

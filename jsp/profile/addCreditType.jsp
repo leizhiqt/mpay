@@ -19,13 +19,13 @@
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="save"/>
 		<jsp:param name="key" value="Edit"/>
-		<jsp:param name="action" value="Product.do"/>
+		<jsp:param name="action" value="CreditType.do"/>
 		<jsp:param name="method" value="processAdd"/>
 	</jsp:include>
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="cancel"/>
 		<jsp:param name="key" value="Cancel"/>
-		<jsp:param name="action" value="Product.do"/>
+		<jsp:param name="action" value="CreditType.do"/>
 		<jsp:param name="method" value="list"/>
 	</jsp:include>
 </div>
@@ -39,33 +39,35 @@
 <td>
 
 <table class="modify">
-<caption><fmt:message key="Add"/> <fmt:message key="Product"/></caption>
+<caption><fmt:message key="Add"/> <fmt:message key="CreditType"/></caption>
 
 <tbody>
 <tr>
-<td class="tl"><fmt:message key="Winery"/></td>
+
 <td>
 
 </td>
 </tr>
 
-
-
 <tr>
-<td class="tl"><fmt:message key="ProductName"/></td>
-<td><input type="text" name="product.productName" size="16" maxlength="16"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="creditName"/></td>
+<td><input type="text" name="creditType.creditName" size="5" maxlength="5"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="brand"/></td>
-<td><input type="text" name="product.brand" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="cycleTotal"/></td>
+<td><input type="text" name="creditType.cycleTotal" size="16" maxlength="16"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="modelNo"/></td>
-<td><input type="text" name="product.modelNo" size="4" maxlength="4"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="cycleUnit"/></td>
+<td><input type="text" name="creditType.cycleUnit" size="5" maxlength="5"/><font class="fm">*</font></td>
 </tr>
 
+<tr>
+<td class="tl"><fmt:message key="creditRate"/></td>
+<td><input type="text" name="creditType.creditRate" size="4" maxlength="4"/><font class="fm">*</font></td>
+</tr>
 
 
 

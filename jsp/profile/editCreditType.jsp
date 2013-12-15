@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 	<html>
 <head>
-<title><fmt:message key="Product" /></title>
+<title><fmt:message key="CreditType" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css"
 	type="text/css" rel="stylesheet">
@@ -23,20 +23,20 @@
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="save" />
 				<jsp:param name="key" value="Edit" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="CreditType.do" />
 				<jsp:param name="method" value="processEdit" />
 			</jsp:include>
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="cancel" />
 				<jsp:param name="key" value="Cancel" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="CreditType.do" />
 				<jsp:param name="method" value="list" />
 			</jsp:include>
 		</div>
 
 		<div id="container">
 			<%@ include file="../incl/b_message.jsp"%>
-			<input type="hidden" name="product.id" value="${product.id }" />
+			<input type="hidden" name="creditType.id" value="${creditType.id }" />
 
 			<div>
 				<table class="twrap">
@@ -46,41 +46,40 @@
 							<table class="modify">
 								<caption>
 									<fmt:message key="Update" />
-									<fmt:message key="Product" />
+									<fmt:message key="CreditType" />
 								</caption>
 
 								<tbody>
 									<tr>
-										<td class="tl"><fmt:message key="Winery" /></td>
-										<td><select name="product.enterpriseId">
-												<c:forEach var="items" items="${winerys}" varStatus="s">
-													<option value="${items.winery.id}"
-														<c:if test="${items.winery.id==product.enterpriseId}">
-			selected="selected"
-		</c:if>>
-														${items.winery.enterpriseName}</option>
-	--</c:forEach>
-										</select></td>
+
+										<td></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="productName" /></td>
-										<td><input type="text" name="product.productName"
-											value="${product.productName }" size="5" maxlength="5" /><font
+										<td class="tl"><fmt:message key="creditName" /></td>
+										<td><input type="text" name="creditType.creditName"
+											value="${creditType.creditName }" size="5" maxlength="5" /><font
 											class="fm">*</font></td>
 									</tr>
 
-
 									<tr>
-										<td class="tl"><fmt:message key="brand" /></td>
-										<td><input type="text" name="product.brand"
-											value="${product.brand }" size="5" maxlength="5" /></td>
+										<td class="tl"><fmt:message key="cycleTotal" /></td>
+										<td><input type="text" name="creditType.cycleTotal"
+											value="${creditType.cycleTotal }" size="16" maxlength="16" /><font
+											class="fm">*</font></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="modelNo" /></td>
-										<td><input type="text" name="product.modelNo"
-											value="${product.modelNo }" size="4" maxlength="4" /></td>
+										<td class="tl"><fmt:message key="cycleUnit" /></td>
+										<td><input type="text" name="creditType.cycleUnit"
+											value="${creditType.cycleUnit }" size="5" maxlength="5" /></td>
+									</tr>
+
+									<tr>
+										<td class="tl"><fmt:message key="creditRate" /></td>
+									<td>	<input type="text" name="creditType.creditRate"
+											value='<fmt:formatNumber value="${creditType.creditRate }" type="percent" />'/>
+											</td>
 									</tr>
 							</table>
 						</td>
