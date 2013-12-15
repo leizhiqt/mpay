@@ -284,13 +284,13 @@
 		</action>
 
 		<!-- "Client" -->
-		<action	name="Client" default="list"
-			class="com.mooo.mycoz.action.operation.label.ClientAction">
-			<result name="list">/jsp/operation/label/listClient.jsp</result>
-			<result name="promptAdd">/jsp/operation/label/addClient.jsp</result>
+		<action	name="ClientInfo" default="list"
+			class="com.mooo.mycoz.action.operation.credit.ClientInfoAction">
+			<result name="list">/jsp/operation/credit/listClientInfo.jsp</result>
+			<result name="promptAdd">/jsp/operation/credit/addClientInfo.jsp</result>
 			<result name="processAdd"></result>
 			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/operation/label/editClient.jsp</result>
+			<result name="promptEdit">/jsp/operation/credit/editClientInfo.jsp</result>
 			<result name="processEdit"></result>
 		</action>
 		

@@ -1,8 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 //Pay System Database Version1.0
-use payBranch;
-
 CREATE TABLE `Client` (
   `id` int(11) NOT NULL DEFAULT '0',
   `clientName` varchar(16) DEFAULT NULL,
@@ -95,8 +93,9 @@ CONSTRAINT `ClientJobTrack_ibfk_3` FOREIGN KEY (`jobTypeId`) REFERENCES `payShar
 CREATE TABLE `Relatives` (
   `id` int(11) NOT NULL DEFAULT '0',
   `relativesType` varchar(16) DEFAULT NULL,
-
-  `employerName` varchar(16) DEFAULT NULL,
+	`relativesName` varchar(16) DEFAULT NULL,
+  
+	`employerName` varchar(16) DEFAULT NULL,
   `officePhone` varchar(11) DEFAULT NULL,
   `extencePhone` varchar(11) DEFAULT NULL,
   `zipCode` varchar(8) DEFAULT NULL,
@@ -107,10 +106,12 @@ CREATE TABLE `Relatives` (
   `county` varchar(32) DEFAULT NULL,
   `town` varchar(32) DEFAULT NULL,
   `street` varchar(32) DEFAULT NULL,
+  
   `issueDate` date DEFAULT NULL,
   `valid` int(11) DEFAULT NULL,
   `branchId` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  KEY `relativesName` (`relativesName`),
   KEY `employerName` (`employerName`),
   KEY `officePhone` (`officePhone`),
   KEY `extencePhone` (`extencePhone`),
@@ -148,8 +149,6 @@ CREATE TABLE `SaleDetail` (
 	CONSTRAINT `SaleDetail_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `payShared`.`Product` (`id`),
 	CONSTRAINT `SaleDetail_ibfk_3` FOREIGN KEY (`branchId`) REFERENCES `payShared`.`Branch` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-
-use payShared;
 
 CREATE TABLE `Product` (
   `id` int(11) NOT NULL DEFAULT '0',
@@ -194,4 +193,31 @@ CREATE TABLE `Certificate` (
   KEY `issuingAuthority` (`issuingAuthority`),
   KEY `issueDate` (`issueDate`),
   KEY `valid` (`valid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `JobCheck` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `jobTypeId` int(11) NOT NULL DEFAULT '0',
+  `checkType` varchar(16) DEFAULT NULL,
+  `checkName` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_jtn` (`jobTypeId`,`checkType`,'checkName'),
+  KEY `jobTypeId` (`jobTypeId`),
+  KEY `checkType` (`checkType`),
+  KEY `checkName` (`checkName`),
+  CONSTRAINT `JobCheck_ibfk_1` FOREIGN KEY (`jobTypeId`) REFERENCES `JobType` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `ClientJobCheck` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `clientJobTrack` int(11) NOT NULL DEFAULT '0',
+  `jobCheckId` int(11) NOT NULL DEFAULT '0',
+  `checkRemark` varchar(32) DEFAULT NULL,
+  `branchId` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `clientJobTrack` (`clientJobTrack`),
+  KEY `jobCheckId` (`jobCheckId`),
+  CONSTRAINT `ClientJobCheck_ibfk_1` FOREIGN KEY (`clientJobTrack`) REFERENCES `ClientJobTrack` (`id`),
+CONSTRAINT `ClientJobCheck_ibfk_2` FOREIGN KEY (`jobCheckId`) REFERENCES `payShared`.`JobCheck` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

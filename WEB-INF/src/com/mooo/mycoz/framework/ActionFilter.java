@@ -116,19 +116,22 @@ public class ActionFilter implements Filter {
 				//accessPath = request.getServletPath();
 				execPath = ActionUtil.execPath(accessPath);
 				execMethod = request.getParameter("method");
-	
+				
+				if(log.isDebugEnabled())log.debug("accessPath:" + accessPath);
+
+				if(log.isDebugEnabled())log.debug("execPath:" + execPath);
+				if(log.isDebugEnabled())log.debug("execMethod:" + execMethod);
+				
 				//set controller,execState for execPath
 				ActionNode actionNode = (ActionNode) actionMap.get(execPath);
 				
+				if(log.isDebugEnabled())log.debug("actionNode:" + actionNode);
+
 				execAction = actionNode.getCls();
 				if (execMethod == null)
 					execMethod = actionNode.getDefMethod();
 				
 				Hashtable<String, MethodNode> results = actionNode.getResults();
-				
-				if(log.isDebugEnabled())log.debug("accessPath:" + accessPath);
-				if(log.isDebugEnabled())log.debug("execPath:" + execPath);
-				if(log.isDebugEnabled())log.debug("execMethod:" + execMethod);
 				
 				//check allow url
 				boolean allow = results.get(execMethod).isAllow();

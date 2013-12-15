@@ -50,7 +50,7 @@
 	mainMenu.add(profile);
 	
 	Action operation = new Action(sessionId,"Operation", "Operation.do");
-	operation.addChildAction(new Action(sessionId,"Client","Client.do"));
+	operation.addChildAction(new Action(sessionId,"ClientInfo","ClientInfo.do"));
 	
 	/*
 	operation.addChildAction(new Action(sessionId,"WineryManage","Winery.do"));
