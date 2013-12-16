@@ -20,7 +20,6 @@ import com.mooo.mycoz.dbobj.wineBranch.GroupMember;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.Branch;
 import com.mooo.mycoz.dbobj.wineShared.BranchCategory;
-import com.mooo.mycoz.dbobj.wineShared.UserType;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.JRUtil;
 import com.mooo.mycoz.framework.component.JRExport;
@@ -58,8 +57,6 @@ public class UserAction extends BaseSupport {
 			colName.add(value);colWidth.add(StringUtils.length(value));
 			
 			request.setAttribute("categorys", ActionSession.getBranchCategoryValues(request));
-			System.out.println("categoryId:"+request.getParameter("categoryId"));
-			request.setAttribute("userTypes", new UserType().values(request.getParameter("categoryId")));
 
 			StringBuilder buffer = new StringBuilder();
 			buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -67,21 +64,15 @@ public class UserAction extends BaseSupport {
 			
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(User.class, "user");
-			dbobject.addTable(UserType.class, "userType");
 			dbobject.addTable(Branch.class, "branch");
 			dbobject.addTable(BranchCategory.class, "branchCategory");
 
 			dbobject.setForeignKey("user", "branchId", "branch", "id");
 			dbobject.setForeignKey("branch", "categoryId", "branchCategory", "id");
-			dbobject.setForeignKey("user", "typeId", "userType", "id");
 			
 			value = request.getParameter("categoryId");
 			if(!StringUtils.isNull(value))
 				dbobject.setField("branchCategory", "id", new Integer(value));
-			
-			value = request.getParameter("typeId");
-			if(!StringUtils.isNull(value))
-				dbobject.setField("user", "typeId", new Integer(value));
 			
 			value = request.getParameter("userName");
 			if(!StringUtils.isNull(value))
@@ -106,7 +97,6 @@ public class UserAction extends BaseSupport {
 			dbobject.setRetrieveField("user", "mobile");
 			dbobject.setRetrieveField("branch", "definition");
 			dbobject.setRetrieveField("branchCategory", "definition");
-			dbobject.setRetrieveField("userType", "definition");
 
 			dbobject.setOrderBy("user", "id");
 			
@@ -196,8 +186,6 @@ public class UserAction extends BaseSupport {
 		
 		request.setAttribute("branchs", ActionSession.getBranchValues(request));
 		
-		request.setAttribute("userTypes", IDGenerator.getValues(UserType.class));
-
 		User user = new User();
 		ParamUtil.bindData(request, user,"user");
 		
@@ -280,8 +268,6 @@ public class UserAction extends BaseSupport {
 				throw new Exception("Please chose object");
 			
 			request.setAttribute("branchs", ActionSession.getBranchValues(request));
-
-			request.setAttribute("userTypes", IDGenerator.getValues(UserType.class));
 
 			User user = new User();
 			user.setId( new Integer(userId));

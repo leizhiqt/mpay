@@ -18,7 +18,6 @@ import com.mooo.mycoz.dbobj.wineBranch.CardJob;
 import com.mooo.mycoz.dbobj.wineBranch.WineJar;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.dbobj.wineBranch.WineryMap;
-import com.mooo.mycoz.dbobj.wineShared.JobState;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
@@ -35,7 +34,7 @@ public class WineryAction extends BaseSupport {
 		
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
-			dbobject.addTable(JobState.class, "jobState");
+//			dbobject.addTable(JobState.class, "jobState");
 			dbobject.addTable(Winery.class, "winery");
 
 			dbobject.setForeignKey("winery", "stateId", "jobState", "id");
@@ -97,7 +96,7 @@ public class WineryAction extends BaseSupport {
 			
 			request.setAttribute("winerys", winerys);
 			
-			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
+//			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -108,9 +107,9 @@ public class WineryAction extends BaseSupport {
 	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("SetupAction list");
 		try {
-			JobState jobState = new JobState();
-			List<?> status = jobState.searchAndRetrieveList();
-			request.setAttribute("status", status);
+//			JobState jobState = new JobState();
+//			List<?> status = jobState.searchAndRetrieveList();
+//			request.setAttribute("status", status);
 
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
@@ -199,9 +198,9 @@ public class WineryAction extends BaseSupport {
 			
 			request.setAttribute("winery", winery);
 			
-			JobState jobState = new JobState();
-			List<?> status = jobState.searchAndRetrieveList();
-			request.setAttribute("status", status);
+//			JobState jobState = new JobState();
+//			List<?> status = jobState.searchAndRetrieveList();
+//			request.setAttribute("status", status);
 		
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());

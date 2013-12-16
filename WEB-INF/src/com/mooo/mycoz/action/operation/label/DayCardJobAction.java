@@ -421,7 +421,7 @@ private static Log log = LogFactory.getLog(DayCardJobAction.class);
 				buffer.append("<Key3>"+value+"</Key3>\n");
 				
 				//column start
-				value=jobType.getDefinition();
+//				value=jobType.getDefinition();
 				if(value.length()>colWidth.get(4)){
 					colWidth.set(4, StringUtils.length(value));
 				}

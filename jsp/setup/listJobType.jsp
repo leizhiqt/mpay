@@ -1,12 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
+
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
 <title><fmt:message key="JobType"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
@@ -54,10 +55,24 @@
 <caption><fmt:message key="JobType"/></caption>
 <tbody>
 <tr>
-	<td><fmt:message key="Abbreviation"/></td>
-	<td><input name="query_abbreviation" value="${param.query_abbreviation }"/></td>
-	<td><fmt:message key="Definition"/></td>
-	<td><input name="query_definition" value="${param.query_definition }"/></td>
+	<td><fmt:message key="ShortName"/></td>
+	<td><input name="jobKey" value="${param.jobKey }"/></td>
+	
+	<td><fmt:message key="Name"/></td>
+	<td><input name="jobName" value="${param.jobName }"/></td>
+	
+	<td><fmt:message key="State"/></td>
+	<td><input name="nextState" value="${param.nextState }"/></td>
+	
+	<td><fmt:message key="Category"/></td>
+	<td>
+	<select name="jobCategory">
+	<option value="" <c:if test="${empty param.jobCategory}">selected="selected"</c:if>>--All--</option>
+	<option value="R" <c:if test="${param.jobCategory=='R'}">selected="selected"</c:if>>R</option>
+	<option value="A" <c:if test="${param.jobCategory=='A'}">selected="selected"</c:if>>A</option>
+	<option value="C" <c:if test="${param.jobCategory=='C'}">selected="selected"</c:if>>C</option>
+	</select>
+</td>
 </tr>
 
 </tbody>
@@ -71,15 +86,16 @@
 
 <thead>
 <tr class="lp">
-<td colspan="5">
+<td colspan="6">
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>
 
 <tr>
 <th><fmt:message key="ID"/></th>
-<th><fmt:message key="Abbreviation"/></th>
-<th><fmt:message key="Definition"/></th>
+<th><fmt:message key="ShortName"/></th>
+<th><fmt:message key="Name"/></th>
+<th><fmt:message key="State"/></th>
 <th><fmt:message key="Category"/></th>
 </tr>
 </thead>
@@ -88,9 +104,10 @@
 <c:forEach var="item" items="${jobTypes}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.id }"><c:out value="${item.id }"/></td>
-<td><c:out value="${item.abbreviation }"/></td>
-<td><c:out value="${item.definition }"/></td>
-<td><c:out value="${item.category }"/></td>
+<td><c:out value="${item.jobKey }"/></td>
+<td><c:out value="${item.jobName }"/></td>
+<td><c:out value="${item.nextState }"/></td>
+<td><c:out value="${item.jobCategory }"/></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -98,7 +115,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="5">
+<td colspan="6">
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>

@@ -6,11 +6,11 @@
 <head>
 <title><fmt:message key="User"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -106,25 +106,6 @@
 	</select>
 	</td>
 
-	<td  class="textr"><fmt:message key="UserType"/></td>
-	<td>
-	<select name="typeId">
-		<option selected="selected" value="">All</option>
-		<c:forEach var="items" items="${userTypes}" varStatus="s">
-			<option value="${items.key}"
-	
-			<c:if test="${items.key==param.typeId}">
-				selected="selected"
-			</c:if>
-				>
-			${items.value}
-			</option>
-		--</c:forEach>
-	</select>
-	</td>
-</tr>
-
-<tr>
 	<td class="textr"><fmt:message key="Active"/></td>
 	<td>
 		<select name="active"  onchange="document.forms[0].submit();">
@@ -143,9 +124,6 @@
 			</c:if>>N</option>
 		</select>
 	</td>
-
-	<td class="textr"></td>
-	<td></td>
 </tr>
 
 </tbody>
@@ -160,7 +138,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="8" >
+<td colspan="7" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -168,10 +146,9 @@
 <tr>
 <th><input name="choose" type="checkbox" onclick="checkedAll(this.name,'id');"/><fmt:message key="ID"/></th>
 <th><fmt:message key="BranchCategory"/></th>
-<th><fmt:message key="UserType"/></th>
 <th><fmt:message key="Name"/></th>
 <th><fmt:message key="Alias"/></th>
-<th><fmt:message key="MobileNumber"/></th>
+<th><fmt:message key="MobilePhone"/></th>
 <th><fmt:message key="Branch"/></th>
 <th><fmt:message key="Active"/></th>
 </tr>
@@ -182,7 +159,6 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.user.id }"> </td>
 <td><c:out value="${item.branchCategory.definition }"/></td>
-<td><c:out value="${item.userType.definition }"/></td>
 <td><c:out value="${item.user.name }"/></td>
 <td><c:out value="${item.user.alias }"/></td>
 <td><c:out value="${item.user.mobile }"/></td>
@@ -195,7 +171,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="8" >
+<td colspan="7" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>

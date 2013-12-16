@@ -56,6 +56,7 @@
 			<result name="menu">/jsp/setup/defPage.jsp</result>
 		</action>
 		
+		<!-- BranchCategory -->		
 		<action	name="BranchCategory" default="list"
 			class="com.mooo.mycoz.action.setup.BranchCategoryAction">
 			<result name="list">/jsp/setup/listBranchCategory.jsp</result>
@@ -65,17 +66,8 @@
 			<result name="promptEdit">/jsp/setup/editBranchCategory.jsp</result>
 			<result name="processEdit"></result>
 		</action>
-
-		<action	name="UserType" default="list"
-			class="com.mooo.mycoz.action.setup.UserTypeAction">
-			<result name="list">/jsp/setup/listUserType.jsp</result>
-			<result name="promptAdd">/jsp/setup/addUserType.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editUserType.jsp</result>
-			<result name="processEdit"></result>
-		</action>		
-
+		
+		<!-- Branch -->
 		<action	name="Branch" default="listBranch"
 			class="com.mooo.mycoz.action.setup.BranchAction">
 			<result name="listBranch">/jsp/setup/listBranch.jsp</result>
@@ -94,6 +86,7 @@
 			<result name="menu">/jsp/setup/defPage.jsp</result>
 		</action>
 		
+		<!-- JobType -->
 		<action	name="JobType" default="listJobType"
 			class="com.mooo.mycoz.action.setup.JobTypeAction">
 			<result name="listJobType">/jsp/setup/listJobType.jsp</result>
@@ -101,66 +94,6 @@
 			<result name="processAdd"></result>
 			<result name="processDelete"></result>
 			<result name="promptEdit">/jsp/setup/editJobType.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-		
-		<action	name="CardType" default="list"
-			class="com.mooo.mycoz.action.setup.CardTypeAction">
-			<result name="list">/jsp/setup/listCardType.jsp</result>
-			<result name="promptAdd">/jsp/setup/addCardType.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editCardType.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-		
-		<action	name="WineType" default="listWineType"
-			class="com.mooo.mycoz.action.setup.WineTypeAction">
-			<result name="listWineType">/jsp/setup/listWineType.jsp</result>
-			<result name="promptAdd">/jsp/setup/addWineType.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editWineType.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-		
-		<action	name="WineLevel" default="listWineLevel"
-			class="com.mooo.mycoz.action.setup.WineLevelAction">
-			<result name="listWineLevel">/jsp/setup/listWineLevel.jsp</result>
-			<result name="promptAdd">/jsp/setup/addWineLevel.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editWineLevel.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-
-		<action	name="JobState" default="list"
-			class="com.mooo.mycoz.action.setup.JobStateAction">
-			<result name="list">/jsp/setup/listJobState.jsp</result>
-			<result name="promptAdd">/jsp/setup/addJobState.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editJobState.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-		
-		<action	name="WarehouseItem" default="list"
-			class="com.mooo.mycoz.action.setup.WarehouseItemAction">
-			<result name="list">/jsp/setup/listWarehouseItem.jsp</result>
-			<result name="promptAdd">/jsp/setup/addWarehouseItem.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editWarehouseItem.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-		
-		<action	name="WineTaster" default="list"
-			class="com.mooo.mycoz.action.setup.WineTasterAction">
-			<result name="list">/jsp/setup/listWineTaster.jsp</result>
-			<result name="promptAdd">/jsp/setup/addWineTaster.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/setup/editWineTaster.jsp</result>
 			<result name="processEdit"></result>
 		</action>
 		

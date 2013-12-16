@@ -26,7 +26,6 @@ import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineBranch.WineJar;
 import com.mooo.mycoz.dbobj.wineBranch.Winery;
 import com.mooo.mycoz.dbobj.wineShared.CardType;
-import com.mooo.mycoz.dbobj.wineShared.JobState;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.JRUtil;
@@ -72,7 +71,6 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
 			request.setAttribute("jobTypes", IDGenerator.getValues(JobType.class));
-			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
 
 			request.setAttribute("reportName", reportName);
 	
@@ -101,7 +99,6 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 			dbobject.addTable(Card.class, "card");
 			dbobject.addTable(Winery.class, "winery");
 			dbobject.addTable(WineJar.class, "wineJar");
-			dbobject.addTable(JobState.class, "jobState");
 
 			dbobject.addTable(User.class, "user");
 			dbobject.addTable(JobType.class, "jobType");
@@ -230,7 +227,7 @@ public String listCardJob(HttpServletRequest request, HttpServletResponse respon
 				buffer.append("<Key3>"+value+"</Key3>\n");
 				
 				//column start
-				value=jobType.getDefinition();
+//				value=jobType.getDefinition();
 				if(value.length()>colWidth.get(4)){
 					colWidth.set(4, StringUtils.length(value));
 				}

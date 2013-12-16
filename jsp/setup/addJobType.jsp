@@ -43,23 +43,26 @@
 
 <tbody>
 <tr>
-<td class="tl"><fmt:message key="Abbreviation"/></td>
-<td><input type="text" name="jobType.abbreviation" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="ShortName"/></td>
+<td><input type="text" name="jobType.jobKey"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="Definition"/></td>
-<td><input type="text" name="jobType.definition"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="Name"/></td>
+<td><input type="text" name="jobType.jobName"/><font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="State"/></td>
+<td><input type="text" name="jobType.nextState"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Category"/><font class="fm">*</font></td>
 <td>
-<select name="jobType.category">
-<option value="D">D</option>
+<select name="jobType.jobCategory">
 <option value="R">R</option>
-<option value="Y">Y</option>
-<option value="N">N</option>
+<option value="A">A</option>
 <option value="C">C</option>
 </select>
 </td>

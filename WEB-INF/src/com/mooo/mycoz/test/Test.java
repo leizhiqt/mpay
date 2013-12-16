@@ -224,8 +224,9 @@ public class Test {
 //		bd.dbToBean("wineBranch","SampleTasting");
 		//bd.dbToBean("wineBranch","SampleTest");
 		
-		bd.dbToBean("payShared","Certificate");
-		
+		//bd.dbToBean("payShared","Certificate");
+		bd.dbToBean("payShared","JobType");
+
 		
 //		bd.dbToBean("wineBranch","Product");
 

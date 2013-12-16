@@ -33,7 +33,6 @@ import com.mooo.mycoz.dbobj.wineShared.Branch;
 import com.mooo.mycoz.dbobj.wineShared.Currency;
 import com.mooo.mycoz.dbobj.wineShared.BranchCategory;
 import com.mooo.mycoz.dbobj.wineShared.Unit;
-import com.mooo.mycoz.dbobj.wineShared.JobState;
 import com.mooo.mycoz.dbobj.wineShared.WineLevel;
 import com.mooo.mycoz.dbobj.wineShared.WineType;
 import com.mooo.mycoz.framework.ActionSession;
@@ -79,7 +78,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			request.setAttribute("EndDate", endDate);
 			
 			request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
-			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
+//			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
 			
 			request.setAttribute("reportName", reportName);
 
@@ -113,7 +112,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(WineLevel.class, "wineLevel");
 			dbobject.addTable(WineType.class, "wineType");
-			dbobject.addTable(JobState.class, "jobState");
+//			dbobject.addTable(JobState.class, "jobState");
 			dbobject.addTable(Unit.class, "unit");
 			dbobject.addTable(Currency.class, "currency");
 
@@ -535,7 +534,7 @@ private static Log log = LogFactory.getLog(WineJarAction.class);
 			request.setAttribute("wineTypes", IDGenerator.getValues(WineType.class));
 			request.setAttribute("wineLevels", IDGenerator.getValues(WineLevel.class));
 			request.setAttribute("currencys", IDGenerator.getValues(Currency.class,"id","codeISO"));
-			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
+//			request.setAttribute("status", IDGenerator.getValues(JobState.class,"id","fullName"));
 			
 			Map<Integer,String> volumeUnits = new LinkedHashMap<Integer,String>();
 			

@@ -45,24 +45,27 @@
 
 <tbody>
 <tr>
-<td class="tl"><fmt:message key="Abbreviation"/></td>
-<td><input type="text" name="jobType.abbreviation" value="${jobType.abbreviation }" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="ShortName"/></td>
+<td><input type="text" name="jobType.jobKey" value="${jobType.jobKey }"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="Definition"/></td>
-<td><input type="text" name="jobType.definition" value="${jobType.definition }"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="Name"/></td>
+<td><input type="text" name="jobType.jobName" value="${jobType.jobName }"/><font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="State"/></td>
+<td><input type="text" name="jobType.nextState" value="${jobType.nextState }"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="Category"/></td>
 <td>
-<select name="jobType.category">
-<option value="D" <c:if test="${jobType.category=='D'}">selected="selected"</c:if> >D</option>
-<option value="R" <c:if test="${jobType.category=='R'}">selected="selected"</c:if>>R</option>
-<option value="Y" <c:if test="${jobType.category=='Y'}">selected="selected"</c:if>>Y</option>
-<option value="N" <c:if test="${jobType.category=='N'}">selected="selected"</c:if>>N</option>
-<option value="C" <c:if test="${jobType.category=='C'}">selected="selected"</c:if>>C</option>
+<select name="jobType.jobCategory">
+<option value="R" <c:if test="${jobType.jobCategory=='R'}">selected="selected"</c:if>>R</option>
+<option value="A" <c:if test="${jobType.jobCategory=='A'}">selected="selected"</c:if>>A</option>
+<option value="C" <c:if test="${jobType.jobCategory=='C'}">selected="selected"</c:if>>C</option>
 </select>
 <font class="fm">*</font>
 </td>

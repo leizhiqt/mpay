@@ -23,8 +23,10 @@ private static Log log = LogFactory.getLog(JobTypeAction.class);
 		try {
 			JobType jobType = new JobType();
 			
-			jobType.setLike("abbreviation",request.getParameter("query_abbreviation"));
-			jobType.setLike("definition",request.getParameter("query_definition"));
+			jobType.setLike("jobKey",request.getParameter("jobKey"));
+			jobType.setLike("jobName",request.getParameter("jobName"));
+			jobType.setLike("nextState",request.getParameter("nextState"));
+			jobType.setLike("jobCategory",request.getParameter("jobCategory"));
 			
 			Page page = new Page();
 			page.buildComponent(request, jobType.count());

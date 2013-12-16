@@ -6,11 +6,11 @@
 <head>
 <title><fmt:message key="User"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -65,25 +65,6 @@
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="UserType"/></td>
-<td>
-<select name="user.typeId">
-	<c:forEach var="items" items="${userTypes}" varStatus="s">
-		<option value="${items.key}"
-
-		<c:if test="${items.key==user.typeId}">
-			selected="selected"
-		</c:if>
-			>
-		${items.value}
-		</option>
-	--</c:forEach>
-</select>
-<font class="fm">*</font>
-</td>
-</tr>
-
-<tr>
 <td class="tl"><fmt:message key="Name"/></td>
 <td><input type="text" name="user.name" maxlength="8" style="width:120px;"/><font class="fm">*</font></td>
 </tr>
@@ -99,7 +80,7 @@
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="MobileNumber"/></td>
+<td class="tl"><fmt:message key="MobilePhone"/></td>
 <td><input type="text" name="user.mobile" size="11" maxlength="11"/><font class="fm">*</font></td>
 </tr>
 
