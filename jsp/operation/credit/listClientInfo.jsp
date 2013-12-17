@@ -62,7 +62,7 @@
 	<jsp:include page="../../incl/actionb.jsp">
 		<jsp:param name="key" value="Declare"/>
 		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="list"/>
+		<jsp:param name="method" value="promptDeclare"/>
 	</jsp:include>
 
 	<jsp:include page="../../incl/actionb.jsp">

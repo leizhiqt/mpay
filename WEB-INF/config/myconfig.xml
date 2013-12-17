@@ -225,6 +225,7 @@
 			<result name="processDelete"></result>
 			<result name="promptEdit">/jsp/operation/credit/editClientInfo.jsp</result>
 			<result name="processEdit"></result>
+			<result name="promptDeclare">/jsp/operation/credit/declareClientInfo.jsp</result>
 		</action>
 		
 		<!-- Report -->
