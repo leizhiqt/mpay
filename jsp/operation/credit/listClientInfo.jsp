@@ -20,45 +20,6 @@
 
 <form method="post" action="${defURL }">
 <div id="gtop">
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="add"/>
-		<jsp:param name="key" value="Add"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="promptAdd"/>
-	</jsp:include>
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="delete"/>
-		<jsp:param name="key" value="Delete"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="processDelete"/>
-	</jsp:include>
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="edit"/>
-		<jsp:param name="key" value="Edit"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="promptEdit"/>
-	</jsp:include>
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="find"/>
-		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="list"/>
-	</jsp:include>
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="print"/>
-		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="aparams" value="reportName=${reportName }&reportType=pdf"/>
-		<jsp:param name="method" value="printClientInfo"/>
-	</jsp:include>
-	<jsp:include page="../../incl/action.jsp">
-		<jsp:param name="type" value="export"/>
-		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="aparams" value="reportName=${reportName }&reportType=xls"/>
-		<jsp:param name="method" value="exportClientInfo"/>
-	</jsp:include>
-	
 	<jsp:include page="../../incl/actionb.jsp">
 		<jsp:param name="key" value="Declare"/>
 		<jsp:param name="action" value="ClientInfo.do"/>
