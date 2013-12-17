@@ -40,9 +40,9 @@ public class UploadFile {
 
 		if (log.isDebugEnabled()) log.debug("uploadPath=" + uPath);
 
-		File uploadFile = new File(uPath);
+		File upFile = new File(uPath);
 
-		if (!uploadFile.exists()) uploadFile.mkdirs();
+		if (!upFile.exists()) upFile.mkdirs();
 		
 		UploadFile uf = new UploadFile();
 		uf.setRequest(request);

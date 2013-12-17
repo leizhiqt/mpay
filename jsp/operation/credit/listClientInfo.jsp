@@ -44,14 +44,11 @@
 <td>
 
 <table class="st">
-<caption><fmt:message key="ClientInfo"/></caption>
+<caption>合同</caption>
 <tbody>
 <tr>
-	<td  class="textr"><fmt:message key="Winery"/></td>
-	<td></td>
-	
-	<td class="textr"></td>
-	<td></td>
+	<td  class="textr">合同号</td>
+	<td><input type="text" name="rfidcode" value="${param.rfidcode }"/></td>
 	
 	<td  class="textr"><fmt:message key="Rfidcode"/></td>
 	<td>
@@ -60,7 +57,7 @@
 	</td>
 	
 	<td  class="textr"><fmt:message key="JobType"/></td>
-	<td></td>
+	<td><input type="text" name="rfidcode" value="${param.rfidcode }"/></td>
 </tr>
 
 <tr>
@@ -84,22 +81,21 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="10" >
+<td colspan="9" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
 
 <tr>
-<th><fmt:message key="ID"/></th>
-<th><fmt:message key="Winery"/></th>
-<th><fmt:message key="StatusId"/></th>
-<th><fmt:message key="OperatorId"/></th>
-<th><fmt:message key="OperatingTime"/></th>
-<th><fmt:message key="ClientInfoType"/></th>
-<th><fmt:message key="Rfidcode"/></th>
-<th><fmt:message key="Position"/></th>
-<th><fmt:message key="Uuid"/></th>
-<th><fmt:message key="Remark"/></th>
+<th></th>
+<th>合同号</th>
+<th>状态</th>
+<th>身份证号</th>
+<th>客户名称</th>
+<th>贷款本金</th>
+<th>分期数</th>
+<th>月付</th>
+<th>还款日</th>
 </tr>
 </thead>
 
@@ -107,21 +103,12 @@
 <c:forEach var="item" items="${results}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.card.id }"></td>
-<td><c:out value="${item.winery.enterpriseName }"/></td>
-<td>
-	<c:url value="/ClientInfo.do" var="viewClientInfo">
-		<c:param name="method">view</c:param>
-		<c:param name="id">${item.card.id}</c:param>
-	</c:url>
-	<a href="#" onclick="window.open('${viewClientInfo }','ClientInfoJob', 'width=640,height=320,scrollbars');return false;"> <c:out value="${item.jobType.definition }"/></a>
-</td>
 <td><c:out value="${item.user.name }"/></td>
 <td><fmt:formatDate value="${item.cardJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.cardType.cardTypeName }"/></td>
 <td><c:out value="${item.card.rfidcode }"/></td>
 <td><c:out value="${item.card.position }"/></td>
-<td><c:out value="${item.card.uuid }"/></td>
-<td><c:out value="${item.card.remark }"/></td>
+<td><c:out value="${item.card.position }"/></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -129,7 +116,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="10" >
+<td colspan="9" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>

@@ -1,5 +1,6 @@
 package com.mooo.mycoz.action.operation.credit;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,12 +18,13 @@ import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
-import com.mooo.mycoz.dbobj.wineBranch.Card;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
+import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
 import com.mooo.mycoz.dbobj.wineShared.Product;
+import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.UploadFile;
 import com.mooo.mycoz.framework.util.IDGenerator;
-import com.mooo.mycoz.framework.util.ParamUtil;
 
 public class ClientInfoAction extends BaseSupport {
 
@@ -32,6 +34,7 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptDeclare");
+		
 		String value = null;
 
 		try {
@@ -113,69 +116,130 @@ public class ClientInfoAction extends BaseSupport {
 	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("list");
+		if (log.isDebugEnabled()) log.debug("list");
+		try {
+			MultiDBObject dbobject = new MultiDBObject();
+
+			dbobject.addTable(Client.class, "client");
+			dbobject.addTable(ClientJob.class, "clientJob");
+
+			dbobject.setForeignKey("clientJob", "clientId", "client","id");
+
+			dbobject.setRetrieveField("client", "id");
+			dbobject.setRetrieveField("client", "productName");
+
+			request.setAttribute("clients", dbobject.searchAndRetrieveList());
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			e.printStackTrace();
+		}
 		return "success";
 	}
 
 	public String promptAdd(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptAdd");
+		if (log.isDebugEnabled()) log.debug("promptAdd");
+		request.setAttribute("pId", request.getParameter("pId"));
+		
 		return "success";
 	}
 
 	public String processAdd(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processAdd");
+		if (log.isDebugEnabled()) log.debug("processAdd");
+		Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
+
 		Transaction tx = null;
 		try {
-			Client client = new Client();
 			tx = new Transaction();
 			tx.start();
 
+			//sub path
+			String sPath = "upload/images/";
+			//physical path
+			String pPath = request.getSession().getServletContext().getRealPath("/");
+			//upload path
+			String uPath = pPath+sPath;
+			if (log.isDebugEnabled()) log.debug("uploadPath=" + uPath);
+
+			File upFile = new File(uPath);
+			if (!upFile.exists()) upFile.mkdirs();
+			
+			UploadFile uf = new UploadFile();
+			uf.setRequest(request);
+			uf.setUploadPath(uPath);
+			uf.process();
+			
 			// 处理户籍地址
 			AddressBook censusAddressBook = new AddressBook();
-			ParamUtil.bindData(request, censusAddressBook, "censusAddressBook");
+			uf.bindData(censusAddressBook, "censusAddressBook");
+//			ParamUtil.bindData(request, censusAddressBook, "censusAddressBook");
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
+			censusAddressBook.setBranchId(branchId);
 			censusAddressBook.add(tx.getConnection());
 			// 处理现居地址
 			AddressBook livingAddressBook = new AddressBook();
-			ParamUtil.bindData(request, livingAddressBook, "livingAddressBook");
+//			ParamUtil.bindData(request, livingAddressBook, "livingAddressBook");
+			uf.bindData(livingAddressBook, "livingAddressBook");
 			int livingAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			livingAddressBook.setId(livingAddressBookId);
+			livingAddressBook.setBranchId(branchId);
+
 			livingAddressBook.add(tx.getConnection());
 			// 处理家庭成員地址
 			AddressBook homeAddressBook = new AddressBook();
-			ParamUtil.bindData(request, homeAddressBook, "homeAddressBook");
+//			ParamUtil.bindData(request, homeAddressBook, "homeAddressBook");
+			uf.bindData(homeAddressBook, "homeAddressBook");
 			int homeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			homeAddressBook.setId(homeAddressBookId);
+			homeAddressBook.setBranchId(branchId);
 			homeAddressBook.add(tx.getConnection());
 			// 处理单位地址
 			AddressBook officeAddressBook = new AddressBook();
-			ParamUtil.bindData(request, homeAddressBook, "officeAddressBook");
+//			ParamUtil.bindData(request, homeAddressBook, "officeAddressBook");
+			uf.bindData(officeAddressBook, "officeAddressBook");
+
 			int officeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			officeAddressBook.setId(officeAddressBookId);
+			officeAddressBook.setBranchId(branchId);
 			officeAddressBook.add(tx.getConnection());
 			// 处理基本信息
+			Client client = new Client();
+
 			int clientId = IDGenerator.getNextID(tx.getConnection(),
 					Client.class);
-			ParamUtil.bindData(request, client, "client");
-
+//			ParamUtil.bindData(request, client, "client");
+			uf.bindData(client, "client");
+			
 			client.setId(clientId);
 			client.setLivingAddressBookId(livingAddressBookId);
 			client.setOfficeAddressBookId(officeAddressBookId);
 			client.setHomeAddressBookId(homeAddressBookId);
 			client.setCensusAddressBookId(censusAddressBookId);
+			client.setBranchId(branchId);
 			client.add(tx.getConnection());
+
+			ClientJob clientJob = new ClientJob();
+			uf.bindData(clientJob, "clientJob");
+
+			int clientJobId = IDGenerator.getNextID(tx.getConnection(),ClientJob.class);
+			clientJob.setId(clientJobId);
+			clientJob.setClientId(clientId);
+			clientJob.setOProductId(0);
+			clientJob.setTProductId(0);
+			clientJob.setBranchId(branchId);
+			
+			clientJob.add(tx.getConnection());
+
+			tx.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			tx.rollback();
 			if (log.isDebugEnabled())
@@ -186,7 +250,7 @@ public class ClientInfoAction extends BaseSupport {
 		} finally {
 			tx.end();
 		}
-		return "listCard";
+		return "list";
 	}
 
 	public String processDelete(HttpServletRequest request,
