@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.mooo.mycoz.db.DbBridgingBean;
 
 public class UploadFile {
 
@@ -258,6 +261,46 @@ public class UploadFile {
 		return strArr;
     }
     
+	public void bindData(Object bean,String prefix) {
+		try {
+			Enumeration<?> em = paramHt.keys();
+			while (em.hasMoreElements()) {
+					String name = (String)em.nextElement();
+	
+					if ( name == null || name.trim().length() == 0 )
+						continue;
+					
+					String value = (paramHt.get(name) == null)?"":(String)((ArrayList<String>)paramHt.get(name)).get(0);
+			        
+					if (value == null) {
+						continue;
+					}
+	
+					if (prefix != null) {
+						if (name.indexOf(prefix + ".") != 0) {
+							continue;
+						}
+						name = name.replaceFirst(prefix + ".", "");
+					}
+	
+					value = value.trim();
+					
+					System.out.println("ParamUtil:"+name + "->" + value);
+
+					if (name.indexOf(".") > -1) {
+						int start = name.indexOf(".");
+						String objName = name.substring(0, start);
+						String propertyName = name.substring(start + 1, name.length());
+						DbBridgingBean.bindSubObject(bean, objName, propertyName, value);
+					} else {
+						DbBridgingBean.bindProperty(bean, name, value);
+					}
+			}
+		} catch (Exception e) {
+			e.printStackTrace(); // To change body of catch statement use
+		}
+	}
+	
     public int getUpdFileSize(){
         return updFileArr.size();
     }
