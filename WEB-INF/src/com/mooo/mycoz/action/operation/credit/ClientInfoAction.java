@@ -1,5 +1,10 @@
 package com.mooo.mycoz.action.operation.credit;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +41,9 @@ private static Log log = LogFactory.getLog(ClientInfoAction.class);
 			
 			double salePirce=0d;
 			double onePay=0d;
+			double monthPay=0d,creditAmount=0d;
+			
+			double onePayPercent=0d;
 			
 			value=request.getParameter("salePirce");
 			if(!StringUtils.isNull(value))
@@ -53,19 +61,37 @@ private static Log log = LogFactory.getLog(ClientInfoAction.class);
 			if(onePay>=salePirce && salePirce>0 )
 				throw new Exception("首付过多");
 			
-			if(onePay/salePirce<0.10)
+			onePayPercent = onePay/salePirce;
+			request.setAttribute("onePayPercent", onePayPercent);
+			
+			if(onePayPercent<0.2)
 				throw new Exception("首付不足");
 			
 			String[] products =  request.getParameterValues("product");
 			
 			if(products!=null){
 				FinancialProduct financialProduct=null;
+				List fProucts = new ArrayList();
+				
 				for(int i=0;i<products.length;i++){
+					Map<String,Object> rowm = new LinkedHashMap();
+					
 					financialProduct = new FinancialProduct();
 					financialProduct.setProductId(new Integer(products[i]));
 					financialProduct.retrieve();
 					
+					creditAmount = salePirce-onePay;
+					monthPay = creditAmount/financialProduct.getCycleTotal();
+					
+					rowm.put("finName", financialProduct.getFinancialName());
+					rowm.put("cycleTotal", financialProduct.getCycleTotal());
+					rowm.put("monthPay", monthPay);
+					rowm.put("firstPay", monthPay);
+					rowm.put("creditAmount", creditAmount);
+
+					fProucts.add(rowm);
 				}
+				request.setAttribute("fProucts", fProucts);
 			}
 
 		} catch (Exception e) {

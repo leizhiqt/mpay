@@ -10,6 +10,7 @@ public class FinancialProduct extends DBObject {
 	private Double creditRate;
 	private Double financialMax;
 	private Integer productId;
+	private Double minPayPercent;
 
 	public Integer getId() {
 		return id;
@@ -65,5 +66,13 @@ public class FinancialProduct extends DBObject {
 
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+
+	public Double getMinPayPercent() {
+		return minPayPercent;
+	}
+
+	public void setMinPayPercent(Double minPayPercent) {
+		this.minPayPercent = minPayPercent;
 	}
 }

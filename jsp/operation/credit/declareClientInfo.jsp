@@ -26,7 +26,7 @@
 
 <div style="float:left;width:29%;margin:4px;">
 <table class="modify">
-<caption style="text-align:left;"><fmt:message key="ClientInfo"/></caption>
+<caption style="text-align:left;">产品类别</caption>
 
 <tbody>
 <tr>
@@ -74,7 +74,7 @@
 
 
 <div style="float:right;width:69%;margin:4px;">
-<table class="modify">
+<table class="lt">
 <caption style="text-align:left;">免税产品</caption>
 
 <thead>
@@ -89,11 +89,23 @@
 
 <tbody>
 
+<c:forEach var="item" items="${fProucts}" varStatus="status">
 <tr>
 <td>
+	<c:url value="/ClientInfo.do" var="newURL">
+		<c:param name="method">promptAdd</c:param>
+	</c:url>
+	<a href="javascript:void(0)" onclick="docommit('${newURL}');"> <c:out value="${item.finName }"/></a>
 </td>
 
+<td><c:out value="${item.cycleTotal }"/> </td>
+<td><c:out value="${item.monthPay }"/> </td>
+<td><c:out value="${item.firstPay }"/> </td>
+<td><c:out value="${item.creditAmount }"/> </td>
 </tr>
+
+</c:forEach>
+
 
 </tbody>
 
