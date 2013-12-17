@@ -2,70 +2,104 @@ package com.mooo.mycoz.dbobj.wineBranch;
 
 import com.mooo.mycoz.db.DBObject;
 
-public class AddressBook extends DBObject{
+public class AddressBook extends DBObject {
 	private Integer id;
-	private String address;
-	private String postalCode;
-	private String tel;
-	private String mobileNo;
-	private Integer userId;
-	private Integer languageId;
-	private Integer cityId;
+	private String zipCode;
+	private String province;
+	private String city;
+	private String county;
+	private String town;
+	private String street;
+	private String community;
+	private String houseNo;
+	private String other;
 	private Integer branchId;
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getAddress() {
-		return address;
+
+	public String getZipCode() {
+		return zipCode;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
-	public String getPostalCode() {
-		return postalCode;
+
+	public String getProvince() {
+		return province;
 	}
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+
+	public void setProvince(String province) {
+		this.province = province;
 	}
-	public String getTel() {
-		return tel;
+
+	public String getCity() {
+		return city;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+
+	public void setCity(String city) {
+		this.city = city;
 	}
-	public String getMobileNo() {
-		return mobileNo;
+
+	public String getCounty() {
+		return county;
 	}
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
+
+	public void setCounty(String county) {
+		this.county = county;
 	}
-	public Integer getUserId() {
-		return userId;
+
+	public String getTown() {
+		return town;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+
+	public void setTown(String town) {
+		this.town = town;
 	}
-	public Integer getLanguageId() {
-		return languageId;
+
+	public String getStreet() {
+		return street;
 	}
-	public void setLanguageId(Integer languageId) {
-		this.languageId = languageId;
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
-	public Integer getCityId() {
-		return cityId;
+
+	public String getCommunity() {
+		return community;
 	}
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
+
+	public void setCommunity(String community) {
+		this.community = community;
 	}
+
+	public String getHouseNo() {
+		return houseNo;
+	}
+
+	public void setHouseNo(String houseNo) {
+		this.houseNo = houseNo;
+	}
+
+	public String getOther() {
+		return other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
+	}
+
 	public Integer getBranchId() {
 		return branchId;
 	}
+
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
 	}
-	
 }

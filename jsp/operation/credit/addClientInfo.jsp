@@ -34,6 +34,7 @@
 <%@ include file="../../incl/b_message.jsp" %>
 
 <div>
+			<div>
 					<table width="100%" border="1" cellpadding="0" cellspacing="0">
 						<tr height="10px" style="border:1px solid #FFF;">
 
@@ -71,13 +72,13 @@
 							
 							<td id="guest_info2">*  姓名</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.userName"   maxlength="10"/>
+									<input type="text" name="client.clientName"   maxlength="10"/>
 								</table></td>
 							<td id="guest_info4"></td>
 							<td id="guest_info5"></td>
 							<td id="guest_info6">*  身份证号码</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.userIdCode"  dtype="identity" onblur="calcIdCard()"/>
+									<input type="text" name="client.idNo"  dtype="identity" onblur="calcIdCard()"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -85,19 +86,19 @@
 
 							<td align="right" id="guest_info2">  身份证截止日期</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.validity"  id="validity" 
+									<input type="text" name="client.idEndDate"  id="validity" 
 									 onclick="displayCalendar(this,'yyyy-mm-dd',this)"/>
 								</table></td>
 							<td id="guest_info4"></td>
 							<td id="guest_info5"><table>
-									<html:checkbox    name="contract.isLongTime"  cssStyle="margin-left:10px"
+									<html:checkbox    name="client.isLongTime"  cssStyle="margin-left:10px"
 									 onclick="checkV()" >
 									</html:checkbox>
 								</table></td>
 							<td id="guest_info6">*  发证机关</td>
 							<td id="guest_info7"><table>
 									<input type="text"
-										name="contract.licenceAddress"    maxlength="50"/>
+										name="client.idAuthority"    maxlength="50"/>
 								</table></td>
 						</tr>
 
@@ -105,78 +106,76 @@
 						<tr>
 							<td id="guest_info2">  SSI号码/学生号码</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.sslCode"/>
+									<input type="text" name="client.otherNo"/>
 								</table></td>
 							<td id="guest_info4">* 申请人年龄</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.guestAge"   dtype="number"/>
+									<input type="text" name="client.age"   dtype="number"/>
 								</table></td>
-							<td id="guest_info6">*  手机</td>
+							<td id="guest_info6">*  手机号</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.phoneCode"   dtype="mobile" onblur="getphonearea(this.value)"/>
+									<input type="text" name="client.mobilePhone"   dtype="mobile" onblur="getphonearea(this.value)"/>
 								</table></td>
 						</tr>
 						<tr>
 							
 							<td id="guest_info2">* 性别</td>
 							<td id="guest_info3"><table>
-							<select>
-							  <option value ="volvo">男</option>
-							  <option value ="saab">女</option>
-							  <option value="opel">Opel</option>
-							  <option value="audi">Audi</option>
+							<select name="client.sex"  id ="sex" onchange="document.getElementById('sex').value += ' ' + this.options[this.selectedIndex].text" width="95%">
+							  <option value ="男">男</option>
+							  <option value ="女">女</option>
 							</select>
 							
 								</table></td>
 							<td id="guest_info4">* 婚姻状况</td>
 							<td id="guest_info5"><table>
-							<select>
-							  <option value ="volvo">未婚</option>
-							  <option value ="saab">已婚</option>
-							  <option value="opel">离异</option>
-							  <option value="audi">丧偶</option>
+							<select name="client.marry"  id ="marry" onchange="document.getElementById('marry').value += ' ' + this.options[this.selectedIndex].text">
+							  <option value ="未婚">未婚</option>
+							  <option value ="已婚">已婚</option>
+							  <option value="离异">离异</option>
+							  <option value="丧偶">丧偶</option>
 							</select>
 									
 								</table></td>
 							<td id="guest_info6">*  手机号码归属地</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.phoneCodeSource"   />
+									<input type="text" name="client.mobileAddress"   />
 								</table></td>
 						</tr>
 						<tr>
 							
 							<td id="guest_info2">子女数目</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.childsCount"  dtype="number"/>
+									<input type="text" name="client.childs"  dtype="number"/>
 								</table></td>
 							<td id="guest_info4">*  住房</td>
 							<td id="guest_info5"><table>
-									<select>
-							  <option value ="volvo">自有房</option>
-							 
-							</select>
+							<select  id ="housing" onchange="document.getElementById('housing').value += ' ' + this.options[this.selectedIndex].text">
+							  <option value ="自有房">自有房</option>
+							  <option value ="租房">租房</option>
+						    </select>
 								</table></td>
 							<td id="guest_info6">*  教育程度</td>
 							<td id="guest_info7"><table>
-									<select>
-										  <option value ="volvo">大學</option>
-										  <option value ="saab">高中</option>
+									<select name="client.educationId" id="educationId" onchange="document.getElementById('educationId').value += ' ' + this.options[this.selectedIndex].text">
+										  <option value =1>大學</option>
+										  <option value =2>高中</option>
 									</select>
 								</table></td>
 						</tr>
 						<tr>
-							<td id="guest_info2">  住宅电话登记人</td>
-							<td id="guest_info3"><table>
+							<td >  住宅电话登记人</td>
+							<td ><table>
 									<input type="text"
-										name="contract.homePhoneRegiatrationPerson" maxlength="20"/>
+										name="client.homePhoneName" maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">住宅/宿舍电话</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.homePhone" />
+									<input type="text" name="client.homePhone" />
 								</table></td>
 							<td id="guest_info6">  电子邮箱</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.email"  dtype="email"/>
+									<input type="text" name="client.email"  dtype="email"/>
 								</table></td>
 						</tr>
 
@@ -188,15 +187,15 @@
 							
 							<td id="guest_info2">  配偶姓名</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.spName" maxlength="20"/>
+									<input type="text" name="client.spuseName" maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">配偶移动电话</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.spPhone"  dtype="mobile"/>
+									<input type="text" name="client.spuseMobile"  dtype="mobile"/>
 								</table></td>
 							<td id="guest_info6">  身份证号码</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.spIdCode" dtype="identity"/>
+									<input type="text" name="client.idSpuse" dtype="identity"/>
 								</table></td>
 						</tr>
 						
@@ -204,17 +203,17 @@
 							
 							<td id="guest_info2">  配偶雇主</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.spEmployer" maxlength="20"/>
+									<input type="text" name="client.spuseHirer" maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">配偶办公电话</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.spOfficePhone"  dtype="mobile"/>
+										name="client.spuseOfficePhone"  dtype="mobile"/>
 								</table></td>
 							<td id="guest_info6">配偶办公电话分机</td>
 							<td id="guest_info7"><table>
 									<input type="text"
-										name="contract.spExtencePhone"  dtype="mobile" />
+										name="client.spuseExtPhone"  dtype="mobile" />
 								</table></td>
 						</tr>
 						<tr>
@@ -225,18 +224,21 @@
 							
 							<td id="guest_info2">邮编</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.adPostCode"  isempty="true" dtype="number" maxlength="20"/>
+									<input type="text" name="censusAddressBook.zipCode"  isempty="true" dtype="number" maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">*  省/直辖市</td>
 							<td id="guest_info5"><table>
-									<select>
-								  		<option value ="volvo">四川省</option>
+									<select id="province1" name="censusAddressBook.province" onchange="document.getElementById('province1').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="四川省">四川省</option>
+								  		<option value ="湖南省">湖南省</option>
+								  		<option value ="河北省">河北省</option>
 									</select>
 								</table></td>
 							<td id="guest_info6">*  市</td>
 							<td id="guest_info7"><table>
-									<select>
-								  		<option value ="volvo">成都市</option>
+									<select id="city1" name="censusAddressBook.city" onchange="document.getElementById('city1').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="成都市">成都市</option>
+								  		<option value ="內江市">內江市</option>
 									</select>
 								</table></td>
 						</tr>
@@ -245,15 +247,15 @@
 							
 							<td id="guest_info2">*  区/县区</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.adCounty"   maxlength="20"/>
+									<input type="text" name="censusAddressBook.county"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  镇</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.adTown"  maxlength="20"/>
+									<input type="text" name="censusAddressBook.town"  maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">*  街道/路/村</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.adStreet"   maxlength="20"/>
+									<input type="text" name="censusAddressBook.street"   maxlength="20"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -261,16 +263,16 @@
 							<td id="guest_info2">*  小区/楼盘</td>
 							<td id="guest_info3"><table>
 									<input type="text"
-										name="contract.adNeighborhoodPremises"   maxlength="20"/>
+										name="censusAddressBook.community"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  栋/单元/房间号</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.adUnitHomeNumber"  isempty="true" maxlength="20"/>
+										name="censusAddressBook.houseNo"  isempty="true" maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">其它</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.adOther"  isempty="true" maxlength="50"/>
+									<input type="text" name="censusAddressBook.other"  isempty="true" maxlength="50"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -282,7 +284,7 @@
 							<td align="center" id="guest_info3"><input type="checkbox" onclick="autoFillAddress(this, 'now');" style="margin-left:10px"/></td>
 							<td id="guest_info4">你在现居住城市住了多久？</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.nowMonth"
+									<input type="text" name="client.nowMonth"
 										 />
 								</table></td>
 							<td align="left" style="background-color:#EEEEEE" >月</td>
@@ -292,49 +294,53 @@
 							
 							<td id="guest_info2">  邮编</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.nowPostCode"  dtype="number" maxlength="10"/>
+									<input type="text" name="livingAddressBook.zipCode"  dtype="number" maxlength="10"/>
 								</table></td>
 							<td id="guest_info4">*  省/直辖市</td>
 							<td id="guest_info5"><table>
-									<select display="width:95%" >
-									
+									<select id="province2" name="livingAddressBook.province" onchange="document.getElementById('province2').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="四川省">四川省</option>
+								  		<option value ="湖南省">湖南省</option>
+								  		<option value ="河北省">河北省</option>
 									</select>
 								</table></td>
 							<td id="guest_info6">*  市</td>
-							<td id="guest_info7">
-								<table>
-									
-								</table>
-							</td>
+							<td id="guest_info7"><table>
+									<select id="city2" name="livingAddressBook.city" onchange="document.getElementById('city2').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="成都市">成都市</option>
+								  		<option value ="內江市">內江市</option>
+									</select>
+								</table></td>
 						</tr>
+						
 						<tr>
 							
 							<td id="guest_info2">*  区/县区</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.nowCounty"   maxlength="20"/>
+									<input type="text" name="livingAddressBook.county"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  镇</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.nowTown" maxlength="20"/>
+									<input type="text" name="livingAddressBook.town"  maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">*  街道/路/村</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.nowStreet"   maxlength="20"/>
+									<input type="text" name="livingAddressBook.street"   maxlength="20"/>
 								</table></td>
 						</tr>
 						<tr>
 							
 							<td id="guest_info2">*  小区/楼盘</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.nowNeighborhoodPremises"   maxlength="20"/>
+									<input type="text"
+										name="livingAddressBook.community"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  栋/单元/房间号</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.nowUnitHomeNumber"  isempty="true" maxlength="20"/>
+										name="livingAddressBook.houseNo"  isempty="true" maxlength="20"/>
 								</table></td>
-							<td id="guest_info6"></td>
-							<td id="guest_info7"></td>
+							
 						</tr>
 						<tr>
 							<td colspan="6" align="left" class="tr8">家庭信息</td>
@@ -343,14 +349,15 @@
 						<tr>
 							<td id="guest_info2">*  家庭成员名称</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.faMemberName"   maxlength="20"/>
+									<input type="text" name="client.homeName"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">*  家庭成员类型</td>
 							<td id="guest_info5"><table>
+									<input type="text" name="client.homeType"  "/>
 								</table></td>
 							<td id="guest_info6">家庭成员电话号</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.faPhone"  "/>
+									<input type="text" name="client.homeTelephone"  "/>
 								</table></td>
 						</tr>
 						<tr>
@@ -365,19 +372,22 @@
 							
 							<td id="guest_info2">邮编</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.faPostCode"  isempty="true" dtype="number" maxlength="10"/>
+									<input type="text" name="homeAddressBook.zipCode"  isempty="true" dtype="number" maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">*  省/直辖市</td>
 							<td id="guest_info5"><table>
-									<s:select list="cityList" listKey="name" listValue="name"   headerKey=""  headerValue="请选择" cssStyle="width:95%"
-										name="contract.faProvince"  onchange="searchCity(this.options[this.options.selectedIndex].value,'contract.faCity')"   maxlength="20">
-									</s:select>
+									<select id="province3" name="homeAddressBook.province" onchange="document.getElementById('province3').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="四川省">四川省</option>
+								  		<option value ="湖南省">湖南省</option>
+								  		<option value ="河北省">河北省</option>
+									</select>
 								</table></td>
 							<td id="guest_info6">*  市</td>
 							<td id="guest_info7"><table>
-									<s:select  list="familyCity" listKey="name" listValue="name"  headerKey=""  headerValue="请选择" cssStyle="width:95%"
-										name="contract.faCity" id="contract.faCity"  maxlength="20">
-									</s:select>
+									<select id="city3" name="homeAddressBook.city" onchange="document.getElementById('city3').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="成都市">成都市</option>
+								  		<option value ="內江市">內江市</option>
+									</select>
 								</table></td>
 						</tr>
 						
@@ -385,15 +395,15 @@
 							
 							<td id="guest_info2">*  区/县区</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.faCounty"   maxlength="20"/>
+									<input type="text" name="homeAddressBook.county"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  镇</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.faTown" maxlength="20"/>
+									<input type="text" name="homeAddressBook.town"  maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">*  街道/路/村</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.faStreet"   maxlength="20"/>
+									<input type="text" name="homeAddressBook.street"   maxlength="20"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -401,16 +411,16 @@
 							<td id="guest_info2">*  小区/楼盘</td>
 							<td id="guest_info3"><table>
 									<input type="text"
-										name="contract.faNeighborhoodPremises"   maxlength="20"/>
+										name="homeAddressBook.community"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">  栋/单元/房间号</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.faUnitHomeNumber"   maxlength="20"/>
+										name="homeAddressBook.houseNo"  isempty="true" maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">其它</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.faOther" />
+									<input type="text" name="homeAddressBook.other"  isempty="true" maxlength="50"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -421,21 +431,25 @@
 							
 							<td id="guest_info2">* 联系人姓名</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.oName" />
+									<input type="text" name="client.otherContacts" />
 								</table></td>
 							<td id="guest_info4">与申请人关系</td>
 							<td id="guest_info5"><table>
+									<select id="otherNexus" name="client.otherNexus" onchange="document.getElementById('otherNexus').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="朋友">朋友</option>
+								  		<option value ="亲戚">亲戚</option>
+									</select>
 								</table></td>
 							<td id="guest_info6">* 联系电话</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.oPhone"  dtype="mobile" />
+									<input type="text" name="client.otherPhone"  dtype="mobile" />
 								</table></td>
 						</tr>
 						<tr>
 							
 							<td id="guest_info2" > 销售顾问备注</td>
 							<td align="left" colspan="5"><table>
-									<input type="text" name="contract.oSa"
+									<input type="text" name="client.oSa"
 										size="135" />
 								</table></td>
 
@@ -448,20 +462,21 @@
 							
 							<td id="guest_info2"></td>
 							<td id="guest_info3"><table>
-									<html:checkbox  name="contract.fIdCode">
-									</html:checkbox>
+							
+									<input type="checkbox"  name="contract.fIdCode">身份证
+									</input>
 								</table></td>
 
 							<td id="guest_info4"></td>
 							<td id="guest_info5"><table>
-									<html:checkbox  name="contract.fSocialCard">
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fSocialCard">社保卡
+									</input>
 								</table></td>
 
 							<td id="guest_info6"></td>
 							<td id="guest_info7"><table>
-									<html:checkbox  name="contract.fWorkCard">
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fWorkCard">工卡
+									</input>
 								</table></td>
 
 						</tr>
@@ -469,22 +484,22 @@
 							
 							<td id="guest_info2"></td>
 							<td id="guest_info3"><table>
-									<html:checkbox  name="contract.fBankCard">
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fBankCard">银行卡
+									</input>
 								</table></td>
 
 							<td id="guest_info4"></td>
 							<td id="guest_info5"><table>
-									<html:checkbox 
-										name="contract.fBankStatement">
-									</html:checkbox>
+									<input type="checkbox" 
+										name="contract.fBankStatement">银行对账单
+									</input>
 								</table></td>
 
 							<td id="guest_info6"></td>
 							<td id="guest_info7"><table>
-									<html:checkbox 
-										name="contract.fBankDeposit">
-									</html:checkbox>
+									<input type="checkbox" 
+										name="contract.fBankDeposit">银行存折
+									</input>
 								</table></td>
 
 						</tr>
@@ -492,21 +507,21 @@
 							
 							<td id="guest_info2"></td>
 							<td id="guest_info3"><table>
-									<html:checkbox 
-										name="contract.fResidenceBooklet" >
-									</html:checkbox>
+									<input type="checkbox"
+										name="contract.fResidenceBooklet" cssClass="inputStyle" >户口本
+									</input>
 								</table></td>
 
 							<td id="guest_info4"></td>
 							<td id="guest_info5"><table>
-									<html:checkbox  name="contract.fSid" >
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fSid" cssClass="inputStyle" >大学学生证
+									</input>
 								</table>
 							<td id="guest_info6"></td>
 							<td id="guest_info7"><table>
-									<html:checkbox 
-										name="contract.fUid" >
-									</html:checkbox>
+									<input type="checkbox" 
+										name="contract.fUid" cssClass="inputStyle" >大学学生证明":"大学学生证明（仅适用全日制大学学生）
+									</input>
 								</table></td>
 
 						</tr>
@@ -514,18 +529,18 @@
 							
 							<td id="guest_info2"></td>
 							<td id="guest_info3"><table>
-									<html:checkbox  name="contract.fHouseCard">
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fHouseCard">房产证
+									</input>
 								</table></td>
 							<td id="guest_info4"></td>
 							<td id="guest_info5"><table>
-									<html:checkbox  name="contract.fDirvingCard">
-									</html:checkbox>
+									<input type="checkbox"  name="contract.fDirvingCard">行驶证
+									</input>
 								</table></td>
 							<td id="guest_info6"></td>
 							<td id="guest_info7"><table>
-									<html:checkbox  name="contract.fDirverCard">
-									</html:checkbox>
+									<input type="checkbox" name="contract.fDirverCard">驾驶证
+									</input>
 								</table></td>
 
 						</tr>
@@ -533,8 +548,8 @@
 							
 							<td id="guest_info2"></td>
 							<td id="guest_info3"><table>
-									<html:checkbox  name="contract.fOther">
-									</html:checkbox>
+									<input type="checkbox" name="contract.fOther">其它
+									</input>
 								</table></td>
 
 							<td id="guest_info4"></td>
@@ -557,8 +572,10 @@
 							<td id="guest_info2">邮寄地址</td>
 							<td id="guest_info3">
 							   <table>
-									<s:select list="postCity" listKey="name" listValue="name"  headerKey=""  headerValue="请选择" cssStyle="width:95%"
-										name="contract.stPostAddr" id="stPostAddr" onclik="choosseAddress(this,'post')"></s:select>
+									<select id="postAddress" name="postAddress" onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="成都市">成都市</option>
+								  		<option value ="重庆市">重庆市</option>
+									</select>
 								</table></td>
 							<td id="guest_info4"></td>
 							<td id="guest_info5"></td>
@@ -576,17 +593,17 @@
 							<td  id="guest_info2">*  月收入总额(元)</td>
 							<td id="guest_info3"><table>
 									<input type="text"
-										name="contract.inMonthlyIncome"   dtype="float" maxlength="10"/>
+										name="client.masterInMonth"   dtype="float" maxlength="10"/>
 								</table></td>
 							<td  id="guest_info4">  其他收入(元/月)</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.inOtherIncome" dtype="float" maxlength="10"/>
+										name="client.otherInMonth" dtype="float" maxlength="10"/>
 								</table></td>
 							<td  id="guest_info6">*  家庭月收入(元)</td>
 							<td id="guest_info7"><table>
 									<input type="text"
-										name="contract.inFamilyIncome"   dtype="float" maxlength="10"/>
+										name="client.homeInMonth"   dtype="float" maxlength="10"/>
 								</table></td>
 						</tr>
 						<tr>
@@ -596,7 +613,7 @@
 							<td  id="guest_info4">  其他收入来源</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.inOtherIncomeSource"  maxlength="10"/>
+										name="client.otherIncome"  maxlength="10"/>
 								</table></td>
 							<td  id="guest_info6"></td>
 							<td id="guest_info7"></td>
@@ -609,28 +626,32 @@
 						<tr>
 							<td id="guest_info2">*  单位名称或大学名称</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.xxName"   maxlength="20"/>
+									<input type="text" name="client.onShortName"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info4">*  单位/学校/个体全称</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.xxxName"   maxlength="20"/>
+									<input type="text" name="client.onFullName"   maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">*  任职部门或班级</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.xxClass"   maxlength="20"/>
+									<input type="text" name="client.onDivision"   maxlength="20"/>
 								</table></td>
 						</tr>
 						<tr>
 							<td id="guest_info2">*  总共工作经脸/总共大学学习时间</td>
 							<td id="guest_info3"><table>
-									<s:select
-										list=" yearList" listKey="name" listValue="name"  headerKey=""  headerValue="请选择"
-										name="contract.xxTime"   maxlength="10" cssStyle="width:95%">
-									</s:select>
+									<select id="onWorkTime" name="client.onWorkTime" onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="0-1年">0-1年</option>
+								  		<option value ="0-1年">1-2年</option>
+								  		<option value ="0-1年">2-3年</option>
+								  		<option value ="0-1年">3-5年</option>
+								  		<option value ="0-1年">5-10年</option>
+								  		<option value ="0-1年">'>'10年</option>
+									</select>
 								</table></td>
 							<td id="guest_info4">*  现工作时间/大学开始时间(以月为单位)</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.xxStartTime"   dtype="number"  maxlength="20"/>
+									<input type="text" name=""   dtype="number"  maxlength="20"/>
 								</table></td>
 							<td id="guest_info6"></td>
 							<td id="guest_info7"></td>
@@ -639,24 +660,24 @@
 							
 							<td id="guest_info2"> * 行业类别</td>
 							<td id="guest_info3"><table>
-									<s:select
-										list="businessList" listKey="name" listValue="name"  headerKey=""  headerValue="请选择" 
-										name="contract.xxType" cssStyle="width:95%">
-									</s:select>
+									<select id="onWorkTime" name="client.onSector" onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="IT">IT</option>
+								  		<option value ="金融">金融</option>
+									</select>
 								</table></td>
 							<td id="guest_info4">* 职位</td>
 							<td id="guest_info5"><table>
-									<s:select
-										list=" positionList" listKey="name" listValue="name"  headerKey=""  headerValue="请选择" 
-										name="contract.xxPosition" cssStyle="width:95%">
-									</s:select>
+									<select id="onOffice" name="client.onSector" onchange="document.getElementById('onOffice').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="经理">经理</option>
+								  		<option value ="总监">总监</option>
+									</select>
 								</table></td>
 							<td id="guest_info6">单位性质</td>
 							<td id="guest_info7"><table>
-									<s:select
-										list=" unitList" listKey="name" listValue="name"  headerKey=""  headerValue="请选择"
-										name="contract.xxOrName" cssStyle="width:95%">
-									</s:select>
+									<select id="onFeature" name="client.onFeature" onchange="document.getElementById('onFeature').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="国有企业">国有企业</option>
+								  		<option value ="私有企业">私有企业</option>
+									</select>
 								</table></td>
 						</tr>
 						
@@ -665,11 +686,11 @@
 							<td id="guest_info2">*  办公电话</td>
 							<td id="guest_info3"><table>
 									<input type="text"
-										name="contract.xxOfficePhone"    maxlength="20" dtype="mobile"/>
+										name="client.xxOfficePhone"    maxlength="20" dtype="mobile"/>
 								</table></td>
 							<td id="guest_info4">办公电话分机</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.xxExtension"  dtype="mobile"/>
+									<input type="text" name="client.onOfficePhone"  dtype="mobile"/>
 								</table></td>
 							<td id="guest_info6"></td>
 							<td id="guest_info7"></td>
@@ -678,54 +699,55 @@
 							
 							<td id="guest_info2">邮编</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.xxPostCode" dtype="number" maxlength="10"/>
+									<input type="text" name="officeAddressBook.zipCode"  isempty="true" dtype="number" maxlength="20"/>
 								</table></td>
-							<td id="guest_info4">* 省/直辖市</td>
-							<td id="guest_info5">
-								<table>
-									<s:select list="cityList" listKey="name" listValue="name"  headerKey=""  headerValue="请选择"  cssStyle="width:95%"
-										name="contract.xxProvince"  onchange="searchCity(this.options[this.options.selectedIndex].value,'contract.xxCity')">
-									</s:select>
-								</table>
-							</td>
-							<td id="guest_info6">* 市</td>
-				            <td id="guest_info7"><table>
-									<s:select list="unitCity" listKey="name" listValue="name"  headerKey=""  headerValue="请选择" 
-										name="contract.xxCity" id="contract.xxCity" cssStyle="width:95%">
-									</s:select>
+							<td id="guest_info4">*  省/直辖市</td>
+							<td id="guest_info5"><table>
+									<select id="province4" name="officeAddressBook.province" onchange="document.getElementById('province4').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="四川省">四川省</option>
+								  		<option value ="湖南省">湖南省</option>
+								  		<option value ="河北省">河北省</option>
+									</select>
+								</table></td>
+							<td id="guest_info6">*  市</td>
+							<td id="guest_info7"><table>
+									<select id="city4" name="officeAddressBook.city" onchange="document.getElementById('city4').value += ' ' + this.options[this.selectedIndex].text">
+								  		<option value ="成都市">成都市</option>
+								  		<option value ="內江市">內江市</option>
+									</select>
 								</table></td>
 						</tr>
 						
 						<tr>
 							
-							<td id="guest_info2">* 区/县区</td>
+							<td id="guest_info2">*  区/县区</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.xxCounty" />
+									<input type="text" name="officeAddressBook.county"   maxlength="20"/>
 								</table></td>
-							<td id="guest_info4">镇</td>
+							<td id="guest_info4">  镇</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.xxTown"  maxlength="20" />
+									<input type="text" name="officeAddressBook.town"  maxlength="20"/>
 								</table></td>
-							<td id="guest_info6">* 街道/路/村</td>
+							<td id="guest_info6">*  街道/路/村</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.xxStreet" />
+									<input type="text" name="officeAddressBook.street"   maxlength="20"/>
 								</table></td>
 						</tr>
 						<tr>
 							
-							<td id="guest_info2">* 小区/楼盘</td>
+							<td id="guest_info2">*  小区/楼盘</td>
 							<td id="guest_info3"><table>
-									<input type="text" 
-										name="contract.xxNeighborhoodPremises" />
+									<input type="text"
+										name="officeAddressBook.community"   maxlength="20"/>
 								</table></td>
-							<td id="guest_info4">栋/单元/房间号</td>
+							<td id="guest_info4">  栋/单元/房间号</td>
 							<td id="guest_info5"><table>
 									<input type="text"
-										name="contract.xxUnitHomeNumber" />
+										name="officeAddressBook.houseNo"  isempty="true" maxlength="20"/>
 								</table></td>
 							<td id="guest_info6">其它</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.xxOther" />
+									<input type="text" name="officeAddressBook.other"  isempty="true" maxlength="50"/>
 								</table></td>
 						</tr>
 
@@ -737,26 +759,26 @@
 							
 							<td  id="guest_info2">商品</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.g1Type" />
+									<input type="text" name="client.g1Type" />
 								</table></td>
 							<td  id="guest_info4">商品类型</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.g1Form" />
+									<input type="text" name="client.g1Form" />
 								</table></td>
 							<td id="guest_info6">价格（元）</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.g1Price" dtype="float" />
+									<input type="text" name="client.g1Price" dtype="float" />
 								</table></td>
 						</tr>
 						<tr>
 							
 							<td id="guest_info2">品牌</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.g1Brand" />
+									<input type="text" name="client.g1Brand" />
 								</table></td>
 							<td id="guest_info4">型号</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.g1Model" />
+									<input type="text" name="client.g1Model" />
 								</table></td>
 							<td id="guest_info6"></td>
 							<td id="guest_info7"></td>
@@ -769,19 +791,19 @@
 							
 							<td  id="guest_info2">产品</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.crProduct"
+									<input type="text" name="client.crProduct"
 										readonly="true" />
 								</table></td>
 							<td  id="guest_info4">商品总价</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.crTotalPrice"
+									<input type="text" name="client.crTotalPrice"
 										readonly="true" />
 								</table></td>
 							<td  id="guest_info6">贷款用途</td>
 							<td id="guest_info7">
 								<table>
 									<s:select list="purposeList" listKey="name" listValue="name" headerKey=""  headerValue="请选择"
-										name="contract.crUse" cssStyle="width:95%">
+										name="client.crUse" cssStyle="width:95%">
 									</s:select>
 								</table>
 							</td>
@@ -790,17 +812,17 @@
 							
 							<td id="guest_info2">自付金额(元)</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.crOwnPayment"
+									<input type="text" name="client.crOwnPayment"
 										readonly="true" />
 								</table></td>
 							<td id="guest_info4">分期期数</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.crMonth"
+									<input type="text" name="client.crMonth"
 										readonly="true" />
 								</table></td>
 							<td id="guest_info6">每月还款额(元)</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.crPayMonth"
+									<input type="text" name="client.crPayMonth"
 										readonly="true" />
 								</table></td>
 						</tr>
@@ -808,17 +830,17 @@
 							
 							<td id="guest_info2">贷款本金(元)</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.crCapital"
+									<input type="text" name="client.crCapital"
 										readonly="true" />
 								</table></td>
 							<td id="guest_info4">首次还款日</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.crFirstPay"
+									<input type="text" name="client.crFirstPay"
 										readonly="true" />
 								</table></td>
 							<td id="guest_info6">每月还款日</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.crPayDay"
+									<input type="text" name="client.crPayDay"
 										readonly="true" />
 								</table></td>
 						</tr>
@@ -826,15 +848,15 @@
 						<tr>
 							<td id="guest_info2">*  客户银行卡号/账号</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.crBankCard"   maxlength="24" dtype="number"/>
+									<input type="text" name="client.crBankCard"   maxlength="24" dtype="number"/>
 								</table></td>
 							<td id="guest_info4">*  客户开户银行</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.crOpenBank"   maxlength="50"/>
+									<input type="text" name="client.crOpenBank"   maxlength="50"/>
 								</table></td>
 							<td id="guest_info6">月花费(元/月)</td>
 							<td id="guest_info7"><table>
-									<input type="text" name="contract.crMonthPay" />
+									<input type="text" name="client.crMonthPay" />
 								</table></td>
 						</tr>
 						
@@ -842,15 +864,15 @@
 							
 							<td id="guest_info2">第二银行卡号</td>
 							<td id="guest_info3"><table>
-									<input type="text" name="contract.crBankOsCard"  dtype="number" />
+									<input type="text" name="client.crBankOsCard"  dtype="number" />
 								</table></td>
 							<td id="guest_info4">第二银行卡开户银行</td>
 							<td id="guest_info5"><table>
-									<input type="text" name="contract.crBankOsOpen" />
+									<input type="text" name="client.crBankOsOpen" />
 								</table></td>
 							<td colspan="1"  id="guest_info6"></td>
 							<td id="guest_info7"><table>
-							<html:checkbox  name="contract.crAgentPay" cssStyle="margin-left:10px">
+							<html:checkbox  name="client.crAgentPay" cssStyle="margin-left:10px">
 									</html:checkbox></table></td>
 						</tr>
 						

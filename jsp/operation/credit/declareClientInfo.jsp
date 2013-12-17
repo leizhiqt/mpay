@@ -25,7 +25,7 @@
 <div>
 
 <div style="float:left;width:29%;margin:4px;">
-<table class="modify">
+<table class="lt">
 <caption style="text-align:left;">产品类别</caption>
 
 <tbody>
@@ -94,8 +94,11 @@
 <td>
 	<c:url value="/ClientInfo.do" var="newURL">
 		<c:param name="method">promptAdd</c:param>
+		<c:param name="salePirce">${salePirce}</c:param>
+		<c:param name="onePay">${onePay}</c:param>
+		<c:param name="pId">${item.pId}</c:param>
 	</c:url>
-	<a href="javascript:void(0)" onclick="docommit('${newURL}');"> <c:out value="${item.finName }"/></a>
+	<a href="${newURL}"> <c:out value="${item.finName }"/></a>
 </td>
 
 <td><c:out value="${item.cycleTotal }"/> </td>
