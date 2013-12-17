@@ -53,13 +53,13 @@
 									<tr>
 										<td class="tl"><fmt:message key="certificateCode" /></td>
 										<td><input type="text" name="certificate.certificateCode"
-											size="5" maxlength="5" /><font class="fm">*</font></td>
+											size="18" maxlength="18" /><font class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="issuingAuthority" /></td>
 										<td><input type="text"
-											name="certificate.issuingAuthority" size="16" maxlength="16" /><font
+											name="certificate.issuingAuthority" size="24" maxlength="24" /><font
 											class="fm">*</font></td>
 									</tr>
 

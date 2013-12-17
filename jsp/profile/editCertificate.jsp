@@ -54,16 +54,16 @@
 									<tr>
 										<td class="tl"><fmt:message key="certificateCode" /></td>
 										<td><input type="text" name="certificate.certificateCode"
-											value="${certificate.certificateCode }" size="5"
-											maxlength="5" /><font class="fm">*</font></td>
+											value="${certificate.certificateCode }" size="18"
+											maxlength="18" /><font class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="issuingAuthority" /></td>
 										<td><input type="text"
 											name="certificate.issuingAuthority"
-											value="${certificate.issuingAuthority }" size="16"
-											maxlength="16" /><font class="fm">*</font></td>
+											value="${certificate.issuingAuthority }" size="35"
+											maxlength="35" /><font class="fm">*</font></td>
 									</tr>
 
 									<tr>
@@ -71,7 +71,7 @@
 										<td>	
 										<input type="text" name="certificate.issueDate"
 											value="<fmt:formatDate value="${certificate.issueDate }" type="date"/>"
-											onclick="displayCalendar(this,'yyyy-MM-dd');" />
+											onclick="displayCalendar(this,'yyyy-MM-dd');" size="10"/>
 											</td>
 									</tr>
 
@@ -83,8 +83,8 @@
 									<tr>
 										<td class="tl"><fmt:message key="certificateType" /></td>
 										<td><input type="text" name="certificate.certificateType"
-											value="${certificate.certificateType }" size="4"
-											maxlength="4" /></td>
+											value="${certificate.certificateType }" size="6"
+											maxlength="6" /></td>
 									</tr>
 							</table>
 						</td>

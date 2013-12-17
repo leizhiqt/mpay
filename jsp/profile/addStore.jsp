@@ -53,13 +53,13 @@
 									<tr>
 										<td class="tl"><fmt:message key="StoreName" /></td>
 										<td><input type="text" name="store.storeName"
-											size="5" maxlength="5" /><font class="fm">*</font></td>
+											size="30" maxlength="30" /><font class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="StoreAddress" /></td>
 										<td><input type="text"
-											name="store.storeAddress" size="16" maxlength="16" /><font
+											name="store.storeAddress" size="40" maxlength="40" /><font
 											class="fm">*</font></td>
 									</tr>
 

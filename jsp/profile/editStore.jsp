@@ -58,14 +58,14 @@
 									<tr>
 										<td class="tl"><fmt:message key="storeName" /></td>
 										<td><input type="text" name="store.storeName"
-											value="${store.storeName }" size="5" maxlength="5" /><font
+											value="${store.storeName }" size="30" maxlength="30" /><font
 											class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="storeAddress" /></td>
 										<td><input type="text" name="store.storeAddress"
-											value="${store.storeAddress }" size="16" maxlength="16" /><font
+											value="${store.storeAddress }" size="40" maxlength="40" /><font
 											class="fm">*</font></td>
 									</tr>
 							</table>

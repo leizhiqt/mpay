@@ -58,26 +58,26 @@
 									<tr>
 										<td class="tl"><fmt:message key="creditName" /></td>
 										<td><input type="text" name="creditType.creditName"
-											value="${creditType.creditName }" size="5" maxlength="5" /><font
+											value="${creditType.creditName }" size="5" maxlength="10" /><font
 											class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="cycleTotal" /></td>
 										<td><input type="text" name="creditType.cycleTotal"
-											value="${creditType.cycleTotal }" size="16" maxlength="16" /><font
+											value="${creditType.cycleTotal }" size="10" maxlength="10" /><font
 											class="fm">*</font></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="cycleUnit" /></td>
 										<td><input type="text" name="creditType.cycleUnit"
-											value="${creditType.cycleUnit }" size="5" maxlength="5" /></td>
+											value="${creditType.cycleUnit }" size="30" maxlength="30" /></td>
 									</tr>
 
 									<tr>
 										<td class="tl"><fmt:message key="creditRate" /></td>
-									<td>	<input type="text" name="creditType.creditRate"
+									<td>	<input type="text" name="creditType.creditRate" size="10"
 											value='<fmt:formatNumber value="${creditType.creditRate }" type="percent" />'/>
 											</td>
 									</tr>

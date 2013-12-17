@@ -34,7 +34,7 @@
 			</jsp:include>
 		</div>
 
-		<div id="container">
+		<div id="container" align="center">
 			<%@ include file="../incl/b_message.jsp"%>
 			<input type="hidden" name="product.id" value="${product.id }" />
 
@@ -43,7 +43,7 @@
 					<tr>
 						<td>
 
-							<table class="modify">
+							<table class="modify" >
 								<caption>
 									<fmt:message key="Update" />
 									<fmt:message key="Product" />
@@ -51,7 +51,7 @@
 
 								<tbody>
 									<tr>
-										<td class="tl"><fmt:message key="Winery" /></td>
+										<td class="tl" width='330px'><fmt:message key="Winery" /></td>
 										<td><select name="product.enterpriseId">
 												<c:forEach var="items" items="${winerys}" varStatus="s">
 													<option value="${items.winery.id}"

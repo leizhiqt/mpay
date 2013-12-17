@@ -51,7 +51,7 @@
 
 <tr>
 <td class="tl"><fmt:message key="creditName"/></td>
-<td><input type="text" name="creditType.creditName" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td><input type="text" name="creditType.creditName" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
@@ -61,12 +61,12 @@
 
 <tr>
 <td class="tl"><fmt:message key="cycleUnit"/></td>
-<td><input type="text" name="creditType.cycleUnit" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td><input type="text" name="creditType.cycleUnit" size="30" maxlength="30"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="creditRate"/></td>
-<td><input type="text" name="creditType.creditRate" size="4" maxlength="4"/><font class="fm">*</font></td>
+<td><input type="text" name="creditType.creditRate" size="8" maxlength="8"/><font class="fm">*</font></td>
 </tr>
 
 
