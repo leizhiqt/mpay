@@ -43,25 +43,24 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.addTable(Product.class, "product");
 			dbobject.addTable(FinancialProduct.class, "financialProduct");
 
-			dbobject.setForeignKey("financialProduct", "productId", "product",
-					"id");
+			dbobject.setForeignKey("financialProduct", "productId", "product","id");
 
 			dbobject.setRetrieveField("product", "id");
 			dbobject.setRetrieveField("product", "productName");
 
 			request.setAttribute("products", dbobject.searchAndRetrieveList());
 
-			double salePirce = 0d;
+			double salePrice = 0d;
 			double onePay = 0d;
 			double monthPay = 0d, creditAmount = 0d;
 
 			double onePayPercent = 0d;
 
-			value = request.getParameter("salePirce");
+			value = request.getParameter("salePrice");
 			if (!StringUtils.isNull(value))
-				salePirce = new Double(value);
+				salePrice = new Double(value);
 
-			request.setAttribute("salePirce", value);
+			request.setAttribute("salePrice", value);
 
 			value = request.getParameter("onePay");
 
@@ -70,10 +69,10 @@ public class ClientInfoAction extends BaseSupport {
 
 			request.setAttribute("onePay", value);
 
-			if (onePay >= salePirce && salePirce > 0)
+			if (onePay >= salePrice && salePrice > 0)
 				throw new Exception("首付过多");
 
-			onePayPercent = onePay / salePirce;
+			onePayPercent = onePay / salePrice;
 			request.setAttribute("onePayPercent", onePayPercent);
 
 			if (onePayPercent < 0.2)
@@ -92,7 +91,7 @@ public class ClientInfoAction extends BaseSupport {
 					financialProduct.setProductId(new Integer(products[i]));
 					financialProduct.retrieve();
 
-					creditAmount = salePirce - onePay;
+					creditAmount = salePrice - onePay;
 					int monthPay1=0;
 					
 					monthPay1 = (int)(creditAmount / financialProduct.getCycleTotal());
@@ -150,7 +149,11 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled()) log.debug("promptAdd");
 		request.setAttribute("pId", request.getParameter("pId"));
-		
+		request.setAttribute("salePrice", request.getParameter("salePrice"));
+		if (log.isDebugEnabled()) log.debug("salePrice:"+request.getParameter("salePrice"));
+
+		request.setAttribute("onePay", request.getParameter("onePay"));
+
 		return "success";
 	}
 
@@ -242,6 +245,9 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setClientId(clientId);
 			clientJob.setOProductId(0);
 			clientJob.setTProductId(0);
+			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(), ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM",6)));
+			
+			
 			clientJob.setBranchId(branchId);
 			
 			clientJob.add(tx.getConnection());
@@ -286,8 +292,6 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
-		
-		
 		return "success";
 	}
 

@@ -631,7 +631,7 @@
 						<td align="right" bgcolor="#CCCCCC">产品</td>
 						<td align="left"></td>
 						<td align="right" bgcolor="#CCCCCC">商品总价</td>
-						<td align="left"><input type="text" name="clientJob.salePrice" readonly />
+						<td align="left"><input type="text" name="clientJob.salePrice"  value="${salePrice }" readonly />
 						</td>
 					  <td bgcolor="#CCCCCC">贷款用途</td>
 						<td></td>
@@ -639,7 +639,7 @@
 					<tr>
 
 						<td align="right" bgcolor="#CCCCCC">自付金额(元)</td>
-						<td align="left"><input type="text" name="clientJob.downAmount" readonly />
+						<td align="left"><input type="text" name="clientJob.downAmount"  value="${onePay }" readonly />
 						<input type="hidden" name="clientJob.financialProductId" value="${pId }">
 						</td>
 						<td align="right" bgcolor="#CCCCCC">分期期数</td>

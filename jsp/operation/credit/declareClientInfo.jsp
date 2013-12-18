@@ -59,7 +59,7 @@
 </tr>
 
 <tr>
-<td><input id="salePirce" type="text" name="salePirce" value="${salePirce }" Onchange="onValue()" /></td>
+<td><input id="salePirce" type="text"  name="salePrice" value="${salePrice }" Onchange="onValue()" /></td>
 <td></td>
 </tr>
 
@@ -110,7 +110,7 @@
 <td>
 	<c:url value="/ClientInfo.do" var="newURL">
 		<c:param name="method">promptAdd</c:param>
-		<c:param name="salePirce">${salePirce}</c:param>
+		<c:param name="salePrice">${salePrice}</c:param>
 		<c:param name="onePay">${onePay}</c:param>
 		<c:param name="pId">${item.pId}</c:param>
 	</c:url>
