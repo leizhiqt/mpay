@@ -100,7 +100,7 @@ public class ClientInfoAction extends BaseSupport {
 					rowm.put("finName", financialProduct.getFinancialName());
 					rowm.put("cycleTotal", financialProduct.getCycleTotal());
 					rowm.put("monthPay", monthPay1);
-					rowm.put("firstPay", creditAmount-financialProduct.getCycleTotal()*monthPay1);
+					rowm.put("firstPay", creditAmount-(financialProduct.getCycleTotal()-1)*monthPay1);
 					rowm.put("creditAmount", creditAmount);
 					rowm.put("pId", financialProduct.getId());
 					fProucts.add(rowm);
@@ -276,4 +276,19 @@ public class ClientInfoAction extends BaseSupport {
 		return "success";
 	}
 
+<<<<<<< HEAD
+=======
+	public String promptApproval(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (log.isDebugEnabled())
+			log.debug("promptApproval");
+		return "success";
+	}
+
+	public String processApproval(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (log.isDebugEnabled())log.debug("processApproval");
+		return "success";
+	}
+>>>>>>> e2eb294f24990945ccbdc36da88666db8c4f04ef
 }
