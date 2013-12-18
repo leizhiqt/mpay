@@ -122,12 +122,17 @@ public class ClientInfoAction extends BaseSupport {
 
 			dbobject.addTable(Client.class, "client");
 			dbobject.addTable(ClientJob.class, "clientJob");
+			dbobject.addTable(FinancialProduct.class, "financialProduct");
 
 			dbobject.setForeignKey("clientJob", "clientId", "client","id");
+			dbobject.setForeignKey("clientJob", "financialProductId", "financialProduct","id");
 
 			dbobject.setRetrieveField("client", "id");
-			dbobject.setRetrieveField("client", "productName");
-
+			dbobject.setRetrieveField("client", "idNo");
+			dbobject.setRetrieveField("client", "clientName");
+			dbobject.setRetrieveField("clientJob", "creditAmount");
+			dbobject.setRetrieveField("clientJob", "jobNo");
+			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())

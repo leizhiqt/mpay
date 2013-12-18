@@ -7,6 +7,7 @@ import com.mooo.mycoz.db.DBObject;
 public class Client extends DBObject {
 	private Integer id;
 	private String clientName;
+	private String photoPath;
 	private String idNo;
 	private Date idEndDate;
 	private String idValidDate;// 未添加
@@ -174,6 +175,14 @@ public class Client extends DBObject {
 
 	public Integer getEducationId() {
 		return educationId;
+	}
+
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
 	}
 
 	public void setEducationId(Integer educationId) {
