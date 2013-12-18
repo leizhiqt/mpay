@@ -276,8 +276,6 @@ public class ClientInfoAction extends BaseSupport {
 		return "success";
 	}
 
-<<<<<<< HEAD
-=======
 	public String promptApproval(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -290,5 +288,4 @@ public class ClientInfoAction extends BaseSupport {
 		if (log.isDebugEnabled())log.debug("processApproval");
 		return "success";
 	}
->>>>>>> e2eb294f24990945ccbdc36da88666db8c4f04ef
 }
