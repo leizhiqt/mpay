@@ -228,7 +228,8 @@ public class Test {
 		//bd.dbToBean("payShared","FinancialProduct");
 //		bd.dbToBean("payBranch","AddressBook");
 //		bd.dbToBean("payBranch","Client");
-		bd.dbToBean("payBranch","ClientJob");
+		bd.dbToBean("payBranch","ClientDoc");
+		
 //		bd.dbToBean("payBranch","ClientJobTrack");
 		
 //		bd.dbToBean("wineBranch","Product");

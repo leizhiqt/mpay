@@ -52,7 +52,8 @@ body,td,th {
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
-						<td align="left" colspan="2"><input /> <input /></td>
+						<td align="left" colspan="2">
+						<input type="file" name="clientPhoto" /> </td>
 
 
 						<td></td>
@@ -364,85 +365,63 @@ body,td,th {
 					</tr>
 					<tr>
 
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fIdCode" />身份证</td>
+						<td width="60" align="right">身份证</td>
+				    <td align="left" width="272"><input type="file" name="contract.fIdCode" /></td>
 
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fSocialCard" />社保卡
+						<td align="right">社保卡</td>
+						<td colspan="3" align="left"><input type="file" name="contract.fSocialCard" />
 						</td>
 
-					  <td></td>
-						<td align="left"><input type="checkbox" name="contract.fWorkCard" />工卡</td>
+				    </tr>
+					<tr>
 
+						<td align="right">银行卡</td>
+				    <td align="left"><input type="file" name="contract.fBankCard" /></td>
+
+						<td align="right">银行对账单</td>
+						<td colspan="3" align="left"><input type="file" name="contract.fBankStatement" /></td>
+
+				    </tr>
+					<tr>
+						<td align="right">户口本</td>
+						<td align="left"><input type="file" name="contract.fResidenceBooklet" />
+						</td>
+
+						<td align="right">大学学生证</td>
+						<td colspan="3" align="left"><input type="file" name="contract.fSid" />					  
 					</tr>
 					<tr>
 
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fBankCard" />银行卡</td>
+						<td align="right">房产证</td>
+				    <td align="left"><input type="file" name="contract.fHouseCard" /></td>
+						<td align="right">行驶证</td>
+						<td colspan="3" align="left"><input type="file" name="contract.fDirvingCard" /></td>
+				    </tr>
+					<tr>
 
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fBankStatement" />银行对账单
-						</td>
+						<td align="right">工卡</td>
+					  <td align="left"><input type="file" name="contract.fWorkCard" /></td>
 
-					  <td></td>
-						<td align="left"><input type="checkbox" name="contract.fBankDeposit" />银行存折
-						</td>
+					  	<td align="right">大学学生证明（仅适用全日制大学学生)</td>
 
+						<td colspan="3" align="left"><input type="checkbox" name="contract.fUid" /></td>
 					</tr>
 					<tr>
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fResidenceBooklet" />户口本
-						</td>
-
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fSid" />大学学生证
-					  <td></td>
-						<td align="left"><input type="checkbox" name="contract.fUid" />大学学生证明":"大学学生证明（仅适用全日制大学学生）
-						</td>
+						<td align="right">银行存折</td>
+						<td align="left"><input type="file" name="contract.fBankDeposit" /></td>
+					  <td align="right">驾驶证</td>
+                      <td colspan="3" align="left"><input type="file" name="contract.fDirverCard" /></td>
 					</tr>
 					<tr>
 
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fHouseCard" />房产证</td>
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fDirvingCard" />行驶证
-						</td>
-					  <td></td>
-						<td align="left"><input type="checkbox" name="contract.fDirverCard" />驾驶证
-						</td>
-
-					</tr>
-					<tr>
-
-						<td></td>
-						<td align="left"><input type="checkbox" name="contract.fOther" />其它</td>
-
-					  <td></td>
-
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td align="left"><input type="button" value="上传各种证件图片" onClick="addfile()"
-							style="height: 25px" /></td>
-					  <td colspan=2></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-
-						<td align="right"  >邮寄地址</td>
-						<td align="left"><select id="postAddress" name="postAddress"
+						<td align="right"  >其它</td>
+						<td align="left"><input type="file" name="contract.fOther" /></td>
+					  <td align="right">邮寄地址</td>
+						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
 							onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
-								<option value="成都市">成都市</option>
-								<option value="重庆市">重庆市</option>
-						</select></td>
-					  <td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+					      <option value="成都市">成都市</option>
+						    <option value="重庆市">重庆市</option>
+				        </select></td>
 					</tr>
 
 
@@ -632,29 +611,32 @@ body,td,th {
 					<tr>
 
 						<td align="right"  >产品</td>
-						<td align="left"></td>
-						<td align="right"  >商品总价</td>
-						<td align="left"><input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
+						<td align="left"><c:out value="${financialProduct.financialName }"/></td>
+						<td align="right">商品总价</td>
+						<td align="left">
+							<input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
 						</td>
-					  <td  >贷款用途</td>
-						<td></td>
+					  	<td>贷款用途</td>
+						<td><input type="text" name="clientJob.byUse"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >自付金额(元)</td>
-						<td align="left"><input type="text" name="clientJob.selfAmount"  value="${onePay }" readonly />
-						<input type="hidden" name="clientJob.financialProductId" value="${pId }">
+						
+						<td align="left">
+							<input type="hidden" name="clientJob.creditAmount" value="${pId }"/>
+							<input type="text" name="clientJob.selfAmount" value="${onePay }"/>
 						</td>
 						<td align="right"  >分期期数</td>
 						
-					  <td align="left"> </td>
+					  <td align="left"><c:out value="${financialProduct.cycleTotal }"/> </td>
 						<td  >每月还款额(元)</td>
-						<td></td>
+						<td><c:out value="${monthPay }"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >贷款本金(元)</td>
-						<td align="left"><input type="text" name="clientJob.creditAmount" readonly /></td>
+						<td align="left"><input type="text" name="clientJob.creditAmount" value="${creditAmount }" readonly /></td>
 						<td align="right"  >首次还款日</td>
 						<td align="left"><input type="text" name="clientJob.firstpayDate" readonly />
 						</td>

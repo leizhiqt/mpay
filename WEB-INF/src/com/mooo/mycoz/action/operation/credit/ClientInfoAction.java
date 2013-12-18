@@ -20,6 +20,7 @@ import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
+import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
 import com.mooo.mycoz.dbobj.wineBranch.User;
@@ -38,7 +39,7 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptDeclare");
-		
+
 		String value = null;
 
 		try {
@@ -47,7 +48,8 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.addTable(Product.class, "product");
 			dbobject.addTable(FinancialProduct.class, "financialProduct");
 
-			dbobject.setForeignKey("financialProduct", "productId", "product","id");
+			dbobject.setForeignKey("financialProduct", "productId", "product",
+					"id");
 
 			dbobject.setRetrieveField("product", "id");
 			dbobject.setRetrieveField("product", "productName");
@@ -96,14 +98,18 @@ public class ClientInfoAction extends BaseSupport {
 					financialProduct.retrieve();
 
 					creditAmount = salePrice - onePay;
-					int monthPay1=0;
-					
-					monthPay1 = (int)(creditAmount / financialProduct.getCycleTotal());
+					int monthPay1 = 0;
+
+					monthPay1 = (int) (creditAmount / financialProduct
+							.getCycleTotal());
 
 					rowm.put("finName", financialProduct.getFinancialName());
 					rowm.put("cycleTotal", financialProduct.getCycleTotal());
 					rowm.put("monthPay", monthPay1);
-					rowm.put("firstPay", creditAmount-(financialProduct.getCycleTotal()-1)*monthPay1);
+					rowm.put("firstPay",
+							creditAmount
+									- (financialProduct.getCycleTotal() - 1)
+									* monthPay1);
 					rowm.put("creditAmount", creditAmount);
 					rowm.put("pId", financialProduct.getId());
 					fProucts.add(rowm);
@@ -121,7 +127,8 @@ public class ClientInfoAction extends BaseSupport {
 	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response) {
-		if (log.isDebugEnabled()) log.debug("list");
+		if (log.isDebugEnabled())
+			log.debug("list");
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
 
@@ -132,14 +139,17 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.addTable(JobType.class, "jobType");
 			dbobject.addTable(User.class, "user");
 
-			dbobject.setForeignKey("clientJob", "clientId", "client","id");
-			dbobject.setForeignKey("clientJob", "financialProductId","financialProduct","id");
-			dbobject.setForeignKey("clientJobTrack", "clientJobId","clientJob","id");
-			dbobject.setForeignKey("clientJobTrack", "jobTypeId","jobType","id");
-			dbobject.setForeignKey("clientJobTrack", "userId","user","id");
+			dbobject.setForeignKey("clientJob", "clientId", "client", "id");
+			dbobject.setForeignKey("clientJob", "financialProductId",
+					"financialProduct", "id");
+			dbobject.setForeignKey("clientJobTrack", "clientJobId",
+					"clientJob", "id");
+			dbobject.setForeignKey("clientJobTrack", "jobTypeId", "jobType",
+					"id");
+			dbobject.setForeignKey("clientJobTrack", "userId", "user", "id");
 
 			dbobject.setField("clientJobTrack", "processId", 0);
-			
+
 			dbobject.setRetrieveField("client", "id");
 			dbobject.setRetrieveField("client", "idNo");
 			dbobject.setRetrieveField("client", "clientName");
@@ -148,7 +158,7 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("clientJob", "selfAmount");
 			dbobject.setRetrieveField("clientJob", "firstpayAmount");
 			dbobject.setRetrieveField("clientJob", "monthOfPay");
-			
+
 			dbobject.setRetrieveField("clientJob", "jobNo");
 			dbobject.setRetrieveField("clientJobTrack", "jobDate");
 			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
@@ -168,47 +178,95 @@ public class ClientInfoAction extends BaseSupport {
 
 	public String promptAdd(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled()) log.debug("promptAdd");
-		request.setAttribute("pId", request.getParameter("pId"));
-		request.setAttribute("salePrice", request.getParameter("salePrice"));
-		if (log.isDebugEnabled()) log.debug("salePrice:"+request.getParameter("salePrice"));
+		if (log.isDebugEnabled())
+			log.debug("promptAdd");
+		String  value=null;
+		try {
+			value=request.getParameter("pId");
+			request.setAttribute("pId", value);
+			
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(new Integer(value));
+			financialProduct.retrieve();
+			
+			request.setAttribute("financialProduct", financialProduct);
 
-		request.setAttribute("onePay", request.getParameter("onePay"));
+			request.setAttribute("salePrice", request.getParameter("salePrice"));
+			if (log.isDebugEnabled())
+				log.debug("salePrice:" + request.getParameter("salePrice"));
 
+			request.setAttribute("onePay", request.getParameter("onePay"));
+			
+			double totailPrice=0d;
+			double firstPayAmount=0d;
+			double creditAmount=0d;
+			
+			value = request.getParameter("salePrice");
+			totailPrice = new Double(value);
+			
+			value = request.getParameter("onePay");
+			firstPayAmount = new Double(value);
+			
+			creditAmount = totailPrice-firstPayAmount;
+			
+			int monthPay1 = (int) (creditAmount / financialProduct.getCycleTotal());
+			
+			double monthPay = creditAmount-(financialProduct.getCycleTotal() - 1) * monthPay1;
+			
+			request.setAttribute("creditAmount", creditAmount);
+
+			request.setAttribute("monthPay1", monthPay1);
+			
+			request.setAttribute("monthPay", monthPay);
+
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+		}
 		return "success";
 	}
 
 	public String processAdd(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled()) log.debug("processAdd");
-		Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+		if (log.isDebugEnabled())
+			log.debug("processAdd");
+		Integer branchId = ActionSession.getInteger(request,
+				ActionSession.BRANCH_SESSION_KEY);
+		Integer sessionId = ActionSession.getInteger(request,
+				ActionSession.USER_SESSION_KEY);
 
 		Transaction tx = null;
 		try {
 			tx = new Transaction();
 			tx.start();
 
-			//sub path
+			// sub path
 			String sPath = "upload/images/";
-			//physical path
-			String pPath = request.getSession().getServletContext().getRealPath("/");
-			//upload path
-			String uPath = pPath+sPath;
-			if (log.isDebugEnabled()) log.debug("uploadPath=" + uPath);
+			// physical path
+			String pPath = request.getSession().getServletContext()
+					.getRealPath("/");
+			// upload path
+			String uPath = pPath + sPath;
+			if (log.isDebugEnabled())
+				log.debug("uploadPath=" + uPath);
 
 			File upFile = new File(uPath);
-			if (!upFile.exists()) upFile.mkdirs();
-			
+			if (!upFile.exists())
+				upFile.mkdirs();
+
 			UploadFile uf = new UploadFile();
 			uf.setRequest(request);
 			uf.setUploadPath(uPath);
 			uf.process();
-			
+
+			String[] pictureName = uf.getUpdFileNames();
+
 			// 处理户籍地址
 			AddressBook censusAddressBook = new AddressBook();
 			uf.bindData(censusAddressBook, "censusAddressBook");
-//			ParamUtil.bindData(request, censusAddressBook, "censusAddressBook");
+			// ParamUtil.bindData(request, censusAddressBook,
+			// "censusAddressBook");
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
@@ -216,7 +274,8 @@ public class ClientInfoAction extends BaseSupport {
 			censusAddressBook.add(tx.getConnection());
 			// 处理现居地址
 			AddressBook livingAddressBook = new AddressBook();
-//			ParamUtil.bindData(request, livingAddressBook, "livingAddressBook");
+			// ParamUtil.bindData(request, livingAddressBook,
+			// "livingAddressBook");
 			uf.bindData(livingAddressBook, "livingAddressBook");
 			int livingAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
@@ -226,7 +285,7 @@ public class ClientInfoAction extends BaseSupport {
 			livingAddressBook.add(tx.getConnection());
 			// 处理家庭成員地址
 			AddressBook homeAddressBook = new AddressBook();
-//			ParamUtil.bindData(request, homeAddressBook, "homeAddressBook");
+			// ParamUtil.bindData(request, homeAddressBook, "homeAddressBook");
 			uf.bindData(homeAddressBook, "homeAddressBook");
 			int homeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
@@ -235,7 +294,8 @@ public class ClientInfoAction extends BaseSupport {
 			homeAddressBook.add(tx.getConnection());
 			// 处理单位地址
 			AddressBook officeAddressBook = new AddressBook();
-//			ParamUtil.bindData(request, homeAddressBook, "officeAddressBook");
+			// ParamUtil.bindData(request, homeAddressBook,
+			// "officeAddressBook");
 			uf.bindData(officeAddressBook, "officeAddressBook");
 
 			int officeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
@@ -248,9 +308,10 @@ public class ClientInfoAction extends BaseSupport {
 
 			int clientId = IDGenerator.getNextID(tx.getConnection(),
 					Client.class);
-//			ParamUtil.bindData(request, client, "client");
+
+			// ParamUtil.bindData(request, client, "client");
 			uf.bindData(client, "client");
-			
+
 			client.setId(clientId);
 			client.setLivingAddressBookId(livingAddressBookId);
 			client.setOfficeAddressBookId(officeAddressBookId);
@@ -259,33 +320,52 @@ public class ClientInfoAction extends BaseSupport {
 			client.setBranchId(branchId);
 			client.add(tx.getConnection());
 
+			// 处理文件图片
+			for (int i = 0; i < pictureName.length; i++) {
+				System.out.println("pictureName" + pictureName[i]);
+				ClientDoc clientDoc = new ClientDoc();
+				int clientDocId = IDGenerator.getNextID(tx.getConnection(),
+						ClientDoc.class);
+				clientDoc.setClientId(clientId);
+				clientDoc.setDocTypeId(1);
+				clientDoc.setFilepath(sPath + pictureName[i]);
+				clientDoc.setId(clientDocId);
+				clientDoc.add(tx.getConnection());
+			}
+
 			ClientJob clientJob = new ClientJob();
 			uf.bindData(clientJob, "clientJob");
 
-			int clientJobId = IDGenerator.getNextID(tx.getConnection(),ClientJob.class);
+			int clientJobId = IDGenerator.getNextID(tx.getConnection(),
+					ClientJob.class);
 			clientJob.setId(clientJobId);
 			clientJob.setClientId(clientId);
 			clientJob.setOProductId(0);
 			clientJob.setTProductId(0);
-			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(), ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM",6)));
-			
-			clientJob.setCreditAmount(clientJob.getTotalPrice()-clientJob.getSelfAmount());
-			
+			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),
+					ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM", 6)));
+
+			clientJob.setCreditAmount(clientJob.getTotalPrice()
+					- clientJob.getSelfAmount());
+
 			FinancialProduct financialProduct = new FinancialProduct();
 			financialProduct.setId(clientJob.getFinancialProductId());
 			financialProduct.retrieve();
-			
-			int monthPay1=0;
-			
-			monthPay1 = (int)(clientJob.getCreditAmount() / financialProduct.getCycleTotal());
-			
+
+			int monthPay1 = 0;
+
+			monthPay1 = (int) (clientJob.getCreditAmount() / financialProduct
+					.getCycleTotal());
+
 			clientJob.setFirstpayAmount(new Double(monthPay1));
-			clientJob.setMonthOfPay(clientJob.getCreditAmount()-(financialProduct.getCycleTotal()-1)*monthPay1);
-			
+			clientJob.setMonthOfPay(clientJob.getCreditAmount()
+					- (financialProduct.getCycleTotal() - 1) * monthPay1);
+
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
 
-			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),ClientJobTrack.class);
+			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
+					ClientJobTrack.class);
 
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setId(clientJobTrackId);
@@ -342,7 +422,8 @@ public class ClientInfoAction extends BaseSupport {
 
 	public String processApproval(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())log.debug("processApproval");
+		if (log.isDebugEnabled())
+			log.debug("processApproval");
 		return "success";
 	}
 }
