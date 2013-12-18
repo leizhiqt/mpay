@@ -3,6 +3,7 @@ package com.mooo.mycoz.action.operation.credit;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,10 @@ import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
+import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
+import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
+import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.UploadFile;
@@ -121,19 +125,30 @@ public class ClientInfoAction extends BaseSupport {
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
 
-            dbobject.addTable(Client.class, "client");
-            dbobject.addTable(ClientJob.class, "clientJob");
-            dbobject.addTable(FinancialProduct.class, "financialProduct");
+			dbobject.addTable(Client.class, "client");
+			dbobject.addTable(ClientJob.class, "clientJob");
+			dbobject.addTable(ClientJobTrack.class, "clientJobTrack");
+			dbobject.addTable(FinancialProduct.class, "financialProduct");
+			dbobject.addTable(JobType.class, "jobType");
+			dbobject.addTable(User.class, "user");
 
-            dbobject.setForeignKey("clientJob", "clientId", "client","id");
-            dbobject.setForeignKey("clientJob", "financialProductId","financialProduct","id");
+			dbobject.setForeignKey("clientJob", "clientId", "client","id");
+			dbobject.setForeignKey("clientJob", "financialProductId","financialProduct","id");
+			dbobject.setForeignKey("clientJobTrack", "clientJobId","clientJob","id");
+			dbobject.setForeignKey("clientJobTrack", "jobTypeId","jobType","id");
+			dbobject.setForeignKey("clientJobTrack", "userId","user","id");
 
-            dbobject.setRetrieveField("client", "id");
-           dbobject.setRetrieveField("client", "idNo");
-           dbobject.setRetrieveField("client", "clientName");
-           dbobject.setRetrieveField("clientJob", "creditAmount");
-           dbobject.setRetrieveField("clientJob", "jobNo");
-
+			dbobject.setField("clientJobTrack", "processId", 0);
+			
+			dbobject.setRetrieveField("client", "id");
+			dbobject.setRetrieveField("client", "idNo");
+			dbobject.setRetrieveField("client", "clientName");
+			dbobject.setRetrieveField("clientJob", "creditAmount");
+			dbobject.setRetrieveField("clientJob", "jobNo");
+			dbobject.setRetrieveField("clientJobTrack", "jobDate");
+			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
+			dbobject.setRetrieveField("user", "name");
+			dbobject.setRetrieveField("jobType", "nextState");
 
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
@@ -161,6 +176,7 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled()) log.debug("processAdd");
 		Integer branchId = ActionSession.getInteger(request, ActionSession.BRANCH_SESSION_KEY);
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		Transaction tx = null;
 		try {
@@ -246,11 +262,20 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setOProductId(0);
 			clientJob.setTProductId(0);
 			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(), ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM",6)));
-			
-			
 			clientJob.setBranchId(branchId);
-			
 			clientJob.add(tx.getConnection());
+
+			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),ClientJobTrack.class);
+
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setId(clientJobTrackId);
+			clientJobTrack.setClientJobId(clientJobId);
+			clientJobTrack.setJobDate(new Date());
+			clientJobTrack.setJobTypeId(1);
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.setUserId(sessionId);
+			clientJobTrack.setBranchId(branchId);
+			clientJobTrack.add(tx.getConnection());
 
 			tx.commit();
 		} catch (SQLException e) {

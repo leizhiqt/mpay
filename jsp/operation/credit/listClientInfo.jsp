@@ -104,13 +104,13 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.client.id }"></td>
 <td><c:out value="${item.clientJob.jobNo }"/></td>
-<td></td>
+<td><c:out value="${item.jobType.nextState }"/></td>
 <td><c:out value="${item.client.idNo }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>
 <td><c:out value="${item.clientJob.creditAmount }"/></td>
 <td><c:out value="${item.clientJob.creditAmount }"/></td>
-<td><fmt:formatDate value="${item.cardJob.jobDate }" type="date" /></td>
-<td><fmt:formatDate value="${item.cardJob.jobDate }" type="date" /></td>
+<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="date" /></td>
+<td><c:out value="${item.user.name }"/></td>
 </tr>
 </c:forEach>
 </tbody>

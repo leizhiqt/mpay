@@ -631,7 +631,7 @@
 						<td align="right" bgcolor="#CCCCCC">产品</td>
 						<td align="left"></td>
 						<td align="right" bgcolor="#CCCCCC">商品总价</td>
-						<td align="left"><input type="text" name="clientJob.salePrice"  value="${salePrice }" readonly />
+						<td align="left"><input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
 						</td>
 					  <td bgcolor="#CCCCCC">贷款用途</td>
 						<td></td>
