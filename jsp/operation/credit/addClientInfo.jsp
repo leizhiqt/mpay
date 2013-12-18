@@ -639,7 +639,7 @@
 					<tr>
 
 						<td align="right" bgcolor="#CCCCCC">自付金额(元)</td>
-						<td align="left"><input type="text" name="clientJob.downAmount"  value="${onePay }" readonly />
+						<td align="left"><input type="text" name="clientJob.selfAmount"  value="${onePay }" readonly />
 						<input type="hidden" name="clientJob.financialProductId" value="${pId }">
 						</td>
 						<td align="right" bgcolor="#CCCCCC">分期期数</td>
@@ -655,7 +655,7 @@
 						<td align="left"><input type="text" name="clientJob.firstpayDate" readonly />
 						</td>
 					  <td bgcolor="#CCCCCC">每月还款日</td>
-						<td><input type="text" name="clientJob.epaymentDate" readonly /></td>
+						<td><input type="text" name="clientJob.monthOfDate" readonly /></td>
 					</tr>
 
 					<tr>

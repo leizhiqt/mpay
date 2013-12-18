@@ -81,7 +81,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="11" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -89,13 +89,15 @@
 <tr>
 <th></th>
 <th>合同号</th>
+<th>合同日期</th>
 <th>状态</th>
 <th>身份证号</th>
 <th>客户名称</th>
 <th>贷款本金</th>
 <th>分期数</th>
+<th>首月付</th>
 <th>月付</th>
-<th>还款日</th>
+<th>销售代表</th>
 </tr>
 </thead>
 
@@ -104,12 +106,14 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.client.id }"></td>
 <td><c:out value="${item.clientJob.jobNo }"/></td>
+<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="date" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>
 <td><c:out value="${item.client.idNo }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>
-<td><c:out value="${item.clientJob.creditAmount }"/></td>
-<td><c:out value="${item.clientJob.creditAmount }"/></td>
-<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="date" /></td>
+<td><c:out value="${item.clientJob.totalPrice-item.clientJob.selfAmount }"/></td>
+<td><c:out value="${item.financialProduct.cycleTotal }"/></td>
+<td><c:out value="${item.clientJob.firstpayAmount }"/></td>
+<td><c:out value="${item.clientJob.monthOfPay }"/></td>
 <td><c:out value="${item.user.name }"/></td>
 </tr>
 </c:forEach>
@@ -118,7 +122,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="11" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>

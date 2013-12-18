@@ -13,12 +13,14 @@ public class ClientJob extends DBObject {
 	private Integer tProductId;
 	private Double tPrice;
 	private Double totalPrice;
+	private Double selfAmount;
 	private Integer financialProductId;
 	private String jobNo;
 	private Double creditAmount;
-	private Double downAmount;
+	private Double firstpayAmount;
 	private Date firstpayDate;
-	private Date repaymentDate;
+	private Double monthOfPay;
+	private Date monthOfDate;
 	private String byUse;
 	private Date jobDate;
 	private Integer branchId;
@@ -87,6 +89,14 @@ public class ClientJob extends DBObject {
 		this.totalPrice = totalPrice;
 	}
 
+	public Double getSelfAmount() {
+		return selfAmount;
+	}
+
+	public void setSelfAmount(Double selfAmount) {
+		this.selfAmount = selfAmount;
+	}
+
 	public Integer getFinancialProductId() {
 		return financialProductId;
 	}
@@ -111,12 +121,12 @@ public class ClientJob extends DBObject {
 		this.creditAmount = creditAmount;
 	}
 
-	public Double getDownAmount() {
-		return downAmount;
+	public Double getFirstpayAmount() {
+		return firstpayAmount;
 	}
 
-	public void setDownAmount(Double downAmount) {
-		this.downAmount = downAmount;
+	public void setFirstpayAmount(Double firstpayAmount) {
+		this.firstpayAmount = firstpayAmount;
 	}
 
 	public Date getFirstpayDate() {
@@ -127,12 +137,20 @@ public class ClientJob extends DBObject {
 		this.firstpayDate = firstpayDate;
 	}
 
-	public Date getRepaymentDate() {
-		return repaymentDate;
+	public Double getMonthOfPay() {
+		return monthOfPay;
 	}
 
-	public void setRepaymentDate(Date repaymentDate) {
-		this.repaymentDate = repaymentDate;
+	public void setMonthOfPay(Double monthOfPay) {
+		this.monthOfPay = monthOfPay;
+	}
+
+	public Date getMonthOfDate() {
+		return monthOfDate;
+	}
+
+	public void setMonthOfDate(Date monthOfDate) {
+		this.monthOfDate = monthOfDate;
 	}
 
 	public String getByUse() {

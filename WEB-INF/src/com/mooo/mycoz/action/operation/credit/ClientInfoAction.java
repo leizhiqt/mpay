@@ -144,11 +144,17 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("client", "idNo");
 			dbobject.setRetrieveField("client", "clientName");
 			dbobject.setRetrieveField("clientJob", "creditAmount");
+			dbobject.setRetrieveField("clientJob", "totalPrice");
+			dbobject.setRetrieveField("clientJob", "selfAmount");
+			dbobject.setRetrieveField("clientJob", "firstpayAmount");
+			dbobject.setRetrieveField("clientJob", "monthOfPay");
+			
 			dbobject.setRetrieveField("clientJob", "jobNo");
 			dbobject.setRetrieveField("clientJobTrack", "jobDate");
 			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
 			dbobject.setRetrieveField("user", "name");
 			dbobject.setRetrieveField("jobType", "nextState");
+			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
@@ -262,6 +268,20 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setOProductId(0);
 			clientJob.setTProductId(0);
 			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(), ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM",6)));
+			
+			clientJob.setCreditAmount(clientJob.getTotalPrice()-clientJob.getSelfAmount());
+			
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			
+			int monthPay1=0;
+			
+			monthPay1 = (int)(clientJob.getCreditAmount() / financialProduct.getCycleTotal());
+			
+			clientJob.setFirstpayAmount(new Double(monthPay1));
+			clientJob.setMonthOfPay(clientJob.getCreditAmount()-(financialProduct.getCycleTotal()-1)*monthPay1);
+			
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
 
