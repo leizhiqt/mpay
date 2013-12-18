@@ -12,7 +12,6 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineShared.CreditType;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;

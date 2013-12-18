@@ -66,6 +66,14 @@
 
 	<td class="textr"><fmt:message key="EndDate"/></td>
 	<td><input type="text" name="EndDate" value="${EndDate }" onclick="displayCalendar(this,'yyyy-MM-dd');" size="10" maxlength="10"/></td>
+	
+	<td>
+	<jsp:include page="../../incl/actionb.jsp">
+		<jsp:param name="key" value="List"/>
+		<jsp:param name="action" value="ClientInfo.do"/>
+		<jsp:param name="method" value="list"/>
+	</jsp:include>
+	</td>
 </tr>
 
 </tbody>

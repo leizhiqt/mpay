@@ -12,14 +12,13 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineShared.Certificate;
-import com.mooo.mycoz.dbobj.wineShared.CreditType;
+import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
-public class CertificateAction extends BaseSupport {
+public class FinancialProductAction extends BaseSupport {
 
 	private static Log log = LogFactory.getLog(ProductAction.class);
 
@@ -30,21 +29,20 @@ public class CertificateAction extends BaseSupport {
 				ActionSession.USER_SESSION_KEY);
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
-			dbobject.addTable(Certificate.class, "certificate");
+			dbobject.addTable(FinancialProduct.class, "financialProduct");
 			
-			value = request.getParameter("certificateCode");
+			value = request.getParameter("creditName");
 			if(!StringUtils.isNull(value)){
-				dbobject.setLike("certificate", "certificateCode", value);
+				dbobject.setLike("financialProduct", "creditName", value);
 			}
 			
-			dbobject.setRetrieveField("certificate", "id");
-			dbobject.setRetrieveField("certificate", "certificateCode");
-			dbobject.setRetrieveField("certificate", "issuingAuthority");
-			dbobject.setRetrieveField("certificate", "issueDate");
-			dbobject.setRetrieveField("certificate", "valid");
-			dbobject.setRetrieveField("certificate", "certificateType");
+			dbobject.setRetrieveField("financialProduct", "id");
+			dbobject.setRetrieveField("financialProduct", "creditName");
+			dbobject.setRetrieveField("financialProduct", "cycleTotal");
+			dbobject.setRetrieveField("financialProduct", "cycleUnit");
+			dbobject.setRetrieveField("financialProduct", "creditRate");
 
-			dbobject.setOrderBy("certificate", "id", "DESC");
+			dbobject.setOrderBy("financialProduct", "id", "DESC");
 
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
@@ -70,6 +68,7 @@ public class CertificateAction extends BaseSupport {
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
+		request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
 		return "success";
 		
 	}
@@ -79,13 +78,13 @@ public class CertificateAction extends BaseSupport {
 		try {
 			tx.start();
 			
-			Certificate certificate=new Certificate();
-			ParamUtil.bindData(request, certificate,"certificate");
+			FinancialProduct financialProduct = new FinancialProduct();
+			ParamUtil.bindData(request, financialProduct,"financialProduct");
 			
-			int certificateId = IDGenerator.getNextID(tx.getConnection(),Certificate.class);
-			certificate.setId(certificateId);
+			int financialProductId = IDGenerator.getNextID(tx.getConnection(),FinancialProduct.class);
+			financialProduct.setId(financialProductId);
 			
-			certificate.add(tx.getConnection());
+			financialProduct.add(tx.getConnection());
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -102,17 +101,17 @@ public class CertificateAction extends BaseSupport {
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-		String certificateId = null;
+		String financialProductId = null;
 		try{
-			certificateId = request.getParameter("id");
-			if(certificateId==null)
+			financialProductId = request.getParameter("id");
+			if(financialProductId==null)
 				throw new Exception("Please chose object");
 			
-			Certificate certificate=new Certificate();
-			certificate.setId(new Integer(certificateId));
-			certificate.retrieve();
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(new Integer(financialProductId));
+			financialProduct.retrieve();
 
-			request.setAttribute("certificate", certificate);
+			request.setAttribute("financialProduct", financialProduct);
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -126,17 +125,17 @@ public class CertificateAction extends BaseSupport {
 		try{
 			tx.start();
 			
-			Certificate certificate=new Certificate();
-			ParamUtil.bindData(request, certificate, "certificate");
+			FinancialProduct financialProduct = new FinancialProduct();
+			ParamUtil.bindData(request, financialProduct, "financialProduct");
 			
-			certificate.update(tx.getConnection());
+			financialProduct.update(tx.getConnection());
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
 			
-			//return "promptEdit";
+			return "promptEdit";
 		}finally {
 			tx.end();
 		}
@@ -158,9 +157,9 @@ public class CertificateAction extends BaseSupport {
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
 				
-				Certificate certificate=new Certificate();
-				certificate.setId(id);
-				certificate.delete(tx.getConnection());
+				FinancialProduct financialProduct = new FinancialProduct();
+				financialProduct.setId(id);
+				financialProduct.delete(tx.getConnection());
 			}
 			
 			tx.commit();

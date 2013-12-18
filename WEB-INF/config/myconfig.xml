@@ -126,13 +126,13 @@
 			<result name="processEdit"></result>
 		</action>
 
-		<action	name="CreditType" default="list"
-			class="com.mooo.mycoz.action.profile.CreditTypeAction">
-			<result name="list">/jsp/profile/listCreditType.jsp</result>
-			<result name="promptAdd">/jsp/profile/addCreditType.jsp</result>
+		<action	name="FinancialProduct" default="list"
+			class="com.mooo.mycoz.action.profile.FinancialProductAction">
+			<result name="list">/jsp/profile/listFinancialProduct.jsp</result>
+			<result name="promptAdd">/jsp/profile/addFinancialProduct.jsp</result>
 			<result name="processAdd"></result>
 			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/profile/editCreditType.jsp</result>
+			<result name="promptEdit">/jsp/profile/editFinancialProduct.jsp</result>
 			<result name="processEdit"></result>
 		</action>
 
@@ -146,16 +146,6 @@
 			<result name="processEdit"></result>
 		</action>
 
-		<action	name="Certificate" default="list"
-			class="com.mooo.mycoz.action.profile.CertificateAction">
-			<result name="list">/jsp/profile/listCertificate.jsp</result>
-			<result name="promptAdd">/jsp/profile/addCertificate.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/profile/editCertificate.jsp</result>
-			<result name="processEdit"></result>
-		</action>
-						
 		<!-- Administrator -->
 		<action	name="Admin" default="menu"
 			class="com.mooo.mycoz.action.admin.AdminAction">

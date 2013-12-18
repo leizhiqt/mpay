@@ -352,3 +352,7 @@ TestingPerson=检测人
 TestTools=检验器具
 TestNorm=检验标准
 Canceled=注销
+ClientInfo=客户管理
+Approval=审批
+Store=商店
+FinancialProduct=金融产品
