@@ -286,6 +286,8 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
+		
+		
 		return "success";
 	}
 

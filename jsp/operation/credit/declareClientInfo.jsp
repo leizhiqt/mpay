@@ -11,6 +11,21 @@
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
+<script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		onValue();
+	});
+			 function onValue(){
+			 	if($('#onePay').val()!="" && $('#salePirce').val()!=""){
+			 						var num=$('#onePay').val()/$('#salePirce').val()*100;  
+			 					 	$('#vals').html(Math.round(num*1000)/1000+"%");
+			 					 	
+			 		
+			 	}			
+			  }
+			 
+	</script>
 </head>
 
 <body>
@@ -20,6 +35,7 @@
 </div>
 
 <div id="container">
+
 <%@ include file="../../incl/b_message.jsp" %>
 
 <div>
@@ -43,7 +59,7 @@
 </tr>
 
 <tr>
-<td><input type="text" name="salePirce" value="${salePirce }"/></td>
+<td><input id="salePirce" type="text" name="salePirce" value="${salePirce }" Onchange="onValue()" /></td>
 <td></td>
 </tr>
 
@@ -53,8 +69,8 @@
 </tr>
 
 <tr>
-<td><input type="text" name="onePay" value="${onePay }"/></td>
-<td><c:out value="${onePayPercent }"/></td>
+<td><input id="onePay" type="text" name="onePay" value="${onePay }" Onchange="onValue()"/></td>
+<td id="vals"></td>
 </tr>
 
 <tr>
