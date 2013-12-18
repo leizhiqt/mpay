@@ -82,7 +82,7 @@ body,td,th {
 <tr>
 <td colspan="2">
 <jsp:include page="../../incl/actionb.jsp">
-		<jsp:param name="key" value="Find"/>
+		<jsp:param name="key" value="Search"/>
 		<jsp:param name="action" value="ClientInfo.do"/>
 		<jsp:param name="method" value="promptDeclare"/>
 	</jsp:include>
