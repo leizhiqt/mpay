@@ -93,12 +93,14 @@ public class ClientInfoAction extends BaseSupport {
 					financialProduct.retrieve();
 
 					creditAmount = salePirce - onePay;
-					monthPay = creditAmount / financialProduct.getCycleTotal();
+					int monthPay1=0;
+					
+					monthPay1 = (int)(creditAmount / financialProduct.getCycleTotal());
 
 					rowm.put("finName", financialProduct.getFinancialName());
 					rowm.put("cycleTotal", financialProduct.getCycleTotal());
-					rowm.put("monthPay", monthPay);
-					rowm.put("firstPay", monthPay);
+					rowm.put("monthPay", monthPay1);
+					rowm.put("firstPay", creditAmount-financialProduct.getCycleTotal()*monthPay1);
 					rowm.put("creditAmount", creditAmount);
 					rowm.put("pId", financialProduct.getId());
 					fProucts.add(rowm);
@@ -122,17 +124,12 @@ public class ClientInfoAction extends BaseSupport {
 
 			dbobject.addTable(Client.class, "client");
 			dbobject.addTable(ClientJob.class, "clientJob");
-			dbobject.addTable(FinancialProduct.class, "financialProduct");
 
 			dbobject.setForeignKey("clientJob", "clientId", "client","id");
-			dbobject.setForeignKey("clientJob", "financialProductId", "financialProduct","id");
 
 			dbobject.setRetrieveField("client", "id");
-			dbobject.setRetrieveField("client", "idNo");
-			dbobject.setRetrieveField("client", "clientName");
-			dbobject.setRetrieveField("clientJob", "creditAmount");
-			dbobject.setRetrieveField("clientJob", "jobNo");
-			
+			dbobject.setRetrieveField("client", "productName");
+
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
@@ -279,17 +276,4 @@ public class ClientInfoAction extends BaseSupport {
 		return "success";
 	}
 
-	public String promptApproval(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptApproval");
-		return "success";
-	}
-
-	public String processApproval(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processApproval");
-		return "success";
-	}
 }
