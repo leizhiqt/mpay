@@ -29,7 +29,7 @@
 	<jsp:include page="../../incl/actionb.jsp">
 		<jsp:param name="key" value="Approval"/>
 		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="list"/>
+		<jsp:param name="method" value="promptApproval"/>
 	</jsp:include>
 
 </div>

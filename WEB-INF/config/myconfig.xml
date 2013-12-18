@@ -226,6 +226,8 @@
 			<result name="promptEdit">/jsp/operation/credit/editClientInfo.jsp</result>
 			<result name="processEdit"></result>
 			<result name="promptDeclare">/jsp/operation/credit/declareClientInfo.jsp</result>
+			<result name="promptApproval">/jsp/operation/credit/approvalClientInfo.jsp</result>
+			<result name="processApproval"></result>
 		</action>
 		
 		<!-- Report -->
