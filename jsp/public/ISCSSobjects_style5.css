@@ -412,7 +412,7 @@ float:left;position:relative; height:30px;margin-top:9px;overflow:hidden;text-al
 	white-space:nowrap;
 }
 
-.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#01cd37;}
+.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#a1fea7;}
 .lt td {border:solid #0C0;border-width:1px 1px 1px 1px;padding:2px; border-spacing:1; border-color:#999; margin-left:5px; margin-right:5px;}
 .st caption{
 	background:#01cd37;
@@ -496,3 +496,31 @@ li {
 	border: 0px solid #000;
 	width: 80%;
 }
+
+
+.mt {
+	width: 100%;
+	background:#eafef3;
+	border-collapse:collapse; /*关键属性：合并表格内外边框(其实表格边框有2px，外面1px，里面还有1px哦) */
+	border:solid #999; /* 0C0设置边框属性；样式(solid=实线)、颜色(#0C0) */
+	/*border-width:1px 1px 1px 1px;*/ /* 设置边框状粗细：上 右 下 左 = 对应：1px 0 0 1px */ 
+	border: 0;
+	border-collapse: collapse;
+}
+.mt thead tr th,.mt thead tr td,.mt tbody tr td{
+	word-break: keep-all;
+	white-space:nowrap;
+}
+
+.mt caption{
+	text-align: left;
+	background:#8ebdf1;
+}
+
+.mt tbody tr td{
+	text-align: left;
+}
+
+.mt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#0199cb;}
+
+.mt td {border:solid #0C0;border-width:1px 1px 1px 1px;padding:2px; border-spacing:1; border-color:#999; margin-left:5px; margin-right:5px;}

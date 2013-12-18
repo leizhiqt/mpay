@@ -324,7 +324,7 @@ float:left;position:relative; height:30px;margin-top:9px;overflow:hidden;text-al
 .menu li ul.level2 li a{display:block;height:26px;line-height:26px;FONT-WEIGHT: normal; FONT-SIZE: 12px;FONT-STYLE: normal; FONT-FAMILY: "宋体";background:#e8eefd url(../images/menus/t1.gif) no-repeat 18px center;padding-left:32px;color:#003366;border-top:1px #fff solid; border-bottom:1px #E9ECEF solid;overflow:hidden;}
 /*二级菜单两态样式,供JS调用*/
 .menu li ul.level2 li a.hove1{background:#fff url(../images/menus/t2.gif) no-repeat 18px center;}
-.menu li ul.level2 li a.cur1{background:#FBC2DA url(../images/menus/t2.gif) no-repeat 18px center;}
+.menu li ul.level2 li a.cur1{background:#FFFFFF url(../images/menus/t2.gif) no-repeat 18px center;}
 
 /*--窗口左侧收展目录--*/
 #split_container{margin:0;width:6px;height:100%; border:0}
@@ -407,7 +407,7 @@ float:left;position:relative; height:30px;margin-top:9px;overflow:hidden;text-al
 	white-space:nowrap;
 }
 
-.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#0199cb;}
+.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#8dbdf1;}
 .lt td {border:solid #0C0;border-width:1px 1px 1px 1px;padding:2px; border-spacing:1; border-color:#999; margin-left:5px; margin-right:5px;}
 
 

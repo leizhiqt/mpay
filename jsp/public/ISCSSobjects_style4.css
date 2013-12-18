@@ -406,7 +406,7 @@ float:left;position:relative; height:30px;margin-top:9px;overflow:hidden;text-al
 	word-break: keep-all;
 	white-space:nowrap;
 }
-.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#e83694;}
+.lt th{ border:solid #0C0;border-width:0px 1px 0px 0px;padding:2px; border-color:#999; background-color:#FBC2DA;}
 .lt td {border:solid #0C0;border-width:1px 1px 1px 1px;padding:2px; border-spacing:1; border-color:#999; margin-left:5px; margin-right:5px;}
 
 .st caption{

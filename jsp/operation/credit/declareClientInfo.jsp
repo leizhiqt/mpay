@@ -26,6 +26,13 @@
 			  }
 			 
 	</script>
+	<style>
+<!--
+body,td,th {
+	font-size: 14px;
+}
+-->
+</style>
 </head>
 
 <body>
@@ -42,9 +49,10 @@
 
 <div style="float:left;width:29%;margin:4px;">
 <table class="lt">
-<caption style="text-align:left;">产品类别</caption>
+
 
 <tbody>
+<tr><th colspan="2" style="font-size:18px"><strong>产品类别</strong></th></tr>
 <tr>
 <td colspan="2">
 <c:forEach var="item" items="${products}" varStatus="status">
@@ -54,22 +62,20 @@
 </tr>
 
 <tr>
-<td>销售价格</td>
-<td></td>
+<td align="left"  colspan="2">销售价格</td>
 </tr>
 
 <tr>
-<td><input id="salePirce" type="text"  name="salePrice" value="${salePrice }" Onchange="onValue()" /></td>
-<td></td>
+<td align="left"  colspan="2"><input id="salePirce" type="text"  name="salePrice" value="${salePrice }" Onchange="onValue()" /></td>
 </tr>
 
 <tr>
-<td>首付金额(现金)</td>
+<td align="left" width="150px">首付金额(现金)</td>
 <td>首付金额(%)</td>
 </tr>
 
 <tr>
-<td><input id="onePay" type="text" name="onePay" value="${onePay }" Onchange="onValue()"/></td>
+<td align="left" ><input id="onePay" type="text" name="onePay" value="${onePay }" Onchange="onValue()"/></td>
 <td id="vals"></td>
 </tr>
 
@@ -91,9 +97,9 @@
 
 <div style="float:right;width:69%;margin:4px;">
 <table class="lt">
-<caption style="text-align:left;">免税产品</caption>
 
 <thead>
+<tr><th colspan="5" style="font-size:18px"><strong>免税产品</strong></th></tr>
 <tr>
 <td>金融策略</td>
 <td>分期付款数</td>
