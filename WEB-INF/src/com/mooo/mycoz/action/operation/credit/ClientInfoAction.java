@@ -288,8 +288,7 @@ public class ClientInfoAction extends BaseSupport {
 
 	public String processApproval(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processApproval");
+		if (log.isDebugEnabled())log.debug("processApproval");
 		return "success";
 	}
 }
