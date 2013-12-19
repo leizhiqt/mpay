@@ -40,9 +40,16 @@ body,td,th {
 					<tr height="10px" style="border: 1px solid #FFF;">
 
 						<td colspan="" align="right"  >销售顾问代码</td>
-						<td><input type="text" name="user.userId" readonly /></td>
+						<td><c:out value="${UserName} "/>
+						<%-- <%=session.getAttribute("UserName") %> --%></td>
 						<td align="right"  ><b style="color:red"><b style="color:red">*</b></b> 内部代码</td>
-						<td></td>
+						<td><select name="client.innerCode" id="innerCode"
+							onchange="document.getElementById('innerCode').value += ' ' + this.options[this.selectedIndex].text"> 
+							<option value="XY24324">XY24324</option>
+							<option value="XY24325">XY24325</option>
+							<option value="XY24326">XY24326</option>
+							<option value="XY24327">XY24327</option>
+						</select></td>
 						<td></td>
 						<td align="left"  >(<b style="color:red">*</b>)必填项</td>
 
@@ -631,37 +638,41 @@ body,td,th {
 						
 					  <td align="left"><c:out value="${financialProduct.cycleTotal }"/> </td>
 						<td  >每月还款额(元)</td>
-						<td><c:out value="${monthPay }"/></td>
+						<td align="left"><c:out value="${monthPay1 }"/></td>
+						
+						
 					</tr>
 					<tr>
-
+						<td align="right">首次还款额（元）</td>
+						<td align="left"><c:out value="${monthPay }"/></td>
 						<td align="right"  >贷款本金(元)</td>
 						<td align="left"><input type="text" name="clientJob.creditAmount" value="${creditAmount }" readonly /></td>
 						<td align="right"  >首次还款日</td>
-						<td align="left"><input type="text" name="clientJob.firstpayDate" readonly />
-						</td>
-					  <td  >每月还款日</td>
-						<td align="left"><input type="text" name="clientJob.monthOfDate" readonly /></td>
+						<td align="left"><input type="text" name="clientJob.firstpayDate" readonly /></td>
+					 
 					</tr>
 
 					<tr>
+					    <td  >每月还款日</td>
+						<td align="left"><input type="text" name="clientJob.monthOfDate" readonly /></td>
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
 						<td align="left"><input type="text" name="bank.debitCard"
 							maxlength="24" /></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
 				    <td align="left"><input type="text" name="bank.bankName"
 							maxlength="50" /></td>
-					  <td  >月花费(元/月)</td>
-						<td align="left"><input type="text" name="bank.monthPay" /></td>
+					
 					</tr>
 
 					<tr>
+						<td  >月花费(元/月)</td>
+						<td align="left"><input type="text" name="bank.monthPay" /></td>
 						<td align="right"  >第二银行卡号</td>
 						<td align="left"><input type="text" name="bank2.debitCard" /></td>
 						<td align="right"  >第二银行卡开户银行</td>
-				    <td align="left"><input type="text" name="bank2.bankName" /></td>
-					  <td colspan="1"></td>
-						<td></td>
+				    	<td align="left"><input type="text" name="bank2.bankName" /></td>
+					  
+						
 					</tr>
 
 				</table>
