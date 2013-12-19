@@ -56,7 +56,13 @@ body,td,th {
 <tr>
 <td colspan="2">
 <c:forEach var="item" items="${products}" varStatus="status">
-<div style="width:20%;float:left;"><input type="checkbox" name="product" value="${item.product.id }"/>${item.product.productName }</div>
+<div style="width:20%;float:left;"><input type="checkbox" name="product" value="${item.product.id }"
+
+<c:forEach var="cproduct" items="${cproducts}" varStatus="status">
+	<c:if test="${item.product.id==cproduct }">checked="checked"</c:if>
+</c:forEach>
+
+/>${item.product.productName }</div>
 </c:forEach>
 </td>
 </tr>

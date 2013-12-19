@@ -46,10 +46,6 @@ public class ClientInfoAction extends BaseSupport {
 			MultiDBObject dbobject = new MultiDBObject();
 
 			dbobject.addTable(Product.class, "product");
-			dbobject.addTable(FinancialProduct.class, "financialProduct");
-
-			dbobject.setForeignKey("financialProduct", "productId", "product",
-					"id");
 
 			dbobject.setRetrieveField("product", "id");
 			dbobject.setRetrieveField("product", "productName");
@@ -87,38 +83,46 @@ public class ClientInfoAction extends BaseSupport {
 			String[] products = request.getParameterValues("product");
 
 			if (products != null) {
-				FinancialProduct financialProduct = null;
+				request.setAttribute("cproducts", products);
+
+				FinancialProduct FinancialProduct = null;
 				List fProucts = new ArrayList();
 
 				for (int i = 0; i < products.length; i++) {
-					Map<String, Object> rowm = new LinkedHashMap();
 
-					financialProduct = new FinancialProduct();
+					FinancialProduct financialProduct = new FinancialProduct();
 					financialProduct.setProductId(new Integer(products[i]));
-					financialProduct.retrieve();
 
-					creditAmount = salePrice - onePay;
-					int monthPay1 = 0;
-					// 乘以税率后的总钱数
-					double afterCalculetedTotals = creditAmount
-							* (financialProduct.getCreditRate() + 1);
-					// 每月支付钱数
-					monthPay1 = (int) (afterCalculetedTotals / financialProduct
-							.getCycleTotal());
+					List<?> financials = financialProduct.searchAndRetrieveList();
+					
+					for(Object obj:financials){
+						financialProduct = (FinancialProduct)obj;
+						
+						Map<String, Object> rowm = new LinkedHashMap();
 
-					rowm.put("finName", financialProduct.getFinancialName());
-					rowm.put("cycleTotal", financialProduct.getCycleTotal());
-					rowm.put("monthPay", monthPay1);
-					// 首月支付钱数(小数后3位)
-					java.text.DecimalFormat df = new java.text.DecimalFormat(
-							"#.###");
-					double d = afterCalculetedTotals
-							- (financialProduct.getCycleTotal() - 1)
-							* monthPay1;
-					rowm.put("firstPay", df.format(d));
-					rowm.put("creditAmount", creditAmount);
-					rowm.put("pId", financialProduct.getId());
-					fProucts.add(rowm);
+						creditAmount = salePrice - onePay;
+						int monthPay1 = 0;
+						// 乘以税率后的总钱数
+						double afterCalculetedTotals = creditAmount
+								* (financialProduct.getCreditRate() + 1);
+						// 每月支付钱数
+						monthPay1 = (int) (afterCalculetedTotals / financialProduct
+								.getCycleTotal());
+
+						rowm.put("finName", financialProduct.getFinancialName());
+						rowm.put("cycleTotal", financialProduct.getCycleTotal());
+						rowm.put("monthPay", monthPay1);
+						// 首月支付钱数(小数后3位)
+						java.text.DecimalFormat df = new java.text.DecimalFormat(
+								"#.###");
+						double d = afterCalculetedTotals
+								- (financialProduct.getCycleTotal() - 1)
+								* monthPay1;
+						rowm.put("firstPay", df.format(d));
+						rowm.put("creditAmount", creditAmount);
+						rowm.put("pId", financialProduct.getId());
+						fProucts.add(rowm);
+					}
 				}
 				request.setAttribute("fProucts", fProucts);
 			}

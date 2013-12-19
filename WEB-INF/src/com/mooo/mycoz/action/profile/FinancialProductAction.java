@@ -29,17 +29,21 @@ public class FinancialProductAction extends BaseSupport {
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(FinancialProduct.class, "financialProduct");
+			dbobject.addTable(Product.class, "product");
+
+			dbobject.setForeignKey("financialProduct", "productId", "product", "id");
 			
-			value = request.getParameter("creditName");
+			value = request.getParameter("financialName");
 			if(!StringUtils.isNull(value)){
-				dbobject.setLike("financialProduct", "creditName", value);
+				dbobject.setLike("financialProduct", "financialName", value);
 			}
 			
 			dbobject.setRetrieveField("financialProduct", "id");
-			dbobject.setRetrieveField("financialProduct", "creditName");
+			dbobject.setRetrieveField("financialProduct", "financialName");
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("financialProduct", "cycleUnit");
 			dbobject.setRetrieveField("financialProduct", "creditRate");
+			dbobject.setRetrieveField("product", "productName");
 
 			dbobject.setOrderBy("financialProduct", "id", "DESC");
 

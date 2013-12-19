@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
@@ -63,26 +60,11 @@
 <caption><fmt:message key="Store"/></caption>
 <tbody>
 <tr>
-	<td  class="textr"><fmt:message key="Store"/></td>
-	<td><select name="storeId" onchange="document.forms[0].submit();">
-			<option selected="selected" value="">All</option>
-			<c:forEach var="items" items="${winerys}" varStatus="s">
-				<option value="${items.store.id}"
-		
-				<c:if test="${items.store.id==param.StoreId}">
-					selected="selected"
-				</c:if>
-					>
-				<!-- ${items.winery.enterpriseName} -->
-				</option>
-			--</c:forEach>
-		</select>
-	</td>
-	
-	<td  class="textr"><fmt:message key="StoreName"/></td>
+	<td  class="textr"><fmt:message key="StoreKey"/></td>
 	<td><input name="storeName" value="${param.styleNumber }"/></td>
 	
-	
+	<td  class="textr"><fmt:message key="Store"/></td>
+	<td><input name="storeName" value="${param.styleNumber }"/></td>
 </tr>
 
 </tbody>
@@ -105,9 +87,9 @@
 
 <tr>
 <th><input name="choose" type="checkbox" onclick="checkedAll(this.name,'id');"/><fmt:message key="ID"/></th>
-<th><fmt:message key="storeName"/></th>
-<th><fmt:message key="storeAddress"/></th>
-
+<th><fmt:message key="StoreKey"/></th>
+<th><fmt:message key="Store"/></th>
+<th><fmt:message key="StoreAddress"/></th>
 </tr>
 </thead>
 
@@ -115,6 +97,7 @@
 <c:forEach var="item" items="${results}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.store.id }"> </td>
+<td><c:out value="${item.store.storeKey }"/></td>
 <td><c:out value="${item.store.storeName }"/></td>
 <td><c:out value="${item.store.storeAddress }"/></td>
 

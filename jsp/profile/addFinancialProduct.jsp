@@ -50,26 +50,48 @@
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="creditName"/></td>
-<td><input type="text" name="creditType.creditName" size="10" maxlength="10"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="Name"/></td>
+<td><input type="text" name="financialProduct.financialName" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="cycleTotal"/></td>
-<td><input type="text" name="creditType.cycleTotal" size="16" maxlength="16"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="CycleTotal"/></td>
+<td><input type="text" name="financialProduct.cycleTotal" size="4" maxlength="4"/><input type="text" name="financialProduct.cycleUnit" size="2" maxlength="2" value="月"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="cycleUnit"/></td>
-<td><input type="text" name="creditType.cycleUnit" size="30" maxlength="30"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="CreditRate"/></td>
+<td><input type="text" name="financialProduct.creditRate" size="5" maxlength="5"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="creditRate"/></td>
-<td><input type="text" name="creditType.creditRate" size="8" maxlength="8"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="FinancialMax"/></td>
+<td><input type="text" name="financialProduct.financialMax" size="5" maxlength="5"/><font class="fm">*</font></td>
 </tr>
 
+<tr>
+<td class="tl"><fmt:message key="MinPayPercent"/></td>
+<td><input type="text" name="financialProduct.minPayPercent" size="5" maxlength="5"/><font class="fm">*</font></td>
+</tr>
 
+<tr>
+<td  class="tl"><fmt:message key="Product"/></td>
+<td>
+<select name="financialProduct.productId">
+	<c:forEach var="items" items="${products}" varStatus="s">
+		<option value="${items.key}"
+
+		<c:if test="${items.key==param.financialProduct.productId}">
+			selected="selected"
+		</c:if>
+			>
+		${items.value}
+		</option>
+	--</c:forEach>
+</select>
+<font class="fm">*</font>
+</td>
+</tr>
 
 </table>
 </td>

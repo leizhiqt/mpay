@@ -67,7 +67,7 @@
 										<td><select name="wineryId"
 											onchange="document.forms[0].submit();">
 												<option selected="selected" value="">All</option>
-												
+
 										</select></td>
 
 
@@ -96,11 +96,11 @@
 
 									<tr>
 										<th><input name="choose" type="checkbox"
-											onclick="checkedAll(this.name,'id');" />
-										<fmt:message key="ID" /></th>
-										<th><fmt:message key="productName" /></th>
-										<th><fmt:message key="brand" /></th>
-										<th><fmt:message key="modelNo" /></th>
+											onclick="checkedAll(this.name,'id');" /> <fmt:message
+												key="ID" /></th>
+										<th><fmt:message key="Product" /></th>
+										<th><fmt:message key="Brand" /></th>
+										<th><fmt:message key="ModelNo" /></th>
 									</tr>
 								</thead>
 
