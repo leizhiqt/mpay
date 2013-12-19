@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 	<html>
 <head>
-<title><fmt:message key="Product" /></title>
+<title><fmt:message key="JobCheck" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css"
 	type="text/css" rel="stylesheet" />
@@ -16,33 +16,33 @@
 
 
 <body>
-	<c:url value="/Product.do" var="defURL" />
+	<c:url value="/JobCheck.do" var="defURL" />
 
 	<form method="post" action="${defURL }">
 		<div id="gtop">
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="add" />
 				<jsp:param name="key" value="Add" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="JobCheck.do" />
 				<jsp:param name="method" value="promptAdd" />
 			</jsp:include>
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="delete" />
 				<jsp:param name="key" value="Delete" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="JobCheck.do" />
 				<jsp:param name="method" value="processDelete" />
 			</jsp:include>
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="edit" />
 				<jsp:param name="key" value="Edit" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="JobCheck.do" />
 				<jsp:param name="method" value="promptEdit" />
 			</jsp:include>
 
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="find" />
 				<jsp:param name="key" value="List" />
-				<jsp:param name="action" value="Product.do" />
+				<jsp:param name="action" value="JobCheck.do" />
 				<jsp:param name="method" value="list" />
 			</jsp:include>
 
@@ -59,14 +59,14 @@
 
 							<table class="st">
 								<caption>
-									<fmt:message key="Product" />
+									<fmt:message key="JobCheck" />
 								</caption>
 								<tbody>
 									<tr>
-										<td class="textr"><fmt:message key="ProductName" /></td>
+										<td class="textr"><fmt:message key="JobCheck" /></td>
 										<td><input name="styleName" value="${param.styleName }" /></td>
 
-										<td class="textr"><fmt:message key="Brand" /></td>
+										<td class="textr"><fmt:message key="JobType" /></td>
 										<td><input name="styleName" value="${param.styleName }" /></td>
 
 									</tr>
@@ -93,24 +93,23 @@
 										<th><input name="choose" type="checkbox"
 											onclick="checkedAll(this.name,'id');" /> <fmt:message
 												key="ID" /></th>
-										<th><fmt:message key="Product" /></th>
-										<th><fmt:message key="Brand" /></th>
-										<th><fmt:message key="ModelNo" /></th>
+										<th><fmt:message key="CheckType" /></th>
+										<th><fmt:message key="CheckName" /></th>
+										<th><fmt:message key="JobType" /></th>
 									</tr>
 								</thead>
 
 								<tbody>
-									<c:forEach var="item" items="${results}" varStatus="status">
+									<c:forEach var="jobCheck" items="${jobChecks}" varStatus="status">
 										<tr
 											<c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>
 											onMouseOver="trMouseOver(this);"
 											onMouseOut="trMouseOut(this);">
 											<td><input type="checkbox" name="id"
-												value="${item.product.id }"></td>
-											<td><c:out value="${item.product.productName }" /></td>
-											<td><c:out value="${item.product.brand }" /></td>
-											<td><c:out value="${item.product.modelNo }" /></td>
-
+												value="${jobCheck.id }"></td>
+											<td><c:out value="${jobCheck.jobCategory }" /></td>
+											<td><c:out value="${jobCheck.checkType }" /></td>
+											<td><c:out value="${jobCheck.checkName }" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>

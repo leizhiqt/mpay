@@ -94,12 +94,12 @@
 </thead>
 
 <tbody>
-<c:forEach var="item" items="${results}" varStatus="status">
+<c:forEach var="store" items="${stores}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-<td><input type="checkbox" name="id" value="${item.store.id }"> </td>
-<td><c:out value="${item.store.storeKey }"/></td>
-<td><c:out value="${item.store.storeName }"/></td>
-<td><c:out value="${item.store.storeAddress }"/></td>
+<td><input type="checkbox" name="id" value="${store.id }"> </td>
+<td><c:out value="${store.storeKey }"/></td>
+<td><c:out value="${store.storeName }"/></td>
+<td><c:out value="${store.storeAddress }"/></td>
 
 </tr>
 </c:forEach>

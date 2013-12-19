@@ -96,7 +96,7 @@
 			<result name="promptEdit">/jsp/setup/editJobType.jsp</result>
 			<result name="processEdit"></result>
 		</action>
-		
+
 		<!-- Accounts -->
 		<action	name="Accounts" default="menu"
 			class="com.mooo.mycoz.action.setup.TypeDefinitionAction">
@@ -116,6 +116,7 @@
 			<result name="menu">/jsp/profile/defPage.jsp</result>
 		</action>
 		
+		<!-- Product -->
 		<action	name="Product" default="list"
 			class="com.mooo.mycoz.action.profile.ProductAction">
 			<result name="list">/jsp/profile/listProduct.jsp</result>
@@ -125,7 +126,8 @@
 			<result name="promptEdit">/jsp/profile/editProduct.jsp</result>
 			<result name="processEdit"></result>
 		</action>
-
+		
+		<!-- FinancialProduct -->
 		<action	name="FinancialProduct" default="list"
 			class="com.mooo.mycoz.action.profile.FinancialProductAction">
 			<result name="list">/jsp/profile/listFinancialProduct.jsp</result>
@@ -136,6 +138,18 @@
 			<result name="processEdit"></result>
 		</action>
 
+		<!-- JobCheck -->
+		<action	name="JobCheck" default="list"
+			class="com.mooo.mycoz.action.profile.JobCheckAction">
+			<result name="list">/jsp/profile/listJobCheck.jsp</result>
+			<result name="promptAdd">/jsp/profile/addJobCheck.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editJobCheck.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+		
+		<!-- Store -->
 		<action	name="Store" default="list"
 			class="com.mooo.mycoz.action.profile.StoreAction">
 			<result name="list">/jsp/profile/listStore.jsp</result>

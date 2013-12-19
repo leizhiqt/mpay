@@ -10,70 +10,70 @@ import org.apache.commons.logging.LogFactory;
 
 import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
-import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineShared.Store;
+import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
-public class StoreAction extends BaseSupport {
 
-	private static Log log = LogFactory.getLog(ProductAction.class);
+public class JobCheckAction extends BaseSupport {
 
-	public String list(HttpServletRequest request,
-			HttpServletResponse response) {
+	private static Log log = LogFactory.getLog(JobCheckAction.class);
+	
+	public String list(HttpServletRequest request,HttpServletResponse response) {
 		String value = null;
 		try {
-			Store store = new Store();
-			
-			value = request.getParameter("storeName");
+			JobCheck jobCheck = new JobCheck();
+
+			value = request.getParameter("checkName");
 			if(!StringUtils.isNull(value)){
-				store.setLike("storeName", value);
+				jobCheck.setLike("checkName", value);
 			}
-
-			store.addOrderBy("id DESC");
-
+			
+			jobCheck.addOrderBy("id DESC");
+			
 			Page page = new Page();
-			page.buildComponent(request,store.count());
-			store.setRecord(page.getOffset(), page.getPageSize());
-			List<?> stores = store.searchAndRetrieveList();
-
-			request.setAttribute("stores", stores);
-
-			if (log.isDebugEnabled())
-				log.debug("list success");
-
+			page.buildComponent(request, jobCheck.count());
+			jobCheck.setRecord(page.getOffset(),page.getPageSize());
+			List<?> jobChecks = jobCheck.searchAndRetrieveList();
+			
+			request.setAttribute("jobChecks", jobChecks);
 		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
 			e.printStackTrace();
-		} 
-		return "list";
-	}
-	public String  promptAdd(HttpServletRequest request,
-			HttpServletResponse response){
+		}
 		
+		return "success";
+	}
+	
+	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptAdd");
 
+		try {
+			String jobTypes[] = {"R","A","C"};
+			request.setAttribute("jobTypes", jobTypes);
+		} catch (Exception e) {
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		}
 		return "success";
-		
 	}
+	
 	public String processAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("processAdd");
 		Transaction tx=new Transaction();
 		try {
 			tx.start();
 			
-			Store store=new Store();
-			ParamUtil.bindData(request,store,"store");
+			JobCheck jobCheck = new JobCheck();
+			ParamUtil.bindData(request, jobCheck,"jobCheck");
 			
-			int storeId = IDGenerator.getNextID(tx.getConnection(),Store.class);
-			store.setId(storeId);
+			int jobCheckId = IDGenerator.getNextID(tx.getConnection(),JobCheck.class);
+			jobCheck.setId(jobCheckId);
 			
-			store.add(tx.getConnection());
+			jobCheck.add(tx.getConnection());
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -87,20 +87,24 @@ public class StoreAction extends BaseSupport {
 		}
 		return "list";
 	}
+	
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-		String storeId = null;
+		String jobCheckId = null;
 		try{
-			storeId = request.getParameter("id");
-			if(storeId==null)
+			jobCheckId = request.getParameter("id");
+			if(jobCheckId==null)
 				throw new Exception("Please chose object");
 			
-			Store store=new Store();
-			store.setId(new Integer(storeId));
-			store.retrieve();
+			JobCheck jobCheck = new JobCheck();
+			jobCheck.setId(new Integer(jobCheckId));
+			jobCheck.retrieve();
 
-			request.setAttribute("store", store);
+			request.setAttribute("jobCheck", jobCheck);
+			
+			String jobTypes[] = {"R","A","C"};
+			request.setAttribute("jobTypes", jobTypes);
+			
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -114,10 +118,10 @@ public class StoreAction extends BaseSupport {
 		try{
 			tx.start();
 			
-			Store store=new Store();
-			ParamUtil.bindData(request, store, "store");
+			JobCheck jobCheck = new JobCheck();
+			ParamUtil.bindData(request, jobCheck, "jobCheck");
 			
-			store.update(tx.getConnection());
+			jobCheck.update(tx.getConnection());
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();
@@ -146,9 +150,9 @@ public class StoreAction extends BaseSupport {
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
 				
-				Store store=new Store();
-				store.setId(id);
-				store.delete(tx.getConnection());
+				JobCheck jobCheck = new JobCheck();
+				jobCheck.setId(id);
+				jobCheck.delete(tx.getConnection());
 			}
 			
 			tx.commit();
@@ -164,4 +168,5 @@ public class StoreAction extends BaseSupport {
 		}
 		return "list";
 	}
+	
 }
