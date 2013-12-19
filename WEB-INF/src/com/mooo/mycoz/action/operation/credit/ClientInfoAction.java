@@ -99,17 +99,23 @@ public class ClientInfoAction extends BaseSupport {
 
 					creditAmount = salePrice - onePay;
 					int monthPay1 = 0;
-
-					monthPay1 = (int) (creditAmount / financialProduct
+					// 乘以税率后的总钱数
+					double afterCalculetedTotals = creditAmount
+							* (financialProduct.getCreditRate() + 1);
+					// 每月支付钱数
+					monthPay1 = (int) (afterCalculetedTotals / financialProduct
 							.getCycleTotal());
 
 					rowm.put("finName", financialProduct.getFinancialName());
 					rowm.put("cycleTotal", financialProduct.getCycleTotal());
 					rowm.put("monthPay", monthPay1);
-					rowm.put("firstPay",
-							creditAmount
-									- (financialProduct.getCycleTotal() - 1)
-									* monthPay1);
+					// 首月支付钱数(小数后3位)
+					java.text.DecimalFormat df = new java.text.DecimalFormat(
+							"#.###");
+					double d = afterCalculetedTotals
+							- (financialProduct.getCycleTotal() - 1)
+							* monthPay1;
+					rowm.put("firstPay", df.format(d));
 					rowm.put("creditAmount", creditAmount);
 					rowm.put("pId", financialProduct.getId());
 					fProucts.add(rowm);
@@ -180,15 +186,15 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptAdd");
-		String  value=null;
+		String value = null;
 		try {
-			value=request.getParameter("pId");
+			value = request.getParameter("pId");
 			request.setAttribute("pId", value);
-			
+
 			FinancialProduct financialProduct = new FinancialProduct();
 			financialProduct.setId(new Integer(value));
 			financialProduct.retrieve();
-			
+
 			request.setAttribute("financialProduct", financialProduct);
 
 			request.setAttribute("salePrice", request.getParameter("salePrice"));
@@ -196,28 +202,34 @@ public class ClientInfoAction extends BaseSupport {
 				log.debug("salePrice:" + request.getParameter("salePrice"));
 
 			request.setAttribute("onePay", request.getParameter("onePay"));
-			
-			double totailPrice=0d;
-			double firstPayAmount=0d;
-			double creditAmount=0d;
-			
+
+			double totailPrice = 0d;
+			double firstPayAmount = 0d;
+			double creditAmount = 0d;
+
 			value = request.getParameter("salePrice");
 			totailPrice = new Double(value);
-			
+
 			value = request.getParameter("onePay");
 			firstPayAmount = new Double(value);
-			
-			creditAmount = totailPrice-firstPayAmount;
-			
-			int monthPay1 = (int) (creditAmount / financialProduct.getCycleTotal());
-			
-			double monthPay = creditAmount-(financialProduct.getCycleTotal() - 1) * monthPay1;
-			
-			request.setAttribute("creditAmount", creditAmount);
 
+			creditAmount = totailPrice - firstPayAmount;
+
+			int monthPay1 = (int) (creditAmount
+					* (1 + financialProduct.getCreditRate()) / financialProduct
+					.getCycleTotal());
+			//处理小数位数
+			java.text.DecimalFormat df = new java.text.DecimalFormat(
+					"#.###");
+			double monthPay = creditAmount
+					* (1 + financialProduct.getCreditRate())
+					- (financialProduct.getCycleTotal() - 1) * monthPay1;
+
+			request.setAttribute("creditAmount", creditAmount);
+			// 每月支付
 			request.setAttribute("monthPay1", monthPay1);
-			
-			request.setAttribute("monthPay", monthPay);
+			// 首次支付
+			request.setAttribute("monthPay", df.format(monthPay));
 
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
