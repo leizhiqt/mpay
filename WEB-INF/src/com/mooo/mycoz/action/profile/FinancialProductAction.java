@@ -13,7 +13,7 @@ import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
-import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
@@ -25,8 +25,7 @@ public class FinancialProductAction extends BaseSupport {
 	public String list(HttpServletRequest request,
 			HttpServletResponse response) {
 		String value = null;
-		Integer sessionId = ActionSession.getInteger(request,
-				ActionSession.USER_SESSION_KEY);
+		//Integer sessionId = ActionSession.getInteger(request,ActionSession.USER_SESSION_KEY);
 		try {
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(FinancialProduct.class, "financialProduct");
@@ -66,12 +65,11 @@ public class FinancialProductAction extends BaseSupport {
 			HttpServletResponse response){
 		
 		if (log.isDebugEnabled())log.debug("promptAdd");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
-		request.setAttribute("winerys", IDGenerator.getWineryValues(sessionId));
+		request.setAttribute("products", IDGenerator.getValues(Product.class, "id", "productName"));
 		return "success";
-		
 	}
+	
 	public String processAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("processAdd");
 		Transaction tx=new Transaction();
@@ -100,7 +98,7 @@ public class FinancialProductAction extends BaseSupport {
 	}
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+		//Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 		String financialProductId = null;
 		try{
 			financialProductId = request.getParameter("id");

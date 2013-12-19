@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -6,11 +6,11 @@
 <head>
 <title><fmt:message key="Product"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet">   
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet" href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112" media="screen"/>
-<script type="text/javascript" src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -19,13 +19,13 @@
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="save"/>
 		<jsp:param name="key" value="Edit"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="processAdd"/>
 	</jsp:include>
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="cancel"/>
 		<jsp:param name="key" value="Cancel"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="list"/>
 	</jsp:include>
 </div>
@@ -39,7 +39,7 @@
 <td>
 
 <table class="modify">
-<caption><fmt:message key="Add"/> <fmt:message key="CreditType"/></caption>
+<caption><fmt:message key="Add"/> <fmt:message key="FinancialProduct"/></caption>
 
 <tbody>
 <tr>

@@ -4,6 +4,7 @@ import com.mooo.mycoz.db.DBObject;
 
 public class Store extends DBObject {
 	private Integer id;
+	private String storeKey;
 	private String storeName;
 	private String storeAddress;
 
@@ -13,6 +14,14 @@ public class Store extends DBObject {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getStoreKey() {
+		return storeKey;
+	}
+
+	public void setStoreKey(String storeKey) {
+		this.storeKey = storeKey;
 	}
 
 	public String getStoreName() {

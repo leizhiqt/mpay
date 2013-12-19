@@ -24,6 +24,7 @@ public class ClientJob extends DBObject {
 	private String byUse;
 	private Date jobDate;
 	private Integer branchId;
+	private String privateKey;
 
 	public Integer getId() {
 		return id;
@@ -175,5 +176,13 @@ public class ClientJob extends DBObject {
 
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
+	}
+
+	public String getPrivateKey() {
+		return privateKey;
+	}
+
+	public void setPrivateKey(String privateKey) {
+		this.privateKey = privateKey;
 	}
 }

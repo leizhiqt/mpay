@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
@@ -16,35 +13,34 @@
 <script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
-
 <body>
-<c:url value="/CreditType.do" var="defURL" />
+<c:url value="/FinancialProduct.do" var="defURL" />
 
 <form method="post" action="${defURL }">
 <div id="gtop">
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="add"/>
 		<jsp:param name="key" value="Add"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="promptAdd"/>
 	</jsp:include>
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="delete"/>
 		<jsp:param name="key" value="Delete"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="processDelete"/>
 	</jsp:include>
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="edit"/>
 		<jsp:param name="key" value="Edit"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="promptEdit"/>
 	</jsp:include>
 	
 	<jsp:include page="../incl/action.jsp">
 		<jsp:param name="type" value="find"/>
 		<jsp:param name="key" value="List"/>
-		<jsp:param name="action" value="CreditType.do"/>
+		<jsp:param name="action" value="FinancialProduct.do"/>
 		<jsp:param name="method" value="list"/>
 	</jsp:include>
 	
@@ -60,29 +56,14 @@
 <td>
 
 <table class="st">
-<caption><fmt:message key="CreditType"/></caption>
+<caption><fmt:message key="FinancialProduct"/></caption>
 <tbody>
 <tr>
-	<td  class="textr"><fmt:message key="CreditType"/></td>
-	<td><select name="creditTypeId" onchange="document.forms[0].submit();">
-			<option selected="selected" value="">All</option>
-			<c:forEach var="items" items="${winerys}" varStatus="s">
-				<option value="${items.creditType.id}"
-		
-				<c:if test="${items.CreditType.id==param.CreditTypeId}">
-					selected="selected"
-				</c:if>
-					>
-				<!-- ${items.winery.enterpriseName} -->
-				</option>
-			--</c:forEach>
-		</select>
-	</td>
+	<td  class="textr"><fmt:message key="Name"/></td>
+	<td><input name="creditName" value="${param.creditName }"/></td>
 	
-	<td  class="textr"><fmt:message key="creditName"/></td>
-	<td><input name="creditName" value="${param.styleNumber }"/></td>
-	
-	
+	<td  class="textr"><fmt:message key="CreditRate"/></td>
+	<td><input name="creditName" value="${param.creditName }"/></td>
 </tr>
 
 </tbody>
@@ -105,21 +86,21 @@
 
 <tr>
 <th><input name="choose" type="checkbox" onclick="checkedAll(this.name,'id');"/><fmt:message key="ID"/></th>
-<th><fmt:message key="creditName"/></th>
-<th><fmt:message key="cycleTotal"/></th>
-<th><fmt:message key="cycleUnit"/></th>
-<th><fmt:message key="creditRate"/></th>
+<th><fmt:message key="Name"/></th>
+<th><fmt:message key="CycleTotal"/></th>
+<th><fmt:message key="CycleUnit"/></th>
+<th><fmt:message key="CreditRate"/></th>
 </tr>
 </thead>
 
 <tbody>
 <c:forEach var="item" items="${results}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-<td><input type="checkbox" name="id" value="${item.creditType.id }"> </td>
-<td><c:out value="${item.creditType.creditName }"/></td>
-<td><c:out value="${item.creditType.cycleTotal }"/></td>
-<td><c:out value="${item.creditType.cycleUnit }"/></td>
-<td><fmt:formatNumber value="${item.creditType.creditRate }" type="percent" maxFractionDigits="5"/></td>
+<td><input type="checkbox" name="id" value="${item.financialProduct.id }"> </td>
+<td><c:out value="${item.financialProduct.creditName }"/></td>
+<td><c:out value="${item.financialProduct.cycleTotal }"/></td>
+<td><c:out value="${item.financialProduct.cycleUnit }"/></td>
+<td><fmt:formatNumber value="${item.financialProduct.creditRate }" type="percent" maxFractionDigits="5"/></td>
 </tr>
 </c:forEach>
 </tbody>
