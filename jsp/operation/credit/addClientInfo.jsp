@@ -43,7 +43,7 @@ body,td,th {
 						<td><c:out value="${UserName} "/>
 						<%-- <%=session.getAttribute("UserName") %> --%></td>
 						<td align="right"  ><b style="color:red"><b style="color:red">*</b></b> 内部代码</td>
-						<td><select name="client.innerCode" id="innerCode"
+						<td><select name="clientJob.privateKey" id="innerCode"
 							onchange="document.getElementById('innerCode').value += ' ' + this.options[this.selectedIndex].text"> 
 							<option value="XY24324">XY24324</option>
 							<option value="XY24325">XY24325</option>
@@ -70,7 +70,7 @@ body,td,th {
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 姓名</td>
-						<td align="left"><input type="text" name="client.clientName"
+						<td align="left"><input type="text" name="client.clientName" value="${client.clientName }"
 							maxlength="10" /></td>
 					  <td></td>
 						<td></td>
@@ -125,7 +125,7 @@ body,td,th {
 						<td align="right"  >子女数目</td>
 				    <td align="left"><input type="text" name="client.childs" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 住房</td>
-				  <td align="left"><select id="housing"
+				  <td align="left"><select id="housing" name=""
 							onchange="document.getElementById('housing').value += ' ' + this.options[this.selectedIndex].text">
 								<option value="自有房">自有房</option>
 								<option value="租房">租房</option>
@@ -499,7 +499,7 @@ body,td,th {
 								<option value="金融">金融</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
-				  <td align="left"><select id="onOffice" name="client.onSector"
+				  <td align="left"><select id="onOffice" name="client.onOffice"
 							onchange="document.getElementById('onOffice').value += ' ' + this.options[this.selectedIndex].text">
 								<option value="经理">经理</option>
 								<option value="总监">总监</option>
@@ -613,12 +613,11 @@ body,td,th {
 					</tr>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>信用信息</strong></th>
-
 					</tr>
 					<tr>
 
 						<td align="right"  >产品</td>
-						<td align="left"><c:out value="${financialProduct.financialName }"/></td>
+						<td align="left"><c:out value="${financialProduct.financialName }"/><input type="hidden" name="clientJob.financialProductId" value="${pId }"/></td>
 						<td align="right">商品总价</td>
 						<td align="left">
 							<input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
@@ -631,7 +630,6 @@ body,td,th {
 						<td align="right"  >自付金额(元)</td>
 						
 						<td align="left">
-							<input type="hidden" name="clientJob.creditAmount" value="${pId }"/>
 							<input type="text" name="clientJob.selfAmount" value="${onePay }"/>
 						</td>
 						<td align="right"  >分期期数</td>

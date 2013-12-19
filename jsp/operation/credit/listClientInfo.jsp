@@ -122,7 +122,7 @@
 <tbody>
 <c:forEach var="item" items="${clients}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-<td><input type="checkbox" name="id" value="${item.client.id }"></td>
+<td><input type="checkbox" name="id" value="${item.clientJob.id }"></td>
 <td><c:out value="${item.clientJob.jobNo }"/></td>
 <td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="date" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>

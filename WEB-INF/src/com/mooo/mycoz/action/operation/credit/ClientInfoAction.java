@@ -163,6 +163,8 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("client", "id");
 			dbobject.setRetrieveField("client", "idNo");
 			dbobject.setRetrieveField("client", "clientName");
+			
+			dbobject.setRetrieveField("clientJob", "id");
 			dbobject.setRetrieveField("clientJob", "creditAmount");
 			dbobject.setRetrieveField("clientJob", "totalPrice");
 			dbobject.setRetrieveField("clientJob", "selfAmount");
@@ -327,6 +329,7 @@ public class ClientInfoAction extends BaseSupport {
 
 			// ParamUtil.bindData(request, client, "client");
 			uf.bindData(client, "client");
+			request.setAttribute("client",client );
 
 			client.setId(clientId);
 			client.setLivingAddressBookId(livingAddressBookId);
@@ -377,6 +380,7 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setMonthOfPay(clientJob.getCreditAmount()
 					- (financialProduct.getCycleTotal() - 1) * monthPay1);
 
+			clientJob.setStoreId(1);
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
 
@@ -426,6 +430,7 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("processEdit");
+		//String clientJobId=request.getParameter(arg0);
 		return "success";
 	}
 
@@ -433,9 +438,167 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
+		String clientJobId=request.getParameter("id");
+		try {
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+			
+			if(clientJobId==null || clientJobId.equals("")){
+				throw new Exception("请选择合同");
+			}
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(clientJobId));
+			clientJob.retrieve();
+			request.setAttribute("clientJob", clientJob);
+			
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			request.setAttribute("client", client);
+			
+			AddressBook censusAddressBook =new AddressBook();
+			censusAddressBook.setId(client.getCensusAddressBookId());
+			censusAddressBook.retrieve();
+			request.setAttribute("censusAddressBook", censusAddressBook);
+			
+			AddressBook homeAddressBook =new AddressBook();
+			homeAddressBook.setId(client.getHomeAddressBookId());
+			homeAddressBook.retrieve();
+			request.setAttribute("homeAddressBook", homeAddressBook);
+
+			
+			AddressBook officeAddressBook =new AddressBook();
+			officeAddressBook.setId(client.getOfficeAddressBookId());
+			officeAddressBook.retrieve();
+			request.setAttribute("officeAddressBook", officeAddressBook);
+
+			
+			AddressBook livingAddressBook =new AddressBook();
+			livingAddressBook.setId(client.getLivingAddressBookId());
+			livingAddressBook.retrieve();
+			request.setAttribute("livingAddressBook", livingAddressBook);
+
+			
+			/*
+			MultiDBObject dbobject = new MultiDBObject();
+
+			dbobject.addTable(Client.class, "client");
+			dbobject.addTable(ClientJob.class, "clientJob");
+			dbobject.addTable(ClientJobTrack.class, "clientJobTrack");
+			dbobject.addTable(FinancialProduct.class, "financialProduct");
+			dbobject.addTable(JobType.class, "jobType");
+			dbobject.addTable(User.class, "user");
+
+			dbobject.setForeignKey("clientJob", "clientId", "client", "id");
+			dbobject.setForeignKey("clientJob", "financialProductId",
+					"financialProduct", "id");
+			dbobject.setForeignKey("clientJobTrack", "clientJobId",
+					"clientJob", "id");
+			dbobject.setForeignKey("clientJobTrack", "jobTypeId", "jobType",
+					"id");
+			dbobject.setForeignKey("clientJobTrack", "userId", "user", "id");
+
+			dbobject.setField("clientJobTrack", "processId", 0);
+			dbobject.setField("clientJob", "id",  Integer.parseInt(clientJobId));
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+			
+			dbobject.setRetrieveField("client", "id");
+			dbobject.setRetrieveField("client", "idNo");
+			dbobject.setRetrieveField("client", "clientName");
+			dbobject.setRetrieveField("client", "photoPath");
+			dbobject.setRetrieveField("client", "idEndDate");
+			dbobject.setRetrieveField("client", "idValidDate");
+			dbobject.setRetrieveField("client", "idAuthority");
+			dbobject.setRetrieveField("client", "otherNo");
+			dbobject.setRetrieveField("client", "age");
+			dbobject.setRetrieveField("client", "mobilePhone");
+			dbobject.setRetrieveField("client", "mobileAddress");
+			dbobject.setRetrieveField("client", "sex");
+			dbobject.setRetrieveField("client", "marry");
+			dbobject.setRetrieveField("client", "childs");
+			dbobject.setRetrieveField("client", "housing");
+			dbobject.setRetrieveField("client", "educationId");
+			dbobject.setRetrieveField("client", "homePhoneName");
+			dbobject.setRetrieveField("client", "homePhone");
+			dbobject.setRetrieveField("client", "email");
+			dbobject.setRetrieveField("client", "spuseName");
+			dbobject.setRetrieveField("client", "spuseMobile");
+			dbobject.setRetrieveField("client", "idSpuse");
+			dbobject.setRetrieveField("client", "spuseHirer");
+			dbobject.setRetrieveField("client", "spuseOfficePhone");
+			dbobject.setRetrieveField("client", "spuseExtPhone");
+			dbobject.setRetrieveField("client", "censusAddressBookId");
+			dbobject.setRetrieveField("client", "livingAddressBookId");
+			dbobject.setRetrieveField("client", "homeName");
+			dbobject.setRetrieveField("client", "homeType");
+			dbobject.setRetrieveField("client", "homeTelephone");
+			dbobject.setRetrieveField("client", "homeAddressBookId");
+			dbobject.setRetrieveField("client", "otherContacts");
+			dbobject.setRetrieveField("client", "otherNexus");
+			dbobject.setRetrieveField("client", "otherPhone");
+			dbobject.setRetrieveField("client", "masterInMonth");			
+			dbobject.setRetrieveField("client", "otherInMonth");
+			dbobject.setRetrieveField("client", "homeInMonth");
+			dbobject.setRetrieveField("client", "otherIncome");
+			dbobject.setRetrieveField("client", "onShortName");
+			dbobject.setRetrieveField("client", "onFullName");
+			dbobject.setRetrieveField("client", "onDivision");
+			dbobject.setRetrieveField("client", "onCompanyName");
+			dbobject.setRetrieveField("client", "onWorkTime");
+			dbobject.setRetrieveField("client", "onSector");
+			dbobject.setRetrieveField("client", "onOffice");
+			dbobject.setRetrieveField("client", "onFeature");
+			dbobject.setRetrieveField("client", "onOfficePhone");
+			dbobject.setRetrieveField("client", "onExtPhone");
+			dbobject.setRetrieveField("client", "officeAddressBookId");
+			dbobject.setRetrieveField("client", "financeName");
+			dbobject.setRetrieveField("client", "branchId");
+			dbobject.setRetrieveField("client", "selfAmount");
+			dbobject.setRetrieveField("client", "selfAmount");
+			dbobject.setRetrieveField("client", "selfAmount");
+			dbobject.setRetrieveField("client", "selfAmount");
+			
+			dbobject.setRetrieveField("clientJob", "id");
+			dbobject.setRetrieveField("clientJob", "creditAmount");
+			dbobject.setRetrieveField("clientJob", "totalPrice");
+			dbobject.setRetrieveField("clientJob", "selfAmount");
+			dbobject.setRetrieveField("clientJob", "firstpayAmount");
+			dbobject.setRetrieveField("clientJob", "monthOfPay");
+
+			dbobject.setRetrieveField("clientJob", "jobNo");
+			dbobject.setRetrieveField("clientJobTrack", "jobDate");
+			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
+			dbobject.setRetrieveField("user", "name");
+			dbobject.setRetrieveField("jobType", "nextState");
+			dbobject.setRetrieveField("financialProduct", "cycleTotal");
+*/
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+			
+//			request.setAttribute("clients", dbobject.searchAndRetrieveList());
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			e.printStackTrace();
+//			return "list";
+		}
 		return "success";
 	}
 
+	public String test(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (log.isDebugEnabled())
+			log.debug("processApproval");
+		return "success";
+	}
+	
 	public String processApproval(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
