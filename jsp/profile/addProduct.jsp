@@ -43,7 +43,7 @@
 
 <tbody>
 <tr>
-<td class="tl"><fmt:message key="Winery"/></td>
+<td class="tl"></td>
 <td>
 
 </td>
@@ -57,13 +57,13 @@
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="brand"/></td>
-<td><input type="text" name="product.brand" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="Brand"/></td>
+<td><input type="text" name="product.brand" size="16" maxlength="16"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
-<td class="tl"><fmt:message key="modelNo"/></td>
-<td><input type="text" name="product.modelNo" size="4" maxlength="4"/><font class="fm">*</font></td>
+<td class="tl"><fmt:message key="ModelNo"/></td>
+<td><input type="text" name="product.modelNo" size="16" maxlength="16"/><font class="fm">*</font></td>
 </tr>
 
 

@@ -51,36 +51,28 @@
 
 								<tbody>
 									<tr>
-										<td class="tl" width='330px'><fmt:message key="Winery" /></td>
-										<td><select name="product.enterpriseId">
-												<c:forEach var="items" items="${winerys}" varStatus="s">
-													<option value="${items.winery.id}"
-														<c:if test="${items.winery.id==product.enterpriseId}">
-			selected="selected"
-		</c:if>>
-														${items.winery.enterpriseName}</option>
-	--</c:forEach>
-										</select></td>
+										<td class="tl" width='330px'></td>
+										<td></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="productName" /></td>
+										<td class="tl"><fmt:message key="ProductName" /></td>
 										<td><input type="text" name="product.productName"
-											value="${product.productName }" size="5" maxlength="5" /><font
+											value="${product.productName }" size="15" maxlength="15" /><font
 											class="fm">*</font></td>
 									</tr>
 
 
 									<tr>
-										<td class="tl"><fmt:message key="brand" /></td>
+										<td class="tl"><fmt:message key="Brand" /></td>
 										<td><input type="text" name="product.brand"
-											value="${product.brand }" size="5" maxlength="5" /></td>
+											value="${product.brand }" size="15" maxlength="15" /></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="modelNo" /></td>
+										<td class="tl"><fmt:message key="ModelNo" /></td>
 										<td><input type="text" name="product.modelNo"
-											value="${product.modelNo }" size="4" maxlength="4" /></td>
+											value="${product.modelNo }" size="15" maxlength="15" /></td>
 									</tr>
 							</table>
 						</td>

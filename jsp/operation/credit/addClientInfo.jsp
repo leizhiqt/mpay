@@ -12,6 +12,7 @@
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
+<script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
 <style>
 <!--
 body,td,th {
@@ -19,6 +20,45 @@ body,td,th {
 }
 -->
 </style>
+<script language="javascript">
+	function calcIdCard(){
+			if($('#card').val().length==15 || $('#card').val().length==18 ){
+				$('#msg2').html('<b style=" color:green"></b>');
+			}else{
+				$('#msg2').html('<b style=" color:#F00">格式错误</b>');
+			}
+		}
+		function getphonearea(val){
+			if(val.length==11){
+				$('#msg5').html('<b style=" color:green"></b>');
+			}else{
+				$('#msg5').html('<b style=" color:#F00">格式错误</b>');
+			}
+		}
+		function getphon(val){
+			if(val.length==11 || val.length==8){
+				$('#msg9').html('<b style=" color:green"></b>');
+			}else{
+				$('#msg9').html('<b style=" color:#F00">格式错误</b>');
+			}
+		}
+		function getphons(val){
+			if(val.length==11 || val.length==8){
+				$('#msg30').html('<b style=" color:green"></b>');
+			}else{
+				$('#msg30').html('<b style=" color:#F00">格式错误</b>');
+			}
+		}
+		function calc(val){
+			
+			var id = $("#"+val.id).attr('data')
+			if(val.value.length !=0 ){
+				$('#'+id).html('<b style=" color:green"></b>');
+			}else{
+				$('#'+id).html('<b style=" color:#F00">请输入</b>');
+			}
+			}
+</script>
 </head>
 
 <body>
@@ -36,7 +76,7 @@ body,td,th {
 			<%@ include file="../../incl/b_message.jsp"%>
 
 			<div>
-				<table border="1" class="lt">
+				<table border="1" class="lt" >
 					<tr height="10px" style="border: 1px solid #FFF;">
 
 						<td colspan="" align="right"  >销售顾问代码</td>
@@ -61,8 +101,6 @@ body,td,th {
 						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
 						<td align="left" colspan="2">
 						<input type="file" name="clientPhoto" /> </td>
-
-
 						<td></td>
 						<td></td>
 						<td></td>
@@ -70,13 +108,11 @@ body,td,th {
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 姓名</td>
-						<td align="left"><input type="text" name="client.clientName" value="${client.clientName }"
-							maxlength="10" /></td>
+						<td align="left"><input type="text" name="client.clientName" value="${client.clientName }" onblur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
 					  <td></td>
 						<td></td>
 						<td align="right"  ><b style="color:red">*</b> 身份证号码</td>
-						<td align="left"><input type="text" name="client.idNo"
-							onblur="calcIdCard()" /></td>
+						<td align="left"><input type="text" name="client.idNo" onblur="calcIdCard()" id="card" /> <b id="msg2"></b></td>
 					</tr>
 					<tr>
 
@@ -87,8 +123,7 @@ body,td,th {
 					  <td></td>
 						<td></td>
 						<td align="right"  ><b style="color:red">*</b> 发证机关</td>
-						<td align="left"><input type="text" name="client.idAuthority"
-							maxlength="50" /></td>
+						<td align="left"><input type="text" name="client.idAuthority" maxlength="50" onblur="calc(this)" data="msg3" maxlength="20" id="msg" /> <b id="msg3"></b></td>
 					</tr>
 
 
@@ -96,10 +131,9 @@ body,td,th {
 						<td align="right"  >SSI号码/学生号码</td>
 				    <td align="left"><input type="text" name="client.otherNo" /></td>
 						<td align="right"  ><b style="color:red">*</b> 申请人年龄</td>
-						<td align="left"><input type="text" name="client.age" /></td>
+						<td align="left"><input type="text" name="client.age" maxlength="10" data="msg4"  id="ages" onblur="calc(this)" /> <b id="msg4"></b></td>
 						<td align="right"  ><b style="color:red">*</b> 手机号</td>
-					  <td align="left"><input type="text" name="client.mobilePhone"
-							onblur="getphonearea(this.value)" /></td>
+					  <td align="left"><input type="text" name="client.mobilePhone" onblur="getphonearea(this.value)" /><b id="msg5"></b></td>
 					</tr>
 					<tr>
 
@@ -118,7 +152,7 @@ body,td,th {
 								<option value="丧偶">丧偶</option>
 						</select></td>
 					  <td align="right"  ><b style="color:red">*</b> 手机号码归属地</td>
-					  <td align="left"><input type="text" name="client.mobileAddress" /></td>
+					  <td align="left"><input type="text" name="client.mobileAddress" data="msg6"  id="addr" onblur="calc(this)" /> <b id="msg6"></b></td>
 					</tr>
 					<tr>
 
@@ -200,19 +234,19 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
 				    <td align="left"><input type="text" name="censusAddressBook.county"
-							maxlength="20" /></td>
+							maxlength="20" data="msg17"  id="xian" onblur="calc(this)" /> <b id="msg17"></b></td>
 					  <td align="right"  >镇</td>
 				    <td align="left"><input type="text" name="censusAddressBook.town"
 							maxlength="20" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
 					  <td align="left"><input type="text" name="censusAddressBook.street"
-							maxlength="20" /></td>
+							maxlength="20" data="msg16"  id="jieda" onblur="calc(this)" /> <b id="msg16"></b></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 				    <td align="left"><input type="text" name="censusAddressBook.community"
-							maxlength="20" /></td>
+							maxlength="20" data="msg15"  id="lou8" onblur="calc(this)" /> <b id="msg15"></b></td>
 					  <td align="right"  >栋/单元/房间号</td>
 				    <td align="left"><input type="text" name="censusAddressBook.houseNo"
 							maxlength="20" /></td>
@@ -258,19 +292,19 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
 				    <td align="left"><input type="text" name="livingAddressBook.county"
-							maxlength="20" /></td>
+							maxlength="20" data="msg14"  id="qu3" onblur="calc(this)" /> <b id="msg14"></b></td>
 					  <td align="right"  >镇</td>
 				    <td align="left"><input type="text" name="livingAddressBook.town"
 							maxlength="20" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
 						<td align="left"><input type="text" name="livingAddressBook.street"
-							maxlength="20" /></td>
+							maxlength="20" data="msg13"  id="ludao" onblur="calc(this)" /> <b id="msg13"></b></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 				    <td align="left"><input type="text" name="livingAddressBook.community"
-							maxlength="20" /></td>
+							maxlength="20" data="msg12"  id="qu1" onblur="calc(this)" /> <b id="msg12"></b></td>
 					  <td align="right"  >栋/单元/房间号</td>
 					  <td align="left"><input type="text" name="livingAddressBook.houseNo"
 							maxlength="20" /></td>
@@ -282,10 +316,10 @@ body,td,th {
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 家庭成员名称</td>
-						<td align="left"><input type="text" name="client.homeName" maxlength="20" />
+						<td align="left"><input type="text" name="client.homeName" maxlength="20" data="msg11"  id="ming" onblur="calc(this)" /> <b id="msg11"></b>
 						</td>
 					  <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>
-				    <td align="left"><input type="text" name="client.homeType" /></td>
+				    <td align="left"><input type="text" name="client.homeType"  data="msg10"  id="lie" onblur="calc(this)" /> <b id="msg10"></b></td>
 					  <td align="right"  >家庭成员电话号</td>
 					  <td align="left"><input type="text" name="client.homeTelephone" /></td>
 					</tr>
@@ -322,19 +356,19 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
 				    <td align="left"><input type="text" name="homeAddressBook.county"
-							maxlength="20" /></td>
+							maxlength="20" data="msg7"  id="qu" onblur="calc(this)" /> <b id="msg7"></b></td>
 					  <td align="right"  >镇</td>
 				    <td align="left"><input type="text" name="homeAddressBook.town"
 							maxlength="20" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
 					  <td align="left"><input type="text" name="homeAddressBook.street"
-							maxlength="20" /></td>
+							maxlength="20" data="msg18"  id="jlc" onblur="calc(this)" /> <b id="msg18"></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 				    <td align="left"><input type="text" name="homeAddressBook.community"
-							maxlength="20" /></td>
+							maxlength="20"  data="msg8"  id="lou" onblur="calc(this)" /> <b id="msg8"></b> </td>
 					  <td align="right"  >栋/单元/房间号</td>
 				    <td align="left"><input type="text" name="homeAddressBook.houseNo"
 							maxlength="20" /></td>
@@ -349,7 +383,7 @@ body,td,th {
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 联系人姓名</td>
-				    <td align="left"><input type="text" name="client.otherContacts" /></td>
+				    <td align="left"><input type="text" name="client.otherContacts" data="msg20"  id="nam" onblur="calc(this)" /> <b id="msg20"></td>
 					  <td align="right"  >与申请人关系</td>
 				  <td align="left"><select id="otherNexus" name="client.otherNexus"
 							onchange="document.getElementById('otherNexus').value += ' ' + this.options[this.selectedIndex].text">
@@ -357,7 +391,7 @@ body,td,th {
 								<option value="亲戚">亲戚</option>
 						</select></td>
 					  <td align="right"  ><b style="color:red">*</b> 联系电话</td>
-					  <td align="left"><input type="text" name="client.otherPhone" /></td>
+					  <td align="left"><input type="text" name="client.otherPhone" onblur="getphon(this.value)" /><b id="msg9"></b></td>
 					</tr>
 					<tr>
 
@@ -440,13 +474,13 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 月收入总额(元)</td>
 						<td align="left"><input type="text" name="client.masterInMonth"
-							maxlength="10" /></td>
+							maxlength="10" data="msg21"  id="shour" onblur="calc(this)" /> <b id="msg21"></b></td>
 						<td align="right"  >其他收入(元/月)</td>
 				    <td align="left"><input type="text" name="client.otherInMonth"
 							maxlength="10" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 家庭月收入(元)</td>
 						<td align="left"><input type="text" name="client.homeInMonth"
-							maxlength="10" /></td>
+							maxlength="10" data="msg22"  id="yue" onblur="calc(this)" /> <b id="msg22"></b></td>
 					</tr>
 					<tr>
 
@@ -466,13 +500,13 @@ body,td,th {
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 单位名称或大学名称</td>
 						<td align="left"><input type="text" name="client.onShortName"
-							maxlength="20" /></td>
+							maxlength="20" data="msg23"  id="college" onblur="calc(this)" /> <b id="msg23"></b></td>
 						<td align="right"  ><b style="color:red">*</b> 单位/学校/个体全称</td>
 				    <td align="left"><input type="text" name="client.onFullName"
-							maxlength="20" /></td>
+							maxlength="20" data="msg24"  id="collegename" onblur="calc(this)" /> <b id="msg24"></b></td>
 					  <td align="right"  ><b style="color:red">*</b> 任职部门或班级</td>
 						<td align="left"><input type="text" name="client.onDivision"
-							maxlength="20" /></td>
+							maxlength="20" data="msg25"  id="collegebumen" onblur="calc(this)" /> <b id="msg25"></b></td>
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
@@ -486,7 +520,7 @@ body,td,th {
 								<option value="0-1年">大于10年</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
-				    <td align="left"><input type="text" name="" maxlength="20" /></td>
+				    <td align="left"><input type="text" name="" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
 					  <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>
@@ -516,7 +550,7 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 办公电话</td>
 						<td align="left"><input type="text" name="client.onOfficePhone"
-							maxlength="20" /></td>
+							maxlength="20" name="client.otherPhone" onblur="getphons(this.value)" /><b id="msg30"></b></td>
 						<td align="right"  >办公电话分机</td>
 				    <td align="left"><input type="text" name="client.onExtPhone" /></td>
 					  <td align="right"  ></td>
@@ -546,19 +580,19 @@ body,td,th {
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
 						<td align="left"><input type="text" name="officeAddressBook.county"
-							maxlength="20" /></td>
+							maxlength="20" data="msg31"  id="co" onblur="calc(this)" /> <b id="msg31"></b></td>
 						<td align="right"  >镇</td>
 				    <td align="left"><input type="text" name="officeAddressBook.town"
 							maxlength="20" /></td>
 					  <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
 						<td align="left"><input type="text" name="officeAddressBook.street"
-							maxlength="20" /></td>
+							maxlength="20" data="msg32"  id="coll" onblur="calc(this)" /> <b id="msg32"></b></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 						<td align="left"><input type="text" name="officeAddressBook.community"
-							maxlength="20" /></td>
+							maxlength="20" data="msg33"  id="loupan" onblur="calc(this)" /> <b id="msg33"></b></td>
 						<td align="right"  >栋/单元/房间号</td>
 				    <td align="left"><input type="text" name="officeAddressBook.houseNo"
 							maxlength="20" /></td>
@@ -685,7 +719,6 @@ body,td,th {
 						<td align="right">口令</td>
 						<td align="left"><input type="password" name="pwdConfirm" /></td>
 					</tr>
-					
 					<tr>
 						<td colspan="2" align="center">
 							<jsp:include page="../../incl/actionb.jsp">

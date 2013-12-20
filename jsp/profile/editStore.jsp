@@ -56,14 +56,20 @@
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="storeName" /></td>
-										<td><input type="text" name="store.storeName"
-											value="${store.storeName }" size="30" maxlength="30" /><font
+										<td class="tl"><fmt:message key="StoreKey" /></td>
+										<td><input type="text" name="store.storeKey"
+											value="${store.storeKey }" size="30" maxlength="30" /><font
 											class="fm">*</font></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="storeAddress" /></td>
+										<td class="tl"><fmt:message key="StoreName" /></td>
+										<td><input type="text" name="store.storeName"
+											value="${store.storeName }" size="40" maxlength="40" /><font
+											class="fm">*</font></td>
+									</tr>
+									<tr>
+										<td class="tl"><fmt:message key="StoreAddress" /></td>
 										<td><input type="text" name="store.storeAddress"
 											value="${store.storeAddress }" size="40" maxlength="40" /><font
 											class="fm">*</font></td>

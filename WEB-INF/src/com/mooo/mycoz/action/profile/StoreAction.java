@@ -32,6 +32,11 @@ public class StoreAction extends BaseSupport {
 			if(!StringUtils.isNull(value)){
 				store.setLike("storeName", value);
 			}
+			
+			value = request.getParameter("StoreKey");
+			if(!StringUtils.isNull(value)){
+				store.setLike("storeKey", value);
+			}
 
 			store.addOrderBy("id DESC");
 
@@ -93,8 +98,11 @@ public class StoreAction extends BaseSupport {
 		String storeId = null;
 		try{
 			storeId = request.getParameter("id");
-			if(storeId==null)
-				throw new Exception("Please chose object");
+			if(storeId==null){
+				request.setAttribute("error", "请选择商店！");
+				return "list";
+				
+			}
 			
 			Store store=new Store();
 			store.setId(new Integer(storeId));
@@ -145,7 +153,7 @@ public class StoreAction extends BaseSupport {
 			
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
-				
+				System.out.println("ids    >>>>>"+ids[i]);
 				Store store=new Store();
 				store.setId(id);
 				store.delete(tx.getConnection());
@@ -153,12 +161,12 @@ public class StoreAction extends BaseSupport {
 			
 			tx.commit();
 			
-			request.setAttribute("message", "processDelete successfully");
+			request.setAttribute("message", "商店删除成功！");
 		} catch (Exception e) {
 			tx.rollback();
 			
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("error", "商店已使用，删除失败！");
 		} finally {
 			tx.end();
 		}

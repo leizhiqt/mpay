@@ -61,10 +61,10 @@
 <tbody>
 <tr>
 	<td  class="textr"><fmt:message key="StoreKey"/></td>
-	<td><input name="storeName" value="${param.styleNumber }"/></td>
+	<td><input name="StoreKey" value="${param.StoreKey }"/></td>
 	
 	<td  class="textr"><fmt:message key="Store"/></td>
-	<td><input name="storeName" value="${param.styleNumber }"/></td>
+	<td><input name="storeName" value="${param.storeName }"/></td>
 </tr>
 
 </tbody>

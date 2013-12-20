@@ -56,22 +56,27 @@
 
 <tr>
 <td class="tl"><fmt:message key="CycleTotal"/></td>
-<td><input type="text" name="financialProduct.cycleTotal" size="4" maxlength="4"/><input type="text" name="financialProduct.cycleUnit" size="2" maxlength="2" value="月"/><font class="fm">*</font></td>
+<td><input type="text" name="financialProduct.cycleTotal" size="10" maxlength="10"/><input type="text" name="financialProduct.cycleUnit" size="2" maxlength="2" value="月"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="CreditRate"/></td>
-<td><input type="text" name="financialProduct.creditRate" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td><input type="text" name="financialProduct.creditRate" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="FinancialMax"/></td>
-<td><input type="text" name="financialProduct.financialMax" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td><input type="text" name="financialProduct.financialMax" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
 <tr>
 <td class="tl"><fmt:message key="MinPayPercent"/></td>
-<td><input type="text" name="financialProduct.minPayPercent" size="5" maxlength="5"/><font class="fm">*</font></td>
+<td><input type="text" name="financialProduct.minPayPercent" size="10" maxlength="10"/><font class="fm">*</font></td>
+</tr>
+
+<tr>
+<td class="tl"><fmt:message key="CycleUnit"/></td>
+<td><input type="text" name="financialProduct.cycleUnit" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
 <tr>

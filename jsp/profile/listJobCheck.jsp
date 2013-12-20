@@ -63,11 +63,11 @@
 								</caption>
 								<tbody>
 									<tr>
-										<td class="textr"><fmt:message key="JobCheck" /></td>
-										<td><input name="styleName" value="${param.styleName }" /></td>
+										<td class="textr"><fmt:message key="JobCategory" /></td>
+										<td><input name="checkName" value="${param.checkName }" /></td>
 
 										<td class="textr"><fmt:message key="JobType" /></td>
-										<td><input name="styleName" value="${param.styleName }" /></td>
+										<td><input name="styleName"  value="${param.styleName }"/></td>
 
 									</tr>
 
@@ -93,7 +93,7 @@
 										<th><input name="choose" type="checkbox"
 											onclick="checkedAll(this.name,'id');" /> <fmt:message
 												key="ID" /></th>
-										<th><fmt:message key="CheckType" /></th>
+										<th><fmt:message key="JobCategory" /></th>
 										<th><fmt:message key="CheckName" /></th>
 										<th><fmt:message key="JobType" /></th>
 									</tr>
@@ -108,8 +108,8 @@
 											<td><input type="checkbox" name="id"
 												value="${jobCheck.id }"></td>
 											<td><c:out value="${jobCheck.jobCategory }" /></td>
+											<td><c:out value="${jobCheck.checkName}" /></td>
 											<td><c:out value="${jobCheck.checkType }" /></td>
-											<td><c:out value="${jobCheck.checkName }" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>

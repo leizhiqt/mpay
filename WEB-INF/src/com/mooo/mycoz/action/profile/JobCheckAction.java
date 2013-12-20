@@ -29,7 +29,12 @@ public class JobCheckAction extends BaseSupport {
 
 			value = request.getParameter("checkName");
 			if(!StringUtils.isNull(value)){
-				jobCheck.setLike("checkName", value);
+				jobCheck.setLike("jobCategory", value);
+			}
+			
+			String styleName=request.getParameter("styleName");
+			if(!StringUtils.isNull(styleName)){
+				jobCheck.setLike("checkType", styleName);
 			}
 			
 			jobCheck.addOrderBy("id DESC");
@@ -93,8 +98,12 @@ public class JobCheckAction extends BaseSupport {
 		String jobCheckId = null;
 		try{
 			jobCheckId = request.getParameter("id");
-			if(jobCheckId==null)
-				throw new Exception("Please chose object");
+			if(jobCheckId==null){
+				request.setAttribute("error", "请选择合同类型！");
+				return "list";
+						
+			}
+				
 			
 			JobCheck jobCheck = new JobCheck();
 			jobCheck.setId(new Integer(jobCheckId));

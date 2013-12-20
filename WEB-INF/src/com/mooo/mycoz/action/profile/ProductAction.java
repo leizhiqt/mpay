@@ -33,9 +33,13 @@ public class ProductAction extends BaseSupport {
 
 			
 			
-			value = request.getParameter("styleName");
+			value = request.getParameter("ProductName");
 			if(!StringUtils.isNull(value)){
 				dbobject.setLike("product", "productName", value);
+			}
+			value = request.getParameter("Brand");
+			if(!StringUtils.isNull(value)){
+				dbobject.setLike("product", "brand", value);
 			}
 			
 			
@@ -66,7 +70,8 @@ public class ProductAction extends BaseSupport {
 	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-
+			//new Product().retrieve();
+		//request.setAttribute("product", new Product().retrieve(););
 		return "success";
 	}
 	
@@ -103,8 +108,10 @@ public class ProductAction extends BaseSupport {
 		String productId = null;
 		try{
 			productId = request.getParameter("id");
-			if(productId==null)
-				throw new Exception("Please chose object");
+			if(productId==null){
+				request.setAttribute("error", "请选择产品！");
+				return "list";
+			}
 			
 			Product product = new Product();
 			product.setId(new Integer(productId));

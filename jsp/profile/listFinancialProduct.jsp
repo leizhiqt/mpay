@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-<title><fmt:message key="Product"/></title>
+<title><fmt:message key="FinancialProduct"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
@@ -63,7 +63,7 @@
 	<td><input name="creditName" value="${param.creditName }"/></td>
 	
 	<td  class="textr"><fmt:message key="CreditRate"/></td>
-	<td><input name="creditName" value="${param.creditName }"/></td>
+	<td><input name="rate" value="${param.rate }"/></td>
 </tr>
 
 </tbody>
@@ -91,6 +91,9 @@
 <th><fmt:message key="CycleUnit"/></th>
 <th><fmt:message key="CreditRate"/></th>
 <th><fmt:message key="Product"/></th>
+<th><fmt:message key="MinPayPercent"/></th>
+<th><fmt:message key="FinancialMax"/></th>
+
 </tr>
 </thead>
 
@@ -103,6 +106,8 @@
 <td><c:out value="${item.financialProduct.cycleUnit }"/></td>
 <td><fmt:formatNumber value="${item.financialProduct.creditRate }" type="percent" maxFractionDigits="5"/></td>
 <td><c:out value="${item.product.productName }"/></td>
+<td><c:out value="${item.financialProduct.minPayPercent }"/></td>
+<td><c:out value="${item.financialProduct.financialMax }"/></td>
 </tr>
 </c:forEach>
 </tbody>

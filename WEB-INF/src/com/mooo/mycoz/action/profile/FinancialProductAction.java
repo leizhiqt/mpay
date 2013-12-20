@@ -33,9 +33,13 @@ public class FinancialProductAction extends BaseSupport {
 
 			dbobject.setForeignKey("financialProduct", "productId", "product", "id");
 			
-			value = request.getParameter("financialName");
+			value = request.getParameter("creditName");
 			if(!StringUtils.isNull(value)){
 				dbobject.setLike("financialProduct", "financialName", value);
+			}
+			String rate=request.getParameter("creditName");
+			if(!StringUtils.isNull(rate)){
+				dbobject.setLike("financialProduct", "financialName", rate);
 			}
 			
 			dbobject.setRetrieveField("financialProduct", "id");
@@ -43,6 +47,8 @@ public class FinancialProductAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("financialProduct", "cycleUnit");
 			dbobject.setRetrieveField("financialProduct", "creditRate");
+			dbobject.setRetrieveField("financialProduct", "financialMax");
+			dbobject.setRetrieveField("financialProduct", "minPayPercent");
 			dbobject.setRetrieveField("product", "productName");
 
 			dbobject.setOrderBy("financialProduct", "id", "DESC");
@@ -106,17 +112,19 @@ public class FinancialProductAction extends BaseSupport {
 		String financialProductId = null;
 		try{
 			financialProductId = request.getParameter("id");
-			if(financialProductId==null)
+			if(financialProductId==null){
 				throw new Exception("Please chose object");
-			
+			}		
 			FinancialProduct financialProduct = new FinancialProduct();
 			financialProduct.setId(new Integer(financialProductId));
 			financialProduct.retrieve();
 
 			request.setAttribute("financialProduct", financialProduct);
+			request.setAttribute("products", IDGenerator.getValues(Product.class, "id", "productName"));
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
+			return "list";
 		}
 		return "success";
 	}

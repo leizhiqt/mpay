@@ -64,10 +64,10 @@
 								<tbody>
 									<tr>
 										<td class="textr"><fmt:message key="ProductName" /></td>
-										<td><input name="styleName" value="${param.styleName }" /></td>
+										<td><input name="ProductName" value="${param.styleName }" /></td>
 
 										<td class="textr"><fmt:message key="Brand" /></td>
-										<td><input name="styleName" value="${param.styleName }" /></td>
+										<td><input name="Brand" value="${param.styleName }" /></td>
 
 									</tr>
 
