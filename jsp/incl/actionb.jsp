@@ -33,6 +33,6 @@ if(key!=null){
 			</c:if>
 		</c:url>
 		
-		<input type="submit" value="<fmt:message key="${transfer.key}"/>" onclick="docommit('${transferURL}');return false;">
+		<input type="submit" style="height:25px;" value="<fmt:message key="${transfer.key}"/>" onclick="docommit('${transferURL}');return false;">
 	</c:if>
 </fmt:bundle>

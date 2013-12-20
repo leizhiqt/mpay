@@ -239,7 +239,6 @@ public class ClientInfoAction extends BaseSupport {
 			request.setAttribute("monthPay1", monthPay1);
 			// 首次支付
 			request.setAttribute("monthPay", df.format(monthPay));
-
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
@@ -308,6 +307,9 @@ public class ClientInfoAction extends BaseSupport {
 			uf.bindData(clientJob, "clientJob");
 			request.setAttribute("clientJob",clientJob );
 			
+			StringUtils.notEmpty(client.getIdNo());
+			StringUtils.notEmpty(client.getClientName());
+
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
@@ -403,7 +405,7 @@ public class ClientInfoAction extends BaseSupport {
 			clientJobTrack.setBranchId(branchId);
 			clientJobTrack.add(tx.getConnection());
 			tx.commit();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			tx.rollback();
 			if (log.isDebugEnabled())
@@ -444,6 +446,7 @@ public class ClientInfoAction extends BaseSupport {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
 		String clientJobId=request.getParameter("id");
+		String value = null;
 		try {
 			
 			if (log.isDebugEnabled())
@@ -518,6 +521,19 @@ public class ClientInfoAction extends BaseSupport {
 			jobType.setJobCategory("A");
 			
 			request.setAttribute("jobTypes",jobType.searchAndRetrieveList());
+			
+			JobCheck jobCheck = new JobCheck();
+			jobCheck.setJobCategory("A");
+			jobCheck.addGroupBy("checkType");
+			request.setAttribute("checkTypes", jobCheck.searchAndRetrieveList());
+			
+			JobCheck checkName = new JobCheck();
+			checkName.setJobCategory("A");
+			value = request.getParameter("checkType");
+			if( !StringUtils.isNull(value) ){
+				checkName.setCheckType(value);
+			}
+			request.setAttribute("checkNames",checkName.searchAndRetrieveList());
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);

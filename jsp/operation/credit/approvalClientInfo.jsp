@@ -55,17 +55,11 @@
 			<td width="8%">&nbsp;</td>
 			<td width="14%" colspan="3">&nbsp;</td>
 		</tr>
-		<tr>
-			<td colspan="9" align="center"style="background-color: #0285c7; line-height: 28px; font-size: 1.5em; color: white; padding-top: 5px;">
-		<center>
-			<h2><c:out value="状态"/> </h2>
-				</center>
-		  </td>
-		</tr>
+
 		
 		<tr>
 			<td colspan="9" align="center" bgcolor="#D6D6D6" style="background-color:#eafef3; line-height: 28px">
-						客户基本信息
+						<h2><strong>客户基本信息</strong></h2>
 					</td>
 				</tr>
 			</tbody>
@@ -87,8 +81,9 @@
 					客户照片:
 				</td>
 				<td align="left" colspan="2">
+				<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 					<c:if test="${!empty  client.photoPath}">
-						<img src='${client.photoPath} ' width="120">
+						<img src='${client.photoPath} 'class="pimg" width="120" height="120">
 					</c:if>
 				</td>
 		      </tr>
@@ -1502,8 +1497,10 @@
 		
 					<tbody>
 						<tr>
+						<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
 							<td>
+							
 								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
 							</td>
 							</c:forEach>
@@ -1750,50 +1747,19 @@
 								<tr>
 									<td class="tdLabel"></td>
 									<td>
-										<select name="clientJobCheck.jobCheckId" id="memoList1" onChange="copyMemo()" width="95%">
-											<option value="0">
-												请选择
+									<select name="checkType" onchange="document.forms[0].submit();">
+										<option selected="selected" value="">All</option>
+										<c:forEach var="items" items="${checkTypes}" varStatus="s">
+											<option value="${items.checkType}"
+									
+											<c:if test="${items.checkType==param.checkType}">
+												selected="selected"
+											</c:if>
+												>
+											${items.checkType}
 											</option>
-											<option value="1">
-												身份证审查
-											</option>
-											<option value="2">
-												征信核查
-											</option>
-											<option value="3">
-												网络审查
-											</option>
-											<option value="4">
-												114审查
-											</option>
-											<option value="5">
-												10000审查
-											</option>
-											<option value="6">
-												本人手机审查
-											</option>
-											<option value="7">
-												公司电话审查
-											</option>
-											<option value="8">
-												家庭座机审查
-											</option>
-											<option value="9">
-												亲属电话审查
-											</option>
-											<option value="10">
-												其他联系人手机审查
-											</option>
-											<option value="11">
-												工作/收入/学生证明文件审查
-											</option>
-		                                                   <option value="12">
-												居住证明文件审查
-											</option>
-		                                                   <option value="13">
-												其他
-											</option>
-							</select>
+										--</c:forEach>
+									</select>
 						</td>
 					</tr>
 		
@@ -1805,10 +1771,22 @@
 		  <tbody>
 		    <tr>
 		      <td class="tdLabel"></td>
-		      <td><select name="memoList" id="memoList2"  width="95%">
-		        <option value="${client.otherPhone}"> 请选择 </option>
-			       
-			        </select></td>
+		      <td>
+		      					<select name="clientJobCheck.jobCheckId">
+										<option selected="selected" value="">All</option>
+										<c:forEach var="items" items="${checkNames}" varStatus="s">
+											<option value="${items.id}"
+									
+											<c:if test="${items.id==clientJobCheck.jobCheckId}">
+												selected="selected"
+											</c:if>
+												>
+											${items.checkName}
+											</option>
+										--</c:forEach>
+									</select>
+			        
+			        </td>
 		        </tr>
 		      </tbody>
 		    </table></td>

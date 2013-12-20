@@ -35,11 +35,11 @@ function addfavorite()
 {
    if (document.all)
    {
-      window.external.addFavorite('http://www.9315.org','中国原酒溯源系统');
+      window.external.addFavorite('http://','汉易资本首页');
    }
    else if (window.sidebar)
    {
-      window.sidebar.addPanel('中国原酒溯源系统', 'http://www.9315.org', "");
+      window.sidebar.addPanel('汉易资本首页', 'http://', "");
    }
 } 
 	
