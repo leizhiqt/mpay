@@ -1,14 +1,16 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 //Pay System Database Version1.0
-CREATE TABLE `Store` (
+CREATE TABLE `ClientJobCheck` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `storeKey` varchar(6) DEFAULT NULL,
-  `storeName` varchar(16) DEFAULT NULL,
-  `storeAddress` varchar(32) DEFAULT NULL,
+  `jobTrackId` int(11) NOT NULL DEFAULT '0',
+  `jobCheckId` int(11) NOT NULL DEFAULT '0',
+  `checkRemark` varchar(32) DEFAULT NULL,
+  `branchId` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `storeKey` (`storeKey`),
-  UNIQUE KEY `storeName` (`storeName`),
-  KEY `storeAddress` (`storeAddress`)
+  KEY `jobTrackId` (`jobTrackId`),
+  KEY `jobCheckId` (`jobCheckId`),
+  CONSTRAINT `ClientJobCheck_ibfk_1` FOREIGN KEY (`jobTrackId`) REFERENCES `ClientJobTrack` (`id`),
+  CONSTRAINT `ClientJobCheck_ibfk_2` FOREIGN KEY (`jobCheckId`) REFERENCES `payShared`.`JobCheck` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 

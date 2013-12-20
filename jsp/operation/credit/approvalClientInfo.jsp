@@ -10,8 +10,8 @@
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
-<script type="text/javascript" src="jsp/js/myhy.js"></script>
 <script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="jsp/js/myhy.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
 
 
@@ -28,6 +28,7 @@
 
 <body>
 			<form method="post">
+			<input type="hidden" name="id" value="${clientJob.id }">
 			
 		<div id="gtop">
 			<jsp:include page="../../incl/action.jsp">
@@ -86,7 +87,9 @@
 					客户照片:
 				</td>
 				<td align="left" colspan="2">
-					<%-- <img src='${client.photoPath} ' width="120">--%>
+					<c:if test="${!empty  client.photoPath}">
+						<img src='${client.photoPath} ' width="120">
+					</c:if>
 				</td>
 		      </tr>
 			<tr>
@@ -1499,14 +1502,11 @@
 		
 					<tbody>
 						<tr>
+						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
 							<td>
-		                                         <div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
-								<img src="./_files/4_1_1386858164024_0.036046124514748756.jpeg" class="pimg" width="120" height="120">
+								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
 							</td>
-							<td>
-								<img src="./_files/4_1_1386858164028_0.5705359558075703.jpeg"  class="pimg" width="120" height="120">
-							</td>
-		
+							</c:forEach>
 						</tr>
 					</tbody>
 				</table>
@@ -1710,43 +1710,31 @@
 					  <td rowspan="700" align="center" id="guest_info1">
 				    <strong>征信注记 </strong></td>
 						<td align="center" id="guest_info31">
-							No
+							编号
 					  </td>
 						<td align="center" id="guest_info32">
-							CRT
+							审查步骤
 						</td>
 						<td align="center" id="guest_info33">
-							电话类型
+							结果
 						</td>
 						<td align="left" id="guest_info34" style="padding-left:4px;">
-			MEMO
+			审查员
 		</td>
 		<td align="left" id="guest_info35" style="padding-left:4px;">
-				TIME
+				审查时间
 			</td>
 		</tr>
 		
-		<tr>
-		
-			<td align="center" id="guest_info31">
-				1
-			</td>
-			<td align="center" id="guest_info32">222222</td>
-			<td align="center" id="guest_info33"></td>
-			<td align="left" id="guest_info34" style="padding-left:4px;"> 身份证审查 一致 </td>
-			<td align="left" id="guest_info35">&nbsp;</td>
-		 </tr>
-		
-		<tr>
-		
-			<td align="center" id="guest_info31">
-				2
-			</td>
-			<td align="center" id="guest_info32">&nbsp;</td>
-			<td align="center" id="guest_info33"></td>
-			<td align="left" id="guest_info34" style="padding-left:4px;">公司电话审查 信息核对一致</td>
-					<td align="left" id="guest_info35">&nbsp;</td>
-			  </tr>
+				<c:forEach var="item" items="${jobChecks }"  varStatus="status">
+				<tr>
+					<td><c:out value="${status.index }"/> </td>
+					<td><c:out value="${item.jobCheck.checkType }"/></td>
+					<td><c:out value="${item.jobCheck.checkName }"/></td>
+					<td><c:out value="${item.clientJobCheck.checkRemark }"/></td>
+					<td><c:out value="${item.jobCheck.checkType }"/></td>
+				 </tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<table width="98%" border="1" cellpadding="0" cellspacing="0"
@@ -1762,7 +1750,7 @@
 								<tr>
 									<td class="tdLabel"></td>
 									<td>
-										<select name="" id="memoList1" onChange="copyMemo()" width="95%">
+										<select name="clientJobCheck.jobCheckId" id="memoList1" onChange="copyMemo()" width="95%">
 											<option value="0">
 												请选择
 											</option>
@@ -1831,7 +1819,7 @@
 				备注
 			:</td>
 			<td id="guest_info72" colspan="3">
-				<input type="text" value="${client.otherPhone}" name="" id="memo" size="100">
+				<input type="text" name="clientJobCheck.checkRemark" value="${clientJobCheck.checkRemark}"  size="100">
 		  </td>
 		
 		 <td id="guest_info75" >
@@ -1841,7 +1829,12 @@
 		<tr>
 			<td height="25px" colspan="7"
 				align="center" bgcolor="#eafef3" style="background-color:#eafef3">
-		<input type="button" name="" value="添加" onClick="addVerifyMemo(2, 222222)"style="height: 22px;">
+				
+						<jsp:include page="../../incl/actionb.jsp">
+							<jsp:param name="key" value="Add" />
+							<jsp:param name="action" value="ClientInfo.do" />
+							<jsp:param name="method" value="processAddCheck" />
+						</jsp:include>
 					</td>
 		
 				</tr>
@@ -2118,41 +2111,32 @@
 				</tr>
 			</tbody>
 		</table>
+		
 		<table width="100%" border="0" cellpadding="0" cellspacing="0"
 			id="tab2">
 			<tbody>
 				<tr style="background-color: #EEEEEE;" height="25px">
-		<td width="48%" style="padding-left:530px;'">
-		<!-- <input type="button" value="审核批准" name="" onclick="" style="height:22px;"/> -->
-		<table>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						<div align="right">
-							<input type="submit" id="verifyForm_0" value="审核批准"
-								style="height: 22px;  font-size:12px;" onClick=changeStatus(2);;>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</td>
-		<td width="52%">
-			<!-- <input type="button" value="审核拒绝" name="" onclick="" style="height:22px;"/> -->
-		<table>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						<div align="right">
-							<input type="submit" id="verifyForm_2" value="审核拒绝"
-								style="height: 22px; margin-right: 100%; font-size:12px;"
-							onClick=changeStatus(6);;>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
+					<td width="48%" style="padding-left:530px;'">
+						<select name="clientJobTrack.jobTypeId" >
+							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
+								<option value="${jobType.id}"
+						
+								<c:if test="${jobType.id==param.clientJobTrack.jobTypeId}">
+									selected="selected"
+								</c:if>
+									>
+								${jobType.jobName}
+								</option>
+							--</c:forEach>
+						</select>
+					</td>
+					<td width="52%" style="height: 22px;">
+						<jsp:include page="../../incl/actionb.jsp">
+							<jsp:param name="key" value="Confirm" />
+							<jsp:param name="action" value="ClientInfo.do" />
+							<jsp:param name="method" value="processApproval" />
+						</jsp:include>
+					</td>
 			</tr>
 		</tbody>
 					</table>

@@ -22,14 +22,17 @@ import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
+import com.mooo.mycoz.dbobj.wineBranch.ClientJobCheck;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
+import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.UploadFile;
 import com.mooo.mycoz.framework.util.IDGenerator;
+import com.mooo.mycoz.framework.util.ParamUtil;
 
 public class ClientInfoAction extends BaseSupport {
 
@@ -283,18 +286,34 @@ public class ClientInfoAction extends BaseSupport {
 			// 处理户籍地址
 			AddressBook censusAddressBook = new AddressBook();
 			uf.bindData(censusAddressBook, "censusAddressBook");
-			// ParamUtil.bindData(request, censusAddressBook,
-			// "censusAddressBook");
+			request.setAttribute("censusAddressBook",censusAddressBook );
+
+			Client client = new Client();
+			uf.bindData(client, "client");
+			request.setAttribute("client",client );
+			
+			AddressBook livingAddressBook = new AddressBook();
+			uf.bindData(livingAddressBook, "livingAddressBook");
+			request.setAttribute("livingAddressBook",livingAddressBook );
+			
+			AddressBook homeAddressBook = new AddressBook();
+			uf.bindData(homeAddressBook, "homeAddressBook");
+			request.setAttribute("homeAddressBook",homeAddressBook );
+			
+			AddressBook officeAddressBook = new AddressBook();
+			uf.bindData(officeAddressBook, "officeAddressBook");
+			request.setAttribute("officeAddressBook",officeAddressBook );
+			
+			ClientJob clientJob = new ClientJob();
+			uf.bindData(clientJob, "clientJob");
+			request.setAttribute("clientJob",clientJob );
+			
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
 			censusAddressBook.setBranchId(branchId);
 			censusAddressBook.add(tx.getConnection());
 			// 处理现居地址
-			AddressBook livingAddressBook = new AddressBook();
-			// ParamUtil.bindData(request, livingAddressBook,
-			// "livingAddressBook");
-			uf.bindData(livingAddressBook, "livingAddressBook");
 			int livingAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			livingAddressBook.setId(livingAddressBookId);
@@ -302,46 +321,37 @@ public class ClientInfoAction extends BaseSupport {
 
 			livingAddressBook.add(tx.getConnection());
 			// 处理家庭成員地址
-			AddressBook homeAddressBook = new AddressBook();
-			// ParamUtil.bindData(request, homeAddressBook, "homeAddressBook");
-			uf.bindData(homeAddressBook, "homeAddressBook");
 			int homeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			homeAddressBook.setId(homeAddressBookId);
 			homeAddressBook.setBranchId(branchId);
 			homeAddressBook.add(tx.getConnection());
+			
 			// 处理单位地址
-			AddressBook officeAddressBook = new AddressBook();
-			// ParamUtil.bindData(request, homeAddressBook,
-			// "officeAddressBook");
-			uf.bindData(officeAddressBook, "officeAddressBook");
-
 			int officeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			officeAddressBook.setId(officeAddressBookId);
 			officeAddressBook.setBranchId(branchId);
 			officeAddressBook.add(tx.getConnection());
+			
 			// 处理基本信息
-			Client client = new Client();
-
 			int clientId = IDGenerator.getNextID(tx.getConnection(),
 					Client.class);
-
-			// ParamUtil.bindData(request, client, "client");
-			uf.bindData(client, "client");
-			request.setAttribute("client",client );
-
 			client.setId(clientId);
 			client.setLivingAddressBookId(livingAddressBookId);
 			client.setOfficeAddressBookId(officeAddressBookId);
 			client.setHomeAddressBookId(homeAddressBookId);
 			client.setCensusAddressBookId(censusAddressBookId);
 			client.setBranchId(branchId);
+			if(pictureName!=null && pictureName.length>0 )
+				client.setPhotoPath(sPath + pictureName[0]);
+
 			client.add(tx.getConnection());
 
 			// 处理文件图片
-			for (int i = 0; i < pictureName.length; i++) {
+			for (int i = 1; i < pictureName.length; i++) {
 				System.out.println("pictureName" + pictureName[i]);
+				
 				ClientDoc clientDoc = new ClientDoc();
 				int clientDocId = IDGenerator.getNextID(tx.getConnection(),
 						ClientDoc.class);
@@ -351,9 +361,6 @@ public class ClientInfoAction extends BaseSupport {
 				clientDoc.setId(clientDocId);
 				clientDoc.add(tx.getConnection());
 			}
-
-			ClientJob clientJob = new ClientJob();
-			uf.bindData(clientJob, "clientJob");
 
 			int clientJobId = IDGenerator.getNextID(tx.getConnection(),
 					ClientJob.class);
@@ -445,6 +452,7 @@ public class ClientInfoAction extends BaseSupport {
 			if(clientJobId==null || clientJobId.equals("")){
 				throw new Exception("请选择合同");
 			}
+			
 			ClientJob clientJob = new ClientJob();
 			clientJob.setId(new Integer(clientJobId));
 			clientJob.retrieve();
@@ -455,6 +463,31 @@ public class ClientInfoAction extends BaseSupport {
 			client.retrieve();
 			request.setAttribute("client", client);
 			
+			ClientDoc clientDoc = new ClientDoc();
+			clientDoc.setClientId(client.getId());
+			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
+
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(clientJob.getId());
+			clientJobTrack.setProcessId(-1);
+			
+			if(clientJobTrack.count()>0){
+				clientJobTrack.retrieve();
+
+				MultiDBObject dbobject = new MultiDBObject();
+	
+				dbobject.addTable(ClientJobCheck.class, "clientJobCheck");
+				dbobject.addTable(JobCheck.class, "jobCheck");
+				dbobject.setForeignKey("clientJobCheck", "jobCheckId", "jobCheck", "id");
+				dbobject.setField("clientJobCheck", "jobTrackId",clientJobTrack.getId());
+				
+				dbobject.setRetrieveField("jobCheck", "checkType");
+				dbobject.setRetrieveField("jobCheck", "checkName");
+				dbobject.setRetrieveField("clientJobCheck", "checkRemark");
+	
+				request.setAttribute("jobChecks", dbobject.searchAndRetrieveList());
+			}
+			
 			AddressBook censusAddressBook =new AddressBook();
 			censusAddressBook.setId(client.getCensusAddressBookId());
 			censusAddressBook.retrieve();
@@ -464,14 +497,12 @@ public class ClientInfoAction extends BaseSupport {
 			homeAddressBook.setId(client.getHomeAddressBookId());
 			homeAddressBook.retrieve();
 			request.setAttribute("homeAddressBook", homeAddressBook);
-
 			
 			AddressBook officeAddressBook =new AddressBook();
 			officeAddressBook.setId(client.getOfficeAddressBookId());
 			officeAddressBook.retrieve();
 			request.setAttribute("officeAddressBook", officeAddressBook);
 
-			
 			AddressBook livingAddressBook =new AddressBook();
 			livingAddressBook.setId(client.getLivingAddressBookId());
 			livingAddressBook.retrieve();
@@ -483,107 +514,10 @@ public class ClientInfoAction extends BaseSupport {
 			financialProduct.retrieve();
 			request.setAttribute("financialProduct", financialProduct);
 			
+			JobType jobType = new JobType();
+			jobType.setJobCategory("A");
 			
-			
-			/*
-			MultiDBObject dbobject = new MultiDBObject();
-
-			dbobject.addTable(Client.class, "client");
-			dbobject.addTable(ClientJob.class, "clientJob");
-			dbobject.addTable(ClientJobTrack.class, "clientJobTrack");
-			dbobject.addTable(FinancialProduct.class, "financialProduct");
-			dbobject.addTable(JobType.class, "jobType");
-			dbobject.addTable(User.class, "user");
-
-			dbobject.setForeignKey("clientJob", "clientId", "client", "id");
-			dbobject.setForeignKey("clientJob", "financialProductId",
-					"financialProduct", "id");
-			dbobject.setForeignKey("clientJobTrack", "clientJobId",
-					"clientJob", "id");
-			dbobject.setForeignKey("clientJobTrack", "jobTypeId", "jobType",
-					"id");
-			dbobject.setForeignKey("clientJobTrack", "userId", "user", "id");
-
-			dbobject.setField("clientJobTrack", "processId", 0);
-			dbobject.setField("clientJob", "id",  Integer.parseInt(clientJobId));
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-			dbobject.setRetrieveField("client", "id");
-			dbobject.setRetrieveField("client", "idNo");
-			dbobject.setRetrieveField("client", "clientName");
-			dbobject.setRetrieveField("client", "photoPath");
-			dbobject.setRetrieveField("client", "idEndDate");
-			dbobject.setRetrieveField("client", "idValidDate");
-			dbobject.setRetrieveField("client", "idAuthority");
-			dbobject.setRetrieveField("client", "otherNo");
-			dbobject.setRetrieveField("client", "age");
-			dbobject.setRetrieveField("client", "mobilePhone");
-			dbobject.setRetrieveField("client", "mobileAddress");
-			dbobject.setRetrieveField("client", "sex");
-			dbobject.setRetrieveField("client", "marry");
-			dbobject.setRetrieveField("client", "childs");
-			dbobject.setRetrieveField("client", "housing");
-			dbobject.setRetrieveField("client", "educationId");
-			dbobject.setRetrieveField("client", "homePhoneName");
-			dbobject.setRetrieveField("client", "homePhone");
-			dbobject.setRetrieveField("client", "email");
-			dbobject.setRetrieveField("client", "spuseName");
-			dbobject.setRetrieveField("client", "spuseMobile");
-			dbobject.setRetrieveField("client", "idSpuse");
-			dbobject.setRetrieveField("client", "spuseHirer");
-			dbobject.setRetrieveField("client", "spuseOfficePhone");
-			dbobject.setRetrieveField("client", "spuseExtPhone");
-			dbobject.setRetrieveField("client", "censusAddressBookId");
-			dbobject.setRetrieveField("client", "livingAddressBookId");
-			dbobject.setRetrieveField("client", "homeName");
-			dbobject.setRetrieveField("client", "homeType");
-			dbobject.setRetrieveField("client", "homeTelephone");
-			dbobject.setRetrieveField("client", "homeAddressBookId");
-			dbobject.setRetrieveField("client", "otherContacts");
-			dbobject.setRetrieveField("client", "otherNexus");
-			dbobject.setRetrieveField("client", "otherPhone");
-			dbobject.setRetrieveField("client", "masterInMonth");			
-			dbobject.setRetrieveField("client", "otherInMonth");
-			dbobject.setRetrieveField("client", "homeInMonth");
-			dbobject.setRetrieveField("client", "otherIncome");
-			dbobject.setRetrieveField("client", "onShortName");
-			dbobject.setRetrieveField("client", "onFullName");
-			dbobject.setRetrieveField("client", "onDivision");
-			dbobject.setRetrieveField("client", "onCompanyName");
-			dbobject.setRetrieveField("client", "onWorkTime");
-			dbobject.setRetrieveField("client", "onSector");
-			dbobject.setRetrieveField("client", "onOffice");
-			dbobject.setRetrieveField("client", "onFeature");
-			dbobject.setRetrieveField("client", "onOfficePhone");
-			dbobject.setRetrieveField("client", "onExtPhone");
-			dbobject.setRetrieveField("client", "officeAddressBookId");
-			dbobject.setRetrieveField("client", "financeName");
-			dbobject.setRetrieveField("client", "branchId");
-			dbobject.setRetrieveField("client", "selfAmount");
-			dbobject.setRetrieveField("client", "selfAmount");
-			dbobject.setRetrieveField("client", "selfAmount");
-			dbobject.setRetrieveField("client", "selfAmount");
-			
-			dbobject.setRetrieveField("clientJob", "id");
-			dbobject.setRetrieveField("clientJob", "creditAmount");
-			dbobject.setRetrieveField("clientJob", "totalPrice");
-			dbobject.setRetrieveField("clientJob", "selfAmount");
-			dbobject.setRetrieveField("clientJob", "firstpayAmount");
-			dbobject.setRetrieveField("clientJob", "monthOfPay");
-
-			dbobject.setRetrieveField("clientJob", "jobNo");
-			dbobject.setRetrieveField("clientJobTrack", "jobDate");
-			dbobject.setRetrieveField("clientJobTrack", "jobRemark");
-			dbobject.setRetrieveField("user", "name");
-			dbobject.setRetrieveField("jobType", "nextState");
-			dbobject.setRetrieveField("financialProduct", "cycleTotal");
-*/
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-//			request.setAttribute("clients", dbobject.searchAndRetrieveList());
+			request.setAttribute("jobTypes",jobType.searchAndRetrieveList());
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
@@ -592,22 +526,118 @@ public class ClientInfoAction extends BaseSupport {
 				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
 			e.printStackTrace();
-//			return "list";
 		}
 		return "success";
 	}
 
-	public String test(HttpServletRequest request,
+	public String processAddCheck(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
-			log.debug("processApproval");
-		return "success";
+			log.debug("processAddCheck");
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+
+		String clientJobId=request.getParameter("id");
+		try {
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+			
+			if(clientJobId==null || clientJobId.equals("")){
+				throw new Exception("请选择合同");
+			}
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(clientJobId));
+			clientJob.retrieve();
+			request.setAttribute("clientJob", clientJob);
+			
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(new Integer(clientJobId));
+			clientJobTrack.setProcessId(-1);
+			
+			int checkCount = clientJobTrack.count();
+			int nextId=0;
+			
+			if(checkCount<1){
+				nextId = IDGenerator.getNextInt(ClientJobTrack.class);
+				clientJobTrack.setId(nextId);
+				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.add();
+			}else{
+				clientJobTrack.retrieve();
+			}
+			
+			nextId = IDGenerator.getNextInt(ClientJobCheck.class);
+			ClientJobCheck clientJobCheck = new ClientJobCheck();
+			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
+			
+			clientJobCheck.setId(nextId);
+			clientJobCheck.setJobTrackId(clientJobTrack.getId());
+			clientJobCheck.add();
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			e.printStackTrace();
+		}
+		return "promptApproval";
 	}
 	
 	public String processApproval(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("processApproval");
-		return "success";
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+
+		String clientJobId=request.getParameter("id");
+		try {
+			
+			if (log.isDebugEnabled())
+				log.debug("clientJobId:"+clientJobId);
+			
+			if(clientJobId==null || clientJobId.equals("")){
+				throw new Exception("请选择合同");
+			}
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(clientJobId));
+			clientJob.retrieve();
+			request.setAttribute("clientJob", clientJob);
+			
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(new Integer(clientJobId));
+			clientJobTrack.setProcessId(-1);
+			
+			int checkCount = clientJobTrack.count();
+			
+			if(checkCount > 0 ){
+				ClientJobTrack orgTrack = new ClientJobTrack();
+				orgTrack.setClientJobId(new Integer(clientJobId));
+				int jobCount = orgTrack.count();
+				
+				orgTrack.setProcessId(0);
+				orgTrack.retrieve();
+				
+				orgTrack.setProcessId(jobCount);
+				orgTrack.update();
+				
+				clientJobTrack.retrieve();
+				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
+				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.setJobDate(new Date());
+				clientJobTrack.setProcessId(0);
+				clientJobTrack.update();
+			}
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+			e.printStackTrace();
+		}
+		return "list";
 	}
+	
 }

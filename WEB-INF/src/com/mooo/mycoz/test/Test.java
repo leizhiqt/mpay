@@ -230,7 +230,8 @@ public class Test {
 //		bd.dbToBean("payBranch","Client");
 //		bd.dbToBean("payBranch","ClientJob");
 
-		bd.dbToBean("payShared","JobCheck");
+//		bd.dbToBean("payShared","JobCheck");
+		bd.dbToBean("payBranch","ClientJobCheck");
 
 //		bd.dbToBean("payShared","Store");
 		
