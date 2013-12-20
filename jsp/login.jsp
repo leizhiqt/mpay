@@ -15,10 +15,10 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-	<title>四川原酒产业联盟</title>
-	<meta name="keywords" content="四川原酒,原酒,四川原酒产业联盟,86999.org,y9jy.com,scy9.com,门户,资讯" />
-	<meta name="description" content="中国白酒线上线下 防伪溯原立体平台 打造全国物联网,移动互联网,多方位立体服务用户体验" />
-	<meta name="application-name" content="原酒首页"/>
+	<title>汉易资本</title>
+	<meta name="keywords" content="汉易资本,门户,资讯" />
+	<meta name="description" content="汉易资本,多方位立体服务用户体验" />
+	<meta name="application-name" content="汉易资本首页"/>
 	<script type="text/javascript" src="jsp/js/util.js"></script>
 
 	<style type="text/css">
@@ -55,7 +55,7 @@
 	<c:param name="method">promptRegister</c:param>
 </c:url>
 
-<c:url value="skins/office/default/images/logo.png" var="logURL"/>
+<c:url value="skins/office/default/images/logo.gif" var="logURL"/>
 
 <c:url value="/Index.do" var="homeURL"/>
 

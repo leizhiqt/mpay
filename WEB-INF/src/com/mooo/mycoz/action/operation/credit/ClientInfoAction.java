@@ -371,15 +371,14 @@ public class ClientInfoAction extends BaseSupport {
 			financialProduct.setId(clientJob.getFinancialProductId());
 			financialProduct.retrieve();
 
-			int monthPay1 = 0;
+//			int monthPay1 = 0;
 
-			monthPay1 = (int) (clientJob.getCreditAmount() / financialProduct
-					.getCycleTotal());
-
-			clientJob.setFirstpayAmount(new Double(monthPay1));
-			clientJob.setMonthOfPay(clientJob.getCreditAmount()
-					- (financialProduct.getCycleTotal() - 1) * monthPay1);
-
+//			monthPay1 = (int) (clientJob.getCreditAmount() / financialProduct
+//					.getCycleTotal());
+//
+//			clientJob.setFirstpayAmount(new Double(monthPay1));
+//			clientJob.setMonthOfPay(clientJob.getCreditAmount()
+//					- (financialProduct.getCycleTotal() - 1) * monthPay1);
 			clientJob.setStoreId(1);
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
@@ -396,7 +395,6 @@ public class ClientInfoAction extends BaseSupport {
 			clientJobTrack.setUserId(sessionId);
 			clientJobTrack.setBranchId(branchId);
 			clientJobTrack.add(tx.getConnection());
-
 			tx.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -479,6 +477,13 @@ public class ClientInfoAction extends BaseSupport {
 			livingAddressBook.retrieve();
 			request.setAttribute("livingAddressBook", livingAddressBook);
 
+			//金融产品
+			FinancialProduct financialProduct=new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			request.setAttribute("financialProduct", financialProduct);
+			
+			
 			
 			/*
 			MultiDBObject dbobject = new MultiDBObject();

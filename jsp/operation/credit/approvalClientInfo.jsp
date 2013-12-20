@@ -14,6 +14,7 @@
 <script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
 
+
 <style>
 	td{
 		line-height:24px;
@@ -38,7 +39,7 @@
 		</div>
 		
 		
-		<table width="98%" border="0" cellpadding="0" cellspacing="0" id="tab2">
+		<table width="98%" border="0" cellpadding="0" cellspacing="0" id="tab2" >
 				<tbody>
 					<tr height="10px">
 		
@@ -124,7 +125,7 @@
 				<td align="right" id="guest_infoE">
 					身份证截止日期:
 				</td>
-				<td align="left" id="guest_infoF" style="padding-left:4px;"><fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/></td></td>
+				<td align="left" id="guest_infoF" style="padding-left:4px;"><fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
 				<td align="right" id="guest_infoG">
 					发证机关:
 				</td>
@@ -242,7 +243,7 @@
 											<td class="tdLabel"></td>
 											<td>
 												<input type="text" name="censusAddressBook.town" size="5"
-													maxlength="20" size="10" value="${client.otherPhone}" readonly="readonly"
+													maxlength="20" size="10" value="${censusAddressBook.town}" readonly="readonly"
 										id="verifyForm_contract_adTown" class="inputStyle1">
 								</td>
 							</tr>
@@ -257,7 +258,7 @@
 								<td class="tdLabel"></td>
 								<td>
 									<input type="text" name="censusAddressBook.street" size="10"
-										maxlength="20" size="10" value="${client.otherPhone}" readonly="readonly"
+										maxlength="20" size="10" value="${censusAddressBook.street}" readonly="readonly"
 										id="verifyForm_contract_adStreet" class="inputStyle1">
 								</td>
 							</tr>
@@ -856,13 +857,13 @@
 					家庭成员电话号:
 				</td>
 				<td width="17%" id="guest_info66" style="padding-left:4px;">
-					<input type="text" name="client.homeTelephone" value="${client.otherPhone}" size="10"/>
+					<input type="text" name="client.homeTelephone" value="${client.homeTelephone}" size="10"/>
 			  </td>
 			</tr>
 			<tr>
 				<td align="right" id="guest_info61">
 					联系人姓名:
-					<input type="button" value="查询合同" id="contactPhone" value="${client.otherPhone}" name="client.otherPhone"
+					<input type="button" value="查询合同" id="contactPhone"  
 						style="height: 20px; font-size:12px;" >
 				</td>
 				<td id="guest_info62" style="padding-left:4px;">
@@ -1612,15 +1613,15 @@
 				<td align="right" id="guest_info53">
 					商品总价:
 				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"><input size="10" type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly /></td>
+			  <td align="left" id="guest_info54" style="padding-left:4px;"><input size="10" type="text" name="clientJob.totalPrice"  value="${clientJob.totalPrice }" readonly /></td>
 				<td align="right" id="guest_info55">
 					贷款用途:
 				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;"><input size="10" type="text" name="clientJob.byUse" value="${bank2.bankName }"/></td>
+			  <td align="left" id="guest_info56" style="padding-left:4px;"><input size="10" type="text" name="clientJob.byUse" value="${clientJob.byUse }"/></td>
 				<td align="right" id="guest_info57">
 					自付金额(元):
 				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><input size="10" type="text" name="clientJob.selfAmount" value="${onePay }"/></td>
+			  <td align="left" id="guest_info58" style="padding-left:4px;"><input size="10" type="text" name="clientJob.selfAmount" value="${clientJob.selfAmount }"/></td>
 				<td align="right" id="guest_info59">
 					分期期数:
 				</td>
@@ -1631,19 +1632,19 @@
 				<td align="right" id="guest_info51">
 					每月还款额(元):
 				</td>
-			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${monthPay1 }"/></td>
+			  <td align="left" id="guest_info52" style="padding-left:4px;"><input size="10"  type="text" name="clientJob.creditAmount" value="${clientJob.monthOfPay }" readonly /></td>
 				<td align="right" id="guest_info53">
 					贷款本金(元):
 				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"><input size="10"  type="text" name="clientJob.creditAmount" value="${creditAmount }" readonly /></td>
+			  <td align="left" id="guest_info54" style="padding-left:4px;"><input size="10"  type="text" name="clientJob.creditAmount" value="${clientJob.creditAmount }" readonly /></td>
 				<td align="right" id="guest_info55">
 					首次还款日:
 				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;"><input size="10" type="text" name="clientJob.firstpayDate" readonly value="${bank2.bankName }"/></td>
+			  <td align="left" id="guest_info56" style="padding-left:4px;"><fmt:formatDate value="${clientJob.firstpayDate }" type="date" pattern="yyyy-MM-dd"/></td>
 				<td align="right" id="guest_info57">
 					每月还款日:
 				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><input size="10" type="text" name="clientJob.monthOfDate" readonly /></td>
+			  <td align="left" id="guest_info58" style="padding-left:4px;"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>
 		
 				<td align="right" id="guest_info59">
 					<table>
