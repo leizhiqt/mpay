@@ -84,7 +84,7 @@ function calc(val){
 						<td><c:out value="${UserName} "/>
 						<td align="right"  ><b style="color:red">*</b> 内部代码</td>
 						<td><select name="clientJob.privateKey" id="innerCode"
-							onchange="document.getElementById('innerCode').value += ' ' + this.options[this.selectedIndex].text"> 
+							> 
 							<option value="XY24324">XY24324</option>
 							<option value="XY24325">XY24325</option>
 							<option value="XY24326">XY24326</option>
@@ -138,13 +138,13 @@ function calc(val){
 
 						<td align="right"  ><b style="color:red">*</b> 性别</td>
 						<td align="left"><select name="client.sex" id="sex"
-							onchange="document.getElementById('sex').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="男">男</option>
 								<option value="女">女</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 婚姻状况</td>
 						<td align="left"><select name="client.marry" id="marry"
-							onchange="document.getElementById('marry').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="未婚">未婚</option>
 								<option value="已婚">已婚</option>
 								<option value="离异">离异</option>
@@ -159,13 +159,13 @@ function calc(val){
 				        <td align="left"><input type="text" name="client.childs" value="${client.childs }"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 住房</td>
 				        <td align="left"><select id="housing" name="client.housing"
-							onchange="document.getElementById('housing').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="自有房">自有房</option>
 								<option value="租房">租房</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 						<td align="left"><select name="client.educationId" id="educationId"
-							onchange="document.getElementById('educationId').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value=1>大學</option>
 								<option value=2>高中</option>
 						</select></td>
@@ -216,14 +216,14 @@ function calc(val){
 						maxlength="20" /></td>
 				      <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 			          <td align="left"><select id="province1" name="censusAddressBook.province" 
-						onchange="document.getElementById('province1').value += ' ' + this.options[this.selectedIndex].text">
+						>
 							<option value="四川省">四川省</option>
 							<option value="湖南省">湖南省</option>
 							<option value="河北省">河北省</option>
 					    </select></td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
 			          <td align="left"><select id="city1" name="censusAddressBook.city" 
-						onchange="document.getElementById('city1').value += ' ' + this.options[this.selectedIndex].text">
+						>
 							<option value="成都市">成都市</option>
 							<option value="內江市">內江市</option>
 					    </select></td>
@@ -273,14 +273,14 @@ function calc(val){
 								maxlength="10" /></td>
 						 <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 					     <td align="left"><select id="province2" name="livingAddressBook.province" 
-								onchange="document.getElementById('province2').value += ' ' + this.options[this.selectedIndex].text">
+								>
 									<option value="四川省">四川省</option>
 									<option value="湖南省">湖南省</option>
 									<option value="河北省">河北省</option>
 							</select></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
 					      <td align="left"><select id="city2" name="livingAddressBook.city" 
-					   			onchange="document.getElementById('city2').value += ' ' + this.options[this.selectedIndex].text">
+					   			>
 									<option value="成都市">成都市</option>
 									<option value="內江市">內江市</option>
 							</select></td>
@@ -335,14 +335,14 @@ function calc(val){
 							maxlength="20" /></td>
 					    <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 				        <td align="left"><select id="province3" name="homeAddressBook.province" 
-							onchange="document.getElementById('province3').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="四川省">四川省</option>
 								<option value="湖南省">湖南省</option>
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 				        <td align="left"><select id="city3" name="homeAddressBook.city"
-							onchange="document.getElementById('city3').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="成都市">成都市</option>
 								<option value="內江市">內江市</option>
 						</select></td>
@@ -382,7 +382,7 @@ function calc(val){
 				        <td align="left"><input type="text" name="client.otherContacts" value="${client.otherContacts }" data="msg20"  id="nam" onblur="calc(this)" /> <b id="msg20"></td>
 					    <td align="right"  >与申请人关系</td>
 				        <td align="left"><select id="otherNexus" name="client.otherNexus"
-							onchange="document.getElementById('otherNexus').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="朋友">朋友</option>
 								<option value="亲戚">亲戚</option>
 						</select></td>
@@ -453,7 +453,7 @@ function calc(val){
 						<td align="left"><input type="file" name="contract.fOther" value="${contract.fOther }"/></td>
 					    <td align="right">邮寄地址</td>
 						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
-							onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+							>
 					        <option value="成都市">成都市</option>
 						    <option value="重庆市">重庆市</option>
 				        </select></td>
@@ -505,7 +505,7 @@ function calc(val){
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 						<td align="left"><select id="onWorkTime" name="client.onWorkTime"
-							onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="0-1年">0-1年</option>
 								<option value="0-1年">1-2年</option>
 								<option value="0-1年">2-3年</option>
@@ -522,19 +522,19 @@ function calc(val){
 
 						<td align="right"  ><b style="color:red">*</b> 行业类别</td>
 						<td align="left"><select id="onWorkTime" name="client.onSector"
-							onchange="document.getElementById('postAddress').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="IT">IT</option>
 								<option value="金融">金融</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
 				        <td align="left"><select id="onOffice" name="client.onOffice"
-							onchange="document.getElementById('onOffice').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="经理">经理</option>
 								<option value="总监">总监</option>
 						</select></td>
 					    <td align="right"  >单位性质</td>
 						<td align="left"><select id="onFeature" name="client.onFeature"
-							onchange="document.getElementById('onFeature').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="国有企业">国有企业</option>
 								<option value="私有企业">私有企业</option>
 						</select></td>
@@ -557,14 +557,14 @@ function calc(val){
 							maxlength="20" /></td>
 						<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 				        <td align="left"><select id="province4" name="officeAddressBook.province"
-							onchange="document.getElementById('province4').value += ' ' + this.options[this.selectedIndex].text">
+							>
 								<option value="四川省">四川省</option>
 								<option value="湖南省">湖南省</option>
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 						<td align="left"><select id="city4" name="officeAddressBook.city"
-							onchange="document.getElementById('city4').value += ' ' + this.options[this.selectedIndex].text">
+						>
 								<option value="成都市">成都市</option>
 								<option value="內江市">內江市</option>
 						</select></td>
