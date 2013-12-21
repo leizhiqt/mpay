@@ -1,5 +1,7 @@
 package com.mooo.mycoz.test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import java.util.UUID;
 import com.mooo.mycoz.db.DbBridgingBean;
 import com.mooo.mycoz.db.pool.DbConnectionManager;
 import com.mooo.mycoz.dbobj.wineShared.Branch;
+import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
 
 public class Test {
 
@@ -215,7 +218,7 @@ public class Test {
 		}
 	}
 	
-	public void dbTools(){
+	public void dbTools() {
 		DbBridgingBean bd = new DbBridgingBean();
 //		bd.dbToBean("wineBranch","StorageAccount");
 //		bd.dbToBean("wineBranch","StorageDetail");
@@ -225,13 +228,14 @@ public class Test {
 		//bd.dbToBean("wineBranch","SampleTest");
 		
 		//bd.dbToBean("payShared","Certificate");
-		//bd.dbToBean("payShared","FinancialProduct");
+//		bd.dbToBean("payShared","FinancialProduct");
 //		bd.dbToBean("payBranch","AddressBook");
 //		bd.dbToBean("payBranch","Client");
 //		bd.dbToBean("payBranch","ClientJob");
+		bd.dbToBean("payBranch","ClientJobSale");
 
 //		bd.dbToBean("payShared","JobCheck");
-		bd.dbToBean("payBranch","ClientJobCheck");
+//		bd.dbToBean("payBranch","ClientJobCheck");
 
 //		bd.dbToBean("payShared","Store");
 		
@@ -249,6 +253,36 @@ public class Test {
 		
 //		DbTools dbTools = new DbTools();
 //		dbTools.exportDb();
+	/*	FinancialProduct bean = new FinancialProduct();
+		try {
+			Method getMethod = bean.getClass().getMethod("getCreditRate");
+			System.out.println(getMethod.getName());
+			
+			Class<?> cl = getMethod.getReturnType();
+			Method setMethod = bean.getClass().getMethod("setCreditRate",new Class[] { cl });
+
+			String value="0.1231";
+			
+			Method valueOf = cl.getMethod("valueOf",new Class[] { String.class });
+			Object valueObj = valueOf.invoke(cl, new Object[] { value });
+			setMethod.invoke(bean, new Object[] { valueObj });
+			
+			Object obj = getMethod.invoke(bean, null);
+			System.out.println("obj:"+obj);
+
+//			System.out.println(bean.getClass().getMethods());
+//			Method[] ms = bean.getClass().getMethods();
+//			for(int i=0;i<ms.length;i++){
+//				System.out.println(ms[i].getName()+"/"+ms[i].getReturnType());
+//			}
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+*/
 	}
 	
 	public void myJdbc(){

@@ -121,6 +121,7 @@ public class FinancialProductAction extends BaseSupport {
 			ParamUtil.bindData(request, financialProduct, "financialProduct");
 			
 			financialProduct.update(tx.getConnection());
+			
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();

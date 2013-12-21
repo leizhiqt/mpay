@@ -5,16 +5,12 @@
 	<html>
 <head>
 <title><fmt:message key="FinancialProduct" /></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css"
-	type="text/css" rel="stylesheet">
-<script type="text/javascript" src="jsp/js/util.js"></script>
-<link type="text/css" rel="stylesheet"
-	href="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112"
-	media="screen" />
-<script type="text/javascript"
-	src="skins/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
+<script type="text/javascript" src="jsp/js/calendar.js"></script>
+<script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
+<script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
 <body>
@@ -74,11 +70,14 @@
 										<td><input type="text" name="financialProduct.cycleUnit"
 											value="${financialProduct.cycleUnit }" size="6" maxlength="6" /></td>
 									</tr>
+									
+									
 									<tr>
 										<td class="tl"><fmt:message key="CreditRate" /></td>
-										<td><input type="text" name="financialProduct.creditRate "
+										<td><input type="text" name="financialProduct.creditRate"
 											value="${financialProduct.creditRate }" size="10" maxlength="10" /></td>
 									</tr>
+
 									<tr>
 										<td class="tl"><fmt:message key="FinancialMax" /></td>
 										<td><input type="text" name="financialProduct.financialMax"
@@ -87,10 +86,9 @@
 									
 									<tr>
 										<td class="tl"><fmt:message key="MinPayPercent" /></td>
-										<td><input type="text" name="financialProduct.minPayPercent "
+										<td><input type="text" name="financialProduct.minPayPercent"
 											value="${financialProduct.minPayPercent }" size="4" maxlength="4" /></td>
 									</tr>
-									
 							</table>
 						</td>
 					</tr>

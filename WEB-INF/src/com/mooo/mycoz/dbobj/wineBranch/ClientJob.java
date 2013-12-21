@@ -7,18 +7,11 @@ import com.mooo.mycoz.db.DBObject;
 public class ClientJob extends DBObject {
 	private Integer id;
 	private Integer clientId;
-	private Integer storeId;
-	private Integer oProductId;
-	private Double oPrice;
-	private Integer tProductId;
-	private Double tPrice;
 	private Double totalPrice;
 	private Double selfAmount;
 	private Integer financialProductId;
 	private String jobNo;
-	private Double creditAmount;
-	private Double firstpayAmount;
-	private Date firstpayDate;
+	private Double totalPay;
 	private Double monthOfPay;
 	private Date monthOfDate;
 	private String byUse;
@@ -40,46 +33,6 @@ public class ClientJob extends DBObject {
 
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
-	public Integer getOProductId() {
-		return oProductId;
-	}
-
-	public void setOProductId(Integer oProductId) {
-		this.oProductId = oProductId;
-	}
-
-	public Double getOPrice() {
-		return oPrice;
-	}
-
-	public void setOPrice(Double oPrice) {
-		this.oPrice = oPrice;
-	}
-
-	public Integer getTProductId() {
-		return tProductId;
-	}
-
-	public void setTProductId(Integer tProductId) {
-		this.tProductId = tProductId;
-	}
-
-	public Double getTPrice() {
-		return tPrice;
-	}
-
-	public void setTPrice(Double tPrice) {
-		this.tPrice = tPrice;
 	}
 
 	public Double getTotalPrice() {
@@ -114,28 +67,12 @@ public class ClientJob extends DBObject {
 		this.jobNo = jobNo;
 	}
 
-	public Double getCreditAmount() {
-		return creditAmount;
+	public Double getTotalPay() {
+		return totalPay;
 	}
 
-	public void setCreditAmount(Double creditAmount) {
-		this.creditAmount = creditAmount;
-	}
-
-	public Double getFirstpayAmount() {
-		return firstpayAmount;
-	}
-
-	public void setFirstpayAmount(Double firstpayAmount) {
-		this.firstpayAmount = firstpayAmount;
-	}
-
-	public Date getFirstpayDate() {
-		return firstpayDate;
-	}
-
-	public void setFirstpayDate(Date firstpayDate) {
-		this.firstpayDate = firstpayDate;
+	public void setTotalPay(Double totalPay) {
+		this.totalPay = totalPay;
 	}
 
 	public Double getMonthOfPay() {
