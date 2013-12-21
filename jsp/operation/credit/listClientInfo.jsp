@@ -47,17 +47,17 @@
 <caption>合同</caption>
 <tbody>
 <tr>
-	<td  class="textr">合同号</td>
-	<td><input type="text" name="rfidcode" value="${param.rfidcode }"/></td>
+	<td  class="textr"><fmt:message key="JobNo" /></td>
+	<td><input type="text" name="JobNo" value="${param.jobNo }"/></td>
 	
-	<td  class="textr"><fmt:message key="Rfidcode"/></td>
-	<td>
-		<input type="text" name="rfidcode" value="${param.rfidcode }"/>
-		<img src="jsp/images/miniSearch.gif" border=0 alt="<fmt:message key="choosedate"/>" onclick="openLookup('jsp/lookup/allClientInfoLookup.jsp?wineryId=${param.wineryId}','forms[0].rfidcode');return false;">
-	</td>
+	<td  class="textr"><fmt:message key="IdNo" /></td>
+	<td><input type="text" name="idNo" value="${param.idNo }"/> </td>
 	
-	<td  class="textr"><fmt:message key="JobType"/></td>
-	<td><input type="text" name="rfidcode" value="${param.rfidcode }"/></td>
+	<td  class="textr"><fmt:message key="Telephone" /></td>
+	<td><input type="text" name="telephone" value="${param.telephone }"/></td>
+	
+	<td  class="textr"><fmt:message key="Status" /></td>
+	<td><input type="text" name="status" value="${param.status }"/></td>
 </tr>
 
 <tr>
@@ -124,7 +124,7 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.clientJob.id }"></td>
 <td><c:out value="${item.clientJob.jobNo }"/></td>
-<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="date" /></td>
+<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="both" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>
 <td><c:out value="${item.client.idNo }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>

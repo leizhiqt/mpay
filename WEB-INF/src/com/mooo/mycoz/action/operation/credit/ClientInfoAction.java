@@ -1,7 +1,6 @@
 package com.mooo.mycoz.action.operation.credit;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -462,8 +461,10 @@ public class ClientInfoAction extends BaseSupport {
 				log.debug("clientJobId:"+clientJobId);
 			
 			if(clientJobId==null || clientJobId.equals("")){
-				throw new Exception("请选择合同");
+				request.setAttribute("error", "请选择合同");
+				return "list";
 			}
+			
 			
 			ClientJob clientJob = new ClientJob();
 			clientJob.setId(new Integer(clientJobId));
@@ -478,7 +479,14 @@ public class ClientInfoAction extends BaseSupport {
 			ClientDoc clientDoc = new ClientDoc();
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
-
+			
+			//带出身份证出现在其他合同
+			List <String > list=new ArrayList<String>();
+			ClientJob clientJob1=new ClientJob();
+			clientJob1.setClientId(clientJob.getClientId());
+			request.setAttribute("clientJobs", clientDoc.searchAndRetrieveList());
+				
+			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(clientJob.getId());
 			clientJobTrack.setProcessId(-1);
