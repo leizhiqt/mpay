@@ -1095,11 +1095,11 @@ table.tab_css_1 td.td_css{
 				<td align="right"  class="td_css">
 					贷款本金(元):
 				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out value="${clientJob.creditAmount }"  /></td>
+			  <td align="left" id="guest_info54" style="padding-left:4px;"></td>
 				<td align="right"  class="td_css">
 					首次还款日:
 				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;"><fmt:formatDate value="${clientJob.firstpayDate }" type="date" pattern="yyyy-MM-dd"/></td>
+			  <td align="left" id="guest_info56" style="padding-left:4px;"></td>
 				<td align="right"  class="td_css">
 					每月还款日:
 				</td>
@@ -1250,9 +1250,19 @@ table.tab_css_1 td.td_css{
 		</table>
 		 <table width="98%" class="tab_css_1">
           <tr>
-            <td class="td_css" align="right">CBSRC</td>
+            <td class="td_css" align="right">CC</td>
+            <td width="300px">
+           		<input type="text" name="codeOne" size="6" value=""> &nbsp;	
+              </td>
+            <td class="td_css" align="right">OC</td>
             <td>
-           			 <select name="clientJobTrack.jobTypeId" >
+            	<input type="text" name="codeOne" size="6" value=""> &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td class="td_css" align="right">初审结果</td>
+            <td>
+				 <select name="clientJobTrack.jobTypeId" >
 							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
 								<option value="${jobType.id}"
 						
@@ -1263,26 +1273,37 @@ table.tab_css_1 td.td_css{
 								${jobType.jobName}
 								</option>
 							--</c:forEach>
-						</select>
-              </td>
-            <td class="td_css" align="right">原因码</td>
-            <td>
-            	<input type="text" name="codeOne" size="6" value=""> &nbsp;
+						</select>&nbsp;
+				<input type="text" name="codeOne" size="6" value=""> &nbsp;
                 <input type="text" name="codeOne" size="6" value=""> &nbsp;
                 <input type="text" name="codeOne" size="6" value=""> 
-            </td>
-          </tr>
-          <tr>
-            <td class="td_css" align="right">初审结果</td>
-            <td>&nbsp;</td>
+			</td>
             <td class="td_css" align="right">原因：</td>
             <td>&nbsp;</td>
           </tr>
           <tr>
             <td class="td_css" align="right">复审结果</td>
-            <td>&nbsp;</td>
+            <td>
+				<select name="clientJobTrack.jobTypeId" >
+							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
+								<option value="${jobType.id}"
+						
+								<c:if test="${jobType.id==param.clientJobTrack.jobTypeId}">
+									selected="selected"
+								</c:if>
+									>
+								${jobType.jobName}
+								</option>
+							--</c:forEach>
+						</select>&nbsp;
+				<input type="text" name="codeOne" size="6" value=""> &nbsp;
+                <input type="text" name="codeOne" size="6" value=""> &nbsp;
+                <input type="text" name="codeOne" size="6" value=""> 
+			</td>
             <td class="td_css" align="right">原因：</td>
-            <td>&nbsp;</td>
+            <td>
+				 
+			</td>
           </tr>
         </table>
 		<table class="tab_css_1" width="100%" cellpadding="0" cellspacing="0"

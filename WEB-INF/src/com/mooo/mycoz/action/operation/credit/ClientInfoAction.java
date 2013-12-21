@@ -166,7 +166,11 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setForeignKey("clientJobTrack", "jobTypeId", "jobType",
 					"id");
 			dbobject.setForeignKey("clientJobTrack", "userId", "user", "id");
+//
+//			dbobject.setLessEqual(arg0, arg1, arg2);
+//			dbobject.setGreaterEqual(arg0, arg1, arg2);(arg0, arg1, arg2);
 
+			
 			dbobject.setField("clientJobTrack", "processId", 0);
 
 			dbobject.setRetrieveField("client", "id");
@@ -174,10 +178,8 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("client", "clientName");
 			
 			dbobject.setRetrieveField("clientJob", "id");
-			dbobject.setRetrieveField("clientJob", "creditAmount");
 			dbobject.setRetrieveField("clientJob", "totalPrice");
 			dbobject.setRetrieveField("clientJob", "selfAmount");
-			dbobject.setRetrieveField("clientJob", "firstpayAmount");
 			dbobject.setRetrieveField("clientJob", "monthOfPay");
 
 			dbobject.setRetrieveField("clientJob", "jobNo");
@@ -376,13 +378,13 @@ public class ClientInfoAction extends BaseSupport {
 					ClientJob.class);
 			clientJob.setId(clientJobId);
 			clientJob.setClientId(clientId);
-			clientJob.setOProductId(0);
-			clientJob.setTProductId(0);
-			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),
-					ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM", 6)));
+		//	clientJob.setOProductId(0);
+		//	clientJob.setTProductId(0);
+			//clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),
+				//	ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM", 6)));
 
-			clientJob.setCreditAmount(clientJob.getTotalPrice()
-					- clientJob.getSelfAmount());
+			//clientJob.setCreditAmount(clientJob.getTotalPrice()
+		//			- clientJob.getSelfAmount());
 
 			FinancialProduct financialProduct = new FinancialProduct();
 			financialProduct.setId(clientJob.getFinancialProductId());
@@ -396,7 +398,6 @@ public class ClientInfoAction extends BaseSupport {
 //			clientJob.setFirstpayAmount(new Double(monthPay1));
 //			clientJob.setMonthOfPay(clientJob.getCreditAmount()
 //					- (financialProduct.getCycleTotal() - 1) * monthPay1);
-			clientJob.setStoreId(1);
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
 

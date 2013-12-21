@@ -88,7 +88,6 @@ function calc(val){
 
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-<!-- ###中国省市二级联动菜单开始##如有问题请到http://hi.baidu.com/51site找我!##
 function Dsy()
 {
 this.Items = {};
@@ -122,6 +121,43 @@ if(++v<s.length){change(v);}
 }
 }
 
+function change1(v){
+var str="0";
+for(i=0;i<v;i++){ str+=("_"+(document.getElementById(st[i]).selectedIndex-1));};
+var ss=document.getElementById(st[v]);
+with(ss){
+length = 0;
+options[0]=new Option(opt0[v],opt0[v]);
+if(v && document.getElementById(st[v-1]).selectedIndex>0 || !v)
+{
+if(dsy.Exists(str)){
+ar = dsy.Items[str];
+for(i=0;i<ar.length;i++)options[length]=new Option(ar[i],ar[i]);
+if(v)options[1].selected = true;
+}
+}
+if(++v<st.length){change(v);}
+}
+}
+
+function change2(v){
+var str="0";
+for(i=0;i<v;i++){ str+=("_"+(document.getElementById(sk[i]).selectedIndex-1));};
+var ss=document.getElementById(sk[v]);
+with(ss){
+length = 0;
+options[0]=new Option(opt0[v],opt0[v]);
+if(v && document.getElementById(sk[v-1]).selectedIndex>0 || !v)
+{
+if(dsy.Exists(str)){
+ar = dsy.Items[str];
+for(i=0;i<ar.length;i++)options[length]=new Option(ar[i],ar[i]);
+if(v)options[1].selected = true;
+}
+}
+if(++v<sk.length){change(v);}
+}
+}
 var dsy = new Dsy();
 
 dsy.add("0",["北京市","天津市","河北省","山西省","内蒙古","辽宁省","吉林省","黑龙江省","上海市","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西自治区","海南省","重庆市","四川省","贵州省","云南省","西藏自治区","陕西省","甘肃省","青海省","宁夏回族自治区","新疆维吾尔自治区","香港特别行政区","澳门特别行政区","台湾省","其它"]);
@@ -148,7 +184,7 @@ dsy.add("0_18",["广州市","清远市市","韶关市","河源市","梅州市","
 dsy.add("0_19",["南宁市","桂林市","柳州市","梧州市","贵港市","玉林市","钦州市","北海市","防城港市","崇左市","百色市","河池市","来宾市","贺州市","其他"]);
 dsy.add("0_20",["海口市","三亚市","其他"]);
 dsy.add("0_21",["渝中区","大渡口区","江北区","沙坪坝区","九龙坡区","南岸区","北碚区","万盛区","双桥区","渝北区","巴南区","万州区","涪陵区","黔江区","长寿区","合川市","永川市","江津市","南川市","綦江县","潼南县","铜梁县","大足县","璧山县","垫江县","武隆县","丰都县","城口县","开县","巫溪县","巫山县","奉节县","云阳县","忠县","石柱土家族自治县","彭水苗族土家族自治县","酉阳土家族苗族自治县","秀山土家族苗族自治县","其他"]);
-dsy.add("0_22",["成都市","广元市","绵阳市","德阳市","南充市","广安市","遂宁市","内江市","乐山市","自贡市","泸州市","宜宾市","攀枝花市","巴中市","资阳市","眉山市","雅安","阿坝藏族羌族自治州","甘孜藏族自治州","凉山彝族自治州县","其他"]);
+dsy.add("0_22",["请选择","广元市","绵阳市","德阳市","南充市","广安市","遂宁市","内江市","乐山市","自贡市","泸州市","宜宾市","攀枝花市","巴中市","资阳市","眉山市","雅安","阿坝藏族羌族自治州","甘孜藏族自治州","凉山彝族自治州县","其他"]);
 dsy.add("0_23",["贵阳市","六盘水市","遵义市","安顺市","毕节地区","铜仁地区","黔东南苗族侗族自治州","黔南布依族苗族自治州","黔西南布依族苗族自治州","其他"]);
 dsy.add("0_24",["昆明市","曲靖市","玉溪市","保山市","昭通市","丽江市","普洱市","临沧市","宁德市","德宏傣族景颇族自治州","怒江傈僳族自治州","楚雄彝族自治州","红河哈尼族彝族自治州","文山壮族苗族自治州","大理白族自治州","迪庆藏族自治州","西双版纳傣族自治州","其他"]);
 dsy.add("0_25",["拉萨市","那曲地区","昌都地区","林芝地区","山南地区","日喀则地区","阿里地区","其他"]);
@@ -173,13 +209,26 @@ for(i=0;i<s.length-1;i++)
 document.getElementById(s[i]).onchange=new Function("change("+(i+1)+")");
 change(0);
 }
-var s1=["livingAddressBookprovince","livingAddressBookcity"];
-function setup1()
+
+var st=["livingAddressBookprovince","livingAddressBookcity"];
+var opt0 = ["请选择","请选择"];
+function setups()
 {
-for(i=0;i<s1.length-1;i++)
-document.getElementById(s1[i]).onchange=new Function("change("+(i+1)+")");
-change(0);
+for(i=0;i<st.length-1;i++)
+document.getElementById(st[i]).onchange=new Function("change1("+(i+1)+")");
+change1(0);
 }
+
+var sk=["homeAddressBookprovince","homeAddressBookcity"];
+var opt0 = ["请选择","请选择"];
+function setupss()
+{
+for(i=0;i<sk.length-1;i++)
+document.getElementById(sk[i]).onchange=new Function("change2("+(i+1)+")");
+change2(0);
+}
+
+
 //##联动菜单结束-->
 </SCRIPT>
 </head>
@@ -346,7 +395,7 @@ change(0);
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
 			          <td align="left"><select  name="censusAddressBook.city" id="censusAddressBookcity" 
 						>
-							<option value="成都市">成都市</option>
+							<option value="请选择">请选择</option>
 							<option value="內江市">內江市</option>
 					    </select></td>
 					</tr>
@@ -403,7 +452,7 @@ change(0);
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
 					      <td align="left"><select  name="livingAddressBook.city"  id="livingAddressBookcity"
 					   			>
-									<option value="成都市">成都市</option>
+									<option value="请选择">请选择</option>
 									<option value="內江市">內江市</option>
 							</select></td>
 					</tr>
@@ -477,7 +526,7 @@ change(0);
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 				        <td align="left"><select id="homeAddressBookcity" name="homeAddressBook.city"
 							>
-								<option value="成都市">成都市</option>
+								<option value="请选择">请选择</option>
 								<option value="內江市">內江市</option>
 						</select></td>
 					</tr>
@@ -595,7 +644,7 @@ change(0);
 					    <td align="right">邮寄地址</td>
 						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
 							>
-					        <option value="成都市">成都市</option>
+					        <option value="请选择">请选择</option>
 						    <option value="重庆市">重庆市</option>
 				        </select></td>
 					</tr>
@@ -706,7 +755,7 @@ change(0);
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
 						<td align="left"><select id="city4" name="officeAddressBook.city"
 						>
-								<option value="成都市">成都市</option>
+								<option value="请选择">请选择</option>
 								<option value="內江市">內江市</option>
 						</select></td>
 					</tr>
@@ -878,9 +927,15 @@ change(0);
 			<jsp:include page="../../incl/g_footer.jsp" />
 		</div>
 	</form>
-	<SCRIPT language="javascript">
-   			setup()
-	</SCRIPT>
+   <SCRIPT language="javascript">
+   setups()
+   </SCRIPT>
+   <SCRIPT language="javascript">
+   setup()
+   </SCRIPT>
+    <SCRIPT language="javascript">
+   setupss()
+   </SCRIPT>
 </body>
 
 	</html>

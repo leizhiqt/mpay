@@ -113,7 +113,6 @@
 <th>客户名称</th>
 <th>贷款本金</th>
 <th>分期数</th>
-<th>首月付</th>
 <th>月付</th>
 <th>销售代表</th>
 </tr>
@@ -130,7 +129,6 @@
 <td><c:out value="${item.client.clientName }"/></td>
 <td><c:out value="${item.clientJob.totalPrice-item.clientJob.selfAmount }"/></td>
 <td><c:out value="${item.financialProduct.cycleTotal }"/></td>
-<td><c:out value="${item.clientJob.firstpayAmount }"/></td>
 <td><c:out value="${item.clientJob.monthOfPay }"/></td>
 <td><c:out value="${item.user.name }"/></td>
 </tr>
