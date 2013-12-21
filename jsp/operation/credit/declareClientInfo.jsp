@@ -110,7 +110,7 @@ body,td,th {
 <td>金融策略</td>
 <td>分期付款数</td>
 <td>每月支付金额</td>
-<td>第一次支付</td>
+<td>首付金额</td>
 <td>贷款额</td>
 </tr>
 </thead>
@@ -131,7 +131,7 @@ body,td,th {
 
 <td><c:out value="${item.cycleTotal }"/> </td>
 <td><c:out value="${item.monthPay }"/> </td>
-<td><c:out value="${item.firstPay }"/> </td>
+<td><c:out value="${item.onePay }"/> </td>
 <td><c:out value="${item.creditAmount }"/> </td>
 </tr>
 

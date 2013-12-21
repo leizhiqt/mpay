@@ -651,7 +651,7 @@ function calc(val){
 							<input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
 						</td>
 					  	<td align="right">贷款用途</td>
-						<td><input type="text" name="clientJob.byUse"/></td>
+						<td align="left"><input type="text" name="clientJob.byUse" /></td>
 					</tr>
 					<tr>
 
@@ -669,30 +669,30 @@ function calc(val){
 						
 					</tr>
 					<tr>
-						<td align="right">首次还款额（元）</td>
-						<td align="left"><input type="text" name="clientJob.firstpayAmount" value="${monthPay }"/></td>
+						
 						<td align="right"  >贷款本金(元)</td>
 						<td align="left"><input type="text" name="clientJob.creditAmount" value="${creditAmount }" readonly /></td>
 						<td align="right"  >首次还款日</td>
 						<td align="left"><input type="text" name="clientJob.firstpayDate" onclick="displayCalendar(this,'yyyy-MM-dd');"  /></td>
-					 
+						<td  align="right">每月还款日</td>
+						<td align="left"><input type="text" name="clientJob.monthOfDate"  value ="${clientJob.monthOfDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>			 
 					</tr>
 
 					<tr>
-					    <td  align="right">每月还款日</td>
-						<td align="left"><input type="text" name="clientJob.monthOfDate"  value ="${clientJob.monthOfDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>
+					    
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
 						<td align="left"><input type="text" name="bank.debitCard"
 							maxlength="24" /></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
 				        <td align="left"><input type="text" name="bank.bankName"
 							maxlength="50" /></td>
+						<td  align="right">月花费(元/月)</td>
+						<td align="left"><input type="text" name="bank.monthPay" /></td>
 					
 					</tr>
 
 					<tr>
-						<td  align="right">月花费(元/月)</td>
-						<td align="left"><input type="text" name="bank.monthPay" /></td>
+						
 						<td align="right"  >第二银行卡号</td>
 						<td align="left"><input type="text" name="bank2.debitCard" /></td>
 						<td align="right"  >第二银行卡开户银行</td>

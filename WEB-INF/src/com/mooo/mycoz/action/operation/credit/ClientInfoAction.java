@@ -62,9 +62,13 @@ public class ClientInfoAction extends BaseSupport {
 			double onePayPercent = 0d;
 
 			value = request.getParameter("salePrice");
-			if (!StringUtils.isNull(value))
+			//处理首次进入
+			if(StringUtils.isNull(value)){
+				return "success";
+			}
+			if (!StringUtils.isNull(value)){
 				salePrice = new Double(value);
-
+			}
 			request.setAttribute("salePrice", value);
 
 			value = request.getParameter("onePay");
@@ -85,17 +89,15 @@ public class ClientInfoAction extends BaseSupport {
 
 			String[] products = request.getParameterValues("product");
 
-			if (products != null) {
-				request.setAttribute("cproducts", products);
-
+			
 				FinancialProduct FinancialProduct = null;
 				List fProucts = new ArrayList();
 
-				for (int i = 0; i < products.length; i++) {
-
+				
 					FinancialProduct financialProduct = new FinancialProduct();
-					financialProduct.setProductId(new Integer(products[i]));
-
+					//financialProduct.getFinancialMax()
+					//financialProduct.setProductId(new Integer(products[i]));
+					financialProduct.setGreaterEqual("financialMax", salePrice-onePay);
 					List<?> financials = financialProduct.searchAndRetrieveList();
 					
 					for(Object obj:financials){
@@ -104,31 +106,36 @@ public class ClientInfoAction extends BaseSupport {
 						Map<String, Object> rowm = new LinkedHashMap();
 
 						creditAmount = salePrice - onePay;
-						int monthPay1 = 0;
+						double monthPay1 = 0;
 						// 乘以税率后的总钱数
 						double afterCalculetedTotals = creditAmount
 								* (financialProduct.getCreditRate() + 1);
 						// 每月支付钱数
-						monthPay1 = (int) (afterCalculetedTotals / financialProduct
+						monthPay1 =  (afterCalculetedTotals / financialProduct
 								.getCycleTotal());
-
+						
+						//取整加1
+						int monthPay1Int=(int)monthPay1;
+						if(monthPay1-monthPay1Int>0){
+							monthPay1Int++;
+						}
 						rowm.put("finName", financialProduct.getFinancialName());
 						rowm.put("cycleTotal", financialProduct.getCycleTotal());
-						rowm.put("monthPay", monthPay1);
-						// 首月支付钱数(小数后3位)
-						java.text.DecimalFormat df = new java.text.DecimalFormat(
-								"#.###");
+						rowm.put("monthPay", monthPay1Int);
+						
+						
 						double d = afterCalculetedTotals
 								- (financialProduct.getCycleTotal() - 1)
 								* monthPay1;
-						rowm.put("firstPay", df.format(d));
+						//rowm.put("firstPay", df.format(d));
 						rowm.put("creditAmount", creditAmount);
+						rowm.put("onePay", onePay);
 						rowm.put("pId", financialProduct.getId());
 						fProucts.add(rowm);
 					}
-				}
+				
 				request.setAttribute("fProucts", fProucts);
-			}
+			
 
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
@@ -227,18 +234,20 @@ public class ClientInfoAction extends BaseSupport {
 			int monthPay1 = (int) (creditAmount
 					* (1 + financialProduct.getCreditRate()) / financialProduct
 					.getCycleTotal());
-			//处理小数位数
-			java.text.DecimalFormat df = new java.text.DecimalFormat(
-					"#.###");
+			
 			double monthPay = creditAmount
 					* (1 + financialProduct.getCreditRate())
-					- (financialProduct.getCycleTotal() - 1) * monthPay1;
-
+					/financialProduct.getCycleTotal() ;
+			
+			//取整加1
+			int monthPay1Int=(int)monthPay;
+			if(monthPay-monthPay1Int>0){
+				monthPay1Int++;
+			}
 			request.setAttribute("creditAmount", creditAmount);
 			// 每月支付
-			request.setAttribute("monthPay1", monthPay1);
-			// 首次支付
-			request.setAttribute("monthPay", df.format(monthPay));
+			request.setAttribute("monthPay1", monthPay1Int);
+		
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());

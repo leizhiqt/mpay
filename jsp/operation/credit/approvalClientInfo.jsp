@@ -6,7 +6,6 @@
 <head>
 <title><fmt:message key="ClientInfo" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="skins/office/default/loan.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
@@ -23,6 +22,39 @@
 #imglist {list-style:none; width:500px; margin:50px auto;}
 #imglist li {float:left; margin-top:10px;}
 
+body,table{
+ font-size:12px;
+}
+table{
+ table-layout:fixed;
+ empty-cells:show; 
+ border-collapse: collapse;
+ margin:0 auto;
+}
+
+h1,h2,h3{
+ font-size:12px;
+ margin:0;
+ padding:0;
+}
+ 
+.title { background: #FFF; border: 1px solid #9DB3C5; padding: 1px; width:90%;margin:20px auto; }
+ .title h1 { line-height: 31px; text-align:center;  background: #2F589C url(th_bg2.gif); background-repeat: repeat-x; background-position: 0 0; color: #FFF; }
+  .title th, .title td { border: 1px solid #CAD9EA; padding: 5px; }
+ 
+//样式一
+table.tab_css_1{
+ border:1px solid #cad9ea;
+ color:#666;
+}
+
+table.tab_css_1 td,table.tab_css_1 th{
+ border:1px solid #cad9ea;
+ padding:0 1em 0;
+}
+table.tab_css_1 td.td_css{
+ background-color:#f5fafe;
+}
 </style>
 </head>
 
@@ -40,7 +72,7 @@
 		</div>
 		
 		
-		<table width="98%" border="0" cellpadding="0" cellspacing="0" id="tab2" >
+		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0" >
 				<tbody>
 					<tr height="10px">
 		
@@ -66,18 +98,18 @@
 		</table>
 		
 		
-		 <table width="98%" border="1" cellpadding="0" cellspacing="0" class="lt"id="tab2">
+		 <table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0" >
 			<tbody>
 				<tr>
-					<td rowspan="1" align="center" id="guest_info1"><strong>
+					<td rowspan="1" align="center" class="td_css"><strong>
 					  客户资料
 					</strong></td>
 					<td>
-		  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+		  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 							id="tab3">
 							<tbody>
 								<tr>
-									<td colspan="6" align="right" style="background-color:#eafef3">
+									<td colspan="6" align="right"  class="td_css">
 					客户照片:
 				</td>
 				<td align="left" colspan="2">
@@ -88,66 +120,66 @@
 				</td>
 		      </tr>
 			<tr>
-				<td align="right" id="guest_infoA" style="height:24px">
+				<td align="right" id="guest_infoA"  class="td_css">
 					姓名:
 				</td>
 				<td align="left" id="guest_infoB" style="padding-left:4px;">
 					<input type="text" name="client.clientName" value="${client.clientName}"
 					maxlength="10" size="10"/></td>
-				<td align="right" id="guest_infoC" style="padding-left:4px;">
+				<td align="right" id="guest_infoC" style="padding-left:4px;" class="td_css">
 					SSI号码/学生号码:
 		                            </td>
 				<td align="left" id="guest_infoD" style="padding-left:4px;"><input size="10" type="text" name="client.otherNo" value="${ client.otherNo}"/></td>
-				<td align="right" id="guest_infoE">
+				<td align="right" id="guest_infoE" class="td_css">
 					性别:
 		                            </td>
 				<td align="left" id="guest_infoF" style="padding-left:4px;"><input size="10" type="text" name="client.sex" value="${ client.sex}"/></td>
-				<td align="right" id="guest_infoG">
+				<td align="right" id="guest_infoG" class="td_css">
 					申请人年龄:
 				</td>
 				<td align="left" id="guest_infoK" style="padding-left:4px;"><input size="10" type="text" name="client.age" value="${ client.age}"/></td>
 		
 		  </tr>
 			<tr>
-				<td align="right" id="guest_infoA">
+				<td align="right"  class="td_css">
 					身份证号码:
 				</td>
 				<td align="left" id="guest_infoB" style="padding-left:4px;"><input size="10" type="text" name="client.idNo" value="${ client.idNo}"
 					onblur="calcIdCard()" value="${client.idNo}"/></td>
 		
-				<td align="right" id="guest_infoC">
+				<td align="right" >
 					<input type="button" value="查询合同" id="userIdCode"
 						style="height: 22px;font-size:12px;">
 				</td>
-				<td align="left" id="guest_infoD" style="padding-left:4px;">6</td>
-				<td align="right" id="guest_infoE">
+				<td align="left"  style="padding-left:4px;">6</td>
+				<td align="right"  class="td_css">
 					身份证截止日期:
 				</td>
-				<td align="left" id="guest_infoF" style="padding-left:4px;"><fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
-				<td align="right" id="guest_infoG">
+				<td align="left" i style="padding-left:4px;"><fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
+				<td align="right" class="td_css">
 					发证机关:
 				</td>
-				<td align="left" id="guest_infoK" style="padding-left:4px;"><input size="10" type="text" name="client.idAuthority" value="${ client.idAuthority}"
+				<td align="left"  style="padding-left:4px;"><input size="10" type="text" name="client.idAuthority" value="${ client.idAuthority}"
 					maxlength="50" /></td> 
 		  </tr>
 			<tr>
 		
-				<td align="right" id="guest_infoA">
+				<td align="right" class="td_css">
 					住房:
 				</td>
-				<td align="left" id="guest_infoB" style="padding-left:4px;"><input size="10" type="text" name="client.housing" value="${ client.housing}"
+				<td align="left"  style="padding-left:4px;"><input size="10" type="text" name="client.housing" value="${ client.housing}"
 					maxlength="50" /></td>
-				<td align="right" id="guest_infoC">
+				<td align="right" class="td_css">
 					教育程度:
 				</td>
-				<td align="left" id="guest_infoD" style="padding-left:4px;"><input size="10" type="text" name="client.educationId"
+				<td align="left" style="padding-left:4px;"><input size="10" type="text" name="client.educationId"
 					maxlength="50" value="${client.educationId }"/></td>
-				<td align="right" id="guest_infoE">
+				<td align="right" class="td_css">
 					婚姻状况:
 				</td>
-				<td align="left" id="guest_infoF" style="padding-left:4px;"><input type="text" name="client.marry" value="${client.marry }"
+				<td align="left"  style="padding-left:4px;"><input type="text" name="client.marry" value="${client.marry }"
 					maxlength="50" size="10" /></td>
-				<td align="right" id="guest_infoG">
+				<td align="right" class="td_css">
 					子女数目:
 				</td>
 				<td align="left" id="guest_infoK" style="padding-left:4px;"><input size="10" type="text" name="client.childs" value="${client.childs }"/></td>
@@ -155,15 +187,15 @@
 		  </tr>
 			<tr>
 		
-				<td align="right" id="guest_infoA">
+				<td align="right" class="td_css" >
 					配偶姓名:
 				</td>
 				<td align="left" id="guest_infoB" style="padding-left:4px;"><input size="10" type="text" name="client.spuseName" maxlength="20" size="10" value="${client.spuseName}"/></td>
-				<td align="right" id="guest_infoC">
+				<td align="right" class="td_css">
 					身份证号码:
 				</td>
-				<td align="left" id="guest_infoD" style="padding-left:4px;"><input size="15" type="text" name="client.idSpuse" value="${client.idSpuse}"/></td>
-				<td align="right" id="guest_infoE">
+				<td align="left"  style="padding-left:4px;"><input size="15" type="text" name="client.idSpuse" value="${client.idSpuse}"/></td>
+				<td align="right" class="td_css">
 					电子邮箱:
 				</td>
 				<td align="left" id="guest_infoF" style="padding-left:4px;"><input size="10" type="text" name="client.homePhone" value="${client.homePhone}"/></td>
@@ -179,15 +211,15 @@
 		
 		
 		<tr>
-			<td align="center" id="guest_info1"><strong>
+			<td align="center" class="td_css"><strong>
 			  户籍地址
 			</strong></td>
 			<td>
-		<table width="100%" border="1" cellpadding="0" cellspacing="0" id="tab3">
+		<table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"">
 					<tbody>
 						<tr>
 							<td id="guest_info11">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -204,7 +236,7 @@
 								</table>
 		          	 </td>
 							<td id="guest_info12">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -220,7 +252,7 @@
 								</table>
 		           </td>
 							<td id="guest_info13">
-						  <table>
+						  <table class="tab_css_1">
 									<tbody>
 										<tr>
 											<td class="tdLabel"></td>
@@ -235,7 +267,7 @@
 								</table>
 		           </td>
 							<td id="guest_info14">
-								<table>
+								<table class="tab_css_1">
 									<tbody>
 										<tr>
 											<td class="tdLabel"></td>
@@ -250,7 +282,7 @@
 					</table>
 		        </td>
 				<td id="guest_info15">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -265,7 +297,7 @@
 					</table>
 		        </td>
 				<td id="guest_info16">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -282,7 +314,7 @@
 					</table>
 		        </td>
 				<td id="guest_info17">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -299,7 +331,7 @@
 		        </td>
 		
 				<td id="guest_info18">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -319,7 +351,7 @@
 					邮编:
 				</td>
 				<td id="guest_info21">
-				  <table>
+				  <table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -345,12 +377,12 @@
 			  现居住地址
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
 							<td id="guest_info11">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -367,7 +399,7 @@
 					</table>
 				</td>
 				<td id="guest_info12">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -383,7 +415,7 @@
 					</table>
 				</td>
 				<td id="guest_info13">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -398,7 +430,7 @@
 					</table>
 				</td>
 				<td id="guest_info14">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -413,7 +445,7 @@
 					</table>
 				</td>
 				<td id="guest_info15">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -428,7 +460,7 @@
 					</table>
 				</td>
 				<td id="guest_info16">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -445,7 +477,7 @@
 					</table>
 				</td>
 				<td id="guest_info17">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -466,7 +498,7 @@
 					居住(月):
 				</td>
 			  <td id="guest_info19">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -484,7 +516,7 @@
 					邮编:
 				</td>
 				<td id="guest_info21">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -509,12 +541,12 @@
 			<td align="center" id="guest_info1"><strong>
 			  公司地址</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
 							<td id="guest_info11">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -531,7 +563,7 @@
 					</table>
 				</td>
 				<td id="guest_info12">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -547,7 +579,7 @@
 					</table>
 				</td>
 				<td id="guest_info13">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -562,7 +594,7 @@
 					</table>
 				</td>
 				<td id="guest_info14">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -577,7 +609,7 @@
 					</table>
 				</td>
 				<td id="guest_info15">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -592,7 +624,7 @@
 					</table>
 				</td>
 				<td id="guest_info16">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -609,7 +641,7 @@
 					</table>
 				</td>
 				<td id="guest_info17">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -626,7 +658,7 @@
 				</td>
 		
 			  <td id="guest_info18">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -645,7 +677,7 @@
 					邮编:
 				</td>
 				<td id="guest_info21">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -672,12 +704,12 @@
 			  家庭成员地址
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
 							<td id="guest_info11">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -694,7 +726,7 @@
 					</table>
 				</td>
 				<td id="guest_info12">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -710,7 +742,7 @@
 					</table>
 				</td>
 				<td id="guest_info13">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -725,7 +757,7 @@
 					</table>
 				</td>
 				<td id="guest_info14">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -740,7 +772,7 @@
 					</table>
 				</td>
 				<td id="guest_info15">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -755,7 +787,7 @@
 					</table>
 				</td>
 				<td id="guest_info16">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -772,7 +804,7 @@
 					</table>
 				</td>
 				<td id="guest_info17">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -789,7 +821,7 @@
 				</td>
 		
 			  <td id="guest_info18">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -808,7 +840,7 @@
 					邮编:
 				</td>
 				<td id="guest_info21">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -836,7 +868,7 @@
 			  联系人信息
 			</strong></td>
 			<td>
-				<table width="100%" border="1" cellpadding="0" cellspacing="0" id="tab3">
+				<table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0" id="tab3">
 					<tbody>
 						<tr>
 							<td width="12%" align="right" id="guest_info61">
@@ -890,7 +922,7 @@
 			  电话
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -961,7 +993,7 @@
 			  所在单位信息
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -969,7 +1001,7 @@
 								单位名称或大学名称:
 							</td>
 							<td width="34%" align="left" id="guest_infoB">
-							  <table>
+							  <table class="tab_css_1">
 									<tbody>
 										<tr>
 											<td class="tdLabel"></td>
@@ -986,7 +1018,7 @@
 					单位/学校/个体全称:
 				</td>
 				<td width="36%" align="left" id="guest_infoD">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -1003,7 +1035,7 @@
 					单位性质:
 				</td>
 				<td width="2%" align="left" id="guest_infoF">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1020,7 +1052,7 @@
 				<td width="4%" align="right" id="guest_infoG">
 					任职部门或班级:
 				</td>
-				<td width="4%" align="left" id="guest_infoK"><table>
+				<td width="4%" align="left" id="guest_infoK"><table class="tab_css_1">
 				  <tbody>
 				    <tr>
 				      <td class="tdLabel"></td>
@@ -1036,7 +1068,7 @@
 					行业类别:
 				</td>
 				<td align="left" id="guest_infoB">
-				  <table>
+				  <table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1055,7 +1087,7 @@
 					职位:
 				</td>
 				<td align="left" id="guest_infoD">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1075,7 +1107,7 @@
 					</p>
 				</td>
 				<td align="left" id="guest_infoF">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1093,7 +1125,7 @@
 								现工作时间/大学开始时间(年):
 							</td>
 							<td align="left" id="guest_infoK">
-								<table>
+								<table class="tab_css_1">
 									<tbody>
 										<tr>
 											<td class="tdLabel"></td>
@@ -1119,7 +1151,7 @@
 			  收入资料
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -1163,12 +1195,12 @@
 			  文件
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
 							<td id="guest_infoM">
-								<table>
+								<table class="tab_css_1">
 		
 									<tbody>
 										<tr>
@@ -1192,7 +1224,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1217,7 +1249,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1241,7 +1273,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1266,7 +1298,7 @@
 				</td>
 				<td id="guest_infoM">
 		
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1291,7 +1323,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1316,7 +1348,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1345,7 +1377,7 @@
 			</tr>
 			<tr>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1366,7 +1398,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -1387,7 +1419,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -1409,7 +1441,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1434,7 +1466,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1458,7 +1490,7 @@
 					</table>
 				</td>
 				<td id="guest_infoM">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1493,7 +1525,7 @@
 			  上传的图片
 			</strong></td>
 			<td colspan="7">
-			  <table id="uploadfile">
+			  <table class="tab_css_1" id="uploadfile">
 		
 					<tbody>
 						<tr>
@@ -1514,7 +1546,7 @@
 			  商品1
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -1548,7 +1580,7 @@
 			  商品2
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -1583,7 +1615,7 @@
 			  销售顾问备注:
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0">
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0">
 					<tbody>
 						<tr>
 						  <td align="left" colspan="11">&nbsp;</td>
@@ -1599,7 +1631,7 @@
 			  信用信息
 			</strong></td>
 			<td>
-			  <table width="100%" border="1" cellpadding="0" cellspacing="0"
+			  <table class="tab_css_1" width="100%" border="1" cellpadding="0" cellspacing="0"
 					id="tab3">
 					<tbody>
 						<tr>
@@ -1644,7 +1676,7 @@
 			  <td align="left" id="guest_info58" style="padding-left:4px;"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>
 		
 				<td align="right" id="guest_info59">
-					<table>
+					<table class="tab_css_1">
 		
 						<tbody>
 							<tr>
@@ -1700,7 +1732,7 @@
 					</tr>
 				</tbody>
 			</table>
-		  <table width="98%" border="1" cellpadding="0" cellspacing="0"
+		  <table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0"
 				class="tabVir" id="signMemo">
 		<tbody>
 					<tr>
@@ -1734,7 +1766,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<table width="98%" border="1" cellpadding="0" cellspacing="0"
+		<table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0"
 			id="tab2">
 			<tbody>
 				<tr>
@@ -1742,7 +1774,7 @@
 		      <strong>添加新注记 </strong></td>
 				  <td width="9%" align="right" id="guest_info71">审查步骤:</td>
 					<td width="18%" id="guest_info72">
-					  <table>
+					  <table class="tab_css_1">
 							<tbody>
 								<tr>
 									<td class="tdLabel"></td>
@@ -1767,7 +1799,7 @@
 		  </table>
 		 </td>
 		<td width="19%" align="right" id="guest_info71">结果：</td>
-		<td width="34%" align="left" id="guest_info77"><table>
+		<td width="34%" align="left" id="guest_info77"><table class="tab_css_1">
 		  <tbody>
 		    <tr>
 		      <td class="tdLabel"></td>
@@ -1806,7 +1838,7 @@
 		 </tr>
 		<tr>
 			<td height="25px" colspan="7"
-				align="center" bgcolor="#eafef3" style="background-color:#eafef3">
+				align="center"  >
 				
 						<jsp:include page="../../incl/actionb.jsp">
 							<jsp:param name="key" value="Add" />
@@ -1818,7 +1850,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<table width="98%" border="1" cellpadding="0" cellspacing="0"
+		<table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0"
 			id="tab2">
 			<tbody>
 				<tr>
@@ -1828,7 +1860,7 @@
 				</tr>
 				<tr>
 					<td id="guest_info">
-						<table width="100%" border="0" cellpadding="0" cellspacing="0" id="tab3">
+						<table class="tab_css_1" width="100%" border="0" cellpadding="0" cellspacing="0" id="tab3">
 							<tbody>
 								<tr>
 									<td id="guest_info1">
@@ -1850,11 +1882,11 @@
 				</tr>
 				<tr>
 					<td id="guest_info">
-						<table width="100%" border="0" cellpadding="0" cellspacing="0" id="tab3">
+						<table class="tab_css_1" width="100%" border="0" cellpadding="0" cellspacing="0" id="tab3">
 							<tbody>
 								<tr>
 									<td>
-										<table width="100%" border="1" cellpadding="0"
+										<table class="tab_css_1" width="100%" border="1" cellpadding="0"
 											cellspacing="0" style="margin-bottom: 2px;">
 						<tbody>
 							<tr>
@@ -1897,7 +1929,7 @@
 									原因码:
 		                                                       </td>												
 								<td width="6%" id="guest_info95">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -1910,7 +1942,7 @@
 									</table>
 								</td>
 							  <td width="6%" id="guest_info96">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -1922,7 +1954,7 @@
 									</table>
 							  </td>
 							  <td width="6%" id="guest_info97">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -1954,7 +1986,7 @@
 									原因码
 								:</td>														
 						  <td width="6%" id="guest_info95">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -1967,7 +1999,7 @@
 									</table>
 								</td>
 							  <td width="6%" id="guest_info96">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -1979,7 +2011,7 @@
 									</table>
 							  </td>
 								<td width="6%" id="guest_info97">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -2013,7 +2045,7 @@
 									原因码
 								:</td>
 								<td width="6%" id="guest_info95">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -2026,7 +2058,7 @@
 									</table>
 								</td>
 								<td width="6%" id="guest_info96">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -2038,7 +2070,7 @@
 									</table>
 								</td>
 								<td width="6%" id="guest_info97">
-									<table>
+									<table class="tab_css_1">
 										<tbody>
 											<tr>
 												<td class="tdLabel"></td>
@@ -2067,13 +2099,13 @@
 				</tr>
 		  </tbody>
 		 </table>
-		<table width="100%" cellpadding="0" cellspacing="0"
+		<table class="tab_css_1" width="100%" cellpadding="0" cellspacing="0"
 			style="display: none;">
 		
 		<tbody>
 			<tr>
 				<td colspan="2">
-					<table>
+					<table class="tab_css_1">
 						<tbody>
 							<tr>
 								<td class="tdLabel"></td>
@@ -2090,7 +2122,7 @@
 			</tbody>
 		</table>
 		
-		<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		<table class="tab_css_1" width="100%" border="0" cellpadding="0" cellspacing="0"
 			id="tab2">
 			<tbody>
 				<tr style="background-color: #EEEEEE;" height="25px">
