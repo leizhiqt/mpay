@@ -10,10 +10,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
-import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
-import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
@@ -25,40 +23,26 @@ public class FinancialProductAction extends BaseSupport {
 	public String list(HttpServletRequest request,
 			HttpServletResponse response) {
 		String value = null;
-		//Integer sessionId = ActionSession.getInteger(request,ActionSession.USER_SESSION_KEY);
 		try {
-			MultiDBObject dbobject = new MultiDBObject();
-			dbobject.addTable(FinancialProduct.class, "financialProduct");
-			dbobject.addTable(Product.class, "product");
-
-			dbobject.setForeignKey("financialProduct", "productId", "product", "id");
+			 FinancialProduct financialProduct = new FinancialProduct();
 			
 			value = request.getParameter("creditName");
 			if(!StringUtils.isNull(value)){
-				dbobject.setLike("financialProduct", "financialName", value);
+				financialProduct.setLike("financialName", value);
 			}
 			String rate=request.getParameter("creditName");
 			if(!StringUtils.isNull(rate)){
-				dbobject.setLike("financialProduct", "financialName", rate);
+				financialProduct.setLike("financialName", rate);
 			}
-			
-			dbobject.setRetrieveField("financialProduct", "id");
-			dbobject.setRetrieveField("financialProduct", "financialName");
-			dbobject.setRetrieveField("financialProduct", "cycleTotal");
-			dbobject.setRetrieveField("financialProduct", "cycleUnit");
-			dbobject.setRetrieveField("financialProduct", "creditRate");
-			dbobject.setRetrieveField("financialProduct", "financialMax");
-			dbobject.setRetrieveField("financialProduct", "minPayPercent");
-			dbobject.setRetrieveField("product", "productName");
 
-			dbobject.setOrderBy("financialProduct", "id", "DESC");
+			financialProduct.addOrderBy("id DESC");
 
 			Page page = new Page();
-			page.buildComponent(request, dbobject.count());
-			dbobject.setRecord(page.getOffset(), page.getPageSize());
-			List<?> results = dbobject.searchAndRetrieveList();
+			page.buildComponent(request, financialProduct.count());
+			financialProduct.setRecord(page.getOffset(), page.getPageSize());
+			List<?> financials = financialProduct.searchAndRetrieveList();
 
-			request.setAttribute("results", results);
+			request.setAttribute("financials", financials);
 
 			if (log.isDebugEnabled())
 				log.debug("list success");
@@ -76,7 +60,6 @@ public class FinancialProductAction extends BaseSupport {
 		
 		if (log.isDebugEnabled())log.debug("promptAdd");
 
-		request.setAttribute("products", IDGenerator.getValues(Product.class, "id", "productName"));
 		return "success";
 	}
 	
@@ -120,7 +103,6 @@ public class FinancialProductAction extends BaseSupport {
 			financialProduct.retrieve();
 
 			request.setAttribute("financialProduct", financialProduct);
-			request.setAttribute("products", IDGenerator.getValues(Product.class, "id", "productName"));
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());

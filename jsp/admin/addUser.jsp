@@ -84,6 +84,23 @@
 <td><input type="text" name="user.mobile" size="11" maxlength="11"/><font class="fm">*</font></td>
 </tr>
 
+<tr>
+<td class="tl"><fmt:message key="Store"/></td>
+<td>
+<select name="user.storeId">
+	<c:forEach var="items" items="${stores}" varStatus="s">
+		<option value="${items.key}"
+
+		<c:if test="${items.key==param.user.storeId}">
+			selected="selected"
+		</c:if>
+			>
+		${items.value}
+		</option>
+	--</c:forEach>
+</select>
+</tr>
+
 </tbody>
 
 </table>

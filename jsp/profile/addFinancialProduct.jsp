@@ -79,25 +79,6 @@
 <td><input type="text" name="financialProduct.cycleUnit" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
-<tr>
-<td  class="tl"><fmt:message key="Product"/></td>
-<td>
-<select name="financialProduct.productId">
-	<c:forEach var="items" items="${products}" varStatus="s">
-		<option value="${items.key}"
-
-		<c:if test="${items.key==param.financialProduct.productId}">
-			selected="selected"
-		</c:if>
-			>
-		${items.value}
-		</option>
-	--</c:forEach>
-</select>
-<font class="fm">*</font>
-</td>
-</tr>
-
 </table>
 </td>
 </tr>

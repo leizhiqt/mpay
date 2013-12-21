@@ -291,7 +291,7 @@ public class IDGenerator {
 			if (!StringUtils.isNull(table)) {
 				sql += table;
 			}
-
+			sql += " WHERE id>0";
 			sql += " ORDER BY id";
 
 			conn = DbConnectionManager.getConnection();

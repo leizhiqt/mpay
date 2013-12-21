@@ -90,7 +90,6 @@
 <th><fmt:message key="CycleTotal"/></th>
 <th><fmt:message key="CycleUnit"/></th>
 <th><fmt:message key="CreditRate"/></th>
-<th><fmt:message key="Product"/></th>
 <th><fmt:message key="MinPayPercent"/></th>
 <th><fmt:message key="FinancialMax"/></th>
 
@@ -98,16 +97,15 @@
 </thead>
 
 <tbody>
-<c:forEach var="item" items="${results}" varStatus="status">
+<c:forEach var="financial" items="${financials}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-<td><input type="checkbox" name="id" value="${item.financialProduct.id }"> </td>
-<td><c:out value="${item.financialProduct.financialName }"/></td>
-<td><c:out value="${item.financialProduct.cycleTotal }"/></td>
-<td><c:out value="${item.financialProduct.cycleUnit }"/></td>
-<td><fmt:formatNumber value="${item.financialProduct.creditRate }" type="percent" maxFractionDigits="5"/></td>
-<td><c:out value="${item.product.productName }"/></td>
-<td><c:out value="${item.financialProduct.minPayPercent }"/></td>
-<td><c:out value="${item.financialProduct.financialMax }"/></td>
+<td><input type="checkbox" name="id" value="${financial.id }"> </td>
+<td><c:out value="${financial.financialName }"/></td>
+<td><c:out value="${financial.cycleTotal }"/></td>
+<td><c:out value="${financial.cycleUnit }"/></td>
+<td><fmt:formatNumber value="${financial.creditRate }" type="percent" maxFractionDigits="5"/></td>
+<td><c:out value="${financial.minPayPercent }"/></td>
+<td><c:out value="${financial.financialMax }"/></td>
 </tr>
 </c:forEach>
 </tbody>

@@ -9,7 +9,6 @@ public class FinancialProduct extends DBObject {
 	private String cycleUnit;
 	private Double creditRate;
 	private Double financialMax;
-	private Integer productId;
 	private Double minPayPercent;
 
 	public Integer getId() {
@@ -58,14 +57,6 @@ public class FinancialProduct extends DBObject {
 
 	public void setFinancialMax(Double financialMax) {
 		this.financialMax = financialMax;
-	}
-
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
 	}
 
 	public Double getMinPayPercent() {

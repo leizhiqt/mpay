@@ -138,7 +138,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -146,6 +146,7 @@
 <tr>
 <th><input name="choose" type="checkbox" onclick="checkedAll(this.name,'id');"/><fmt:message key="ID"/></th>
 <th><fmt:message key="BranchCategory"/></th>
+<th><fmt:message key="Store"/></th>
 <th><fmt:message key="Name"/></th>
 <th><fmt:message key="Alias"/></th>
 <th><fmt:message key="MobilePhone"/></th>
@@ -159,6 +160,7 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.user.id }"> </td>
 <td><c:out value="${item.branchCategory.definition }"/></td>
+<td><c:out value="${item.store.storeName }"/></td>
 <td><c:out value="${item.user.name }"/></td>
 <td><c:out value="${item.user.alias }"/></td>
 <td><c:out value="${item.user.mobile }"/></td>
@@ -171,7 +173,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="7" >
+<td colspan="8" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>

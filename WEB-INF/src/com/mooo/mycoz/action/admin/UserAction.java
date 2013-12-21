@@ -20,6 +20,7 @@ import com.mooo.mycoz.dbobj.wineBranch.GroupMember;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.Branch;
 import com.mooo.mycoz.dbobj.wineShared.BranchCategory;
+import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.JRUtil;
 import com.mooo.mycoz.framework.component.JRExport;
@@ -64,12 +65,14 @@ public class UserAction extends BaseSupport {
 			
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(User.class, "user");
+			dbobject.addTable(Store.class, "store");
 			dbobject.addTable(Branch.class, "branch");
 			dbobject.addTable(BranchCategory.class, "branchCategory");
 
 			dbobject.setForeignKey("user", "branchId", "branch", "id");
 			dbobject.setForeignKey("branch", "categoryId", "branchCategory", "id");
-			
+			dbobject.setForeignKey("user", "storeId", "store", "id");
+
 			value = request.getParameter("categoryId");
 			if(!StringUtils.isNull(value))
 				dbobject.setField("branchCategory", "id", new Integer(value));
@@ -97,6 +100,8 @@ public class UserAction extends BaseSupport {
 			dbobject.setRetrieveField("user", "mobile");
 			dbobject.setRetrieveField("branch", "definition");
 			dbobject.setRetrieveField("branchCategory", "definition");
+
+			dbobject.setRetrieveField("store", "storeName");
 
 			dbobject.setOrderBy("user", "id");
 			
@@ -275,6 +280,8 @@ public class UserAction extends BaseSupport {
 			
 			request.setAttribute("user", user);
 			
+			request.setAttribute("stores", IDGenerator.getValues(Store.class, "id", "storeName"));
+
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
