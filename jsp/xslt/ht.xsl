@@ -272,55 +272,55 @@ exclude-result-prefixes="fo">
 						</fo:block>
 					</fo:table-cell>
 				</fo:table-row>
-				<fo:table-row>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+				<fo:table-row height="2cm">
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="ClientName"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm" >
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black" >
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="ClientID"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt"  wrap-option="wrap" language="zh" text-align="start"
 							 ><xsl:value-of select="Address"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="FromIn"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="TelePhone"/>
 						</fo:block>
 					</fo:table-cell>
 
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="Email"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="StoreName"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="StoreKey"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="StoreName"/>
 						</fo:block>
 					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" line-height="2cm">
-						<fo:block font-size="8pt"   
+					<fo:table-cell  border="1pt solid black">
+						<fo:block font-size="8pt" text-align="start"   
 							 ><xsl:value-of select="StoreKey"/>
 						</fo:block>
 					</fo:table-cell>
@@ -416,7 +416,7 @@ exclude-result-prefixes="fo">
 						</fo:block>
 					</fo:table-cell>
 				</fo:table-row>
-				<fo:table-row>
+				<fo:table-row height="2cm">
 					<fo:table-cell  border="1pt solid black" >
 							<xsl:for-each select="Lookup">
 								<fo:block font-size="8pt">
