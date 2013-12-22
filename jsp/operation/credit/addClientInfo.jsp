@@ -256,10 +256,10 @@ change2(0);
 						<td align="right"  ><b style="color:red">*</b> 内部代码</td>
 						<td><select name="clientJob.privateKey" id="innerCode"
 							> 
-							<option value="XY24324">XY24324</option>
-							<option value="XY24325">XY24325</option>
-							<option value="XY24326">XY24326</option>
-							<option value="XY24327">XY24327</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+							<option value="D">D</option>
 						</select></td>
 						<td></td>
 						<td align="left"  >(<b style="color:red">*</b>)必填项</td>
@@ -302,7 +302,7 @@ change2(0);
 				    <td align="left"><input type="text" name="client.otherNo" value="${client.otherNo}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 申请人年龄</td>
 						<td align="left"><input type="text" name="client.age" maxlength="10" value="${client.age }" data="msg4"  id="ages" onblur="calc(this)" /> <b id="msg4"></b></td>
-						<td align="right"  ><b style="color:red">*</b> 手机号</td>
+						<td align="right"  ><b style="color:red">*</b>本人手机号</td>
 					    <td align="left"><input type="text" name="client.mobilePhone" value="${client.mobilePhone }" onblur="getphonearea(this.value)" /><b id="msg5"></b></td>
 					</tr>
 					<tr>
@@ -485,7 +485,7 @@ change2(0);
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 家庭成员名称</td>
 						<td align="left"><input type="text" name="client.homeName" maxlength="20" value="${client.homeName }" data="msg11"  id="ming" onblur="calc(this)" /> <b id="msg11"></b></td>
-					    <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>client.homeType
+					    <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>
 				        <td align="left">
                         <select  name="client.homeType" >
 								<option value="请选择">请选择</option>                        
@@ -869,9 +869,9 @@ change2(0);
 					<tr>
 						
 						<td align="right"  >贷款本金(元)</td>
-						<td align="left"><input type="text" name="clientJob.creditAmount" value="${creditAmount }" readonly /></td>
-						<td align="right"  >首次还款日</td>
-						<td align="left"><input type="text" name="clientJob.firstpayDate" onclick="displayCalendar(this,'yyyy-MM-dd');"  /></td>
+						<td align="left"></td>
+						<td align="right"  ></td>
+						<td align="left"></td>
 						<td  align="right">每月还款日</td>
 						<td align="left"><input type="text" name="clientJob.monthOfDate"  value ="${clientJob.monthOfDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>			 
 					</tr>

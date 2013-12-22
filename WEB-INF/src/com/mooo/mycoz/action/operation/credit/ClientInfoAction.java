@@ -232,13 +232,13 @@ public class ClientInfoAction extends BaseSupport {
 
 			creditAmount = totailPrice - firstPayAmount;
 
-			int monthPay1 = (int) (creditAmount
-					* (1 + financialProduct.getCreditRate()) / financialProduct
-					.getCycleTotal());
 			
 			double monthPay = creditAmount
 					* (1 + financialProduct.getCreditRate())
 					/financialProduct.getCycleTotal() ;
+			
+			
+			
 			
 			//取整加1
 			int monthPay1Int=(int)monthPay;
@@ -380,8 +380,8 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.setClientId(clientId);
 		//	clientJob.setOProductId(0);
 		//	clientJob.setTProductId(0);
-			//clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),
-				//	ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM", 6)));
+			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),
+				ClientJob.class, "jobNo", IDGenerator.getBatchSN("GM", 6)));
 
 			//clientJob.setCreditAmount(clientJob.getTotalPrice()
 		//			- clientJob.getSelfAmount());
@@ -455,6 +455,7 @@ public class ClientInfoAction extends BaseSupport {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
 		String clientJobId=request.getParameter("id");
+		
 		String value = null;
 		try {
 			
@@ -480,12 +481,73 @@ public class ClientInfoAction extends BaseSupport {
 			ClientDoc clientDoc = new ClientDoc();
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
+		
+			MultiDBObject dbobject5 = new MultiDBObject();
 			
-			//带出身份证出现在其他合同
-			List <String > list=new ArrayList<String>();
-			ClientJob clientJob1=new ClientJob();
-			clientJob1.setClientId(clientJob.getClientId());
-			request.setAttribute("clientJobs", clientDoc.searchAndRetrieveList());
+//			dbobject5.addTable(ClientJob.class,"clientJob" );
+//			dbobject5.addTable(Client.class,"client" );
+//		
+//			dbobject5.addCustomWhereClause("  client.id=clientJob.clientId and (client.telePhone='"+client.get+"' or"
+//					+ " client.spuseMobile='"+client.getTelePhone()+"')");
+//			dbobject5.setRetrieveField("clientJob","jobNo");
+//			request.setAttribute("selfPhoneList", dbobject5.searchAndRetrieveList());
+			
+			//处理座机号在其他合同中出现
+			MultiDBObject dbobject6 = new MultiDBObject();
+			dbobject6.addTable(ClientJob.class,"clientJob" );
+			dbobject6.addTable(Client.class,"client" );
+			dbobject6.addCustomWhereClause("  client.id=clientJob.clientId and "
+					+ "(client.homePhone='"+client.getHomePhone()+"' or"
+					+ " client.onOfficePhone='"+client.getHomePhone()+"' or "
+					+ " client.onExtPhone='"+client.getOnOfficePhone()+"' or "
+					+ " client.onExtPhone='"+client.getHomePhone()+"')");
+			dbobject6.setRetrieveField("clientJob","jobNo");
+			dbobject6.setRetrieveField("clientJob","id");
+			request.setAttribute("homePhoneNoList", dbobject6.searchAndRetrieveList());
+			
+			//带出身份证出现在其他合同(自己和配偶)
+			MultiDBObject dbobject1 = new MultiDBObject();
+			
+			dbobject1.addTable(ClientJob.class,"clientJob" );
+			dbobject1.addTable(Client.class,"client" );
+		
+			dbobject1.addCustomWhereClause("  client.id=clientJob.clientId and  client.id !="+client.getId()+"  and (client.idNo='"+client.getIdNo()+"' or"
+					+ " client.idSpuse='"+client.getIdNo()+"')");
+			dbobject1.setRetrieveField("clientJob","jobNo");
+			dbobject1.setRetrieveField("clientJob","id");
+			request.setAttribute("selfIdNoList", dbobject1.searchAndRetrieveList());
+			
+			MultiDBObject dbobject2 = new MultiDBObject();
+			dbobject2.addTable(ClientJob.class,"clientJob" );
+			dbobject2.addTable(Client.class,"client" );
+			dbobject2.setForeignKey("clientJob", "clientId", "client", "id");
+			dbobject2.addCustomWhereClause("  client.id=clientJob.clientId and (client.idNo='"+client.getIdSpuse()+"' or"
+					+ " client.idSpuse='"+client.getIdSpuse()+"')");
+			dbobject2.setRetrieveField("clientJob","jobNo");
+			dbobject2.setRetrieveField("clientJob","id");
+			request.setAttribute("spuseIdNoList", dbobject2.searchAndRetrieveList());
+			//处理手机号
+			MultiDBObject dbobject3 = new MultiDBObject();
+			
+			dbobject3.addTable(ClientJob.class,"clientJob" );
+			dbobject3.addTable(Client.class,"client" );
+			dbobject3.addCustomWhereClause("  client.id=clientJob.clientId and (client.telePhone='"+client.getMobilePhone()+"' or"
+					+ " client.spuseMobile='"+client.getMobilePhone()+"')");
+			dbobject3.setRetrieveField("clientJob","jobNo");
+			dbobject3.setRetrieveField("clientJob","id");
+			request.setAttribute("selfPhoneList", dbobject3.searchAndRetrieveList());
+			
+			MultiDBObject dbobject4 = new MultiDBObject();
+			dbobject4.addTable(ClientJob.class,"clientJob" );
+			dbobject4.addTable(Client.class,"client" );
+			dbobject4.setForeignKey("clientJob", "clientId", "client", "id");
+			dbobject4.addCustomWhereClause("   (client.telePhone='"+client.getSpuseMobile()+"' or"
+					+ " client.spuseMobile='"+client.getSpuseMobile()+"')");
+			dbobject4.setRetrieveField("clientJob","jobNo");
+			dbobject4.setRetrieveField("clientJob","id");
+			request.setAttribute("spusePhoneNoList", dbobject4.searchAndRetrieveList());
+			
+			
 				
 			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();

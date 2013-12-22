@@ -75,25 +75,59 @@ table.tab_css_1 td.td_css{
 		
 		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0" >
 				<tbody>
+				
+					<tr height="10px">
+			  			<c:out value="身份证号在下列合同中出现："/>
+			  			<c:forEach var="selfIdNoList" items="${selfIdNoList}" varStatus="s">
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${selfIdNoList.clientJob.id }' ><c:out value="${selfIdNoList.clientJob.jobNo }"/>&nbsp;</a>
+						</c:forEach>	
+						<c:forEach var="spuseIdNoList" items="${spuseIdNoList}" varStatus="s">
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${spuseIdNoList.clientJob.id }' ><c:out value="${spuseIdNoList.clientJob.jobNo }"/></a>
+						</c:forEach>				
+					</tr>
+					<tr height="10px">
+						
+			  			
+					</tr>
+					<tr height="10px">
+						<c:out value="手机号在下列合同中出现："/>
+			  			<c:forEach var="selfPhoneList" items="${selfPhoneList}" varStatus="s">
+								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${selfPhoneList.clientJob.id }"><c:out value="${selfPhoneList.clientJob.jobNo }"/>&nbsp;</a>
+						</c:forEach>
+						<c:forEach var="spusePhoneNoList" items="${spusePhoneNoList}" varStatus="s">
+								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${spusePhoneNoList.clientJob.id }"><c:out value="${spusePhoneNoList.clientJob.jobNo }"/>&nbsp;</a>
+						</c:forEach>
+					</tr>
+					<tr height="10px">
+						<c:out value="座机号在下列合同中出现："/>
+			  			<c:forEach var="homePhoneNoList" items="${homePhoneNoList}" varStatus="s">
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${homePhoneNoList.clientJob.id }' ><c:out value="${homePhoneNoList.clientJob.jobNo }"/></a>
+						</c:forEach>
+					</tr>
+					
 					<tr height="10px">
 		
 						<td height="28" colspan="2" align="right">
 							销售顾问代码:
 						</td>
 					  <td width="17%">&nbsp;<c:out value="${UserName}"/></td>
-		
-		<td>
-			<c:out  value="${clientJob.privateKey}"/>
-			</td>
-			<td >&nbsp;</td>
-		</tr>
+					  <td align="right"  >内部代码</td>
+					  <td>
+			             <c:out  value="${clientJob.privateKey}"/>
+			          </td>
+			          <td >&nbsp;</td>
+					</tr>
 
 		
 		<tr>
 			<td colspan="5" align="center" bgcolor="#D6D6D6" style="background-color:#eafef3; line-height: 28px">
-						<h2><strong>客户基本信息</strong></h2>
-					</td>
-				</tr>
+				<h2><strong>客户基本信息</strong></h2>
+			</td>
+		</tr>
+		<tr>
+		
+		</tr>		
+				
 			</tbody>
 		</table>
 		
@@ -140,8 +174,7 @@ table.tab_css_1 td.td_css{
 				<td align="left" id="guest_infoB"   ><c:out   value="${client.idNo}"/></td>
 		
 				<td align="right" class="td_css" >
-					<input type="button" value="查询合同" id="userIdCode"
-						style="height: 22px;font-size:12px;">
+					
 				</td>
 				<td align="left"  style="padding-left:4px;">6</td>
 				<td align="right"  class="td_css">
@@ -457,8 +490,6 @@ table.tab_css_1 td.td_css{
 			<tr>
             	<td align="right"  class="td_css">
 					联系人姓名:
-					<input type="button" value="查询合同" id="contactPhone"  
-						style="height: 20px; font-size:12px;" >
 				</td>
 				<td   style="padding-left:4px;">
 				  <c:out  value="${client.otherContacts}" />
@@ -484,7 +515,7 @@ table.tab_css_1 td.td_css{
 						<tr>
                         	<td rowspan="3" width="100px" class="td_css" ><strong>电话</strong></td>	
 						  <td align="right"  class="td_css">
-								手机&nbsp;:			  </td>
+								本人手机号&nbsp;:			  </td>
 			  <td align="left" id="guest_infoB" style="padding-left:4px;">							
 			  	<c:out    value="${client.mobilePhone }"/>
 			</td>
@@ -500,13 +531,13 @@ table.tab_css_1 td.td_css{
 							<td align="right" class="td_css">
 								住宅/宿舍电话:
 							</td>
-							<td align="left" id="guest_infoK" style="padding-left:4px;"><input  size="10" type="text" name="client.homePhone" value="${client.homePhone }"/></td>
+							<td align="left" id="guest_infoK" style="padding-left:4px;"><c:out value="${client.homePhone }"/></td>
 		
 		
 			</tr>
 			<tr>
 			  <td align="right"  class="td_css">
-					办公电话&nbsp;:<input type="button" value="查询合同" id="officePhone" style="height: 20px; font-size:12px;">
+					办公电话&nbsp;:
 			  </td>
 			  <td align="left" id="guest_infoB" style="padding-left:4px;"><c:out   value="${client.onOfficePhone }"/></td>
 							<td align="right"  class="td_css">
@@ -1289,12 +1320,12 @@ table.tab_css_1 td.td_css{
 								<option value="${jobType.id}"
 						
 								<c:if test="${jobType.id==param.clientJobTrack.jobTypeId}">
-									selected="selected"
+									selected="selected" 
 								</c:if>
 									>
 								${jobType.jobName}
 								</option>
-							--</c:forEach>
+							</c:forEach>
 						</select>&nbsp;
 				<input type="text" name="codeOne" size="6" value=""> &nbsp;
                 <input type="text" name="codeOne" size="6" value=""> &nbsp;
