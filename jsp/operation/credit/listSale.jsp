@@ -206,9 +206,9 @@
 <td style="text-align: center;">
 
 <select name="noteTypeId">
-	<option value="1">合同</option>
-	<option value="2">协议</option>
-	<option value="3">回单</option>
+	<option value="1">分期合同</option>
+	<option value="2">还款指引</option>
+	<option value="3">商品交付书</option>
 </select>
 		
 <jsp:include page="../../incl/actionb.jsp">
