@@ -42,7 +42,7 @@ public class XSLTUtil {
 //				String tmpFNPrefix=physicalPath+"tmp/"+noteName;
 
 				String xml = physicalPath+"jsp/xslt/t.xml";
-				String xsl = physicalPath+"jsp/xslt/t.xsl";
+				String xsl = physicalPath+"jsp/xslt/ht.xsl";
 
 				if(noteType.equals("HT")){
 					content = xslt(xml,xsl);
