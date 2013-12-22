@@ -230,6 +230,7 @@
 		<action	name="Sale" default="list"
 			class="com.mooo.mycoz.action.operation.credit.SaleAction">
 			<result name="list">/jsp/operation/credit/listSale.jsp</result>
+			<result name="promptSale">/jsp/operation/credit/declareSale.jsp</result>
 			<result name="promptAdd">/jsp/operation/credit/addSale.jsp</result>
 			<result name="processAdd"></result>
 			<result name="processDelete"></result>
@@ -243,12 +244,7 @@
 		<action	name="ClientInfo" default="list"
 			class="com.mooo.mycoz.action.operation.credit.ClientInfoAction">
 			<result name="list">/jsp/operation/credit/listClientInfo.jsp</result>
-			<result name="promptAdd">/jsp/operation/credit/addClientInfo.jsp</result>
-			<result name="processAdd"></result>
-			<result name="processDelete"></result>
-			<result name="promptEdit">/jsp/operation/credit/editClientInfo.jsp</result>
-			<result name="processEdit"></result>
-			<result name="promptDeclare">/jsp/operation/credit/declareClientInfo.jsp</result>
+			<result name="promptView">/jsp/operation/credit/editClientInfo.jsp</result>
 			<result name="promptApproval">/jsp/operation/credit/approvalClientInfo.jsp</result>
 			<result name="processApproval"></result>
 			<result name="processAddCheck"></result>

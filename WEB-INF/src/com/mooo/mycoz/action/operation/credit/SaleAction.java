@@ -23,28 +23,24 @@ import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
-import com.mooo.mycoz.dbobj.wineBranch.ClientJobCheck;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
 import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
 import com.mooo.mycoz.dbobj.wineBranch.StoreUser;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
-import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
-import com.mooo.mycoz.framework.component.JRExport;
 import com.mooo.mycoz.framework.component.UploadFile;
 import com.mooo.mycoz.framework.component.XSLTUtil;
 import com.mooo.mycoz.framework.util.IDGenerator;
-import com.mooo.mycoz.framework.util.ParamUtil;
 
 public class SaleAction extends BaseSupport {
 
 	private static Log log = LogFactory.getLog(SaleAction.class);
 
-	public String promptDeclare(HttpServletRequest request,
+	public String promptSale(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptDeclare");
@@ -422,6 +418,8 @@ public class SaleAction extends BaseSupport {
 			uf.bindData(clientJob, "clientJob");
 			request.setAttribute("clientJob",clientJob );
 			
+			request.setAttribute("pId",clientJob.getFinancialProductId() );
+
 			StringUtils.notEmpty(client.getIdNo());
 			StringUtils.notEmpty(client.getClientName());
 

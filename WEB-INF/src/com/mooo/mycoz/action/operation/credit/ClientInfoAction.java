@@ -1,12 +1,8 @@
 package com.mooo.mycoz.action.operation.credit;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,13 +21,11 @@ import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobCheck;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
-import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
 import com.mooo.mycoz.dbobj.wineBranch.StoreUser;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.FinancialProduct;
 import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
-import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.UploadFile;
@@ -41,131 +35,6 @@ import com.mooo.mycoz.framework.util.ParamUtil;
 public class ClientInfoAction extends BaseSupport {
 
 	private static Log log = LogFactory.getLog(ClientInfoAction.class);
-
-	public String promptDeclare(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptDeclare");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-
-		String value = null;
-
-		try {
-			StoreUser storeUser = new StoreUser();
-			storeUser.setUserId(sessionId);
-			storeUser.setActive("Y");
-			
-			int acount=storeUser.count();
-			
-			if(acount<1)
-				throw new Exception("请先登录店铺");
-			
-			storeUser.retrieve();
-			
-			MultiDBObject dbobject = new MultiDBObject();
-
-			dbobject.addTable(Product.class, "product");
-			dbobject.addTable(StoreProduct.class, "storeProduct");
-
-			dbobject.setForeignKey("product", "id", "storeProduct", "productId");
-			
-			dbobject.setField("storeProduct", "storeId",storeUser.getStoreId());
-			
-			dbobject.setRetrieveField("product", "id");
-			dbobject.setRetrieveField("product", "productName");
-
-			request.setAttribute("products", dbobject.searchAndRetrieveList());
-
-			double salePrice = 0d;
-			double onePay = 0d;
-			double monthPay = 0d, creditAmount = 0d;
-
-			double onePayPercent = 0d;
-
-			value = request.getParameter("salePrice");
-			//处理首次进入
-			if(StringUtils.isNull(value)){
-				return "success";
-			}
-			if (!StringUtils.isNull(value)){
-				salePrice = new Double(value);
-			}
-			request.setAttribute("salePrice", value);
-
-			value = request.getParameter("onePay");
-
-			if (!StringUtils.isNull(value))
-				onePay = new Double(value);
-
-			request.setAttribute("onePay", value);
-
-			if (onePay >= salePrice && salePrice > 0)
-				throw new Exception("首付过多");
-
-			onePayPercent = onePay / salePrice;
-			request.setAttribute("onePayPercent", onePayPercent);
-
-			if (onePayPercent < 0.2)
-				throw new Exception("首付不足");
-
-			String[] products = request.getParameterValues("product");
-
-			
-				FinancialProduct FinancialProduct = null;
-				List fProucts = new ArrayList();
-
-				
-					FinancialProduct financialProduct = new FinancialProduct();
-					//financialProduct.getFinancialMax()
-					//financialProduct.setProductId(new Integer(products[i]));
-					financialProduct.setGreaterEqual("financialMax", salePrice-onePay);
-					List<?> financials = financialProduct.searchAndRetrieveList();
-					
-					for(Object obj:financials){
-						financialProduct = (FinancialProduct)obj;
-						
-						Map<String, Object> rowm = new LinkedHashMap();
-
-						creditAmount = salePrice - onePay;
-						double monthPay1 = 0;
-						// 乘以税率后的总钱数
-						double afterCalculetedTotals = creditAmount
-								* (financialProduct.getCreditRate() + 1);
-						// 每月支付钱数
-						monthPay1 =  (afterCalculetedTotals / financialProduct
-								.getCycleTotal());
-						
-						//取整加1
-						int monthPay1Int=(int)monthPay1;
-						if(monthPay1-monthPay1Int>0){
-							monthPay1Int++;
-						}
-						rowm.put("finName", financialProduct.getFinancialName());
-						rowm.put("cycleTotal", financialProduct.getCycleTotal());
-						rowm.put("monthPay", monthPay1Int);
-						
-						
-						double d = afterCalculetedTotals
-								- (financialProduct.getCycleTotal() - 1)
-								* monthPay1;
-						//rowm.put("firstPay", df.format(d));
-						rowm.put("creditAmount", creditAmount);
-						rowm.put("onePay", onePay);
-						rowm.put("pId", financialProduct.getId());
-						fProucts.add(rowm);
-					}
-				
-				request.setAttribute("fProucts", fProucts);
-			
-
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
-		}
-		return "success";
-	}
 
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -573,7 +442,7 @@ public class ClientInfoAction extends BaseSupport {
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
 		
-			MultiDBObject dbobject5 = new MultiDBObject();
+//			MultiDBObject dbobject5 = new MultiDBObject();
 			
 //			dbobject5.addTable(ClientJob.class,"clientJob" );
 //			dbobject5.addTable(Client.class,"client" );

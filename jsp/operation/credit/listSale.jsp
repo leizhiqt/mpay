@@ -23,7 +23,7 @@
 	<jsp:include page="../../incl/actionb.jsp">
 		<jsp:param name="key" value="Declare"/>
 		<jsp:param name="action" value="Sale.do"/>
-		<jsp:param name="method" value="promptDeclare"/>
+		<jsp:param name="method" value="promptSale"/>
 	</jsp:include>
 </div>
 

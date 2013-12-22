@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-<title><fmt:message key="ClientInfo"/></title>
+<title><fmt:message key="Sale"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
@@ -89,8 +89,8 @@ body,td,th {
 <td colspan="2">
 <jsp:include page="../../incl/actionb.jsp">
 		<jsp:param name="key" value="Search"/>
-		<jsp:param name="action" value="ClientInfo.do"/>
-		<jsp:param name="method" value="promptDeclare"/>
+		<jsp:param name="action" value="Sale.do"/>
+		<jsp:param name="method" value="promptSale"/>
 	</jsp:include>
 </td>
 </tr>
@@ -120,7 +120,7 @@ body,td,th {
 <c:forEach var="item" items="${fProucts}" varStatus="status">
 <tr>
 <td>
-	<c:url value="/ClientInfo.do" var="newURL">
+	<c:url value="/Sale.do" var="newURL">
 		<c:param name="method">promptAdd</c:param>
 		<c:param name="salePrice">${salePrice}</c:param>
 		<c:param name="onePay">${onePay}</c:param>

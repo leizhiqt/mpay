@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 	<html>
 <head>
-<title><fmt:message key="ClientInfo" /></title>
+<title><fmt:message key="Sale" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css"
 	type="text/css" rel="stylesheet" />
@@ -239,7 +239,7 @@ change2(0);
 			<jsp:include page="../../incl/action.jsp">
 				<jsp:param name="type" value="cancel" />
 				<jsp:param name="key" value="Cancel" />
-				<jsp:param name="action" value="ClientInfo.do" />
+				<jsp:param name="action" value="Sale.do" />
 				<jsp:param name="method" value="promptDeclare" />
 			</jsp:include>
 		</div>
@@ -914,8 +914,8 @@ change2(0);
 					<tr>
 						<td colspan="2" align="center">
 							<jsp:include page="../../incl/actionb.jsp">
-								<jsp:param name="key" value="keyButtonConfirm" />
-								<jsp:param name="action" value="ClientInfo.do" />
+								<jsp:param name="key" value="Confirm" />
+								<jsp:param name="action" value="Sale.do" />
 								<jsp:param name="method" value="processAdd" />
 							</jsp:include>
 						</td>
