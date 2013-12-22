@@ -3,7 +3,7 @@
 xmlns:fo="http://www.w3.org/1999/XSL/Format" version="1.0"
 exclude-result-prefixes="fo">
 
-<xsl:template match="HBL">
+<xsl:template match="SN">
 
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 

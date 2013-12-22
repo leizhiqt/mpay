@@ -3,7 +3,7 @@
 xmlns:fo="http://www.w3.org/1999/XSL/Format" version="1.0"
 exclude-result-prefixes="fo">
 
-<xsl:template match="HBL">
+<xsl:template match="SN">
 
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
@@ -275,53 +275,53 @@ exclude-result-prefixes="fo">
 				<fo:table-row>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="ClientName"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm" >
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="ClientID"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="Address"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="FromIn"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="TelePhone"/>
 						</fo:block>
 					</fo:table-cell>
 
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="Email"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="StoreName"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="StoreKey"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="StoreName"/>
 						</fo:block>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" line-height="2cm">
 						<fo:block font-size="8pt"   
-							 >s
+							 ><xsl:value-of select="StoreKey"/>
 						</fo:block>
 					</fo:table-cell>
 					
@@ -418,66 +418,39 @@ exclude-result-prefixes="fo">
 				</fo:table-row>
 				<fo:table-row>
 					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>小米
-						</fo:block>
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="8pt">
+									<xsl:value-of select="ProductName"/>
+								</fo:block>
+				  			</xsl:for-each>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>2s
-						</fo:block>
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="8pt">
+									<xsl:value-of select="ProductPrice"/>
+								</fo:block>
+				  			</xsl:for-each>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>小米
-						</fo:block>
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="8pt">
+									<xsl:value-of select="ProductQuantity"/>
+								</fo:block>
+				  			</xsl:for-each>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>1
-						</fo:block>
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="8pt">
+									<xsl:value-of select="ProductModelNo"/>
+								</fo:block>
+				  			</xsl:for-each>
 					</fo:table-cell>
 					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>1799
-						</fo:block>
-					</fo:table-cell>
-				</fo:table-row>
-				<fo:table-row>
-					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							  
-							>手机
-						</fo:block>
-					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>小米2s
-						</fo:block>
-					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							 
-							>手机
-						</fo:block>
-					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							   
-							>10
-						</fo:block>
-					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" >
-						<fo:block font-size="8pt" 
-							  
-							>10
-						</fo:block>
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="8pt">
+									<xsl:value-of select="ProductBrand"/>
+								</fo:block>
+				  			</xsl:for-each>
 					</fo:table-cell>
 				</fo:table-row>
 			</fo:table-body>

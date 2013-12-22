@@ -1,6 +1,9 @@
 package com.mooo.mycoz.action.operation.credit;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -598,10 +601,132 @@ public class SaleAction extends BaseSupport {
 	}
 	
 	public String export(HttpServletRequest request,HttpServletResponse response) {
+		
+		
 		return XSLTUtil.buildPDF(request, response);
 	}
 
 	public String print(HttpServletRequest request,HttpServletResponse response) {
+		
+		String noteType = request.getParameter("noteType");
+		String physicalPath = request.getSession().getServletContext().getRealPath("/");
+
+		String xml = null;
+		String xslt = null;
+		String noteName = null;
+
+		try{
+			String xmlStr = null;
+			if(noteType.equals("FQHT")){
+				xmlStr=xmlFQHT(request,response);
+				xslt="ht.xsl";
+				noteName="FQHT";
+			}else if(noteType.equals("HTZY")){
+				xmlStr=xmlHTZY(request,response);
+				xslt="hkzy.xsl";
+				noteName="HTZY";
+			}else if(noteType.equals("SPJF")){
+				xmlStr=xmlSPJF(request,response);
+				xslt="ht.xsl";
+				noteName="SPJF";
+			}
+			
+			xml=physicalPath+"tmp/"+System.currentTimeMillis()+".xml";
+			xslt=physicalPath+"jsp/xslt/"+xslt;
+			
+			FileOutputStream writerStream = new FileOutputStream(xml);
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(writerStream, "UTF-8"));      
+			writer.write(xmlStr);
+			writer.flush();
+			writer.close();
+			writerStream.close();
+			
+		}catch(Exception e){
+			request.setAttribute("error", e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		}
+		
+		request.setAttribute("xml", xml);
+		request.setAttribute("xslt", xslt);
+		request.setAttribute("noteName", noteName);
+
 		return XSLTUtil.buildPDF(request, response);
+	}
+	
+	public String xmlFQHT(HttpServletRequest request,HttpServletResponse response) {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		buffer.append("<SN>\n");
+		
+		try {
+			String id = request.getParameter("id");
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			
+			AddressBook addressBook = new AddressBook();
+			addressBook.setId(client.getLivingAddressBookId());
+			addressBook.retrieve();
+			
+			Store store = new Store();
+			store.setId(clientJob.getStoreId());
+			store.retrieve();
+			
+			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
+			buffer.append("<ClientID>"+client.getIdNo()+"</ClientID>\n");
+			buffer.append("<Address>"+addressBook.getProvince()+addressBook.getCity()+addressBook.getCounty()+addressBook.getTown()+addressBook.getStreet()+"</Address>\n");
+			buffer.append("<FromIn>"+client.getOnCompanyName()+"</FromIn>\n");
+			buffer.append("<TelePhone>"+client.getTelePhone()+"</TelePhone>\n");
+			buffer.append("<Email>"+client.getEmail()+"</Email>\n");
+			buffer.append("<StoreName>"+store.getStoreName()+"</StoreName>\n");
+			buffer.append("<StoreKey>"+store.getStoreKey()+"</StoreKey>\n");
+			
+			buffer.append("<Lookup>\n");
+			buffer.append("<ProductName>"+""+"</ProductName>\n");
+			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
+			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
+			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
+			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
+			buffer.append("</Lookup>\n");
+	
+			buffer.append("<Lookup>\n");
+			buffer.append("<ProductName>"+""+"</ProductName>\n");
+			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
+			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
+			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
+			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
+			buffer.append("</Lookup>\n");
+		
+		}catch(Exception e){
+			request.setAttribute("error", e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		}
+		buffer.append("</SN>\n");
+
+		return buffer.toString();
+	}
+	
+	public String xmlHTZY(HttpServletRequest request,HttpServletResponse response) {
+		
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		buffer.append("<SN>\n");
+		buffer.append("</SN>\n");
+		
+		return buffer.toString();
+	}
+	
+	public String xmlSPJF(HttpServletRequest request,HttpServletResponse response) {
+		
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		buffer.append("<SN>\n");
+		buffer.append("</SN>\n");		
+		return buffer.toString();
 	}
 }

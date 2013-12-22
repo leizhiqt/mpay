@@ -32,9 +32,9 @@ public class ExampleXML2PDF {
 			outDir.mkdirs();
 
 			// Setup input and output files
-			File xmlfile = new File(baseDir, "jsp/xslt/t.xml");
-			File xsltfile = new File(baseDir, "jsp/xslt/PersonPayContact.xsl");
-			File pdffile = new File(outDir, "PersonPayContact.pdf");
+			File xmlfile = new File(baseDir, "jsp/xslt/g.xml");
+			File xsltfile = new File(baseDir, "jsp/xslt/ht.xsl");
+			File pdffile = new File(outDir, "ht.pdf");
 //			File xsltfile = new File(baseDir, "jsp/xslt/New.xsl");
 //			File pdffile = new File(outDir, "New.pdf");
 

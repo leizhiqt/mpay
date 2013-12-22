@@ -27,40 +27,33 @@ public class XSLTUtil {
 	public static String buildPDF(HttpServletRequest request,HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("buildJasper");
 		
-		String physicalPath = request.getSession().getServletContext().getRealPath("/");
+//		String physicalPath = request.getSession().getServletContext().getRealPath("/");
 
 		String noteName=request.getParameter("noteName");
-		String noteType=request.getParameter("noteType");
 
-		noteName = "HT";
-		noteType = "HT";
-		
-		if(noteType!=null){
-			try {
-				byte[] content = null;
-	
+		String xml = (String)request.getAttribute("xml");
+		String xsl = (String)request.getAttribute("xslt");
+		noteName= (String)request.getAttribute("noteName");
+		try {
+			byte[] content = null;
+
 //				String tmpFNPrefix=physicalPath+"tmp/"+noteName;
+//				String xml = physicalPath+"jsp/xslt/t.xml";
+//				String xsl = physicalPath+"jsp/xslt/ht.xsl";
 
-				String xml = physicalPath+"jsp/xslt/t.xml";
-				String xsl = physicalPath+"jsp/xslt/ht.xsl";
-
-				if(noteType.equals("HT")){
-					content = xslt(xml,xsl);
-				}
-				
-				response.setHeader("Content-Disposition", "attachment;filename=" + noteName+".pdf");
-				response.setContentType("application/pdf");
-				response.setContentLength(content.length);
-				response.getOutputStream().write(content);
-				response.getOutputStream().flush();
-				response.getOutputStream().close();
-				response.flushBuffer();
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
-				request.setAttribute("error", e.getMessage());
-			}
+			content = xslt(xml,xsl);
+			response.setHeader("Content-Disposition", "attachment;filename=" + noteName+".pdf");
+			response.setContentType("application/pdf");
+			response.setContentLength(content.length);
+			response.getOutputStream().write(content);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+			response.flushBuffer();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
 		}
 		return "success";
 	}
