@@ -48,7 +48,8 @@ public class LoginStoreAction extends BaseSupport {
 			
 			dbobject.setRetrieveField("storeUser", "id");
 			dbobject.setRetrieveField("store", "storeName");
-			
+			dbobject.setRetrieveField("store", "storeKey");
+
 			request.setAttribute("stores", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())

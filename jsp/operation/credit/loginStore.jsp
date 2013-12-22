@@ -18,7 +18,7 @@
 <form method="post">
 <div id="gtop">
 <c:if test="${!empty store}">
-当前登录店铺为:<c:out value="${store.storeName}"/> 店铺地址:<c:out value="${store.storeAddress}"/>
+当前登录店铺名:<c:out value="${store.storeName}"/> 店铺号:<c:out value="${store.storeKey}"/> 店铺地址:<c:out value="${store.storeAddress}"/>
 </c:if>
 </div>
 
@@ -46,7 +46,7 @@
 					selected="selected"
 				</c:if>
 					>
-				${item.store.storeName}
+				[${item.store.storeKey}][${item.store.storeName}]
 				</option>
 			--</c:forEach>
 		</select>
