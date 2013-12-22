@@ -33,8 +33,10 @@ public class ExampleXML2PDF {
 
 			// Setup input and output files
 			File xmlfile = new File(baseDir, "jsp/xslt/t.xml");
-			File xsltfile = new File(baseDir, "jsp/xslt/t.xsl");
-			File pdffile = new File(outDir, "ResultXML2PDF.pdf");
+			File xsltfile = new File(baseDir, "jsp/xslt/PersonPayContact.xsl");
+			File pdffile = new File(outDir, "PersonPayContact.pdf");
+//			File xsltfile = new File(baseDir, "jsp/xslt/New.xsl");
+//			File pdffile = new File(outDir, "New.pdf");
 
 			System.out.println("Input: XML (" + xmlfile + ")");
 			System.out.println("Stylesheet: " + xsltfile);
