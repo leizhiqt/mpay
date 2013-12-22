@@ -26,8 +26,10 @@
 	mainMenu.add(profile);
 	
 	Action operation = new Action(sessionId,"Operation", "Operation.do");
-	operation.addChildAction(new Action(sessionId,"ClientInfo","ClientInfo.do"));
-	
+	operation.addChildAction(new Action(sessionId,"LoginStore","LoginStore.do"));
+	operation.addChildAction(new Action(sessionId,"Sales","Sale.do"));
+	operation.addChildAction(new Action(sessionId,"Approval","ClientInfo.do"));
+
 	mainMenu.add(operation);
 	/*
 	Action report = new Action(sessionId,"Report", "Report.do");

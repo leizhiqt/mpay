@@ -34,13 +34,15 @@ import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.JRExport;
 import com.mooo.mycoz.framework.component.UploadFile;
+import com.mooo.mycoz.framework.component.XSLTUtil;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
-public class ClientInfoAction extends BaseSupport {
+public class SaleAction extends BaseSupport {
 
-	private static Log log = LogFactory.getLog(ClientInfoAction.class);
+	private static Log log = LogFactory.getLog(SaleAction.class);
 
 	public String promptDeclare(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -227,7 +229,7 @@ public class ClientInfoAction extends BaseSupport {
 					"id");
 			dbobject.setForeignKey("clientJobTrack", "userId", "user", "id");
 			dbobject.setForeignKey("clientJob", "storeId", "store", "id");
-
+//
 //			dbobject.setLessEqual(arg0, arg1, arg2);
 //			dbobject.setGreaterEqual(arg0, arg1, arg2);(arg0, arg1, arg2);
 			
@@ -246,10 +248,6 @@ public class ClientInfoAction extends BaseSupport {
 			value = request.getParameter("jobTypeId");
 			if(!StringUtils.isNull(value))
 				dbobject.setField("jobType", "id", new Integer(value));
-			
-			value = request.getParameter("storeId");
-			if(!StringUtils.isNull(value))
-				dbobject.setField("clientJob", "storeId", new Integer(value));
 			
 			value = request.getParameter("storeId");
 			if(!StringUtils.isNull(value))
@@ -278,6 +276,7 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("jobType", "jobKey");
 			dbobject.setRetrieveField("jobType", "nextState");
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
+
 			dbobject.setRetrieveField("store", "storeName");
 
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
@@ -519,6 +518,65 @@ public class ClientInfoAction extends BaseSupport {
 		return "list";
 	}
 
+	
+	
+	public String processConfirm(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (log.isDebugEnabled())
+			log.debug("processConfirm");
+		Integer sessionId = ActionSession.getInteger(request,ActionSession.USER_SESSION_KEY);
+		
+		Transaction tx =new Transaction();
+		try {
+			String[] ids =  request.getParameterValues("id");
+			
+			if(ids==null)
+				throw new Exception("Please select delete object");
+			
+			if(ids!=null)
+				for(int i=0;i<ids.length;i++){
+					
+					ClientJobTrack clientJobTrack = new ClientJobTrack();
+					clientJobTrack.setClientJobId(new Integer(ids[i]));
+					clientJobTrack.setProcessId(0);
+					clientJobTrack.setJobTypeId(2);
+					
+					int checkCount = clientJobTrack.count(tx.getConnection());
+					
+					if(checkCount > 0 ){
+						throw new Exception("已经提交 请耐心等待审核!");
+					}
+					
+					ClientJobTrack orgTrack = new ClientJobTrack();
+					orgTrack.setClientJobId(new Integer(ids[i]));
+					int jobCount = orgTrack.count(tx.getConnection());
+					
+					orgTrack.setProcessId(0);
+					orgTrack.retrieve(tx.getConnection());
+					
+					orgTrack.setProcessId(jobCount);
+					orgTrack.update(tx.getConnection());
+					
+					clientJobTrack = new ClientJobTrack();
+					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+					clientJobTrack.setUserId(sessionId);
+					clientJobTrack.setJobDate(new Date());
+					clientJobTrack.setJobRemark(orgTrack.getJobRemark());
+					clientJobTrack.setProcessId(0);
+					clientJobTrack.setClientJobId(new Integer(ids[i]));
+					clientJobTrack.setJobTypeId(2);
+					clientJobTrack.add(tx.getConnection());
+				}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+
+			request.setAttribute("error", e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		}
+		return "list";
+	}
+	
 	public String processDelete(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -540,291 +598,12 @@ public class ClientInfoAction extends BaseSupport {
 		//String clientJobId=request.getParameter(arg0);
 		return "success";
 	}
-
-	public String promptApproval(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptApproval");
-		String clientJobId=request.getParameter("id");
-		
-		String value = null;
-		try {
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-			if(clientJobId==null || clientJobId.equals("")){
-				request.setAttribute("error", "请选择合同");
-				return "list";
-			}
-			
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(clientJobId));
-			clientJob.retrieve();
-			request.setAttribute("clientJob", clientJob);
-			
-			Client client = new Client();
-			client.setId(clientJob.getClientId());
-			client.retrieve();
-			request.setAttribute("client", client);
-			
-			ClientDoc clientDoc = new ClientDoc();
-			clientDoc.setClientId(client.getId());
-			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
-		
-			MultiDBObject dbobject5 = new MultiDBObject();
-			
-//			dbobject5.addTable(ClientJob.class,"clientJob" );
-//			dbobject5.addTable(Client.class,"client" );
-//		
-//			dbobject5.addCustomWhereClause("  client.id=clientJob.clientId and (client.telePhone='"+client.get+"' or"
-//					+ " client.spuseMobile='"+client.getTelePhone()+"')");
-//			dbobject5.setRetrieveField("clientJob","jobNo");
-//			request.setAttribute("selfPhoneList", dbobject5.searchAndRetrieveList());
-			
-			//处理座机号在其他合同中出现
-			MultiDBObject dbobject6 = new MultiDBObject();
-			dbobject6.addTable(ClientJob.class,"clientJob" );
-			dbobject6.addTable(Client.class,"client" );
-			dbobject6.addCustomWhereClause("  client.id=clientJob.clientId and "
-					+ "(client.homePhone='"+client.getHomePhone()+"' or"
-					+ " client.onOfficePhone='"+client.getHomePhone()+"' or "
-					+ " client.onExtPhone='"+client.getOnOfficePhone()+"' or "
-					+ " client.onExtPhone='"+client.getHomePhone()+"')");
-			dbobject6.setRetrieveField("clientJob","jobNo");
-			dbobject6.setRetrieveField("clientJob","id");
-			request.setAttribute("homePhoneNoList", dbobject6.searchAndRetrieveList());
-			
-			//带出身份证出现在其他合同(自己和配偶)
-			MultiDBObject dbobject1 = new MultiDBObject();
-			
-			dbobject1.addTable(ClientJob.class,"clientJob" );
-			dbobject1.addTable(Client.class,"client" );
-		
-			dbobject1.addCustomWhereClause("  client.id=clientJob.clientId and  client.id !="+client.getId()+"  and (client.idNo='"+client.getIdNo()+"' or"
-					+ " client.idSpuse='"+client.getIdNo()+"')");
-			dbobject1.setRetrieveField("clientJob","jobNo");
-			dbobject1.setRetrieveField("clientJob","id");
-			request.setAttribute("selfIdNoList", dbobject1.searchAndRetrieveList());
-			
-			MultiDBObject dbobject2 = new MultiDBObject();
-			dbobject2.addTable(ClientJob.class,"clientJob" );
-			dbobject2.addTable(Client.class,"client" );
-			dbobject2.setForeignKey("clientJob", "clientId", "client", "id");
-			dbobject2.addCustomWhereClause("  client.id=clientJob.clientId and (client.idNo='"+client.getIdSpuse()+"' or"
-					+ " client.idSpuse='"+client.getIdSpuse()+"')");
-			dbobject2.setRetrieveField("clientJob","jobNo");
-			dbobject2.setRetrieveField("clientJob","id");
-			request.setAttribute("spuseIdNoList", dbobject2.searchAndRetrieveList());
-			//处理手机号
-			MultiDBObject dbobject3 = new MultiDBObject();
-			
-			dbobject3.addTable(ClientJob.class,"clientJob" );
-			dbobject3.addTable(Client.class,"client" );
-			dbobject3.addCustomWhereClause("  client.id=clientJob.clientId and (client.telePhone='"+client.getMobilePhone()+"' or"
-					+ " client.spuseMobile='"+client.getMobilePhone()+"')");
-			dbobject3.setRetrieveField("clientJob","jobNo");
-			dbobject3.setRetrieveField("clientJob","id");
-			request.setAttribute("selfPhoneList", dbobject3.searchAndRetrieveList());
-			
-			MultiDBObject dbobject4 = new MultiDBObject();
-			dbobject4.addTable(ClientJob.class,"clientJob" );
-			dbobject4.addTable(Client.class,"client" );
-			dbobject4.setForeignKey("clientJob", "clientId", "client", "id");
-			dbobject4.addCustomWhereClause("   (client.telePhone='"+client.getSpuseMobile()+"' or"
-					+ " client.spuseMobile='"+client.getSpuseMobile()+"')");
-			dbobject4.setRetrieveField("clientJob","jobNo");
-			dbobject4.setRetrieveField("clientJob","id");
-			request.setAttribute("spusePhoneNoList", dbobject4.searchAndRetrieveList());
-			
-			
-				
-			
-			ClientJobTrack clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setClientJobId(clientJob.getId());
-			clientJobTrack.setProcessId(-1);
-			
-			if(clientJobTrack.count()>0){
-				clientJobTrack.retrieve();
-
-				MultiDBObject dbobject = new MultiDBObject();
 	
-				dbobject.addTable(ClientJobCheck.class, "clientJobCheck");
-				dbobject.addTable(JobCheck.class, "jobCheck");
-				dbobject.setForeignKey("clientJobCheck", "jobCheckId", "jobCheck", "id");
-				dbobject.setField("clientJobCheck", "jobTrackId",clientJobTrack.getId());
-				
-				dbobject.setRetrieveField("jobCheck", "checkType");
-				dbobject.setRetrieveField("jobCheck", "checkName");
-				dbobject.setRetrieveField("clientJobCheck", "checkRemark");
-	
-				request.setAttribute("jobChecks", dbobject.searchAndRetrieveList());
-			}
-			
-			AddressBook censusAddressBook =new AddressBook();
-			censusAddressBook.setId(client.getCensusAddressBookId());
-			censusAddressBook.retrieve();
-			request.setAttribute("censusAddressBook", censusAddressBook);
-			
-			AddressBook homeAddressBook =new AddressBook();
-			homeAddressBook.setId(client.getHomeAddressBookId());
-			homeAddressBook.retrieve();
-			request.setAttribute("homeAddressBook", homeAddressBook);
-			
-			AddressBook officeAddressBook =new AddressBook();
-			officeAddressBook.setId(client.getOfficeAddressBookId());
-			officeAddressBook.retrieve();
-			request.setAttribute("officeAddressBook", officeAddressBook);
-
-			AddressBook livingAddressBook =new AddressBook();
-			livingAddressBook.setId(client.getLivingAddressBookId());
-			livingAddressBook.retrieve();
-			request.setAttribute("livingAddressBook", livingAddressBook);
-
-			//金融产品
-			FinancialProduct financialProduct=new FinancialProduct();
-			financialProduct.setId(clientJob.getFinancialProductId());
-			financialProduct.retrieve();
-			request.setAttribute("financialProduct", financialProduct);
-			
-			JobType jobType = new JobType();
-			jobType.setJobCategory("A");
-			
-			request.setAttribute("jobTypes",jobType.searchAndRetrieveList());
-			
-			JobCheck jobCheck = new JobCheck();
-			jobCheck.setJobCategory("A");
-			jobCheck.addGroupBy("checkType");
-			request.setAttribute("checkTypes", jobCheck.searchAndRetrieveList());
-			
-			JobCheck checkName = new JobCheck();
-			checkName.setJobCategory("A");
-			value = request.getParameter("checkType");
-			if( !StringUtils.isNull(value) ){
-				checkName.setCheckType(value);
-			}
-			request.setAttribute("checkNames",checkName.searchAndRetrieveList());
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
-		}
-		return "success";
+	public String export(HttpServletRequest request,HttpServletResponse response) {
+		return XSLTUtil.buildPDF(request, response);
 	}
 
-	public String processAddCheck(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processAddCheck");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-
-		String clientJobId=request.getParameter("id");
-		try {
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-			if(clientJobId==null || clientJobId.equals("")){
-				throw new Exception("请选择合同");
-			}
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(clientJobId));
-			clientJob.retrieve();
-			request.setAttribute("clientJob", clientJob);
-			
-			ClientJobTrack clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setClientJobId(new Integer(clientJobId));
-			clientJobTrack.setProcessId(-1);
-			
-			int checkCount = clientJobTrack.count();
-			int nextId=0;
-			
-			if(checkCount<1){
-				nextId = IDGenerator.getNextInt(ClientJobTrack.class);
-				clientJobTrack.setId(nextId);
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.add();
-			}else{
-				clientJobTrack.retrieve();
-			}
-			
-			nextId = IDGenerator.getNextInt(ClientJobCheck.class);
-			ClientJobCheck clientJobCheck = new ClientJobCheck();
-			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
-			
-			clientJobCheck.setId(nextId);
-			clientJobCheck.setJobTrackId(clientJobTrack.getId());
-			clientJobCheck.add();
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
-		}
-		return "promptApproval";
+	public String print(HttpServletRequest request,HttpServletResponse response) {
+		return XSLTUtil.buildPDF(request, response);
 	}
-	
-	public String processApproval(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processApproval");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
-
-		String clientJobId=request.getParameter("id");
-		try {
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-			if(clientJobId==null || clientJobId.equals("")){
-				throw new Exception("请选择合同");
-			}
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(clientJobId));
-			clientJob.retrieve();
-			request.setAttribute("clientJob", clientJob);
-			
-			ClientJobTrack clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setClientJobId(new Integer(clientJobId));
-			clientJobTrack.setProcessId(-1);
-			
-			int checkCount = clientJobTrack.count();
-			
-			if(checkCount > 0 ){
-				ClientJobTrack orgTrack = new ClientJobTrack();
-				orgTrack.setClientJobId(new Integer(clientJobId));
-				int jobCount = orgTrack.count();
-				
-				orgTrack.setProcessId(0);
-				orgTrack.retrieve();
-				
-				orgTrack.setProcessId(jobCount);
-				orgTrack.update();
-				
-				clientJobTrack.retrieve();
-				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.setJobDate(new Date());
-				clientJobTrack.setProcessId(0);
-				clientJobTrack.update();
-			}
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
-		}
-		return "list";
-	}
-	
 }

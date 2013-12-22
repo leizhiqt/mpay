@@ -221,6 +221,25 @@
 		</action>
 
 		<!-- "Client" -->
+		<action	name="LoginStore" default="promptLogin"
+			class="com.mooo.mycoz.action.operation.credit.LoginStoreAction">
+			<result name="promptLogin">/jsp/operation/credit/loginStore.jsp</result>
+			<result name="processLogin"></result>
+		</action>
+		
+		<action	name="Sale" default="list"
+			class="com.mooo.mycoz.action.operation.credit.SaleAction">
+			<result name="list">/jsp/operation/credit/listSale.jsp</result>
+			<result name="promptAdd">/jsp/operation/credit/addSale.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/operation/credit/editSale.jsp</result>
+			<result name="processEdit"></result>
+			<result name="processConfirm"></result>
+			<result name="export"></result>
+			<result name="print"></result>
+		</action>
+		
 		<action	name="ClientInfo" default="list"
 			class="com.mooo.mycoz.action.operation.credit.ClientInfoAction">
 			<result name="list">/jsp/operation/credit/listClientInfo.jsp</result>
@@ -241,27 +260,6 @@
 			<result name="patrolReport">/jsp/report/patrolReport.jsp</result>
 			<result name="export"></result>
 			<result name="print"></result>
-		</action>
-
-		<!-- Security Codes -->
-		<action	name="Package" default="list"
-			class="com.mooo.mycoz.action.operation.security.PackageAction">
-			<result name="list">/jsp/operation/security/listPackage.jsp</result>
-			<result name="viewPackage">/jsp/operation/security/viewPackage.jsp</result>
-			<result name="promptEdit">/jsp/operation/security/editPackage.jsp</result>
-			<result name="processEdit"></result>
-			<result name="processItemAdd"></result>
-			<result name="processItemDelete"></result>
-			<result name="processDelete"></result>
-			<result name="print">/jsp/incl/download.jsp</result>
-			<result name="export">/jsp/incl/download.jsp</result>
-		</action>
-
-		<action	name="Sale" default="list"
-			class="com.mooo.mycoz.action.operation.security.SaleAction">
-			<result name="list">/jsp/operation/security/listSale.jsp</result>
-			<result name="preview">/jsp/operation/security/previewForgeryCode.jsp</result>
-			<result name="check" allow="true">/jsp/operation/security/checkForgeryCode.jsp</result>
 		</action>
 
 		<!-- Help -->

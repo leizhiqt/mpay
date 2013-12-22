@@ -1301,7 +1301,7 @@ table.tab_css_1 td.td_css{
 									selected="selected"
 								</c:if>
 									>
-								${jobType.jobName}
+								${jobType.jobKey}
 								</option>
 							--</c:forEach>
 						</select>&nbsp;
@@ -1323,7 +1323,7 @@ table.tab_css_1 td.td_css{
 									selected="selected" 
 								</c:if>
 									>
-								${jobType.jobName}
+								${jobType.jobKey}
 								</option>
 							</c:forEach>
 						</select>&nbsp;
