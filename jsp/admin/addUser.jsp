@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -87,18 +87,9 @@
 <tr>
 <td class="tl"><fmt:message key="Store"/></td>
 <td>
-<select name="user.storeId">
-	<c:forEach var="items" items="${stores}" varStatus="s">
-		<option value="${items.key}"
-
-		<c:if test="${items.key==param.user.storeId}">
-			selected="selected"
-		</c:if>
-			>
-		${items.value}
-		</option>
-	--</c:forEach>
-</select>
+	<c:forEach var="store" items="${stores}" varStatus="s">
+		<input type="checkbox" name="storeId" value="${store.id }">${store.storeName }
+	</c:forEach>
 </tr>
 
 </tbody>

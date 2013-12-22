@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
@@ -146,7 +146,6 @@
 <tr>
 <th><input name="choose" type="checkbox" onclick="checkedAll(this.name,'id');"/><fmt:message key="ID"/></th>
 <th><fmt:message key="BranchCategory"/></th>
-<th><fmt:message key="Store"/></th>
 <th><fmt:message key="Name"/></th>
 <th><fmt:message key="Alias"/></th>
 <th><fmt:message key="MobilePhone"/></th>
@@ -160,7 +159,6 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><input type="checkbox" name="id" value="${item.user.id }"> </td>
 <td><c:out value="${item.branchCategory.definition }"/></td>
-<td><c:out value="${item.store.storeName }"/></td>
 <td><c:out value="${item.user.name }"/></td>
 <td><c:out value="${item.user.alias }"/></td>
 <td><c:out value="${item.user.mobile }"/></td>

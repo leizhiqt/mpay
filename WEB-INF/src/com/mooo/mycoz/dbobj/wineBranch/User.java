@@ -15,7 +15,6 @@ public class User extends DBObject {
 	private String mobile;
 	private String uuid;
 	private Integer branchId;
-	private Integer storeId;
 
 	public Integer getId() {
 		return id;
@@ -79,13 +78,5 @@ public class User extends DBObject {
 
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
 	}
 }

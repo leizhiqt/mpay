@@ -160,15 +160,6 @@
 			<result name="processEdit"></result>
 		</action>
 
-		<!-- StoreProduct -->
-		<action	name="StoreProduct" default="promptAuthStore"
-			class="com.mooo.mycoz.action.profile.StoreSaleAction">
-			<result name="promptAuthStore">/jsp/profile/authStore.jsp</result>
-			<result name="processAuthStore"></result>
-			<result name="promptAuthProduct">/jsp/profile/authProduct.jsp</result>
-			<result name="processAuthProduct"></result>
-		</action>
-		
 		<!-- Administrator -->
 		<action	name="Admin" default="menu"
 			class="com.mooo.mycoz.action.admin.AdminAction">

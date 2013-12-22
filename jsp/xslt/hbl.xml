@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<HBL>
+<ShipperKey>Shipper</ShipperKey>
+<Lookup><ShipperValue>PT. GITA TATA EKSPRESINDO</ShipperValue></Lookup>
+<Lookup><ShipperValue>JL. ENDE NO.33-35 </ShipperValue></Lookup>
+<Lookup><ShipperValue>TANJUNG PRIOK. JAKARTA. INDONESIA</ShipperValue></Lookup>
+<Lookup><ShipperValue>TEL:62-21-4393-4151</ShipperValue></Lookup>
+<Lookup><ShipperValue>FAX:62-21-4393-4120/122</ShipperValue></Lookup>
+<DocNoKey>FMC NO</DocNoKey>
+<DocNoValue>A</DocNoValue><HouseBillNoKey>B/L NO</HouseBillNoKey>
+<HouseBillNoValue>
+JLAX1003111</HouseBillNoValue>
+<ExpRefNoKey>EXPORT REFERENCES</ExpRefNoKey>
+<ExpRefNoValue>CSE10031011</ExpRefNoValue>
+<ConsigneeKey>Consignee</ConsigneeKey><Lookup><ConsigneeValue>SEAHORSE CONTAINER LINES INC</ConsigneeValue></Lookup>
+<Lookup><ConsigneeValue>10731 WALKER ST CYPRESS, CA 90630</ConsigneeValue></Lookup>
+<Lookup><ConsigneeValue>TEL:562-985-0616   FAX:562-985-1345</ConsigneeValue></Lookup>
+<Lookup><ConsigneeValue>EMAIL.:</ConsigneeValue></Lookup>
+<Lookup><ConsigneeValue>BREAKBULKLGB@SEAHORSECONTAINERLINES.COM</ConsigneeValue></Lookup>
+<DeliveryAgentKey>For Delivery of goods please apply to</DeliveryAgentKey>
+<Lookup><DeliveryAgentValue>PAN PACIFIC EXPRESS CORP.</DeliveryAgentValue></Lookup>
+<Lookup><DeliveryAgentValue>20021 S. RANCHO WAY</DeliveryAgentValue></Lookup>
+<Lookup><DeliveryAgentValue>RANCHO DOMINGUEZ CA 90220 USA</DeliveryAgentValue></Lookup>
+<Lookup><DeliveryAgentValue>TEL:1.310.638.3887 / 3888 / 3889</DeliveryAgentValue></Lookup>
+<Lookup><DeliveryAgentValue>FAX:1.310.638.1407</DeliveryAgentValue></Lookup>
+<NotifyPartyKey>NotifyParty</NotifyPartyKey>
+<Lookup><NotifyPartyValue>SAME AS CONSIGNEE</NotifyPartyValue></Lookup>
+<NotifyParty2Key>NotifyParty</NotifyParty2Key>
+<NotifyParty2Value></NotifyParty2Value>
+<NotifyParty2Value></NotifyParty2Value>
+<NotifyParty2Value></NotifyParty2Value>
+<NotifyParty2Value></NotifyParty2Value>
+<NotifyParty2Value></NotifyParty2Value>
+<PreCarriageKey>PRE-CARRIAGE BY</PreCarriageKey>
+<PreCarriageValue>SINAR SUMBA/079</PreCarriageValue>
+<VesselKey>Laden on Boord the Vessel</VesselKey>
+<VesselValue>APL TEXAS/008E</VesselValue>
+<ContainerInfoKey>CONTAINER NOs/SEAL NOs</ContainerInfoKey>
+<ContainerInfoValue>HDMU5450912/HMM744162 (40'HR) </ContainerInfoValue>
+<ReceiptPlaceKey>PLACE OF RECEIPT</ReceiptPlaceKey>
+<ReceiptPlaceValue>TG. PRIOK, JAKARTA</ReceiptPlaceValue>
+<POLPlaceKey>PORT OF LOADING</POLPlaceKey>
+<POLPlaceValue>JAKARTA, INDONESIA</POLPlaceValue>
+<FinalDestKey>Final Declaration (for the Merchant's reference only)</FinalDestKey>
+<FinalDestValue>LOS ANGELES, CA, USA</FinalDestValue>
+<PODPlaceKey>PORT OF DISCHARGE</PODPlaceKey>
+<PODPlaceValue>LOS ANGELES, CA, USA</PODPlaceValue>
+<DeliveryPlaceKey>PLACE OF DELIVERY</DeliveryPlaceKey>
+<DeliveryPlaceValue>LOS ANGELES, CA, USA</DeliveryPlaceValue>
+<FreightStatusKey>FREIGHT STATUS</FreightStatusKey>
+<FreightStatusValue>Collect</FreightStatusValue>
+<NumOfOrgKey>Number Of Original B(s)/L</NumOfOrgKey>
+<NumOfOrgValue>THREE</NumOfOrgValue>
+<PlaceOfKey>Place Of B(s)/L Lssue/Date</PlaceOfKey>
+<PlaceOfValue></PlaceOfValue>
+<IniadRoutingKey>InIad Routing (for the Merchants reference only)</IniadRoutingKey>
+<IniadRoutingValue></IniadRoutingValue>
+<Header1>Container No. And Seal No. Marks &amp; Nos.</Header1>
+<Header2>Quantily And Kind of Packages</Header2>
+<Header3>Description of Goods</Header3>
+<Header4>Measurement(CBM) Gross Weight(KGS)</Header4>
+<Header5>MEASUREMENT</Header5>
+<FreightItem> 
+<Lookup><FreightMark>MARKINGS:</FreightMark></Lookup>
+<Lookup><FreightMark>3DAY SUIT BROKER</FreightMark></Lookup>
+<Lookup><FreightMark>60 W. COCHRAN ST.</FreightMark></Lookup>
+<Lookup><FreightMark>SIMI VALLEY CA</FreightMark></Lookup>
+<Lookup><FreightMark>93065</FreightMark></Lookup>
+<Lookup><FreightMark>C/NO 1 OF 231</FreightMark></Lookup>
+<FreightNumOfPKG> 
+231CARTONS</FreightNumOfPKG>
+<Lookup><FreightDesc>231 CARTONS SAID TO CONTAINS</FreightDesc></Lookup>
+<Lookup><FreightDesc>3,556 PIECES OF</FreightDesc></Lookup>
+<Lookup><FreightDesc>MEN'S 100 % COTTON WOVEN SHIRT</FreightDesc></Lookup>
+<Lookup><FreightDesc> </FreightDesc></Lookup>
+<Lookup><FreightDesc>H/BL NO.: FCR1030170</FreightDesc></Lookup>
+<Lookup><FreightDesc>SCAC CODE: AITB</FreightDesc></Lookup>
+</FreightItem>
+<Lookup><Freight>G. W.:</Freight></Lookup>
+<Lookup><Freight>1507.94KGS</Freight></Lookup>
+<Lookup><Freight>N. W.:</Freight></Lookup>
+<Lookup><Freight>1244.6KGS</Freight></Lookup>
+<Lookup><Freight>MEASURE.:</Freight></Lookup>
+<Lookup><Freight>16.34CBM</Freight></Lookup>
+<FreightMessage>
+<FreightValue>CFS / CFS</FreightValue>
+</FreightMessage>
+<FreightMessage>
+<FreightValue>TWO HUNDRED AND THIRTY ONE CARTONS ONLY</FreightValue>
+</FreightMessage>
+<ValueDeclKey>Excess Value Declaration: Refer to Clause 6(4)(B)+(C) on reverse side</ValueDeclKey>
+<ValueDeclValue></ValueDeclValue><WordPacksKey>TOTAL NO OF PACKAGES OR CONTAINERS (IN WORDS)</WordPacksKey>
+<WordPacksValue>PART OF 1 X 40'HR</WordPacksValue>
+<FreightHeader>FREIGHT AND CHARGES</FreightHeader>
+<FreightKey>FREIGHT &amp; CHARGES </FreightKey>
+<FreightValue>FREIGHT COLLECT</FreightValue>
+<PrepaidKey>PREPAID</PrepaidKey>
+<PrepaidValue></PrepaidValue>
+<CollectKey>COLLECT</CollectKey>
+<CollectValue></CollectValue>
+<AmountDueKey>TOTAL AMOUNT DUE</AmountDueKey>
+<PrepaidDue>null</PrepaidDue>
+<CollectDue>null</CollectDue>
+<IssueKey>Place and date of issue</IssueKey>
+<IssuePlaceValue>Montreal, Canada</IssuePlaceValue>
+<IssueDateValue>Sun Apr 11 04:00:41 CST 2010</IssueDateValue>
+<PlaceOfIssueKey>Place Of B(s)/L Issue/Date</PlaceOfIssueKey>
+<PlaceOfIssueValue>JAKARTA, INDONESIA/2010-03-21</PlaceOfIssueValue>
+<SignKey>Signed on behalf of the Carrier</SignKey>
+</HBL>

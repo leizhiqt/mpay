@@ -13,7 +13,6 @@
 <script type="text/javascript" src="jsp/js/util.js"></script>
 </head>
 
-
 <body>
 <c:url value="/Store.do" var="defURL" />
 

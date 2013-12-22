@@ -232,10 +232,12 @@ public class Test {
 //		bd.dbToBean("payBranch","AddressBook");
 //		bd.dbToBean("payBranch","Client");
 //		bd.dbToBean("payBranch","ClientJob");
-		bd.dbToBean("payBranch","ClientJobSale");
+//		bd.dbToBean("payBranch","ClientJobSale");
+//		bd.dbToBean("payBranch","StoreProduct");
+//		bd.dbToBean("payBranch","StoreUser");
 
 //		bd.dbToBean("payShared","JobCheck");
-//		bd.dbToBean("payBranch","ClientJobCheck");
+		bd.dbToBean("payBranch","ClientJobCheck");
 
 //		bd.dbToBean("payShared","Store");
 		

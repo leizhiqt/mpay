@@ -1,5 +1,7 @@
 package com.mooo.mycoz.dbobj.wineBranch;
 
+import java.util.Date;
+
 import com.mooo.mycoz.db.DBObject;
 
 public class ClientJobCheck extends DBObject {
@@ -8,6 +10,7 @@ public class ClientJobCheck extends DBObject {
 	private Integer jobCheckId;
 	private String checkRemark;
 	private Integer branchId;
+	private Date checkTime;
 
 	public Integer getId() {
 		return id;
@@ -47,5 +50,13 @@ public class ClientJobCheck extends DBObject {
 
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
+	}
+
+	public Date getCheckTime() {
+		return checkTime;
+	}
+
+	public void setCheckTime(Date checkTime) {
+		this.checkTime = checkTime;
 	}
 }

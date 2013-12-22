@@ -17,6 +17,7 @@ import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.GroupMember;
+import com.mooo.mycoz.dbobj.wineBranch.StoreUser;
 import com.mooo.mycoz.dbobj.wineBranch.User;
 import com.mooo.mycoz.dbobj.wineShared.Branch;
 import com.mooo.mycoz.dbobj.wineShared.BranchCategory;
@@ -65,13 +66,11 @@ public class UserAction extends BaseSupport {
 			
 			MultiDBObject dbobject = new MultiDBObject();
 			dbobject.addTable(User.class, "user");
-			dbobject.addTable(Store.class, "store");
 			dbobject.addTable(Branch.class, "branch");
 			dbobject.addTable(BranchCategory.class, "branchCategory");
 
 			dbobject.setForeignKey("user", "branchId", "branch", "id");
 			dbobject.setForeignKey("branch", "categoryId", "branchCategory", "id");
-			dbobject.setForeignKey("user", "storeId", "store", "id");
 
 			value = request.getParameter("categoryId");
 			if(!StringUtils.isNull(value))
@@ -100,8 +99,6 @@ public class UserAction extends BaseSupport {
 			dbobject.setRetrieveField("user", "mobile");
 			dbobject.setRetrieveField("branch", "definition");
 			dbobject.setRetrieveField("branchCategory", "definition");
-
-			dbobject.setRetrieveField("store", "storeName");
 
 			dbobject.setOrderBy("user", "id");
 			
@@ -189,12 +186,22 @@ public class UserAction extends BaseSupport {
 	public String promptAdd(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		
-		request.setAttribute("branchs", ActionSession.getBranchValues(request));
-		
-		User user = new User();
-		ParamUtil.bindData(request, user,"user");
-		
-		request.setAttribute("user", user);
+		try {
+			request.setAttribute("branchs", ActionSession.getBranchValues(request));
+			
+			User user = new User();
+			ParamUtil.bindData(request, user,"user");
+			
+			request.setAttribute("user", user);
+
+			Store store = new Store();
+			store.setGreater("id", 0);
+			
+			request.setAttribute("stores", store.searchAndRetrieveList());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "success";
 	}
@@ -212,6 +219,22 @@ public class UserAction extends BaseSupport {
 			user.setPassword(StringUtils.hash(user.getPassword()));
 
 			user.add(tx.getConnection());
+			
+			
+			String[] storeId =  request.getParameterValues("storeId");
+
+			if(storeId!=null && storeId.length>0){
+				for(int i=0;i<storeId.length;i++){
+					Integer id = new Integer(storeId[i]);
+					
+					StoreUser storeUser = new StoreUser();
+					storeUser.setId(IDGenerator.getNextID(tx.getConnection(), StoreUser.class));
+					storeUser.setUserId(user.getId());
+					storeUser.setStoreId(id);
+					
+					storeUser.add(tx.getConnection());
+				}
+			}
 			
 			tx.commit();
 
@@ -243,6 +266,15 @@ public class UserAction extends BaseSupport {
 			
 			for(int i=0;i<ids.length;i++){
 				Integer userId = new Integer(ids[i]);
+				
+				StoreUser storeUser = new StoreUser();
+				storeUser.setUserId(userId);
+
+				List<Object> stores = storeUser.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					storeUser=(StoreUser)bean;
+					storeUser.delete(tx.getConnection());
+				}
 				
 				User user = new User();
 				user.setId( userId);
@@ -280,7 +312,13 @@ public class UserAction extends BaseSupport {
 			
 			request.setAttribute("user", user);
 			
-			request.setAttribute("stores", IDGenerator.getValues(Store.class, "id", "storeName"));
+			Store store = new Store();
+			store.setGreater("id", 0);
+			request.setAttribute("stores", store.searchAndRetrieveList());
+			
+			StoreUser storeUser = new StoreUser();
+			storeUser.setUserId(user.getId());
+			request.setAttribute("nowStores", storeUser.searchAndRetrieveList());
 
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
@@ -302,6 +340,53 @@ public class UserAction extends BaseSupport {
 				user.setPassword(StringUtils.hash(user.getPassword()));
 			
 			user.update(tx.getConnection());
+			
+			String[] storeId =  request.getParameterValues("storeId");
+
+			if(storeId!=null){
+				for(int i=0;i<storeId.length;i++){
+					StoreUser storeUser = new StoreUser();
+					storeUser.setStoreId(new Integer(storeId[i]));
+					storeUser.setUserId(user.getId());
+					
+					if(storeUser.count()<1){
+						storeUser.setId(IDGenerator.getNextID(tx.getConnection(),StoreUser.class));
+						storeUser.add(tx.getConnection());
+					}
+				}
+				
+				StoreUser storeUser = new StoreUser();
+				storeUser.setUserId(user.getId());
+				
+				List<Object> stores = storeUser.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					storeUser=(StoreUser)bean;
+
+					boolean remove = false;
+					
+					for(int i=0;i<storeId.length;i++){
+						int dId = new Integer(storeId[i]); 
+						
+						if(dId==storeUser.getStoreId()){
+							remove = true;
+							break;
+						}
+					}
+					
+					if(!remove){
+						storeUser.delete(tx.getConnection());
+					}
+				}
+			}else{//delete all
+				StoreUser storeUser = new StoreUser();
+				storeUser.setUserId(user.getId());
+				
+				List<Object> stores = storeUser.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					storeUser=(StoreUser)bean;
+					storeUser.delete(tx.getConnection());
+				}
+			}
 			
 			tx.commit();
 			

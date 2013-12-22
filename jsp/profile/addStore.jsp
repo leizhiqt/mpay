@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/jsp/incl/static.inc"%>
 <fmt:bundle basename="MessageBundle">
-	<html>
+<html>
 <head>
 <title><fmt:message key="Store"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -63,8 +63,13 @@
 											class="fm">*</font></td>
 									</tr>
 
-									
-							</table>
+									<tr>
+										<td class="tl"><fmt:message key="Product" /></td>
+										<td><c:forEach var="product" items="${products}"
+												varStatus="s">
+												<input type="checkbox" name="productId" value="${product.id }">${product.productName }
+											</c:forEach>
+									</tr></table>
 						</td>
 					</tr>
 

@@ -1,5 +1,6 @@
 package com.mooo.mycoz.action.profile;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +11,10 @@ import org.apache.commons.logging.LogFactory;
 
 import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
-import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
+import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
+import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
-import com.mooo.mycoz.framework.ActionSession;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
@@ -62,7 +63,14 @@ public class StoreAction extends BaseSupport {
 			HttpServletResponse response){
 		
 		if (log.isDebugEnabled())log.debug("promptAdd");
-
+		try {
+			Product product = new Product();
+			product.setGreater("id", 0);
+			request.setAttribute("products", product.searchAndRetrieveList());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return "success";
 		
 	}
@@ -80,6 +88,21 @@ public class StoreAction extends BaseSupport {
 			
 			store.add(tx.getConnection());
 			
+			String[] productId =  request.getParameterValues("productId");
+
+			if(productId!=null && productId.length>0){
+				for(int i=0;i<productId.length;i++){
+					Integer id = new Integer(productId[i]);
+					
+					StoreProduct storeProduct = new StoreProduct();
+					storeProduct.setId(IDGenerator.getNextID(tx.getConnection(), StoreProduct.class));
+					storeProduct.setStoreId(store.getId());
+					storeProduct.setProductId(id);
+					
+					storeProduct.add(tx.getConnection());
+				}
+			}
+			
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -94,7 +117,6 @@ public class StoreAction extends BaseSupport {
 	}
 	public String promptEdit(HttpServletRequest request, HttpServletResponse response) {
 		if (log.isDebugEnabled())log.debug("promptEdit");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 		String storeId = null;
 		try{
 			storeId = request.getParameter("id");
@@ -109,6 +131,14 @@ public class StoreAction extends BaseSupport {
 			store.retrieve();
 
 			request.setAttribute("store", store);
+			
+			Product product = new Product();
+			product.setGreater("id", 0);
+			request.setAttribute("products", product.searchAndRetrieveList());
+			
+			StoreProduct storeProduct = new StoreProduct();
+			storeProduct.setStoreId(store.getId());
+			request.setAttribute("nowProducts", storeProduct.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -126,6 +156,54 @@ public class StoreAction extends BaseSupport {
 			ParamUtil.bindData(request, store, "store");
 			
 			store.update(tx.getConnection());
+			
+			String[] productId =  request.getParameterValues("productId");
+
+			if(productId!=null){
+				for(int i=0;i<productId.length;i++){
+					StoreProduct storeProduct = new StoreProduct();
+					storeProduct.setProductId(new Integer(productId[i]));
+					storeProduct.setStoreId(store.getId());
+					
+					if(storeProduct.count()<1){
+						storeProduct.setId(IDGenerator.getNextID(tx.getConnection(),StoreProduct.class));
+						storeProduct.add(tx.getConnection());
+					}
+				}
+				
+				StoreProduct storeProduct = new StoreProduct();
+				storeProduct.setStoreId(store.getId());
+				
+				List<Object> products = storeProduct.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:products){
+					storeProduct=(StoreProduct)bean;
+
+					boolean remove = false;
+					
+					for(int i=0;i<productId.length;i++){
+						int dId = new Integer(productId[i]); 
+						
+						if(dId==storeProduct.getProductId()){
+							remove = true;
+							break;
+						}
+					}
+					
+					if(!remove){
+						storeProduct.delete(tx.getConnection());
+					}
+				}
+			}else{//delete all
+				StoreProduct storeProduct = new StoreProduct();
+				storeProduct.setStoreId(store.getId());
+				
+				List<Object> stores = storeProduct.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					storeProduct=(StoreProduct)bean;
+					storeProduct.delete(tx.getConnection());
+				}
+			}
+			
 			tx.commit();
 		}catch (Exception e) {
 			tx.rollback();
@@ -153,7 +231,16 @@ public class StoreAction extends BaseSupport {
 			
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
-				System.out.println("ids    >>>>>"+ids[i]);
+				
+				StoreProduct storeProduct = new StoreProduct();
+				storeProduct.setStoreId(id);
+
+				List<Object> stores = storeProduct.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					storeProduct=(StoreProduct)bean;
+					storeProduct.delete(tx.getConnection());
+				}
+				
 				Store store=new Store();
 				store.setId(id);
 				store.delete(tx.getConnection());

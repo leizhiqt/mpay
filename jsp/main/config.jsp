@@ -23,7 +23,6 @@
 	profile.addChildAction(new Action(sessionId,"FinancialProduct","FinancialProduct.do"));
 	profile.addChildAction(new Action(sessionId,"JobCheck","JobCheck.do"));
 	profile.addChildAction(new Action(sessionId,"Store","Store.do"));
-	profile.addChildAction(new Action(sessionId,"StoreProduct","StoreProduct.do"));
 	mainMenu.add(profile);
 	
 	Action operation = new Action(sessionId,"Operation", "Operation.do");
