@@ -26,6 +26,7 @@ import com.mooo.mycoz.dbobj.wineBranch.AddressBook;
 import com.mooo.mycoz.dbobj.wineBranch.Client;
 import com.mooo.mycoz.dbobj.wineBranch.ClientDoc;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJob;
+import com.mooo.mycoz.dbobj.wineBranch.ClientJobSale;
 import com.mooo.mycoz.dbobj.wineBranch.ClientJobTrack;
 import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
 import com.mooo.mycoz.dbobj.wineBranch.StoreUser;
@@ -127,7 +128,7 @@ public class SaleAction extends BaseSupport {
 					double monthPay1 = 0;
 					// 乘以税率后的总钱数
 					double afterCalculetedTotals = creditAmount
-							* (financialProduct.getCreditRate() + 1);
+							* (financialProduct.getChargeRate()+financialProduct.getVouchRate()+financialProduct.getNaturalRate() + 1);
 					// 每月支付钱数
 					monthPay1 =  (afterCalculetedTotals / financialProduct
 							.getCycleTotal());
@@ -324,7 +325,7 @@ public class SaleAction extends BaseSupport {
 			creditAmount = totalPrice - selfAmount;
 			
 			double monthPay = creditAmount
-					* (1 + financialProduct.getCreditRate())
+					* (1 + financialProduct.getChargeRate()+financialProduct.getVouchRate()+financialProduct.getNaturalRate())
 					/financialProduct.getCycleTotal() ;
 			
 			//取整加1
@@ -336,6 +337,7 @@ public class SaleAction extends BaseSupport {
 			// 每月支付
 			request.setAttribute("monthPay1", monthPay1Int);
 		
+			
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
@@ -505,6 +507,25 @@ public class SaleAction extends BaseSupport {
 			clientJobTrack.setUserId(sessionId);
 			clientJobTrack.setBranchId(branchId);
 			clientJobTrack.add(tx.getConnection());
+			
+			ClientJobSale oSale = new ClientJobSale();
+			uf.bindData(oSale, "oSale");
+			int nextId = IDGenerator.getNextID(tx.getConnection(),
+					ClientJobSale.class);
+			oSale.setId(nextId);
+			oSale.setClientJobId(clientJob.getId());
+			oSale.add(tx.getConnection());
+			
+			ClientJobSale tSale = new ClientJobSale(); 
+			uf.bindData(tSale, "tSale");
+			if(tSale.getSaleName()!=null){
+				nextId = IDGenerator.getNextID(tx.getConnection(),
+						ClientJobSale.class);
+				tSale.setId(nextId);
+				tSale.setClientJobId(clientJob.getId());
+				tSale.add(tx.getConnection());
+			}
+			
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

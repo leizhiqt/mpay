@@ -852,18 +852,18 @@ change3(0);
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 商品1</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="oSale.saleName" /></td>
 						<td align="right"  >商品类型</td>
 				        <td align="left"><input type="text" name="" /></td>
 					    <td align="right"  >价格（元）</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="oSale.salePrice" /></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >品牌</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="oSale.brand" /></td>
 						<td align="right"  >型号</td>
-				        <td align="left"><input type="text" name="" /></td>
+				        <td align="left"><input type="text" name="oSale.modelNo" /></td>
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
@@ -874,18 +874,18 @@ change3(0);
 					<tr>
 
 						<td align="right"  >商品2</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="tSale.saleName" /></td>
 						<td align="right"  >商品类型</td>
 				        <td align="left"><input type="text" name="" /></td>
 					    <td align="right"  >价格（元）</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="tSale.salePrice" /></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >品牌</td>
-						<td align="left"><input type="text" name="" /></td>
+						<td align="left"><input type="text" name="tSale.brand" /></td>
 						<td align="right"  >型号</td>
-				        <td align="left"><input type="text" name="" /></td>
+				        <td align="left"><input type="text" name="tSale.modelNo" /></td>
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>

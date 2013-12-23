@@ -89,7 +89,9 @@
 <th><fmt:message key="Name"/></th>
 <th><fmt:message key="CycleTotal"/></th>
 <th><fmt:message key="CycleUnit"/></th>
-<th><fmt:message key="CreditRate"/></th>
+<th><fmt:message key="NaturalRate"/></th>
+<th><fmt:message key="ChargeRate"/></th>
+<th><fmt:message key="VouchRate"/></th>
 <th><fmt:message key="MinPayPercent"/></th>
 <th><fmt:message key="FinancialMax"/></th>
 
@@ -103,7 +105,9 @@
 <td><c:out value="${financial.financialName }"/></td>
 <td><c:out value="${financial.cycleTotal }"/></td>
 <td><c:out value="${financial.cycleUnit }"/></td>
-<td><fmt:formatNumber value="${financial.creditRate }" type="percent" maxFractionDigits="5"/></td>
+<td><fmt:formatNumber value="${financial.naturalRate }" type="percent" maxFractionDigits="5"/></td>
+<td><fmt:formatNumber value="${financial.chargeRate }" type="percent" maxFractionDigits="5"/></td>
+<td><fmt:formatNumber value="${financial.vouchRate }" type="percent" maxFractionDigits="5"/></td>
 <td><c:out value="${financial.minPayPercent }"/></td>
 <td><c:out value="${financial.financialMax }"/></td>
 </tr>

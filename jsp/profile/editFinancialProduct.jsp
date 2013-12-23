@@ -73,11 +73,24 @@
 									
 									
 									<tr>
-										<td class="tl"><fmt:message key="CreditRate" /></td>
-										<td><input type="text" name="financialProduct.creditRate"
-											value="${financialProduct.creditRate }" size="10" maxlength="10" /></td>
+										<td class="tl"><fmt:message key="NaturalRate" /></td>
+										<td><input type="text" name="financialProduct.NaturalRate"
+											value="${financialProduct.naturalRate }" size="10" maxlength="10" /></td>
 									</tr>
 
+									<tr>
+										<td class="tl"><fmt:message key="ChargeRate" /></td>
+										<td><input type="text" name="financialProduct.chargeRate"
+											value="${financialProduct.chargeRate }" size="10" maxlength="10" /></td>
+									</tr>
+									
+									
+									<tr>
+										<td class="tl"><fmt:message key="VouchRate"/></td>
+										<td><input type="text" name="financialProduct.vouchRate" 
+										value="${financialProduct.vouchRate }" size="10" maxlength="10"/><font class="fm">*</font></td>
+									</tr>
+									
 									<tr>
 										<td class="tl"><fmt:message key="FinancialMax" /></td>
 										<td><input type="text" name="financialProduct.financialMax"
