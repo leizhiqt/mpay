@@ -355,13 +355,20 @@ public class ClientInfoAction extends BaseSupport {
 			
 			dbobject10.addTable(ClientJobTrack.class, "clientJobTrack");
 			dbobject10.addTable(User.class, "user");
-			dbobject10.addTable(User.class, "user");
+			dbobject10.addTable(JobType.class, "jobType");
 			dbobject10.setForeignKey("clientJobTrack", "userId", "user", "id");
+			dbobject10.setForeignKey("jobType", "id", "clientJobTrack", "jobTypeId");
 			dbobject10.setRetrieveField("user", "name");
+			
+			dbobject10.setRetrieveField("jobType", "jobKey");
 			dbobject10.setRetrieveField("clientJobTrack", "jobRemark");
 			dbobject10.setRetrieveField("clientJobTrack", "processId");
 			dbobject10.setRetrieveField("clientJobTrack", "jobDate");
-			
+			dbobject10.setRetrieveField("clientJobTrack", "jobTypeId");
+			dbobject10.setRetrieveField("clientJobTrack", "nbs");
+			dbobject10.setRetrieveField("clientJobTrack", "nbf");
+			dbobject10.setRetrieveField("clientJobTrack", "nbc");
+			dbobject10.addCustomWhereClause(" clientJobId = "+clientJobId);
 			dbobject10.setOrderBy("clientJobTrack", "id");
 			request.setAttribute("clientJobTracks", dbobject10.searchAndRetrieveList());
 			
@@ -459,34 +466,41 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.setId(new Integer(clientJobId));
 				clientJob.retrieve(tx.getConnection());
 				request.setAttribute("clientJob", clientJob);
-				
+				//写入日志文件
 				ClientJobTrack clientJobTrack = new ClientJobTrack();
+				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
 				clientJobTrack.setClientJobId(new Integer(clientJobId));
-				clientJobTrack.setProcessId(0);
-				clientJobTrack.setJobTypeId(2);
-				
-				int checkCount = clientJobTrack.count(tx.getConnection());
-				if(checkCount > 0 ){
-					ClientJobTrack orgTrack = new ClientJobTrack();
-					orgTrack.setClientJobId(new Integer(clientJobId));
-					int jobCount = orgTrack.count(tx.getConnection());
-					
-					orgTrack.setProcessId(0);
-					orgTrack.retrieve();
-					
-					orgTrack.setProcessId(jobCount);
-					orgTrack.update(tx.getConnection());
-					
-					clientJobTrack.retrieve();
-					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
-					
-					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-					clientJobTrack.setUserId(sessionId);
-					clientJobTrack.setJobDate(new Date());
-					clientJobTrack.setProcessId(0);
-					clientJobTrack.add(tx.getConnection());
-				}
+				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.setJobDate(new Date());
+				clientJobTrack.setBranchId(0);
+				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+clientJobTrack.getJobTypeId());
+				clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+				//clientJobTrack.setProcessId(0);
+				//clientJobTrack.setJobTypeId(2);
+				clientJobTrack.add(tx.getConnection());
 				tx.commit();
+//				int checkCount = clientJobTrack.count(tx.getConnection());
+//				if(checkCount > 0 ){
+//					ClientJobTrack orgTrack = new ClientJobTrack();
+//					orgTrack.setClientJobId(new Integer(clientJobId));
+//					int jobCount = orgTrack.count(tx.getConnection());
+//					
+//					orgTrack.setProcessId(0);
+//					orgTrack.retrieve();
+//					
+//					orgTrack.setProcessId(jobCount);
+//					orgTrack.update(tx.getConnection());
+//					
+//					clientJobTrack.retrieve();
+//					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
+//					
+//					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+//					clientJobTrack.setUserId(sessionId);
+//					clientJobTrack.setJobDate(new Date());
+//					clientJobTrack.setProcessId(0);
+//					clientJobTrack.add(tx.getConnection());
+//				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				tx.rollback();

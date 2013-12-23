@@ -1278,7 +1278,7 @@ table.tab_css_1 td.td_css{
 		 <table width="98%" class="tab_css_1">
           <tr>
             <td  align="right"></td>
-            <td class="td_css" align="left" colspan="2">CC<input type="text" name="codeOne" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="codeOne" size="6" value=""> &nbsp;</td>
+            <td class="td_css" align="left" colspan="2">CC<input type="text" name="clientJob.cc" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="clientJob.cc" size="6" value=""> &nbsp;</td>
             <td>
             </td>
           </tr>
@@ -1297,13 +1297,13 @@ table.tab_css_1 td.td_css{
 								</option>
 							--</c:forEach>
 						</select>&nbsp;
-				<input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
+				<input type="text" name="clientJobTrack.nbf"  size="6" value=""> 
+                <input type="text" name="clientJobTrack.nbs"  size="6" value=""> 
+                <input type="text" name="clientJobTrack.nbc"  size="6" value=""> 
 			</td>
             <td class="td_css" align="right">原因：</td>
             <td>
-				<input type="text" name="codeOne" size="30" value=""> 
+				<input type="text" name="clientJobTrack.jobRemark" size="30" value=""> 
 			</td>
           </tr>
           <tr>
@@ -1382,17 +1382,21 @@ table.tab_css_1 td.td_css{
             <tr>
 					<td  class="textr"><fmt:message key="userId"/></td>
 					<td  class="textr"><fmt:message key="UserName"/></td>
-					<td  class="textr"><fmt:message key="ProcessId"/></td>
+					<td  class="textr"><fmt:message key="jobType"/></td>
 					<td  class="textr"><fmt:message key="JobRemark"/></td>
+					<td  class="textr"><fmt:message key="OC"/></td>
+					<td  class="textr"><fmt:message key="CC"/></td>
 					<td  class="textr"><fmt:message key="JobDate"/></td>
 					
 				</tr>
 				<c:forEach var="clientJobTracks" items="${clientJobTracks}" varStatus="status">
 				<tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-				<td><c:out value="${clientJobTracks.id }"></c:out>  </td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.id}"></c:out>  </td>
 				<td><c:out value="${clientJobTracks.user.name }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.processId }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.jobRemark }"/></td>
+				<td><c:out value="${clientJobTracks.jobType.jobKey }"/></td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.nbf }"/></td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.nbs }"/></td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.nbc }"/></td>
 				<td><fmt:formatDate value="${clientJobTracks.clientJobTrack.jobDate }" type="both" /></td>
 				</tr>
 				</c:forEach>
