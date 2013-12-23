@@ -98,14 +98,14 @@ public class SaleAction extends BaseSupport {
 
 			request.setAttribute("selfAmount", ssAmount);
 
-			if (selfAmount >= totalPrice)
+			if (selfAmount >= totalPrice && totalPrice > 0)
 				throw new Exception("首付过多");
 
 			selfPercent = selfAmount / totalPrice;
 			request.setAttribute("selfPercent", selfPercent);
 
-			if (selfPercent < 0.2)
-				throw new Exception("首付不足");
+//			if (selfPercent < 0.2)
+//				throw new Exception("首付不足");
 
 			creditAmount = totalPrice-selfAmount;
 
