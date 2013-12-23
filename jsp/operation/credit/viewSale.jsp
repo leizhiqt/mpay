@@ -290,7 +290,11 @@ change3(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
-						<td align="left" colspan="5"><input type="file" name="clientPhoto"  /> </td>
+						<td align="left" colspan="5">
+							<c:if test="${!empty  client.photoPath}">
+								<img src='${client.photoPath} 'class="pimg" width="120" height="120">
+							</c:if>
+						</td>
 					</tr>
 					<tr>
 
@@ -428,7 +432,7 @@ change3(0);
 						 <td align="left">
 							<input type="checkbox" id="ischange" name="isSameWitcensusAdd"/></td>
 				    	 <td align="right"  >你在现居住城市住了多久？</td>
-				    	 <td align="left"><input type="text" name="" /></td>
+				    	 <td align="left"><c:out value="${client.livingMonth}"/></td>
 					     <td align="right"  >月</td>
 						 <td></td>
 					</tr>
@@ -543,60 +547,13 @@ change3(0);
 
 					</tr>
 					<tr>
-
-						<td width="60" align="right">身份证</td>
-				   	 <td align="left" width="272"><c:out value="${contract.fIdCode}"/></td>
-
-						<td align="right">社保卡</td>
-						<td colspan="3" align="left"><c:out value="${contract.fSocialCard}"/></td>
-
-				    </tr>
-					<tr>
-
-						<td align="right">银行卡</td>
-				    <td align="left"><c:out value="${contract.fBankCard}"/></td>
-
-						<td align="right">银行对账单</td>
-						<td colspan="3" align="left"><c:out value="${contract.fBankStatement}"/></td>
-
-				    </tr>
-					<tr>
-						<td align="right">户口本</td>
-						<td align="left"><c:out value="${contract.fResidenceBooklet}"/></td>
-
-						<td align="right">大学学生证</td>
-						<td colspan="3" align="left"><c:out value="${contract.fSid}"/>				  
+					<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
+						<td colspan="6">
+							<c:forEach var="clientDoc" items="${docs}" varStatus="s">
+								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
+							</c:forEach>
+						</td>
 					</tr>
-					<tr>
-
-						<td align="right">房产证</td>
-				    <td align="left"><c:out value="${contract.fHouseCard}"/></td>
-						<td align="right">行驶证</td>
-						<td colspan="3" align="left"><c:out value="${contract.fDirvingCard}"/></td>
-				    </tr>
-					<tr>
-
-						<td align="right">工卡</td>
-					    <td align="left"><c:out value="${contract.fWorkCard}"/></td>
-
-					  	<td align="right">大学学生证明（仅适用全日制大学学生)</td>
-
-						<td colspan="3" align="left"><c:out value="${contract.fUid}"/></td>
-					</tr>
-					<tr>
-						<td align="right">银行存折</td>
-						<td align="left"><c:out value="${contract.fBankDeposit}"/></td>
-					    <td align="right">驾驶证</td>
-                        <td colspan="3" align="left"><c:out value="${contract.fDirverCard}"/></td>
-					</tr>
-					<tr>
-
-						<td align="right"  >其它</td>
-						<td align="left"><c:out value="${contract.fOther}"/></td>
-					    <td align="right">邮寄地址</td>
-						<td colspan="3" align="left"><c:out value="${postAddress}"/></td>
-					</tr>
-
 
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>收入资料</strong></th>
@@ -800,28 +757,6 @@ change3(0);
 				    	<td align="left"><c:out value="${bank2.bankName} "/></td>
 					  
 						
-					</tr>
-
-				</table>
-				
-				<table style="width:100%;text-align:center;">
-					<tr>
-						<td width="39%" align="right">用户</td>
-						<td width="61%" align="left"> <c:out value="${user.name} "/></td>
-					</tr>
-					
-					<tr>
-						<td align="right">口令</td>
-						<td align="left"><c:out value="${pwdConfirm} "/></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center">
-							<jsp:include page="../../incl/actionb.jsp">
-								<jsp:param name="key" value="Confirm" />
-								<jsp:param name="action" value="Sale.do" />
-								<jsp:param name="method" value="processAdd" />
-							</jsp:include>
-						</td>
 					</tr>
 
 				</table>
