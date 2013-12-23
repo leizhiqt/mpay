@@ -820,7 +820,7 @@ change3(0);
 						<option value="河北省">河北省</option>
 				</select></td>
 			    <td align="right"  ><b style="color:red">*</b> 市</td>
-				<td align="left"><input type="text" id="city4" name="officeAddressBook.city" />
+				<td align="left"><input type="text" id="city4" name="officeAddressBook.city" value="${officeAddressBook.city }" />
 						</td>
 			</tr>
 
@@ -856,18 +856,18 @@ change3(0);
 			<tr>
 
 				<td align="right"  ><b style="color:red">*</b> 商品1</td>
-				<td align="left"><input type="text" name="" /></td>
+				<td align="left"><input type="text" name="oSale.saleName" value="${oSale.saleName }" /></td>
 				<td align="right"  >商品类型</td>
 		        <td align="left"><input type="text" name="" /></td>
 			    <td align="right"  >价格（元）</td>
-				<td align="left"><input type="text" name="" /></td>
+				<td align="left"><input type="text" name="oSale.salePrice" value="${oSale.salePrice }" /></td>
 			</tr>
 			<tr>
 
 				<td align="right"  >品牌</td>
-				<td align="left"><input type="text" name="" /></td>
+				<td align="left"><input type="text" name="oSale.brand" value="${oSale.brand }" /></td>
 				<td align="right"  >型号</td>
-		        <td align="left"><input type="text" name="" /></td>
+		        <td align="left"><input type="text" name="oSale.modelNo" value="${oSale.modelNo }" /></td>
 			    <td align="right"  ></td>
 				<td></td>
 			</tr>
@@ -877,21 +877,21 @@ change3(0);
 			</tr>
 			<tr>
 
-				<td align="right"  >商品2</td>
-				<td align="left"><input type="text" name="" /></td>
-				<td align="right"  >商品类型</td>
-		        <td align="left"><input type="text" name="" /></td>
-			    <td align="right"  >价格（元）</td>
-				<td align="left"><input type="text" name="" /></td>
+					<td align="right"  >商品2</td>
+					<td align="left"><input type="text" name="tSale.saleName" value="${tSale.saleName }"/></td>
+					<td align="right"  >商品类型</td>
+			        <td align="left"><input type="text" name="" /></td>
+				    <td align="right"  >价格（元）</td>
+					<td align="left"><input type="text" name="tSale.salePrice" value="${tSale.salePrice }"/></td>
 			</tr>
 			<tr>
 
-				<td align="right"  >品牌</td>
-				<td align="left"><input type="text" name="" /></td>
-				<td align="right"  >型号</td>
-		        <td align="left"><input type="text" name="" /></td>
-			    <td align="right"  ></td>
-				<td></td>
+					<td align="right"  >品牌</td>
+					<td align="left"><input type="text" name="tSale.brand" value="${tSale.brand }"/></td>
+					<td align="right"  >型号</td>
+			        <td align="left"><input type="text" name="tSale.modelNo" value="${tSale.modelNo }"/></td>
+				    <td align="right"  ></td>
+					<td></td>
 			</tr>
 			<tr  >
 				<th colspan="6" align="left" class="tr8"><strong>信用信息</strong></th>
@@ -943,22 +943,22 @@ change3(0);
 			<tr>
 			    
 				<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
-				<td align="left"><input type="text" name="bank.debitCard"
+				<td align="left"><input type="text" name="bank.debitCard" value="${bank.debitCard}"
 					maxlength="24" /></td>
 				<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
-		        <td align="left"><input type="text" name="bank.bankName"
+		        <td align="left"><input type="text" name="bank.bankName" value="${ bank.bankName}"
 					maxlength="50" /></td>
 				<td  align="right">月花费(元/月)</td>
-				<td align="left"><input type="text" name="bank.monthPay" /></td>
+				<td align="left"><input type="text" name="bank.monthPay"  value="${bank.monthPay}"/></td>
 			
 			</tr>
 
 			<tr>
 				
 				<td align="right"  >第二银行卡号</td>
-				<td align="left"><input type="text" name="bank2.debitCard" /></td>
+				<td align="left"><input type="text" name="bank2.debitCard" value="${bank2.debitCard }"/></td>
 				<td align="right"  >第二银行卡开户银行</td>
-		    	<td align="left"><input type="text" name="bank2.bankName" /></td>
+		    	<td align="left"><input type="text" name="bank2.bankName" value="${ bank2.bankName}"/></td>
 			  
 				
 			</tr>
