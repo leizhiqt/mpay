@@ -637,6 +637,15 @@ public class SaleAction extends BaseSupport {
 			clientJob.retrieve();
 			request.setAttribute("clientJob",clientJob );
 
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			request.setAttribute("sales",clientJobSale.searchAndRetrieveList());
+
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			request.setAttribute("financialProduct",financialProduct );
+			
 			Store store = new Store();
 			store.setId(clientJob.getStoreId());
 			store.retrieve();

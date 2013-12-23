@@ -534,8 +534,7 @@ change3(0);
 					<tr>
 
 						<td align="right"  >销售顾问备注</td>
-					    <td align="left" colspan="5"><input type="text"
-							name="clientJob.saleRemark"  value="${clientJob.saleRemark}" size="135" /></td>
+					    <td align="left" colspan="5"><c:out value="${clientJob.saleRemark}"/> </td>
 
 					</tr>
 					<tr  >
@@ -543,7 +542,6 @@ change3(0);
 
 					</tr>
 					<tr>
-
 						<td width="60" align="right">身份证</td>
 				   	 <td align="left" width="272"><c:out value="${contract.fIdCode}"/></td>
 
@@ -697,7 +695,14 @@ change3(0);
 					    <td align="right"  >其它</td>
 						<td align="left"><c:out value="${officeAddressBook.other}"/></td>
 					</tr>
-
+						
+						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
+							<td>
+							
+								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
+							</td>
+						</c:forEach>
+<%-- 
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>商品1</strong></th>
 
@@ -742,6 +747,8 @@ change3(0);
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
+					
+					--%>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>信用信息</strong></th>
 					</tr>
@@ -751,7 +758,7 @@ change3(0);
 						<td align="left"><c:out value="${financialProduct.financialName }"/><input type="hidden" name="clientJob.financialProductId" value="${pId }"/></td>
 						<td align="right">商品总价</td>
 						<td align="left">
-							<c:out value="${totalPrice }"/> <c:out value="${clientJob.totalPrice}"/>
+							<c:out value="${clientJob.totalPrice}"/>
 						</td>
 					  	<td align="right">贷款用途</td>
 						<td align="left"> <c:out value="${clientJob.byUse}"/></td>
@@ -761,20 +768,20 @@ change3(0);
 						<td align="right"  >自付金额(元)</td>
 						
 						<td align="left">
-							<c:out value="${selfAmount }"/><c:out value="${selfAmount}"/>
+							<c:out value="${clientJob.selfAmount }"/>
 						</td>
 						<td align="right"  >分期期数</td>
 						
 					    <td align="left"><c:out value="${financialProduct.cycleTotal }"/> </td>
 						<td  align="right">每月还款额(元)</td>
-						<td align="left"><c:out value="${monthPay1}"/></td>
+						<td align="left"><c:out value="${clientJob.monthOfPay}"/></td>
 						
 						
 					</tr>
 					<tr>
 						
 						<td align="right"  >贷款本金(元)</td>
-						<td align="left"><c:out value="${salePrice-onePay } "/></td>
+						<td align="left"><c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/></td>
 						<td align="right"  ></td>
 						<td align="left"></td>
 						<td  align="right">每月还款日</td>
@@ -804,27 +811,6 @@ change3(0);
 
 				</table>
 				
-				<table style="width:100%;text-align:center;">
-					<tr>
-						<td width="39%" align="right">用户</td>
-						<td width="61%" align="left"> <c:out value="${user.name} "/></td>
-					</tr>
-					
-					<tr>
-						<td align="right">口令</td>
-						<td align="left"><c:out value="${pwdConfirm} "/></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center">
-							<jsp:include page="../../incl/actionb.jsp">
-								<jsp:param name="key" value="Confirm" />
-								<jsp:param name="action" value="Sale.do" />
-								<jsp:param name="method" value="processAdd" />
-							</jsp:include>
-						</td>
-					</tr>
-
-				</table>
 			</div>
 
 			<jsp:include page="../../incl/g_footer.jsp" />
