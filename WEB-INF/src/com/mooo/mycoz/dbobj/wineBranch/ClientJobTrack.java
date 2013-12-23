@@ -13,6 +13,9 @@ public class ClientJobTrack extends DBObject {
 	private Integer processId;
 	private Integer branchId;
 	private Date jobDate;
+	private String nbf;
+	private String nbc;
+	private String nbs;
 
 	public Integer getId() {
 		return id;
@@ -76,5 +79,29 @@ public class ClientJobTrack extends DBObject {
 
 	public void setJobDate(Date jobDate) {
 		this.jobDate = jobDate;
+	}
+
+	public String getNbf() {
+		return nbf;
+	}
+
+	public void setNbf(String nbf) {
+		this.nbf = nbf;
+	}
+
+	public String getNbc() {
+		return nbc;
+	}
+
+	public void setNbc(String nbc) {
+		this.nbc = nbc;
+	}
+
+	public String getNbs() {
+		return nbs;
+	}
+
+	public void setNbs(String nbs) {
+		this.nbs = nbs;
 	}
 }

@@ -20,6 +20,8 @@ public class ClientJob extends DBObject {
 	private String privateKey;
 	private Integer storeId;
 	private String saleRemark;
+	private String cc;
+	private String oc;
 
 	public Integer getId() {
 		return id;
@@ -140,5 +142,20 @@ public class ClientJob extends DBObject {
 	public void setSaleRemark(String saleRemark) {
 		this.saleRemark = saleRemark;
 	}
-	
+
+	public String getCc() {
+		return cc;
+	}
+
+	public void setCc(String cc) {
+		this.cc = cc;
+	}
+
+	public String getOc() {
+		return oc;
+	}
+
+	public void setOc(String oc) {
+		this.oc = oc;
+	}
 }
