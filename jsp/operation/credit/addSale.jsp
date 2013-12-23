@@ -463,7 +463,7 @@ change3(0);
 						 <td align="left">
 							<input type="checkbox" id="ischange" name="isSameWitcensusAdd"/></td>
 				    	 <td align="right"  >你在现居住城市住了多久？</td>
-				    	 <td align="left"><input type="text" name="" /></td>
+				    	 <td align="left"><input type="text" name="client.livingMonth" /></td>
 					     <td align="right"  >月</td>
 						 <td></td>
 					</tr>
