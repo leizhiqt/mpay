@@ -98,7 +98,7 @@ public class SaleAction extends BaseSupport {
 
 			request.setAttribute("selfAmount", ssAmount);
 
-			if (selfAmount >= totalPrice && totalPrice > 0)
+			if (selfAmount >= totalPrice)
 				throw new Exception("首付过多");
 
 			selfPercent = selfAmount / totalPrice;
