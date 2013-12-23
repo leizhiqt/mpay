@@ -379,3 +379,7 @@ TypeBankNo=商铺银行帐号
 StoreBankNo=门店银行帐号
 StoreBankName=商铺银行开户名
 StoreTypeName=商铺名称
+NaturalRate=利息
+ChargeRate=服务费
+VouchRate=担保费
+FinancialName=金融产品
