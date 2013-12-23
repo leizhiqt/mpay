@@ -92,7 +92,9 @@
 											<c:forEach var="storeType" items="${storeTypes}" varStatus="s">
 													<option value="${storeType.id}"
 						
-												
+													<c:if test="${storeType.id==param.store.storeTypeId}">
+														selected="selected" 
+													</c:if>
 														>${storeType.typeName}
 													
 													</option>
