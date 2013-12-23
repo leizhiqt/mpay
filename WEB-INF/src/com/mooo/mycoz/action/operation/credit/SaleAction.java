@@ -50,7 +50,7 @@ public class SaleAction extends BaseSupport {
 			log.debug("promptDeclare");
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
-		String value = null;
+//		String value = null;
 
 		try {
 			StoreUser storeUser = new StoreUser();

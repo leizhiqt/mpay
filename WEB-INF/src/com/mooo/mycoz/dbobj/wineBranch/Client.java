@@ -33,6 +33,8 @@ public class Client extends DBObject {
 	private String spuseExtPhone;
 	private Integer censusAddressBookId;// 户籍地址
 	private Integer livingAddressBookId;// 现居地址
+	private Integer livingMonth;
+	
 	private String homeName;
 	private String homeType;
 	private String homeTelephone;
@@ -510,6 +512,14 @@ public class Client extends DBObject {
 
 	public void setTbao(String tbao) {
 		this.tbao = tbao;
+	}
+
+	public Integer getLivingMonth() {
+		return livingMonth;
+	}
+
+	public void setLivingMonth(Integer livingMonth) {
+		this.livingMonth = livingMonth;
 	}
 	
 }

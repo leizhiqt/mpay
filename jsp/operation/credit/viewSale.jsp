@@ -280,13 +280,7 @@ change3(0);
 						<td colspan="" align="right"  >销售顾问代码</td>
 						<td><c:out value="${UserName} "/>
 						<td align="right"  ><b style="color:red">*</b> 内部代码</td>
-						<td><select name="clientJob.privateKey" id="innerCode"
-							> 
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="C">C</option>
-							<option value="D">D</option>
-						</select></td>
+						<td> <c:out value="${clientJob.privateKey} "/></td>
 						<td></td>
 						<td align="left"  >(<b style="color:red">*</b>)必填项</td>
 
@@ -296,94 +290,70 @@ change3(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
-						<td align="left" colspan="2"><input type="file" name="clientPhoto" /> </td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td align="left" colspan="5"><input type="file" name="clientPhoto"  /> </td>
 					</tr>
 					<tr>
 
 						<td align="right" ><b style="color:red">*</b> 姓名</td>
-						<td align="left" width="240px" ><input type="text" name="client.clientName" value="${client.clientName }" onblur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
-					    <td></td>
-						<td></td>
+						<td align="left" width="240px" ><c:out value="${client.clientName}"/> </td>
+					    <td align="right"><b style="color:red">*</b> 申请人年龄</td>
+					  <td align="left"><c:out value="${client.age}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 身份证号码</td>
-						<td align="left"><input type="text" name="client.idNo"  value="${client.idNo }" onblur="calcIdCard()" id="card" /> <b id="msg2"></b></td>
+						<td align="left"><c:out value="${client.idNo}"/></td>
 					</tr>
 					<tr>
 
 
 						<td align="right"  >身份证截止日期</td>
-						<td align="left"><input type="text" name="client.idEndDate" id="validity" value='<fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/>'
-							onclick="displayCalendar(this,'yyyy-MM-dd');" /></td>
-					    <td></td>
-						<td></td>
-						<td align="right"  ><b style="color:red">*</b> 发证机关</td>
-						<td align="left"><input type="text" name="client.idAuthority" maxlength="50" value="${client.idAuthority }" onblur="calc(this)" data="msg3" maxlength="20" id="msg" /> <b id="msg3"></b></td>
+						<td align="left"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>
+					    <td align="right"><b style="color:red">*</b> 婚姻状况</td>
+						<td align="left">
+                        <c:out value="${client.marry}"/> 
+                        </td>
+					  <td align="right"  ><b style="color:red">*</b> 发证机关</td>
+						<td align="left">
+                        <c:out value="${client.idAuthority}"/>
+                        </td>
 					</tr>
 
 
 					<tr>
 						<td align="right"  >SSI号码/学生号码</td>
-				    <td align="left"><input type="text" name="client.otherNo" value="${client.otherNo}"/></td>
-						<td align="right" width="260px" ><b style="color:red">*</b> 申请人年龄</td>
-						<td align="left"><input type="text" name="client.age" maxlength="10" value="${client.age }" data="msg4"  id="ages" onblur="calc(this)" /> <b id="msg4"></b></td>
+				    <td align="left"> <c:out value="${client.otherNo}"/></td>
+						<td align="right" width="260px" ><b style="color:red">*</b> 住房</td>
+						<td align="left"><c:out value="${client.housing}"/></td>
 						<td align="right"  ><b style="color:red">*</b>本人手机号</td>
-					    <td align="left"><input type="text" name="client.mobilePhone" value="${client.mobilePhone }" onblur="getphonearea(this.value)" /><b id="msg5"></b></td>
+					    <td align="left"><c:out value="${client.mobilePhone}"/>
+                        </td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 性别</td>
-						<td align="left"><select name="client.sex" id="sex"
-							>
-								<option value="男">男</option>
-								<option value="女">女</option>
-						</select></td>
-					    <td align="right"  ><b style="color:red">*</b> 婚姻状况</td>
-						<td align="left"><select name="client.marry" id="marry"
-							>
-								<option value="未婚">未婚</option>
-								<option value="已婚">已婚</option>
-								<option value="离异">离异</option>
-								<option value="丧偶">丧偶</option>
-						</select></td>
+						<td align="left"><c:out value="${client.sex}"/></td>
+					    <td align="right"  >住宅/宿舍电话</td>
+						<td align="left"><c:out value="${client.homePhone}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 手机号码归属地</td>
-					    <td align="left"><input type="text" name="client.mobileAddress" data="msg6" value="${client.mobileAddress }"  id="addr" onblur="calc(this)" /> <b id="msg6"></b></td>
+					    <td align="left"><c:out value="${client.mobileAddress}"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >子女数目</td>
-				        <td align="left"><input type="text" name="client.childs" value="${client.childs }"/></td>
-					    <td align="right"  ><b style="color:red">*</b> 住房</td>
-				        <td align="left"><select id="housing" name="client.housing"
-							>
-								<option value="自有房">自有房</option>
-								<option value="租住房">租住房</option>
-								<option value="父母房产">父母房产</option>
-								<option value="单位提供的福利房">单位提供的福利房</option>
-								<option value="集体宿舍">集体宿舍</option>
-						</select></td>
+				        <td align="left"><c:out value="${client.childs}"/></td>
+					    <td align="right"  >QQ:</td>
+				        <td align="left"><c:out value="${client.qq}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
-						<td align="left"><select name="client.educationId" id="educationId"
-							>
-								<option value="小学">小学</option>
-								<option value="初中">初中</option>
-								<option value="高中">高中</option>
-								<option value="职高，中专，技术学校">职高，中专，技术学校</option>
-								<option value="大学">大学</option>
-								<option value="硕士及以上">硕士及以上</option>
-								
-						</select></td>
+						<td align="left"><c:out value="${client.educationId}"/>
+                        </td>
 					</tr>
 					<tr>
 						<td align="right"  >住宅电话登记人</td>
-						<td align="left"><input type="text" name="client.homePhoneName" value="${ client.homePhoneName}"
-							maxlength="20" /></td>
-					    <td align="right"  >住宅/宿舍电话</td>
-				        <td align="left"><input type="text" name="client.homePhone" value="${client.homePhone }"/></td>
+						<td align="left"><c:out value="${client.homePhoneName}"/></td>
+					    <td align="right"  >淘宝账号：</td>
+				        <td align="left"><c:out value="${client.tbao}"/></td>
 					    <td align="right"  >电子邮箱</td>
-					    <td align="left"><input type="text" name="client.email" value="${client.email}"/></td>
+					    <td align="left"><c:out value="${client.email}"/></td>
 					</tr>
+
 
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>配偶资料</strong></th>
@@ -392,23 +362,27 @@ change3(0);
 					<tr>
 
 						<td align="right"  >配偶姓名</td>
-						<td align="left"><input type="text" name="client.spuseName" maxlength="20" value="${client.spuseName }"/>
+						<td align="left"><c:out value="${client.spuseName}"/>
 						</td>
 					    <td align="right"  >配偶移动电话</td>
-				        <td align="left"><input type="text" name="client.spuseMobile" value="${ client.spuseMobile}"/></td>
+				        <td align="left"><c:out value="${client.spuseMobile}"/>
+                        </td>
 					    <td align="right"  >身份证号码</td>
-					    <td align="left"><input type="text" name="client.idSpuse" value="${client.idSpuse }"/></td>
+					    <td align="left"><c:out value="${client.idSpuse}"/>
+                        </td>
 					</tr>
 
 					<tr>
 
 						<td align="right"  >配偶雇主</td>
-				        <td align="left"><input type="text" name="client.spuseHirer" value="${client.spuseHirer }"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${client.spuseHirer}"/>
+                        </td>
 					    <td align="right"  >配偶办公电话</td>
-				        <td align="left"><input type="text" name="client.spuseOfficePhone" value="${client.spuseOfficePhone }"/></td>
+				        <td align="left"><c:out value="${client.spuseOfficePhone}"/>
+                        </td>
 					    <td align="right"  >配偶办公电话分机</td>
-					    <td align="left"><input type="text" name="client.spuseExtPhone" value="${client.spuseExtPhone }"/></td>
+					    <td align="left"><c:out value="${client.spuseExtPhone}"/>
+                        </td>
 					</tr>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>户籍地址</strong></th>
@@ -417,42 +391,33 @@ change3(0);
 					<tr>
 
 			   		  <td align="right"  >邮编</td>
-			          <td align="left"><input type="text" name="censusAddressBook.zipCode" value="${censusAddressBook.zipCode}" id="censusAddressBookZipCode"
-						maxlength="20" /></td>
+			          <td align="left"><c:out value="${censusAddressBook.zipCode}"/>
+                      </td>
 				      <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-			          <td align="left"><select  name="censusAddressBook.province"  id="censusAddressBookprovince"
-						>
-							<option value="四川省">四川省</option>
-							<option value="湖南省">湖南省</option>
-							<option value="河北省">河北省</option>
-					    </select></td>
+			          <td align="left"><c:out value="${censusAddressBook.province}"/>
+                      </td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
-			          <td align="left"><input type="text" name="censusAddressBook.city" />
+			          <td align="left"><c:out value="${censusAddressBook.city}"/>
 					</tr>
 
 					<tr>
 
 						  <td align="right"  ><b style="color:red">*</b> 区/县区</td>
-				          <td align="left"><input type="text" name="censusAddressBook.county" value="${censusAddressBook.county }" 
-							maxlength="20" data="msg17"  id="censusAddressBookcounty" onblur="calc(this)" /> <b id="msg17"></b></td>
+				          <td align="left"><c:out value="${censusAddressBook.county}"/></td>
 					      <td align="right"  >镇</td>
-				          <td align="left"><input type="text" name="censusAddressBook.town"
-							maxlength="20" id="censusAddressBooktown" /></td>
+				          <td align="left"><c:out value="${censusAddressBook.town}"/></td>
 					      <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
-					      <td align="left"><input type="text" name="censusAddressBook.street" value="${censusAddressBook.street }"
-							maxlength="20" data="msg16"  id="censusAddressBookstreet" onblur="calc(this)" /> <b id="msg16"></b></td>
+					      <td align="left"><c:out value="${censusAddressBook.street}"/></td>
 					</tr>
 					<tr>
 
 						 <td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
-				    <td align="left"><input type="text" name="censusAddressBook.community" value="${censusAddressBook.community }"
-							maxlength="20" data="msg15"  id="censusAddressBookcommunity" onblur="calc(this)" /> <b id="msg15"></b></td>
+				    <td align="left"><c:out value="${censusAddressBook.community}"/></td>
 					     <td align="right"  >栋/单元/房间号</td>
-				    <td align="left"><input type="text" name="censusAddressBook.houseNo" id="censusAddressBookhouseNo" value="${censusAddressBook.houseNo}"
-							maxlength="20" /></td>
+				    <td align="left"><c:out value="${censusAddressBook.houseNo}"/>
+                    </td>
 					     <td align="right"  >其它</td>
-					     <td align="left"><input type="text" name="censusAddressBook.other" id="censusAddressBookother" value="${ censusAddressBook.other}"
-							maxlength="50" /></td>
+					     <td align="left"><c:out value="${censusAddressBook.other}"/></td>
 					</tr>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>现居住地址</strong></th>
@@ -470,40 +435,32 @@ change3(0);
 					<tr>
 	
 					     <td align="right"  >邮编</td>
-					     <td align="left"><input type="text" name="livingAddressBook.zipCode" value="${livingAddressBook.zipCode }" id="livingAddressBookZipCode"
-								maxlength="10" /></td>
+					     <td align="left"><c:out value="${livingAddressBook.zipCode}"/></td>
 						 <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-					     <td align="left"><select  name="livingAddressBook.province"  id="livingAddressBookprovince"
-								>
-									<option value="四川省">四川省</option>
-									<option value="湖南省">湖南省</option> 	 
-									<option value="河北省">河北省</option>
-							</select></td>
+					     <td align="left"><c:out value="${livingAddressBookprovince}"/></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
-					      <td align="left"><input  name="livingAddressBook.city"  type="text"/>
+					      <td align="left"><c:out value="${livingAddressBook.city}"/>
 									</td>
 					</tr>
 
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
-				    <td align="left"><input type="text" name="livingAddressBook.county" value="${livingAddressBook.county }"
-							maxlength="20" data="msg14"  id="livingAddressBookcounty" onblur="calc(this)" /> <b id="msg14"></b></td>
+				    <td align="left"><c:out value="${livingAddressBook.county}"/></td>
 					    <td align="right"  >镇</td>
-				        <td align="left"><input type="text" name="livingAddressBook.town"   id="livingAddressBooktown" value="${livingAddressBook.town }"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${livingAddressBook.town}"/>
+                        </td>
 					    <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
-						<td align="left"><input type="text" name="livingAddressBook.street" value="${livingAddressBook.street }"
-							maxlength="20" data="msg13"  id="livingAddressBookstreet" onblur="calc(this)" /> <b id="msg13"></b></td>
+						<td align="left"><c:out value="${livingAddressBook.street}"/></td>
 					</tr>
 					<tr>
 
 					  <td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
-				  	  <td align="left"><input type="text" name="livingAddressBook.community" value="${livingAddressBook.community }"
-							maxlength="20" data="msg12"  id="livingAddressBookcommunity" onblur="calc(this)" /> <b id="msg12"></b></td>
+				  	  <td align="left"><c:out value="${livingAddressBook.community}"/>
+                      </td>
 					  <td align="right"  >栋/单元/房间号</td>
-					  <td align="left"><input type="text"  id="livingAddressBookhouseNo" name="livingAddressBook.houseNo" value="${livingAddressBook.houseNo }"
-							maxlength="20" /></td>
+					  <td align="left"><c:out value="${livingAddressBookhouseNo}"/>
+                      </td>
 					</tr>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>家庭信息</strong></th>
@@ -511,23 +468,13 @@ change3(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 家庭成员名称</td>
-						<td align="left"><input type="text" name="client.homeName" maxlength="20" value="${client.homeName }" data="msg11"  id="ming" onblur="calc(this)" /> <b id="msg11"></b></td>
+						<td align="left"><c:out value="${client.homeName}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>
-				        <td align="left">
-                        <select  name="client.homeType" >
-								<option value="请选择">请选择</option>                        
-								<option value="父亲">父亲</option>
-								<option value="母亲">母亲</option>
-								<option value="兄弟">兄弟</option>
- 								<option value="姐妹">姐妹</option>
-								<option value="儿子">儿子</option>
-								<option value="女儿">女儿</option>
-								<option value="其他">其他</option>
-                           
-						</select>
+				        <td align="left"><c:out value="${client.homeType}"/>
                         </td>
 					    <td align="right"  ><b style="color:red">*</b>家庭成员电话号</td>
-					    <td align="left"><input type="text" name="client.homeTelephone" value="${ client.homeTelephone}" onblur="calc(this)" data="msg40"/></td>
+					    <td align="left"><c:out value="${client.homeTelephone}"/>
+                        </td>
 					</tr>
 					<tr>
 						<td align="right"  >家庭成员地址与户籍地址相同</td>
@@ -541,43 +488,33 @@ change3(0);
 					<tr>
 
 						<td align="right"  >邮编</td>
-				  		<td align="left"><input type="text" name="homeAddressBook.zipCode" id="homeAddressBookzipCode" value="${ homeAddressBook.zipCode}"
-							maxlength="20" /></td>
+				  		<td align="left"><c:out value="${homeAddressBook.zipCode}"/>
+                        </td>
 					    <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-				        <td align="left"><select  name="homeAddressBook.province" id="homeAddressBookprovince"
-							>
-								<option value="四川省">四川省</option>
-								<option value="湖南省">湖南省</option>
-								<option value="河北省">河北省</option>
-						</select></td>
+				        <td align="left"><c:out value="${homeAddressBook.province}"/>
+                        </td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-				        <td align="left"><input type="text" name="homeAddressBook.city"/>
-							</td>
+				        <td align="left"><c:out value="${homeAddressBook.city}"/>
+						</td>
 					</tr>
 
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
-				        <td align="left"><input type="text" name="homeAddressBook.county" id="homeAddressBookcounty" value="${ homeAddressBook.county}"
-							maxlength="20" data="msg7"  id="qu" onblur="calc(this)" /> <b id="msg7"></b></td>
+				        <td align="left"><c:out value="${homeAddressBook.county}"/></td>
 					    <td align="right"  >镇</td>
-				        <td align="left"><input type="text" id="homeAddressBooktown" name="homeAddressBook.town" value="${homeAddressBook.town}"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${homeAddressBook.town}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
-					    <td align="left"><input type="text" id="homeAddressBookstreet" name="homeAddressBook.street" value="${homeAddressBook.street}"
-							maxlength="20" data="msg18"  id="jlc" onblur="calc(this)" /> <b id="msg18"></td>
+					    <td align="left"><c:out value="${homeAddressBook.street}"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
-				        <td align="left"><input type="text" id="homeAddressBookcommunity" name="homeAddressBook.community" value="${homeAddressBook.community }"
-							maxlength="20"  data="msg8"  id="lou" onblur="calc(this)" /> <b id="msg8"></b> </td>
+				        <td align="left"><c:out value="${homeAddressBook.community}"/> </td>
 					    <td align="right"  >栋/单元/房间号</td>
-				        <td align="left"><input type="text" id="homeAddressBookhouseNo" name="homeAddressBook.houseNo" value="${homeAddressBook.houseNo }"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${homeAddressBookhouseNo}"/></td>
 					    <td align="right"  >其它</td>
-					    <td align="left"><input type="text" id="homeAddressBookother" name="homeAddressBook.other" value="${homeAddressBook.other }"
-							maxlength="50" /></td>
+					    <td align="left"><c:out value="${homeAddressBook.other}"/></td>
 					</tr>
 					<tr >
 						<th colspan="6" align="left" class="tr8"><strong>其他联系人资料</strong></th>
@@ -586,22 +523,13 @@ change3(0);
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 联系人姓名</td>
-				        <td align="left"><input type="text" name="client.otherContacts" value="${client.otherContacts }" data="msg20"  id="nam" onblur="calc(this)" /> <b id="msg20"></td>
+				        <td align="left"><c:out value="${client.otherContacts}"/></td>
 					    <td align="right"  >与申请人关系</td>
-				        <td align="left"><select id="otherNexus" name="client.otherNexus"
-							>
-                            	<option value="请选择">请选择</option>
-								<option value="配偶">配偶</option>
-								<option value="父母">父母</option>
-								<option value="子女">子女</option>
-								<option value="亲戚">亲戚</option>
-								<option value="同事">同事</option>
-								<option value="同学">同学</option>
-								<option value="其他">其他</option>
-
-						</select></td>
+				        <td align="left"><c:out value="${client.otherNexus}"/>
+                        </td>
 					    <td align="right"  ><b style="color:red">*</b> 联系电话</td>
-					    <td align="left"><input type="text" name="client.otherPhone" value="${client.otherPhone }" onblur="getphon(this.value)" /><b id="msg9"></b></td>
+					    <td align="left"><c:out value="${client.otherPhone}"/>
+                        </td>
 					</tr>
 					<tr>
 
@@ -617,61 +545,56 @@ change3(0);
 					<tr>
 
 						<td width="60" align="right">身份证</td>
-				   	 <td align="left" width="272"><input type="file" name="contract.fIdCode" value="${ contract.fIdCode}"/></td>
+				   	 <td align="left" width="272"><c:out value="${contract.fIdCode}"/></td>
 
 						<td align="right">社保卡</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fSocialCard" value="${contract.fSocialCard }"/></td>
+						<td colspan="3" align="left"><c:out value="${contract.fSocialCard}"/></td>
 
 				    </tr>
 					<tr>
 
 						<td align="right">银行卡</td>
-				    <td align="left"><input type="file" name="contract.fBankCard" /></td>
+				    <td align="left"><c:out value="${contract.fBankCard}"/></td>
 
 						<td align="right">银行对账单</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fBankStatement" /></td>
+						<td colspan="3" align="left"><c:out value="${contract.fBankStatement}"/></td>
 
 				    </tr>
 					<tr>
 						<td align="right">户口本</td>
-						<td align="left"><input type="file" name="contract.fResidenceBooklet" /></td>
+						<td align="left"><c:out value="${contract.fResidenceBooklet}"/></td>
 
 						<td align="right">大学学生证</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fSid" />					  
+						<td colspan="3" align="left"><c:out value="${contract.fSid}"/>				  
 					</tr>
 					<tr>
 
 						<td align="right">房产证</td>
-				    <td align="left"><input type="file" name="contract.fHouseCard" /></td>
+				    <td align="left"><c:out value="${contract.fHouseCard}"/></td>
 						<td align="right">行驶证</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fDirvingCard" /></td>
+						<td colspan="3" align="left"><c:out value="${contract.fDirvingCard}"/></td>
 				    </tr>
 					<tr>
 
 						<td align="right">工卡</td>
-					    <td align="left"><input type="file" name="contract.fWorkCard" /></td>
+					    <td align="left"><c:out value="${contract.fWorkCard}"/></td>
 
 					  	<td align="right">大学学生证明（仅适用全日制大学学生)</td>
 
-						<td colspan="3" align="left"><input type="file" name="contract.fUid" /></td>
+						<td colspan="3" align="left"><c:out value="${contract.fUid}"/></td>
 					</tr>
 					<tr>
 						<td align="right">银行存折</td>
-						<td align="left"><input type="file" name="contract.fBankDeposit" /></td>
+						<td align="left"><c:out value="${contract.fBankDeposit}"/></td>
 					    <td align="right">驾驶证</td>
-                        <td colspan="3" align="left"><input type="file" name="contract.fDirverCard" /></td>
+                        <td colspan="3" align="left"><c:out value="${contract.fDirverCard}"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >其它</td>
-						<td align="left"><input type="file" name="contract.fOther" value="${contract.fOther }"/></td>
+						<td align="left"><c:out value="${contract.fOther}"/></td>
 					    <td align="right">邮寄地址</td>
-						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
-							>
-					        <option value="户籍地址">户籍地址</option>
-						    <option value="家庭地址">家庭地址</option>
-						     <option value="现居地址">现居地址</option>
-				        </select></td>
+						<td colspan="3" align="left"><c:out value="${postAddress}"/></td>
 					</tr>
 
 
@@ -682,22 +605,18 @@ change3(0);
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 月收入总额(元)</td>
-						<td align="left"><input type="text" name="client.masterInMonth" value="${client.masterInMonth }"
-							maxlength="10" data="msg21"  id="shour" onblur="calc(this)" /> <b id="msg21"></b></td>
+						<td align="left"><c:out value="${client.masterInMonth}"/></td>
 						<td align="right"  >其他收入(元/月)</td>
-				        <td align="left"><input type="text" name="client.otherInMonth" value="${client.otherInMonth }"
-							maxlength="10" /></td>
+				        <td align="left"><c:out value="${client.otherInMonth}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 家庭月收入(元)</td>
-						<td align="left"><input type="text" name="client.homeInMonth" value="${client.homeInMonth }"
-							maxlength="10" data="msg22"  id="yue" onblur="calc(this)" /> <b id="msg22"></b></td>
+						<td align="left"><c:out value="${client.homeInMonth}"/></td>
 					</tr>
 					<tr>
 
 						<td  ></td>
 						<td align="left"></td>
 						<td align="right"  >其他收入来源</td>
-				        <td align="left"><input type="text" name="client.otherIncome" value="${client.otherIncome }"
-							maxlength="10" /></td>
+				        <td align="left"><c:out value="${client.otherIncome}"/></td>
 					    <td  ></td>
 						<td></td>
 					</tr>
@@ -708,141 +627,75 @@ change3(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 单位名称或大学名称</td>
-						<td align="left"><select id="onWorkTime" name="client.onShortName" >
-								<option value="公司或个人">公司或个人</option>
-								<option value="大学">大学</option>
-						</select>
+						<td align="left"><c:out value="${client.onShortName}"/>
 						</td>
 						<td align="right"  ><b style="color:red">*</b> 单位/学校/个体全称</td>
-				        <td align="left"><input type="text" name="client.onFullName" value="${client.onFullName }"
-							maxlength="20" data="msg24"  id="collegename" onblur="calc(this)" /> <b id="msg24"></b></td>
+				        <td align="left"><c:out value="${client.onFullName}"/>
+                        </td>
 					    <td align="right"  ><b style="color:red">*</b> 任职部门或班级</td>
-						<td align="left"><input type="text" name="client.onDivision" value="${client.onDivision }"
-							maxlength="20" data="msg25"  id="collegebumen" onblur="calc(this)" /> <b id="msg25"></b></td>
+						<td align="left"><c:out value="${client.onDivision}"/>
+                        </td>
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
-						<td align="left"><select id="onWorkTime" name="client.onWorkTime">
-								<option value="0-1年">0-1年</option>
-								<option value="0-1年">1-2年</option>
-								<option value="0-1年">2-3年</option>
-								<option value="0-1年">3-5年</option>
-								<option value="0-1年">5-10年</option>
-								<option value="0-1年">大于10年</option>
-						</select></td>
+						<td align="left"><c:out value="${client.onWorkTime}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
-				        <td align="left"><input type="text" name="" maxlength="20" data="msg26"  id="college1" onblur="calc(this)" /> <b id="msg26"></b></td>
+				        <td align="left"> <input type="text" name="" maxlength="20" data="msg26"  id="college1" onBlur="calc(this)" /> <b id="msg26"></b></td>
 					    <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 行业类别</td>
-						<td align="left"><select id="onWorkTime" name="client.onSector" style="width:50px"
-							>
-								<option value="餐饮，酒店，旅游，美容美发保健">餐饮，酒店，旅游，美容美发保健</option>
-								<option value="农业，林业，畜牧业和渔业">农业，林业，畜牧业和渔业</option>
-								<option value="建筑">建筑</option>
-								<option value="文化，运动，娱乐，传媒，广告设计">文化，运动，娱乐，传媒，广告设计</option>
-								<option value="教育">教育</option>
-								<option value="金融机构，专业性事务机构">金融机构，专业性事务机构</option>
-								<option value="政府机构，社会团体">政府机构，社会团体</option>
-								<option value="计算机，电信，通讯，互联网">计算机，电信，通讯，互联网</option>
-								<option value="制造，快速消费品，耐用消费品">制造，快速消费品，耐用消费品</option>
-								<option value="军队">军队</option>
-								<option value="电力，煤气，和水的生产和供应">电力，煤气，和水的生产和供应</option>
-								<option value="能源，化工，矿产">能源，化工，矿产</option>
-								<option value="个体，自营，退休，居住，家政和其他服务">个体，自营，退休，居住，家政和其他服务</option>
-								<option value="科研技术服务和地质勘探">科研技术服务和地质勘探</option>
-								<option value="事业单位，公共设施，医疗卫生，社会保障和社会福利">事业单位，公共设施，医疗卫生，社会保障和社会福利</option>
-								<option value="租赁和商业服务">租赁和商业服务</option>
-								<option value="交通，运输，仓储，邮电和物流">交通，运输，仓储，邮电和物流</option>
-								<option value="批发和零售贸品">批发和零售贸品</option>
-						</select></td>
+						<td align="left"><c:out value="${client.onSector}"/>
+                        </td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
-				        <td align="left"><select id="onOffice" name="client.onOffice" style="width:50px"
-							>
-								<option value="高层管理人员/总监以上/局级以上干部">高层管理人员/总监以上/局级以上干部</option>
-								<option value="中层管理人员/经理以上/科级以上干部">中层管理人员/经理以上/科级以上干部</option>
-								<option value="基层管理人员/主管组长/科员">基层管理人员/主管组长/科员</option>
-								<option value="一般员工">一般员工</option>
-								<option value="工人（包括生产，加工，建筑和设备操作人员及有关人员）">工人（包括生产，加工，建筑和设备操作人员及有关人员）</option>
-								<option value="销售/中介/业务代表/促销">销售/中介/业务代表/促销</option>
-								<option value="商业，服务人员">商业，服务人员</option>
-								<option value="保安/治安/防损">保安/治安/防损</option>
-								<option value="农民">农民</option>
-								<option value="个体">个体</option>
-								<option value="专业技术人员">专业技术人员</option>
-								<option value="军人">军人</option>
-								<option value="司机">司机</option>
-								<option value="退休">退休</option>
-								<option value="其他">其他</option>
-								
-						</select></td>
+				        <td align="left"><c:out value="${client.onOffice}"/>
+                        </td>
 					    <td align="right"  >单位性质</td>
-						<td align="left"><select id="onFeature" name="client.onFeature"
-							>
-								<option value="国有企业">国有企业</option>
-								<option value="私有企业">私有企业</option>
-								<option value="个体">个体</option>
-								<option value="集体">集体</option>
-								<option value="外商独资">外商独资</option>
-								<option value="外商合资">外商合资</option>
-								<option value="其他">其他</option>
-								<option value="农民">农民</option>
-						</select></td>
+						<td align="left"><c:out value="${client.onFeature}"/>
+                        </td>
 					</tr>
 
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 办公电话</td>
-						<td align="left"><input type="text" name="client.onOfficePhone" value="${client.onOfficePhone}"
-							maxlength="20" name="client.otherPhone" onblur="getphons(this.value)" /><b id="msg30"></b></td>
+						<td align="left"><c:out value="${client.onOfficePhone}"/>
+                        </td>
 						<td align="right"  >办公电话分机</td>
-				        <td align="left"><input type="text" name="client.onExtPhone" value="${client.onExtPhone }"/></td>
+				        <td align="left"> <c:out value="${client.onExtPhone}"/></td>
 					    <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >邮编</td>
-						<td align="left"><input type="text" name="officeAddressBook.zipCode" value="${ officeAddressBook.zipCode}"
-							maxlength="20" /></td>
+						<td align="left"><c:out value="${officeAddressBook.zipCode}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-				        <td align="left">
-				        <select name="officeAddressBook.province"  id="officeAddressBook">
-								<option value="四川省">四川省</option>
-								<option value="湖南省">湖南省</option>
-								<option value="河北省">河北省</option>
-						</select></td>
+				        <td align="left"><c:out value="${officeAddressBook.province}"/>
+				        </td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-						<td align="left"><input type="text" id="city4" name="officeAddressBook.city" />
+						<td align="left"><c:out value="${officeAddressBook.city}"/>
 								</td>
 					</tr>
 
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 区/县区</td>
-						<td align="left"><input type="text" name="officeAddressBook.county" value="${officeAddressBook.county }"
-							maxlength="20" data="msg31"  id="co" onblur="calc(this)" /> <b id="msg31"></b></td>
+						<td align="left"><c:out value="${officeAddressBook.county}"/></td>
 						<td align="right"  >镇</td>
-				        <td align="left"><input type="text" name="officeAddressBook.town" value="${officeAddressBook.town }"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${officeAddressBook.town}"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
-						<td align="left"><input type="text" name="officeAddressBook.street" value="${officeAddressBook.street }"
-							maxlength="20" data="msg32"  id="coll" onblur="calc(this)" /> <b id="msg32"></b></td>
+						<td align="left"><c:out value="${officeAddressBook.street}"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
-						<td align="left"><input type="text" name="officeAddressBook.community" value="${ officeAddressBook.community}"
-							maxlength="20" data="msg33"  id="loupan" onblur="calc(this)" /> <b id="msg33"></b></td>
+						<td align="left"><c:out value="${officeAddressBook.community}"/></td>
 						<td align="right"  >栋/单元/房间号</td>
-				        <td align="left"><input type="text" name="officeAddressBook.houseNo" value="${officeAddressBook.houseNo }"
-							maxlength="20" /></td>
+				        <td align="left"><c:out value="${officeAddressBook.houseNo}"/></td>
 					    <td align="right"  >其它</td>
-						<td align="left"><input type="text" name="officeAddressBook.other" value="${officeAddressBook.other }"
-							maxlength="50" /></td>
+						<td align="left"><c:out value="${officeAddressBook.other}"/></td>
 					</tr>
 
 					<tr  >
@@ -898,31 +751,23 @@ change3(0);
 						<td align="left"><c:out value="${financialProduct.financialName }"/><input type="hidden" name="clientJob.financialProductId" value="${pId }"/></td>
 						<td align="right">商品总价</td>
 						<td align="left">
-							<c:out value="${totalPrice }"/><input type="text" name="clientJob.totalPrice"  value="${totalPrice }"/>
+							<c:out value="${totalPrice }"/> <c:out value="${clientJob.totalPrice}"/>
 						</td>
 					  	<td align="right">贷款用途</td>
-						<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
-						>
-								<option value="请选择">请选择</option>
-								<option value="家用电器">家用电器</option>
-                                <option value="家具及住宅装饰用品">家具及住宅装饰用品</option>
-                                <option value="计算机与办公室通讯（私人用途）">计算机与办公室通讯（私人用途）</option>
-                                <option value="时尚电子产品">时尚电子产品</option>
-                                <option value="其他">其他</option>
-						</select></td>
+						<td align="left"> <c:out value="${clientJob.byUse}"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >自付金额(元)</td>
 						
 						<td align="left">
-							<c:out value="${selfAmount }"/><input type="text" name="clientJob.selfAmount"  value="${selfAmount }"/>
+							<c:out value="${selfAmount }"/><c:out value="${selfAmount}"/>
 						</td>
 						<td align="right"  >分期期数</td>
 						
 					    <td align="left"><c:out value="${financialProduct.cycleTotal }"/> </td>
 						<td  align="right">每月还款额(元)</td>
-						<td align="left"><input type="text" name="clientJob.monthOfPay"  value="${monthPay1 }"/></td>
+						<td align="left"><c:out value="${monthPay1}"/></td>
 						
 						
 					</tr>
@@ -933,28 +778,26 @@ change3(0);
 						<td align="right"  ></td>
 						<td align="left"></td>
 						<td  align="right">每月还款日</td>
-						<td align="left"><input type="text" name="clientJob.monthOfDate"  value ="${clientJob.monthOfDate }" onclick="displayCalendar(this,'yyyy-MM-dd');"/></td>			 
+						<td align="left"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>			 
 					</tr>
 
 					<tr>
 					    
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
-						<td align="left"><input type="text" name="bank.debitCard"
-							maxlength="24" /></td>
+						<td align="left"> <c:out value="${bank.debitCard} "/></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
-				        <td align="left"><input type="text" name="bank.bankName"
-							maxlength="50" /></td>
+				        <td align="left"><c:out value="${bank.bankName}"/></td>
 						<td  align="right">月花费(元/月)</td>
-						<td align="left"><input type="text" name="bank.monthPay" /></td>
+						<td align="left"><c:out value="${bank.monthPay} "/></td>
 					
 					</tr>
 
 					<tr>
 						
 						<td align="right"  >第二银行卡号</td>
-						<td align="left"><input type="text" name="bank2.debitCard" /></td>
+						<td align="left"><c:out value="${bank2.debitCard} "/></td>
 						<td align="right"  >第二银行卡开户银行</td>
-				    	<td align="left"><input type="text" name="bank2.bankName" /></td>
+				    	<td align="left"><c:out value="${bank2.bankName} "/></td>
 					  
 						
 					</tr>
@@ -964,12 +807,12 @@ change3(0);
 				<table style="width:100%;text-align:center;">
 					<tr>
 						<td width="39%" align="right">用户</td>
-						<td width="61%" align="left"><input type="text" name="user.name"></input></td>
+						<td width="61%" align="left"> <c:out value="${user.name} "/></td>
 					</tr>
 					
 					<tr>
 						<td align="right">口令</td>
-						<td align="left"><input type="password" name="pwdConfirm" /></td>
+						<td align="left"><c:out value="${pwdConfirm} "/></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
