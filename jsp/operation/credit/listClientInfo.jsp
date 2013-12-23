@@ -161,7 +161,7 @@
 		<c:param name="id">${item.clientJob.id }</c:param>
 	</c:url>
 	
-	<c:if test="${item.jobType.jobKey=='R2' }">
+	<c:if test="${item.jobType.jobKey=='R' ||item.jobType.jobKey=='W' }">
 		<a href="${approvalURL }"><fmt:message key="Approval"/></a>
 	</c:if>
 </td>

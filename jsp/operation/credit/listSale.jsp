@@ -162,8 +162,8 @@
 <td><c:out value="${item.user.name }"/></td>
 
 <td>
-	<c:url value="/Sale.do" var="confirmURL">
-		<c:param name="method">processConfirm</c:param>
+	<c:url value="/Sale.do" var="viewURL">
+		<c:param name="method">promptView</c:param>
 		<c:param name="id">${item.clientJob.id }</c:param>
 	</c:url>
 	
@@ -177,11 +177,14 @@
 		<c:param name="id">${item.clientJob.id }</c:param>
 	</c:url>
 	
-	<c:if test="${item.jobType.jobKey=='R1' }">
-		<a href="${confirmURL }"><fmt:message key="submit"/></a>
-		<a href="${removeURL }"><fmt:message key="Delete"/></a>
+	<a href="${viewURL }"><fmt:message key="View"/></a>
+	
+	<c:if test="${item.jobType.jobKey=='T' }">
 		<a href="${editURL }"><fmt:message key="Edit"/></a>
 	</c:if>
+	<%--
+	<a href="${removeURL }"><fmt:message key="Delete"/></a>
+	 --%>
 </td>
 
 </tr>

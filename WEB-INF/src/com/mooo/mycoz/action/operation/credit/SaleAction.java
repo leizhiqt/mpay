@@ -35,6 +35,7 @@ import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.component.UploadFile;
 import com.mooo.mycoz.framework.component.XSLTUtil;
 import com.mooo.mycoz.framework.util.IDGenerator;
@@ -77,84 +78,79 @@ public class SaleAction extends BaseSupport {
 
 			request.setAttribute("products", dbobject.searchAndRetrieveList());
 
-			double salePrice = 0d;
-			double onePay = 0d;
+			String stPrice = request.getParameter("totalPrice");
+			String ssAmount = request.getParameter("selfAmount");
+			
+			double totalPrice = 0d;
+			double selfAmount = 0d;
 			double creditAmount = 0d;
 
-			double onePayPercent = 0d;
+			double selfPercent = 0d;
 
-			value = request.getParameter("salePrice");
-			//处理首次进入
-			if(StringUtils.isNull(value)){
-				return "success";
+			if (!StringUtils.isNull(stPrice)){
+				totalPrice = new Double(stPrice);
 			}
-			if (!StringUtils.isNull(value)){
-				salePrice = new Double(value);
-			}
-			request.setAttribute("salePrice", value);
+			request.setAttribute("totalPrice", stPrice);
 
-			value = request.getParameter("onePay");
+			if (!StringUtils.isNull(ssAmount))
+				selfAmount = new Double(ssAmount);
 
-			if (!StringUtils.isNull(value))
-				onePay = new Double(value);
+			request.setAttribute("selfAmount", ssAmount);
 
-			request.setAttribute("onePay", value);
-
-			if (onePay >= salePrice && salePrice > 0)
+			if (selfAmount >= totalPrice && totalPrice > 0)
 				throw new Exception("首付过多");
 
-			onePayPercent = onePay / salePrice;
-			request.setAttribute("onePayPercent", onePayPercent);
+			selfPercent = selfAmount / totalPrice;
+			request.setAttribute("selfPercent", selfPercent);
 
-			if (onePayPercent < 0.2)
+			if (selfPercent < 0.2)
 				throw new Exception("首付不足");
 
+			creditAmount = totalPrice-selfAmount;
+
 			String[] products = request.getParameterValues("product");
-			
-				FinancialProduct FinancialProduct = null;
+		
+			if(products!=null){
+				request.setAttribute("cproducts", products);
+	
 				List fProucts = new ArrayList();
 				
-					FinancialProduct financialProduct = new FinancialProduct();
-					financialProduct.setGreaterEqual("financialMax", salePrice-onePay);
-					List<?> financials = financialProduct.searchAndRetrieveList();
+				FinancialProduct financialProduct = new FinancialProduct();
+				financialProduct.setGreaterEqual("financialMax", creditAmount);
+				List<?> financials = financialProduct.searchAndRetrieveList();
+						
+				for(Object obj:financials){
+					financialProduct = (FinancialProduct)obj;
 					
-					for(Object obj:financials){
-						financialProduct = (FinancialProduct)obj;
-						
-						Map<String, Object> rowm = new LinkedHashMap();
-
-						creditAmount = salePrice - onePay;
-						double monthPay1 = 0;
-						// 乘以税率后的总钱数
-						double afterCalculetedTotals = creditAmount
-								* (financialProduct.getCreditRate() + 1);
-						// 每月支付钱数
-						monthPay1 =  (afterCalculetedTotals / financialProduct
-								.getCycleTotal());
-						
-						//取整加1
-						int monthPay1Int=(int)monthPay1;
-						if(monthPay1-monthPay1Int>0){
-							monthPay1Int++;
-						}
-						rowm.put("finName", financialProduct.getFinancialName());
-						rowm.put("cycleTotal", financialProduct.getCycleTotal());
-						rowm.put("monthPay", monthPay1Int);
-						
-						
-						double d = afterCalculetedTotals
-								- (financialProduct.getCycleTotal() - 1)
-								* monthPay1;
-						//rowm.put("firstPay", df.format(d));
-						rowm.put("creditAmount", creditAmount);
-						rowm.put("onePay", onePay);
-						rowm.put("pId", financialProduct.getId());
-						fProucts.add(rowm);
+					Map<String, Object> rowm = new LinkedHashMap();
+	
+					double monthPay1 = 0;
+					// 乘以税率后的总钱数
+					double afterCalculetedTotals = creditAmount
+							* (financialProduct.getCreditRate() + 1);
+					// 每月支付钱数
+					monthPay1 =  (afterCalculetedTotals / financialProduct
+							.getCycleTotal());
+					
+					//取整加1
+					int monthPay1Int=(int)monthPay1;
+					
+					if(monthPay1-monthPay1Int>0){
+						monthPay1Int++;
 					}
+					
+					rowm.put("finName", financialProduct.getFinancialName());
+					rowm.put("cycleTotal", financialProduct.getCycleTotal());
+					rowm.put("monthPay", monthPay1Int);
+					rowm.put("creditAmount", creditAmount);
+					rowm.put("selfAmount", selfAmount);
+					rowm.put("pId", financialProduct.getId());
+	
+					fProucts.add(rowm);
+				}
 				
 				request.setAttribute("fProucts", fProucts);
-			
-
+			}
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
@@ -274,6 +270,11 @@ public class SaleAction extends BaseSupport {
 
 			dbobject.setRetrieveField("store", "storeName");
 
+			Page page = new Page();
+			page.buildComponent(request, dbobject.count());
+			
+			dbobject.setRecord(page.getOffset(),page.getPageSize());
+			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
@@ -300,10 +301,6 @@ public class SaleAction extends BaseSupport {
 				ssAmount = (String) request.getAttribute("selfAmount");
 			}
 			
-			if (log.isDebugEnabled()) log.debug("pId:"+pId);
-			if (log.isDebugEnabled()) log.debug("totalPrice:"+stPrice);
-			if (log.isDebugEnabled()) log.debug("selfAmount:"+ssAmount);
-			
 			request.setAttribute("pId", pId);
 			request.setAttribute("totalPrice", stPrice);
 			request.setAttribute("selfAmount", ssAmount);
@@ -314,14 +311,17 @@ public class SaleAction extends BaseSupport {
 
 			request.setAttribute("financialProduct", financialProduct);
 
-			double totailPrice = 0d;
+			double totalPrice = 0d;
 			double selfAmount = 0d;
 			double creditAmount = 0d;
 
-			totailPrice = new Double(stPrice);
-			selfAmount = new Double(ssAmount);
-
-			creditAmount = totailPrice - selfAmount;
+			if (!StringUtils.isNull(stPrice))
+				totalPrice = new Double(stPrice);
+			
+			if (!StringUtils.isNull(ssAmount))
+				selfAmount = new Double(ssAmount);
+			
+			creditAmount = totalPrice - selfAmount;
 			
 			double monthPay = creditAmount
 					* (1 + financialProduct.getCreditRate())
@@ -419,13 +419,18 @@ public class SaleAction extends BaseSupport {
 			uf.bindData(clientJob, "clientJob");
 			request.setAttribute("clientJob",clientJob );
 			
-			request.setAttribute("pId",clientJob.getFinancialProductId() );
-			request.setAttribute("totalPrice",clientJob.getTotalPrice() );
-			request.setAttribute("selfAmount",clientJob.getSelfAmount() );
-
-			StringUtils.noNull(client.getIdNo());
-			StringUtils.noNull(client.getClientName());
-
+			request.setAttribute("pId",clientJob.getFinancialProductId()+"" );
+			request.setAttribute("totalPrice",clientJob.getTotalPrice()+"" );
+			request.setAttribute("selfAmount",clientJob.getSelfAmount()+"" );
+			//check 
+			if(StringUtils.isNull(client.getClientName())){
+				throw new Exception("请输入申请人名字");
+			}
+			System.out.println("dd:"+client.getIdNo().length());
+			if(client.getIdNo()==null || (client.getIdNo().length()!=15 && client.getIdNo().length()!=18)){
+				throw new Exception("身份证非法输入");
+			}
+			
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
@@ -516,7 +521,7 @@ public class SaleAction extends BaseSupport {
 	}
 
 	
-	
+	/*
 	public String processConfirm(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -573,7 +578,7 @@ public class SaleAction extends BaseSupport {
 		}
 		return "list";
 	}
-	
+	*/
 	public String processDelete(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
@@ -592,13 +597,84 @@ public class SaleAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("processEdit");
-		//String clientJobId=request.getParameter(arg0);
+		return "success";
+	}
+	
+	public String promptView(HttpServletRequest request,
+			HttpServletResponse response) {
+		if (log.isDebugEnabled())log.debug("promptView");
+		String id = request.getParameter("id");
+		try {
+
+			//check 
+			if(StringUtils.isNull(id)){
+				throw new Exception("无效的合同号");
+			}
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			request.setAttribute("clientJob",clientJob );
+
+			Store store = new Store();
+			store.setId(clientJob.getStoreId());
+			store.retrieve();
+			request.setAttribute("store",store );
+
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			request.setAttribute("client",client );
+
+			// 处理户籍地址
+			AddressBook censusAddressBook = new AddressBook();
+			censusAddressBook.setId(client.getCensusAddressBookId());
+			censusAddressBook.retrieve();
+			request.setAttribute("censusAddressBook",censusAddressBook );
+
+			AddressBook livingAddressBook = new AddressBook();
+			livingAddressBook.setId(client.getLivingAddressBookId());
+			livingAddressBook.retrieve();
+			request.setAttribute("livingAddressBook",livingAddressBook );
+			
+			AddressBook homeAddressBook = new AddressBook();
+			homeAddressBook.setId(client.getHomeAddressBookId());
+			homeAddressBook.retrieve();
+			request.setAttribute("homeAddressBook",homeAddressBook );
+			
+			AddressBook officeAddressBook = new AddressBook();
+			officeAddressBook.setId(client.getHomeAddressBookId());
+			officeAddressBook.retrieve();
+			request.setAttribute("officeAddressBook",officeAddressBook );
+			
+			ClientDoc clientDoc = new ClientDoc();
+			clientDoc.setClientId(client.getId());
+			request.setAttribute("docs",clientDoc.searchAndRetrieveList());
+
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(clientJob.getId());
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.retrieve();
+			
+			request.setAttribute("clientJobTrack",clientJobTrack);
+
+			JobType jobType = new JobType();
+			jobType.setId(clientJobTrack.getJobTypeId());
+			jobType.retrieve();
+			request.setAttribute("jobType",jobType);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+
+			return "list";
+		} 
 		return "success";
 	}
 	
 	public String export(HttpServletRequest request,HttpServletResponse response) {
-		
-		
 		return XSLTUtil.buildPDF(request, response);
 	}
 

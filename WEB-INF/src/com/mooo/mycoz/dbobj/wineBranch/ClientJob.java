@@ -19,6 +19,7 @@ public class ClientJob extends DBObject {
 	private Integer branchId;
 	private String privateKey;
 	private Integer storeId;
+	private String saleRemark;
 
 	public Integer getId() {
 		return id;
@@ -131,4 +132,13 @@ public class ClientJob extends DBObject {
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
 	}
+
+	public String getSaleRemark() {
+		return saleRemark;
+	}
+
+	public void setSaleRemark(String saleRemark) {
+		this.saleRemark = saleRemark;
+	}
+	
 }

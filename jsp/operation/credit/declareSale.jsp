@@ -17,8 +17,8 @@
 		onValue();
 	});
 			 function onValue(){
-			 	if($('#onePay').val()!="" && $('#salePirce').val()!=""){
-			 						var num=$('#onePay').val()/$('#salePirce').val()*100;  
+			 	if($('#selfAmount').val()!="" && $('#totalPrice').val()!=""){
+			 						var num=$('#selfAmount').val()/$('#totalPrice').val()*100;  
 			 					 	$('#vals').html(Math.round(num*1000)/1000+"%");
 			 					 	
 			 		
@@ -72,7 +72,7 @@ body,td,th {
 </tr>
 
 <tr>
-<td align="left"  colspan="2"><input id="salePirce" type="text"  name="salePrice" value="${salePrice }" Onchange="onValue()" /></td>
+<td align="left"  colspan="2"><input id="totalPrice" type="text"  name="totalPrice" value="${totalPrice }" Onchange="onValue()" /></td>
 </tr>
 
 <tr>
@@ -81,7 +81,7 @@ body,td,th {
 </tr>
 
 <tr>
-<td align="left" ><input id="onePay" type="text" name="onePay" value="${onePay }" Onchange="onValue()"/></td>
+<td align="left" ><input id="selfAmount" type="text" name="selfAmount" value="${selfAmount }" Onchange="onValue()"/></td>
 <td id="vals"></td>
 </tr>
 
@@ -122,8 +122,8 @@ body,td,th {
 <td>
 	<c:url value="/Sale.do" var="newURL">
 		<c:param name="method">promptAdd</c:param>
-		<c:param name="totalPrice">${salePrice}</c:param>
-		<c:param name="selfAmount">${onePay}</c:param>
+		<c:param name="totalPrice">${totalPrice}</c:param>
+		<c:param name="selfAmount">${selfAmount}</c:param>
 		<c:param name="pId">${item.pId}</c:param>
 	</c:url>
 	<a href="${newURL}"> <c:out value="${item.finName }"/></a>
@@ -131,7 +131,7 @@ body,td,th {
 
 <td><c:out value="${item.cycleTotal }"/> </td>
 <td><c:out value="${item.monthPay }"/> </td>
-<td><c:out value="${item.onePay }"/> </td>
+<td><c:out value="${item.selfAmount }"/> </td>
 <td><c:out value="${item.creditAmount }"/> </td>
 </tr>
 

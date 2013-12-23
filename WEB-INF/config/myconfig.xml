@@ -247,7 +247,7 @@
 			<result name="processDelete"></result>
 			<result name="promptEdit">/jsp/operation/credit/editSale.jsp</result>
 			<result name="processEdit"></result>
-			<result name="processConfirm"></result>
+			<result name="promptView">/jsp/operation/credit/viewSale.jsp</result>
 			<result name="export"></result>
 			<result name="print"></result>
 		</action>

@@ -1,6 +1,5 @@
 package com.mooo.mycoz.action.operation.credit;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +27,6 @@ import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
-import com.mooo.mycoz.framework.component.UploadFile;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
@@ -159,265 +157,19 @@ public class ClientInfoAction extends BaseSupport {
 		return "success";
 	}
 
-	public String promptAdd(HttpServletRequest request,
+	public String promptApproval(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
-			log.debug("promptAdd");
+			log.debug("promptApproval");
+		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
+
+		String clientJobId=request.getParameter("id");
 		String value = null;
-		try {
-			value = request.getParameter("pId");
-			request.setAttribute("pId", value);
-
-			FinancialProduct financialProduct = new FinancialProduct();
-			financialProduct.setId(new Integer(value));
-			financialProduct.retrieve();
-
-			request.setAttribute("financialProduct", financialProduct);
-
-			request.setAttribute("salePrice", request.getParameter("salePrice"));
-			if (log.isDebugEnabled())
-				log.debug("salePrice:" + request.getParameter("salePrice"));
-
-			request.setAttribute("onePay", request.getParameter("onePay"));
-
-			double totailPrice = 0d;
-			double firstPayAmount = 0d;
-			double creditAmount = 0d;
-
-			value = request.getParameter("salePrice");
-			totailPrice = new Double(value);
-
-			value = request.getParameter("onePay");
-			firstPayAmount = new Double(value);
-
-			creditAmount = totailPrice - firstPayAmount;
-
-			
-			double monthPay = creditAmount
-					* (1 + financialProduct.getCreditRate())
-					/financialProduct.getCycleTotal() ;
-			
-			
-			
-			
-			//取整加1
-			int monthPay1Int=(int)monthPay;
-			if(monthPay-monthPay1Int>0){
-				monthPay1Int++;
-			}
-			request.setAttribute("creditAmount", creditAmount);
-			// 每月支付
-			request.setAttribute("monthPay1", monthPay1Int);
-		
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-		}
-		return "success";
-	}
-
-	public String processAdd(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processAdd");
-		Integer branchId = ActionSession.getInteger(request,
-				ActionSession.BRANCH_SESSION_KEY);
-		Integer sessionId = ActionSession.getInteger(request,
-				ActionSession.USER_SESSION_KEY);
 
 		Transaction tx = null;
 		try {
 			tx = new Transaction();
 			tx.start();
-
-			StoreUser storeUser = new StoreUser();
-			storeUser.setUserId(sessionId);
-			storeUser.setActive("Y");
-			
-			int acount=storeUser.count();
-			
-			if(acount<1)
-				throw new Exception("请先登录店铺");
-			
-			storeUser.retrieve(tx.getConnection());
-			
-			Store store = new Store();
-			store.setId(storeUser.getStoreId());
-			store.retrieve(tx.getConnection());
-
-			// sub path
-			String sPath = "upload/images/";
-			// physical path
-			String pPath = request.getSession().getServletContext()
-					.getRealPath("/");
-			// upload path
-			String uPath = pPath + sPath;
-			if (log.isDebugEnabled())
-				log.debug("uploadPath=" + uPath);
-
-			File upFile = new File(uPath);
-			if (!upFile.exists())
-				upFile.mkdirs();
-
-			UploadFile uf = new UploadFile();
-			uf.setRequest(request);
-			uf.setUploadPath(uPath);
-			uf.process();
-
-			String[] pictureName = uf.getUpdFileNames();
-
-			// 处理户籍地址
-			AddressBook censusAddressBook = new AddressBook();
-			uf.bindData(censusAddressBook, "censusAddressBook");
-			request.setAttribute("censusAddressBook",censusAddressBook );
-
-			Client client = new Client();
-			uf.bindData(client, "client");
-			request.setAttribute("client",client );
-			
-			AddressBook livingAddressBook = new AddressBook();
-			uf.bindData(livingAddressBook, "livingAddressBook");
-			request.setAttribute("livingAddressBook",livingAddressBook );
-			
-			AddressBook homeAddressBook = new AddressBook();
-			uf.bindData(homeAddressBook, "homeAddressBook");
-			request.setAttribute("homeAddressBook",homeAddressBook );
-			
-			AddressBook officeAddressBook = new AddressBook();
-			uf.bindData(officeAddressBook, "officeAddressBook");
-			request.setAttribute("officeAddressBook",officeAddressBook );
-			
-			ClientJob clientJob = new ClientJob();
-			uf.bindData(clientJob, "clientJob");
-			request.setAttribute("clientJob",clientJob );
-			
-			StringUtils.notEmpty(client.getIdNo());
-			StringUtils.notEmpty(client.getClientName());
-
-			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
-					AddressBook.class);
-			censusAddressBook.setId(censusAddressBookId);
-			censusAddressBook.setBranchId(branchId);
-			censusAddressBook.add(tx.getConnection());
-			// 处理现居地址
-			int livingAddressBookId = IDGenerator.getNextID(tx.getConnection(),
-					AddressBook.class);
-			livingAddressBook.setId(livingAddressBookId);
-			livingAddressBook.setBranchId(branchId);
-
-			livingAddressBook.add(tx.getConnection());
-			// 处理家庭成員地址
-			int homeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
-					AddressBook.class);
-			homeAddressBook.setId(homeAddressBookId);
-			homeAddressBook.setBranchId(branchId);
-			homeAddressBook.add(tx.getConnection());
-			
-			// 处理单位地址
-			int officeAddressBookId = IDGenerator.getNextID(tx.getConnection(),
-					AddressBook.class);
-			officeAddressBook.setId(officeAddressBookId);
-			officeAddressBook.setBranchId(branchId);
-			officeAddressBook.add(tx.getConnection());
-			
-			// 处理基本信息
-			int clientId = IDGenerator.getNextID(tx.getConnection(),
-					Client.class);
-			client.setId(clientId);
-			client.setLivingAddressBookId(livingAddressBookId);
-			client.setOfficeAddressBookId(officeAddressBookId);
-			client.setHomeAddressBookId(homeAddressBookId);
-			client.setCensusAddressBookId(censusAddressBookId);
-			client.setBranchId(branchId);
-			if(pictureName!=null && pictureName.length>0 )
-				client.setPhotoPath(sPath + pictureName[0]);
-
-			client.add(tx.getConnection());
-
-			// 处理文件图片
-			for (int i = 1; i < pictureName.length; i++) {
-				System.out.println("pictureName" + pictureName[i]);
-				
-				ClientDoc clientDoc = new ClientDoc();
-				int clientDocId = IDGenerator.getNextID(tx.getConnection(),
-						ClientDoc.class);
-				clientDoc.setClientId(clientId);
-				clientDoc.setDocTypeId(1);
-				clientDoc.setFilepath(sPath + pictureName[i]);
-				clientDoc.setId(clientDocId);
-				clientDoc.add(tx.getConnection());
-			}
-
-			int clientJobId = IDGenerator.getNextID(tx.getConnection(),ClientJob.class);
-			clientJob.setId(clientJobId);
-			clientJob.setClientId(clientId);
-			clientJob.setJobNo(IDGenerator.getSN(tx.getConnection(),ClientJob.class, "jobNo", IDGenerator.getBatchSN(store.getStoreKey(), 6)));
-			clientJob.setStoreId(store.getId());
-			clientJob.setBranchId(branchId);
-			clientJob.add(tx.getConnection());
-
-			FinancialProduct financialProduct = new FinancialProduct();
-			financialProduct.setId(clientJob.getFinancialProductId());
-			financialProduct.retrieve(tx.getConnection());
-			
-			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
-					ClientJobTrack.class);
-
-			ClientJobTrack clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setId(clientJobTrackId);
-			clientJobTrack.setClientJobId(clientJobId);
-			clientJobTrack.setJobDate(new Date());
-			clientJobTrack.setJobTypeId(1);
-			clientJobTrack.setProcessId(0);
-			clientJobTrack.setUserId(sessionId);
-			clientJobTrack.setBranchId(branchId);
-			clientJobTrack.add(tx.getConnection());
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			tx.rollback();
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-
-			return "promptAdd";
-		} finally {
-			tx.end();
-		}
-		return "list";
-	}
-
-	public String processDelete(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processDelete");
-		return "list";
-	}
-
-	public String promptEdit(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptEdit");
-		return "success";
-	}
-
-	public String processEdit(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processEdit");
-		//String clientJobId=request.getParameter(arg0);
-		return "success";
-	}
-
-	public String promptApproval(HttpServletRequest request,
-			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptApproval");
-		String clientJobId=request.getParameter("id");
-		
-		String value = null;
-		try {
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
@@ -426,7 +178,6 @@ public class ClientInfoAction extends BaseSupport {
 				request.setAttribute("error", "请选择合同");
 				return "list";
 			}
-			
 			
 			ClientJob clientJob = new ClientJob();
 			clientJob.setId(new Integer(clientJobId));
@@ -442,16 +193,6 @@ public class ClientInfoAction extends BaseSupport {
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDocs", clientDoc.searchAndRetrieveList());
 		
-//			MultiDBObject dbobject5 = new MultiDBObject();
-			
-//			dbobject5.addTable(ClientJob.class,"clientJob" );
-//			dbobject5.addTable(Client.class,"client" );
-//		
-//			dbobject5.addCustomWhereClause("  client.id=clientJob.clientId and (client.telePhone='"+client.get+"' or"
-//					+ " client.spuseMobile='"+client.getTelePhone()+"')");
-//			dbobject5.setRetrieveField("clientJob","jobNo");
-//			request.setAttribute("selfPhoneList", dbobject5.searchAndRetrieveList());
-			
 			//处理座机号在其他合同中出现
 			MultiDBObject dbobject6 = new MultiDBObject();
 			dbobject6.addTable(ClientJob.class,"clientJob" );
@@ -507,12 +248,10 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject4.setRetrieveField("clientJob","id");
 			request.setAttribute("spusePhoneNoList", dbobject4.searchAndRetrieveList());
 			
-			
-				
-			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(clientJob.getId());
-			clientJobTrack.setProcessId(-1);
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.setJobTypeId(2);
 			
 			if(clientJobTrack.count()>0){
 				clientJobTrack.retrieve();
@@ -559,6 +298,7 @@ public class ClientInfoAction extends BaseSupport {
 			
 			JobType jobType = new JobType();
 			jobType.setJobCategory("A");
+			jobType.setNotEqual("jobKey", "W");
 			
 			request.setAttribute("jobTypes",jobType.searchAndRetrieveList());
 			
@@ -577,11 +317,49 @@ public class ClientInfoAction extends BaseSupport {
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
+			
+			//审核中状态处理
+			
+			clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(clientJob.getId());
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.setJobTypeId(2);
+			
+			int checkCount = clientJobTrack.count(tx.getConnection());
+			
+			if(checkCount < 1 ){
+				ClientJobTrack orgTrack = new ClientJobTrack();
+				orgTrack.setClientJobId(clientJob.getId());
+				int jobCount = orgTrack.count(tx.getConnection());
+				
+				orgTrack.setProcessId(0);
+				orgTrack.retrieve(tx.getConnection());
+				
+				orgTrack.setProcessId(jobCount);
+				orgTrack.update(tx.getConnection());
+				
+				clientJobTrack = new ClientJobTrack();
+				clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+				clientJobTrack.setUserId(sessionId);
+				clientJobTrack.setJobDate(new Date());
+				clientJobTrack.setJobRemark(orgTrack.getJobRemark());
+				clientJobTrack.setProcessId(0);
+				clientJobTrack.setClientJobId(clientJob.getId());
+				clientJobTrack.setJobTypeId(2);
+				clientJobTrack.add(tx.getConnection());
+			}
+			
+			tx.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
+	
+			return "promptApproval";
+		} finally {
+			tx.end();
 		}
 		return "success";
 	}
@@ -590,7 +368,6 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("processAddCheck");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		String clientJobId=request.getParameter("id");
 		try {
@@ -609,27 +386,23 @@ public class ClientInfoAction extends BaseSupport {
 			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(new Integer(clientJobId));
-			clientJobTrack.setProcessId(-1);
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.setJobTypeId(2);
 			
 			int checkCount = clientJobTrack.count();
 			int nextId=0;
 			
-			if(checkCount<1){
-				nextId = IDGenerator.getNextInt(ClientJobTrack.class);
-				clientJobTrack.setId(nextId);
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.add();
-			}else{
+			if(checkCount>0){
 				clientJobTrack.retrieve();
+				
+				nextId = IDGenerator.getNextInt(ClientJobCheck.class);
+				ClientJobCheck clientJobCheck = new ClientJobCheck();
+				ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
+				
+				clientJobCheck.setId(nextId);
+				clientJobCheck.setJobTrackId(clientJobTrack.getId());
+				clientJobCheck.add();
 			}
-			
-			nextId = IDGenerator.getNextInt(ClientJobCheck.class);
-			ClientJobCheck clientJobCheck = new ClientJobCheck();
-			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
-			
-			clientJobCheck.setId(nextId);
-			clientJobCheck.setJobTrackId(clientJobTrack.getId());
-			clientJobCheck.add();
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
@@ -649,50 +422,61 @@ public class ClientInfoAction extends BaseSupport {
 		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		String clientJobId=request.getParameter("id");
+		Transaction tx = null;
 		try {
-			
-			if (log.isDebugEnabled())
-				log.debug("clientJobId:"+clientJobId);
-			
-			if(clientJobId==null || clientJobId.equals("")){
-				throw new Exception("请选择合同");
-			}
-			
-			ClientJob clientJob = new ClientJob();
-			clientJob.setId(new Integer(clientJobId));
-			clientJob.retrieve();
-			request.setAttribute("clientJob", clientJob);
-			
-			ClientJobTrack clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setClientJobId(new Integer(clientJobId));
-			clientJobTrack.setProcessId(-1);
-			
-			int checkCount = clientJobTrack.count();
-			
-			if(checkCount > 0 ){
-				ClientJobTrack orgTrack = new ClientJobTrack();
-				orgTrack.setClientJobId(new Integer(clientJobId));
-				int jobCount = orgTrack.count();
+				tx = new Transaction();
+				tx.start();
 				
-				orgTrack.setProcessId(0);
-				orgTrack.retrieve();
+				if (log.isDebugEnabled())
+					log.debug("clientJobId:"+clientJobId);
 				
-				orgTrack.setProcessId(jobCount);
-				orgTrack.update();
+				if(clientJobId==null || clientJobId.equals("")){
+					throw new Exception("请选择合同");
+				}
 				
-				clientJobTrack.retrieve();
-				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.setJobDate(new Date());
+				ClientJob clientJob = new ClientJob();
+				clientJob.setId(new Integer(clientJobId));
+				clientJob.retrieve(tx.getConnection());
+				request.setAttribute("clientJob", clientJob);
+				
+				ClientJobTrack clientJobTrack = new ClientJobTrack();
+				clientJobTrack.setClientJobId(new Integer(clientJobId));
 				clientJobTrack.setProcessId(0);
-				clientJobTrack.update();
+				clientJobTrack.setJobTypeId(2);
+				
+				int checkCount = clientJobTrack.count(tx.getConnection());
+				if(checkCount > 0 ){
+					ClientJobTrack orgTrack = new ClientJobTrack();
+					orgTrack.setClientJobId(new Integer(clientJobId));
+					int jobCount = orgTrack.count(tx.getConnection());
+					
+					orgTrack.setProcessId(0);
+					orgTrack.retrieve();
+					
+					orgTrack.setProcessId(jobCount);
+					orgTrack.update(tx.getConnection());
+					
+					clientJobTrack.retrieve();
+					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
+					
+					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
+					clientJobTrack.setUserId(sessionId);
+					clientJobTrack.setJobDate(new Date());
+					clientJobTrack.setProcessId(0);
+					clientJobTrack.add(tx.getConnection());
+				}
+				tx.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				tx.rollback();
+				if (log.isDebugEnabled())
+					log.debug("Exception Load error of: " + e.getMessage());
+				request.setAttribute("error", e.getMessage());
+		
+				return "promptApproval";
+			} finally {
+				tx.end();
 			}
-		} catch (Exception e) {
-			if (log.isDebugEnabled())
-				log.debug("Exception Load error of: " + e.getMessage());
-			request.setAttribute("error", e.getMessage());
-			e.printStackTrace();
-		}
 		return "list";
 	}
 	
