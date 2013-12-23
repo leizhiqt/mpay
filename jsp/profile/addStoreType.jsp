@@ -47,7 +47,7 @@
 								<tbody>
 									<tr>
 										<td class="tl"><fmt:message key="TypeKey" /></td>
-										<td><input type="text" name="storeType.typeKey" size="6" maxlength="6" /><font class="fm">*</font></td>
+										<td><input type="text" name="storeType.typeKey" size="8" maxlength="8" /><font class="fm">*</font></td>
 									</tr>
 									
 									<tr>

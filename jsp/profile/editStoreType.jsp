@@ -55,7 +55,7 @@
 									<tr>
 										<td class="tl"><fmt:message key="TypeKey" /></td>
 										<td><input type="text" name="storeType.typeKey"
-											value="${storeType.typeKey }" size="30" maxlength="30" /><font
+											value="${storeType.typeKey }"  size="8" maxlength="8"/><font
 											class="fm">*</font></td>
 									</tr>
 									<tr>

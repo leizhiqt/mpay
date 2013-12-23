@@ -27,6 +27,7 @@ import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
+import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
@@ -147,6 +148,11 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("store", "storeName");
 
+			Page page = new Page();
+			page.buildComponent(request, dbobject.count());
+			
+			dbobject.setRecord(page.getOffset(),page.getPageSize());
+			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
