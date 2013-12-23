@@ -79,11 +79,11 @@
 										<td class="tl"><fmt:message key="StoreType" /></td>
 										<td>
 										
-										<select name="storeType.storeTypeId" >
-											<c:forEach var="storeType" items="${storeType}" varStatus="s">
+										<select name="store.storeTypeId" >
+											<c:forEach var="storeType" items="${storeTypes}" varStatus="s">
 													<option value="${storeType.id}"
 						
-													<c:if test="${storeType.id==param.storeType.id}">
+													<c:if test="${storeType.id==param.store.storeTypeId}">
 														selected="selected" 
 													</c:if>
 														>${storeType.typeName}

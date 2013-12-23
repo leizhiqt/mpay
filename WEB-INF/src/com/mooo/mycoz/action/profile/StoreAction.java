@@ -84,7 +84,8 @@ public class StoreAction extends BaseSupport {
 			
 			product.setGreater("id", 0);
 			request.setAttribute("products", product.searchAndRetrieveList());
-			request.setAttribute("storeType", storeType.searchAndRetrieveList());
+			
+			request.setAttribute("storeTypes", storeType.searchAndRetrieveList());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
