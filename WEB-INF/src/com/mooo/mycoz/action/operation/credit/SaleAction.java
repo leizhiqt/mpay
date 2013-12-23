@@ -338,6 +338,30 @@ public class SaleAction extends BaseSupport {
 			request.setAttribute("monthPay1", monthPay1Int);
 		
 			
+			Calendar now = Calendar.getInstance();
+//			now.DAY_OF_MONTH;
+			//int now.getActualMaximum(Calendar.DAY_OF_MONTH);
+			
+			//now.getActualMinimum(Calendar.DAY_OF_MONTH);
+			
+			Date monthOfDay= null;
+//			int day = now.get(Calendar.DAY_OF_MONTH);
+			
+			now.add(Calendar.MONTH, +1);
+			
+//			int nextMonthDay = now.get(Calendar.DAY_OF_MONTH);
+			
+//
+//			if(day<=nextMonthDay){
+				monthOfDay = now.getTime();
+//			}else{
+//				now.add(Calendar.DATE, -1);
+//
+//				monthOfDay = now.getTime();
+//			}
+//			request.setAttribute("monthOfDay", CalendarUtils.dformat(monthOfDay));
+			request.setAttribute("monthOfDay", monthOfDay);
+
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
