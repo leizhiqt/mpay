@@ -122,8 +122,8 @@ body,td,th {
 <td>
 	<c:url value="/Sale.do" var="newURL">
 		<c:param name="method">promptAdd</c:param>
-		<c:param name="salePrice">${salePrice}</c:param>
-		<c:param name="onePay">${onePay}</c:param>
+		<c:param name="totalPrice">${salePrice}</c:param>
+		<c:param name="selfAmount">${onePay}</c:param>
 		<c:param name="pId">${item.pId}</c:param>
 	</c:url>
 	<a href="${newURL}"> <c:out value="${item.finName }"/></a>

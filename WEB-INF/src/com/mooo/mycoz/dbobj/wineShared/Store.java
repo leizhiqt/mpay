@@ -7,6 +7,9 @@ public class Store extends DBObject {
 	private String storeKey;
 	private String storeName;
 	private String storeAddress;
+	private Integer storeTypeId;
+	private String storeBankName;
+	private String storeBankNo;
 
 	public Integer getId() {
 		return id;
@@ -38,5 +41,29 @@ public class Store extends DBObject {
 
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress = storeAddress;
+	}
+
+	public Integer getStoreTypeId() {
+		return storeTypeId;
+	}
+
+	public void setStoreTypeId(Integer storeTypeId) {
+		this.storeTypeId = storeTypeId;
+	}
+
+	public String getStoreBankName() {
+		return storeBankName;
+	}
+
+	public void setStoreBankName(String storeBankName) {
+		this.storeBankName = storeBankName;
+	}
+
+	public String getStoreBankNo() {
+		return storeBankNo;
+	}
+
+	public void setStoreBankNo(String storeBankNo) {
+		this.storeBankNo = storeBankNo;
 	}
 }

@@ -61,6 +61,9 @@ public class Client extends DBObject {
 	private Double selfAmount;
 	private Integer branchId;
 
+	private String qq;
+	private String tbao;
+
 	public Integer getId() {
 		return id;
 	}
@@ -492,4 +495,21 @@ public class Client extends DBObject {
 	public void setBranchId(Integer branchId) {
 		this.branchId = branchId;
 	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getTbao() {
+		return tbao;
+	}
+
+	public void setTbao(String tbao) {
+		this.tbao = tbao;
+	}
+	
 }

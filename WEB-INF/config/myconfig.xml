@@ -148,7 +148,18 @@
 			<result name="promptEdit">/jsp/profile/editJobCheck.jsp</result>
 			<result name="processEdit"></result>
 		</action>
-		
+
+		<!-- StoreType -->
+		<action	name="Store" default="list"
+			class="com.mooo.mycoz.action.profile.StoreTypeAction">
+			<result name="list">/jsp/profile/listStoreType.jsp</result>
+			<result name="promptAdd">/jsp/profile/addStoreType.jsp</result>
+			<result name="processAdd"></result>
+			<result name="processDelete"></result>
+			<result name="promptEdit">/jsp/profile/editStoreType.jsp</result>
+			<result name="processEdit"></result>
+		</action>
+				
 		<!-- Store -->
 		<action	name="Store" default="list"
 			class="com.mooo.mycoz.action.profile.StoreAction">

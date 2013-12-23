@@ -237,10 +237,11 @@ public class Test {
 //		bd.dbToBean("payBranch","StoreUser");
 
 //		bd.dbToBean("payShared","JobCheck");
-		bd.dbToBean("payBranch","ClientJobCheck");
+//		bd.dbToBean("payBranch","ClientJobCheck");
 
 //		bd.dbToBean("payShared","Store");
-		
+		bd.dbToBean("payShared","StoreType");
+
 //		bd.dbToBean("payBranch","ClientJobTrack");
 		
 //		bd.dbToBean("wineBranch","Product");

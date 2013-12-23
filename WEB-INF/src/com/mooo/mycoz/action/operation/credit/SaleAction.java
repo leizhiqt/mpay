@@ -79,7 +79,7 @@ public class SaleAction extends BaseSupport {
 
 			double salePrice = 0d;
 			double onePay = 0d;
-			double monthPay = 0d, creditAmount = 0d;
+			double creditAmount = 0d;
 
 			double onePayPercent = 0d;
 
@@ -110,15 +110,11 @@ public class SaleAction extends BaseSupport {
 				throw new Exception("首付不足");
 
 			String[] products = request.getParameterValues("product");
-
 			
 				FinancialProduct FinancialProduct = null;
 				List fProucts = new ArrayList();
-
 				
 					FinancialProduct financialProduct = new FinancialProduct();
-					//financialProduct.getFinancialMax()
-					//financialProduct.setProductId(new Integer(products[i]));
 					financialProduct.setGreaterEqual("financialMax", salePrice-onePay);
 					List<?> financials = financialProduct.searchAndRetrieveList();
 					
@@ -292,42 +288,44 @@ public class SaleAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptAdd");
-		String value = null;
 		try {
-			value = request.getParameter("pId");
-			request.setAttribute("pId", value);
+			
+			String pId = request.getParameter("pId");
+			String stPrice = request.getParameter("totalPrice");
+			String ssAmount = request.getParameter("selfAmount");
+
+			if(pId==null){
+				pId = (String) request.getAttribute("pId");
+				stPrice = (String) request.getAttribute("totalPrice");
+				ssAmount = (String) request.getAttribute("selfAmount");
+			}
+			
+			if (log.isDebugEnabled()) log.debug("pId:"+pId);
+			if (log.isDebugEnabled()) log.debug("totalPrice:"+stPrice);
+			if (log.isDebugEnabled()) log.debug("selfAmount:"+ssAmount);
+			
+			request.setAttribute("pId", pId);
+			request.setAttribute("totalPrice", stPrice);
+			request.setAttribute("selfAmount", ssAmount);
 
 			FinancialProduct financialProduct = new FinancialProduct();
-			financialProduct.setId(new Integer(value));
+			financialProduct.setId(new Integer(pId));
 			financialProduct.retrieve();
 
 			request.setAttribute("financialProduct", financialProduct);
 
-			request.setAttribute("salePrice", request.getParameter("salePrice"));
-			if (log.isDebugEnabled())
-				log.debug("salePrice:" + request.getParameter("salePrice"));
-
-			request.setAttribute("onePay", request.getParameter("onePay"));
-
 			double totailPrice = 0d;
-			double firstPayAmount = 0d;
+			double selfAmount = 0d;
 			double creditAmount = 0d;
 
-			value = request.getParameter("salePrice");
-			totailPrice = new Double(value);
+			totailPrice = new Double(stPrice);
+			selfAmount = new Double(ssAmount);
 
-			value = request.getParameter("onePay");
-			firstPayAmount = new Double(value);
-
-			creditAmount = totailPrice - firstPayAmount;
-
+			creditAmount = totailPrice - selfAmount;
 			
 			double monthPay = creditAmount
 					* (1 + financialProduct.getCreditRate())
 					/financialProduct.getCycleTotal() ;
-			
-			
-			
 			
 			//取整加1
 			int monthPay1Int=(int)monthPay;
@@ -422,9 +420,11 @@ public class SaleAction extends BaseSupport {
 			request.setAttribute("clientJob",clientJob );
 			
 			request.setAttribute("pId",clientJob.getFinancialProductId() );
+			request.setAttribute("totalPrice",clientJob.getTotalPrice() );
+			request.setAttribute("selfAmount",clientJob.getSelfAmount() );
 
-			StringUtils.notEmpty(client.getIdNo());
-			StringUtils.notEmpty(client.getClientName());
+			StringUtils.noNull(client.getIdNo());
+			StringUtils.noNull(client.getClientName());
 
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
@@ -488,10 +488,6 @@ public class SaleAction extends BaseSupport {
 			clientJob.setBranchId(branchId);
 			clientJob.add(tx.getConnection());
 
-			FinancialProduct financialProduct = new FinancialProduct();
-			financialProduct.setId(clientJob.getFinancialProductId());
-			financialProduct.retrieve(tx.getConnection());
-			
 			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
 					ClientJobTrack.class);
 
