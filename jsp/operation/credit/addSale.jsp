@@ -314,7 +314,7 @@ change3(0);
 
 
 						<td align="right"  >身份证截止日期</td>
-						<td align="left"><input type="text" name="client.idEndDate" id="validity" value='<fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/>'
+						<td align="left"><input type="text" name="client.idEndDate" id="validity" value='<fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/>'
 							onclick="displayCalendar(this,'yyyy-MM-dd');" /></td>
 					    <td></td>
 						<td></td>
@@ -366,12 +366,12 @@ change3(0);
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 						<td align="left"><select name="client.educationId" id="educationId"
 							>
-								<option value="小学">小学</option>
-								<option value="初中">初中</option>
-								<option value="高中">高中</option>
-								<option value="职高，中专，技术学校">职高，中专，技术学校</option>
-								<option value="大学">大学</option>
-								<option value="硕士及以上">硕士及以上</option>
+								<option value="0">小学</option>
+								<option value="1">初中</option>
+								<option value="2">高中</option>
+								<option value="3">职高，中专，技术学校</option>
+								<option value="4">大学</option>
+								<option value="5">硕士及以上</option>
 								
 						</select></td>
 					</tr>
@@ -427,7 +427,7 @@ change3(0);
 							<option value="河北省">河北省</option>
 					    </select></td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
-			          <td align="left"><input type="text" name="censusAddressBook.city" />
+			          <td align="left"><input type="text" name="censusAddressBook.city" id="censusAddressBookcity" />
 					</tr>
 
 					<tr>
@@ -480,7 +480,7 @@ change3(0);
 									<option value="河北省">河北省</option>
 							</select></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
-					      <td align="left"><input  name="livingAddressBook.city"  type="text"/>
+					      <td align="left"><input  name="livingAddressBook.city" id="livingAddressBookcity" type="text"/>
 									</td>
 					</tr>
 
@@ -551,7 +551,7 @@ change3(0);
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-				        <td align="left"><input type="text" name="homeAddressBook.city"/>
+				        <td align="left"><input type="text" name="homeAddressBook.city" id="homeAddressBookcity"/>
 							</td>
 					</tr>
 

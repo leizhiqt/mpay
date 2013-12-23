@@ -255,7 +255,7 @@
 		<action	name="ClientInfo" default="list"
 			class="com.mooo.mycoz.action.operation.credit.ClientInfoAction">
 			<result name="list">/jsp/operation/credit/listClientInfo.jsp</result>
-			<result name="promptView">/jsp/operation/credit/editClientInfo.jsp</result>
+			<result name="promptView">/jsp/operation/credit/viewClientInfo.jsp</result>
 			<result name="promptApproval">/jsp/operation/credit/approvalClientInfo.jsp</result>
 			<result name="processApproval"></result>
 			<result name="processAddCheck"></result>

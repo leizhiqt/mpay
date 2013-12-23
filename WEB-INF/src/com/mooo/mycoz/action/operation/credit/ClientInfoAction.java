@@ -27,7 +27,6 @@ import com.mooo.mycoz.dbobj.wineShared.JobCheck;
 import com.mooo.mycoz.dbobj.wineShared.JobType;
 import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.framework.ActionSession;
-import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
 
@@ -148,11 +147,6 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("store", "storeName");
 
-			Page page = new Page();
-			page.buildComponent(request, dbobject.count());
-			
-			dbobject.setRecord(page.getOffset(),page.getPageSize());
-			
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
@@ -355,6 +349,22 @@ public class ClientInfoAction extends BaseSupport {
 				clientJobTrack.add(tx.getConnection());
 			}
 			
+			//封装审批结果及过程（按照时间先后顺序与展示）
+			
+			MultiDBObject dbobject10 = new MultiDBObject();
+			
+			dbobject10.addTable(ClientJobTrack.class, "clientJobTrack");
+			dbobject10.addTable(User.class, "user");
+			dbobject10.addTable(User.class, "user");
+			dbobject10.setForeignKey("clientJobTrack", "userId", "user", "id");
+			dbobject10.setRetrieveField("user", "name");
+			dbobject10.setRetrieveField("clientJobTrack", "jobRemark");
+			dbobject10.setRetrieveField("clientJobTrack", "processId");
+			dbobject10.setRetrieveField("clientJobTrack", "jobDate");
+			
+			dbobject10.setOrderBy("clientJobTrack", "id");
+			request.setAttribute("clientJobTracks", dbobject10.searchAndRetrieveList());
+			
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -370,6 +380,11 @@ public class ClientInfoAction extends BaseSupport {
 		return "success";
 	}
 
+	
+	public String promptView(HttpServletRequest request,
+			HttpServletResponse response) {
+			return "success";
+	}
 	public String processAddCheck(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())

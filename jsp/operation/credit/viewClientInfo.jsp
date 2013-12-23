@@ -1208,73 +1208,7 @@ table.tab_css_1 td.td_css{
 				</c:forEach>
 			</tbody>
 		</table>
-		<table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0"
-			id="tab2">
-			<tbody>
-				<tr>
-				  <td width="100px"  rowspan="3" align="center"  class="td_css">
-		      <strong>添加新注记 </strong></td>
-				  <td width="6%"  align="right" class="td_css">审查步骤:</td>
-					<td width="36%" align="left">
-									<select name="checkType" onchange="document.forms[0].submit();">
-										<c:forEach var="items" items="${checkTypes}" varStatus="s">
-											<option value="${items.checkType}"
-									
-											<c:if test="${items.checkType==param.checkType}">
-												selected="selected"
-											</c:if>
-												>
-											${items.checkType}
-											</option>
-										--</c:forEach>
-									</select>
-						</td>
-					
-		<td width="15%" align="right" class="td_css" >结果：</td>
-		<td width="27%"  align="left" >
-		      					<select name="clientJobCheck.jobCheckId">
-										<c:forEach var="items" items="${checkNames}" varStatus="s">
-											<option value="${items.id}"
-									
-											<c:if test="${items.id==clientJobCheck.jobCheckId}">
-												selected="selected"
-											</c:if>
-												>
-											${items.checkName}
-											</option>
-										--</c:forEach>
-									</select>
-			        
-			        </td>
-
-			<td width="8%"  id="guest_info75"></td>
-		</tr>
-		<tr>
-			<td align="right"  class="td_css">
-				备注
-			:</td>
-			<td  colspan="3">
-				<c:out  value="${clientJobCheck.checkRemark}"  />
-		  </td>
 		
-		 <td id="guest_info75" >
-				30汉字/60字符
-		  </td>
-		 </tr>
-		<tr>
-			<td height="25px" colspan="7"
-				align="center"  >
-				
-						<jsp:include page="../../incl/actionb.jsp">
-							<jsp:param name="key" value="Add" />
-							<jsp:param name="action" value="ClientInfo.do" />
-							<jsp:param name="method" value="processAddCheck" />
-						</jsp:include>
-					</td>
-		
-				</tr>
-			</tbody>
-		</table>
 		 <table width="98%" class="tab_css_1">
           <tr>
             <td  align="right"></td>
@@ -1302,9 +1236,7 @@ table.tab_css_1 td.td_css{
                 <input type="text" name="codeOne" size="6" value=""> 
 			</td>
             <td class="td_css" align="right">原因：</td>
-            <td>
-				<input type="text" name="codeOne" size="30" value=""> 
-			</td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td class="td_css" align="right">复审结果</td>
@@ -1327,7 +1259,7 @@ table.tab_css_1 td.td_css{
 			</td>
             <td class="td_css" align="right">原因：</td>
             <td>
-				 <input type="text" name="codeOne" size="30" value=""> 
+				 
 			</td>
           </tr>
         </table>
@@ -1352,7 +1284,6 @@ table.tab_css_1 td.td_css{
 				</tr>
 			</tbody>
 		</table>
-		
 		<table class="tab_css_1" width="98%" >
             		<tr>
 		
@@ -1371,49 +1302,7 @@ table.tab_css_1 td.td_css{
                 </td>
 				</tr>
             </table>
-				<tbody>
-					<tr> 
-							<td> <center><strong><h2>审批日志</h2></strong></center></td>
-					</tr>
-				</tbody>
-			</table>
-		<table class="tab_css_1" width="98%">
-            <tbody>
-            <tr>
-					<td  class="textr"><fmt:message key="userId"/></td>
-					<td  class="textr"><fmt:message key="UserName"/></td>
-					<td  class="textr"><fmt:message key="ProcessId"/></td>
-					<td  class="textr"><fmt:message key="JobRemark"/></td>
-					<td  class="textr"><fmt:message key="JobDate"/></td>
-					
-				</tr>
-				<c:forEach var="clientJobTracks" items="${clientJobTracks}" varStatus="status">
-				<tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-				<td><c:out value="${clientJobTracks.id }"></c:out>  </td>
-				<td><c:out value="${clientJobTracks.user.name }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.processId }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.jobRemark }"/></td>
-				<td><fmt:formatDate value="${clientJobTracks.clientJobTrack.jobDate }" type="both" /></td>
-				</tr>
-				</c:forEach>
-				</tbody>
-		</table>
-		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0"
-			id="tab2">
-			<tbody>
-				<tr>
-					<td width="52%" style="height: 22px;" >
-					<center>
-						<jsp:include page="../../incl/actionb.jsp" >
-							<jsp:param name="key" value="Confirm" />
-							<jsp:param name="action" value="ClientInfo.do" />
-							<jsp:param name="method" value="processApproval" />
-						</jsp:include>
-					</center>
-					</td>
-			</tr>
-		</tbody>
-					</table>
+		
 				</form>
 </body>
 	</html>

@@ -305,7 +305,7 @@ change3(0);
 
 
 						<td align="right"  >身份证截止日期</td>
-						<td align="left"><fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/></td>
+						<td align="left"><fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/></td>
 					    <td align="right"><b style="color:red">*</b> 婚姻状况</td>
 						<td align="left">
                         <c:out value="${client.marry}"/> 
@@ -534,7 +534,8 @@ change3(0);
 					<tr>
 
 						<td align="right"  >销售顾问备注</td>
-					    <td align="left" colspan="5"><c:out value="${clientJob.saleRemark}"/> </td>
+					    <td align="left" colspan="5"><input type="text"
+							name="clientJob.saleRemark"  value="${clientJob.saleRemark}" size="135" /></td>
 
 					</tr>
 					<tr  >
@@ -542,6 +543,7 @@ change3(0);
 
 					</tr>
 					<tr>
+
 						<td width="60" align="right">身份证</td>
 				   	 <td align="left" width="272"><c:out value="${contract.fIdCode}"/></td>
 
@@ -695,14 +697,7 @@ change3(0);
 					    <td align="right"  >其它</td>
 						<td align="left"><c:out value="${officeAddressBook.other}"/></td>
 					</tr>
-						
-						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
-							<td>
-							
-								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
-							</td>
-						</c:forEach>
-<%-- 
+
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>商品1</strong></th>
 
@@ -747,9 +742,7 @@ change3(0);
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
-					
-					--%>
-					<tr  >
+<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>信用信息</strong></th>
 					</tr>
 					<tr>
@@ -811,6 +804,27 @@ change3(0);
 
 				</table>
 				
+				<table style="width:100%;text-align:center;">
+					<tr>
+						<td width="39%" align="right">用户</td>
+						<td width="61%" align="left"> <c:out value="${user.name} "/></td>
+					</tr>
+					
+					<tr>
+						<td align="right">口令</td>
+						<td align="left"><c:out value="${pwdConfirm} "/></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<jsp:include page="../../incl/actionb.jsp">
+								<jsp:param name="key" value="Confirm" />
+								<jsp:param name="action" value="Sale.do" />
+								<jsp:param name="method" value="processAdd" />
+							</jsp:include>
+						</td>
+					</tr>
+
+				</table>
 			</div>
 
 			<jsp:include page="../../incl/g_footer.jsp" />

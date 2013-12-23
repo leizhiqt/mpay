@@ -161,6 +161,13 @@
 		<c:param name="id">${item.clientJob.id }</c:param>
 	</c:url>
 	
+	<c:url value="/ClientInfo.do" var="viewURL">
+		<c:param name="method">promptView</c:param>
+		<c:param name="id">${item.clientJob.id }</c:param>
+	</c:url>
+	
+	<a href="${viewURL }"><fmt:message key="View"/></a>
+	
 	<c:if test="${item.jobType.jobKey=='R' ||item.jobType.jobKey=='W' }">
 		<a href="${approvalURL }"><fmt:message key="Approval"/></a>
 	</c:if>
