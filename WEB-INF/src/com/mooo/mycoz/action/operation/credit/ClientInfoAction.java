@@ -146,7 +146,7 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject.setRetrieveField("jobType", "nextState");
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 			dbobject.setRetrieveField("store", "storeName");
-
+			dbobject.setOrderBy("clientJob", "id");
 			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
@@ -367,6 +367,8 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject10.setRetrieveField("clientJobTrack", "jobTypeId");
 			dbobject10.setRetrieveField("clientJobTrack", "nbs");
 			dbobject10.setRetrieveField("clientJobTrack", "nbf");
+			dbobject10.setRetrieveField("clientJobTrack", "nbc");
+			dbobject10.setRetrieveField("clientJobTrack", "nbc");
 			dbobject10.setRetrieveField("clientJobTrack", "nbc");
 			dbobject10.addCustomWhereClause(" clientJobId = "+clientJobId);
 			dbobject10.setOrderBy("clientJobTrack", "id");
