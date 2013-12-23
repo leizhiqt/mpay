@@ -447,7 +447,7 @@ change3(0);
 					     <td align="right"  >邮编</td>
 					     <td align="left"><c:out value="${livingAddressBook.zipCode}"/></td>
 						 <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-					     <td align="left"><c:out value="${livingAddressBookprovince}"/></td>
+					     <td align="left"><c:out value="${livingAddressBook.province}"/></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
 					      <td align="left"><c:out value="${livingAddressBook.city}"/>
 									</td>
@@ -469,7 +469,7 @@ change3(0);
 				  	  <td align="left"><c:out value="${livingAddressBook.community}"/>
                       </td>
 					  <td align="right"  >栋/单元/房间号</td>
-					  <td align="left"><c:out value="${livingAddressBookhouseNo}"/>
+					  <td align="left"><c:out value="${livingAddressBook.houseNo}"/>
                       </td>
 					</tr>
 					<tr  >
@@ -522,7 +522,7 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 小区/楼盘</td>
 				        <td align="left"><c:out value="${homeAddressBook.community}"/> </td>
 					    <td align="right"  >栋/单元/房间号</td>
-				        <td align="left"><c:out value="${homeAddressBookhouseNo}"/></td>
+				        <td align="left"><c:out value="${homeAddressBook.houseNo}"/></td>
 					    <td align="right"  >其它</td>
 					    <td align="left"><c:out value="${homeAddressBook.other}"/></td>
 					</tr>
@@ -603,7 +603,7 @@ change3(0);
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 						<td align="left"><c:out value="${client.onWorkTime}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 现工作时间/大学开始时间(以月为单位)</td>
-				        <td align="left"> <input type="text" name="" maxlength="20" data="msg26"  id="college1" onBlur="calc(this)" /> <b id="msg26"></b></td>
+				        <td align="left"> <c:out value="${client.onWorkTime}"/></td>
 					    <td align="right"  ></td>
 						<td align="left"></td>
 					</tr>
@@ -661,6 +661,32 @@ change3(0);
 						<td align="left"><c:out value="${officeAddressBook.other}"/></td>
 					</tr>
 
+							<c:forEach var="sale" items="${sales}" varStatus="s">
+								<tr  >
+									<th colspan="6" align="left" class="tr8"><strong>商品1</strong></th>
+								</tr>
+								<tr>
+			
+									<td align="right"  ><b style="color:red">*</b> 商品1</td>
+									<td align="left"><c:out value="${sale.saleName}"/></td>
+									<td align="right"  >商品类型</td>
+							        <td align="left"></td>
+								    <td align="right"  >价格（元）</td>
+									<td align="left"><c:out value="${sale.salePrice}"/></td>
+								</tr>
+								
+								<tr>
+
+									<td align="right"  >品牌</td>
+									<td align="left"><c:out value="${sale.brand}"/></td>
+									<td align="right"  >型号</td>
+							        <td align="left"><c:out value="${sale.modelNo}"/></td>
+								    <td align="right"  ></td>
+									<td></td>
+								</tr>
+							</c:forEach>
+							
+<%--
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>商品1</strong></th>
 
@@ -705,6 +731,7 @@ change3(0);
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
+					 --%>
 <tr  >
 						<th colspan="6" align="left" class="tr8"><strong>信用信息</strong></th>
 					</tr>
