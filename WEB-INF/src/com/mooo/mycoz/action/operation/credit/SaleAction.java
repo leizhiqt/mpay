@@ -271,8 +271,7 @@ public class SaleAction extends BaseSupport {
 			dbobject.setRetrieveField("financialProduct", "cycleTotal");
 
 			dbobject.setRetrieveField("store", "storeName");
-			
-			dbobject.setOrderBy("clientJobTrack", "jobDate","DESC");
+			dbobject.setOrderBy("clientJob", "jobDate","DESC");
 			
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());
@@ -655,15 +654,167 @@ public class SaleAction extends BaseSupport {
 
 	public String promptEdit(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("promptEdit");
+		if (log.isDebugEnabled())log.debug("promptView");
+		String id = request.getParameter("id");
+		try {
+
+			//check 
+			if(StringUtils.isNull(id)){
+				throw new Exception("无效的合同号");
+			}
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			request.setAttribute("clientJob",clientJob );
+
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			request.setAttribute("oSale",clientJobSale.searchAndRetrieveList().get(0));
+			request.setAttribute("tSale",clientJobSale.searchAndRetrieveList().get(1));
+
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			request.setAttribute("financialProduct",financialProduct );
+			
+			Store store = new Store();
+			store.setId(clientJob.getStoreId());
+			store.retrieve();
+			request.setAttribute("store",store );
+
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			request.setAttribute("client",client );
+
+			// 处理户籍地址
+			AddressBook censusAddressBook = new AddressBook();
+			censusAddressBook.setId(client.getCensusAddressBookId());
+			censusAddressBook.retrieve();
+			request.setAttribute("censusAddressBook",censusAddressBook );
+
+			AddressBook livingAddressBook = new AddressBook();
+			livingAddressBook.setId(client.getLivingAddressBookId());
+			livingAddressBook.retrieve();
+			request.setAttribute("livingAddressBook",livingAddressBook );
+			
+			AddressBook homeAddressBook = new AddressBook();
+			homeAddressBook.setId(client.getHomeAddressBookId());
+			homeAddressBook.retrieve();
+			request.setAttribute("homeAddressBook",homeAddressBook );
+			
+			AddressBook officeAddressBook = new AddressBook();
+			officeAddressBook.setId(client.getHomeAddressBookId());
+			officeAddressBook.retrieve();
+			request.setAttribute("officeAddressBook",officeAddressBook );
+			
+			ClientDoc clientDoc = new ClientDoc();
+			clientDoc.setClientId(client.getId());
+			request.setAttribute("clientDoc",clientDoc.searchAndRetrieveList());
+
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(clientJob.getId());
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.retrieve();
+			
+			request.setAttribute("clientJobTrack",clientJobTrack);
+
+			JobType jobType = new JobType();
+			jobType.setId(clientJobTrack.getJobTypeId());
+			jobType.retrieve();
+			request.setAttribute("jobType",jobType);
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+
+			return "list";
+		} 
 		return "success";
 	}
 
 	public String processEdit(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (log.isDebugEnabled())
-			log.debug("processEdit");
+		if (log.isDebugEnabled())log.debug("promptView");
+		String id = request.getParameter("id");
+		try {
+
+			//check 
+			if(StringUtils.isNull(id)){
+				throw new Exception("无效的合同号");
+			}
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			request.setAttribute("clientJob",clientJob );
+
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			request.setAttribute("sales",clientJobSale.searchAndRetrieveList());
+
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			request.setAttribute("financialProduct",financialProduct );
+			
+			Store store = new Store();
+			store.setId(clientJob.getStoreId());
+			store.retrieve();
+			request.setAttribute("store",store );
+
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			request.setAttribute("client",client );
+
+			// 处理户籍地址
+			AddressBook censusAddressBook = new AddressBook();
+			censusAddressBook.setId(client.getCensusAddressBookId());
+			censusAddressBook.retrieve();
+			request.setAttribute("censusAddressBook",censusAddressBook );
+
+			AddressBook livingAddressBook = new AddressBook();
+			livingAddressBook.setId(client.getLivingAddressBookId());
+			livingAddressBook.retrieve();
+			request.setAttribute("livingAddressBook",livingAddressBook );
+			
+			AddressBook homeAddressBook = new AddressBook();
+			homeAddressBook.setId(client.getHomeAddressBookId());
+			homeAddressBook.retrieve();
+			request.setAttribute("homeAddressBook",homeAddressBook );
+			
+			AddressBook officeAddressBook = new AddressBook();
+			officeAddressBook.setId(client.getHomeAddressBookId());
+			officeAddressBook.retrieve();
+			request.setAttribute("officeAddressBook",officeAddressBook );
+			
+			ClientDoc clientDoc = new ClientDoc();
+			clientDoc.setClientId(client.getId());
+			request.setAttribute("docs",clientDoc.searchAndRetrieveList());
+
+			ClientJobTrack clientJobTrack = new ClientJobTrack();
+			clientJobTrack.setClientJobId(clientJob.getId());
+			clientJobTrack.setProcessId(0);
+			clientJobTrack.retrieve();
+			
+			request.setAttribute("clientJobTrack",clientJobTrack);
+
+			JobType jobType = new JobType();
+			jobType.setId(clientJobTrack.getJobTypeId());
+			jobType.retrieve();
+			request.setAttribute("jobType",jobType);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (log.isDebugEnabled())
+				log.debug("Exception Load error of: " + e.getMessage());
+			request.setAttribute("error", e.getMessage());
+
+			return "list";
+		} 
 		return "success";
 	}
 	
