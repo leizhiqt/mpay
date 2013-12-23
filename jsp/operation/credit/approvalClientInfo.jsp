@@ -1275,7 +1275,7 @@ table.tab_css_1 td.td_css{
 		 <table width="98%" class="tab_css_1">
           <tr>
             <td  align="right"></td>
-            <td class="td_css" align="left" colspan="2">CC<input type="text" name="clientJob.cc" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="clientJob.cc" size="6" value=""> &nbsp;</td>
+            <td class="td_css" align="left" colspan="2">CC<input type="text" name="cc" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="oc" size="6" value=""> &nbsp;</td>
             <td>
             </td>
           </tr>

@@ -468,6 +468,11 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.setId(new Integer(clientJobId));
 				clientJob.retrieve(tx.getConnection());
 				request.setAttribute("clientJob", clientJob);
+				String cc=request.getParameter("cc");
+				String oc=request.getParameter("oo");
+				clientJob.setCc(cc);
+				clientJob.setOc(oc);
+				clientJob.update(tx.getConnection());;
 				//写入日志文件
 				ClientJobTrack clientJobTrack = new ClientJobTrack();
 				ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
