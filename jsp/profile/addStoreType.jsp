@@ -4,7 +4,7 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-<title><fmt:message key="Store"/></title>
+<title><fmt:message key="StoreType"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
@@ -19,13 +19,13 @@
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="save" />
 				<jsp:param name="key" value="Edit" />
-				<jsp:param name="action" value="Store.do" />
+				<jsp:param name="action" value="StoreType.do" />
 				<jsp:param name="method" value="processAdd" />
 			</jsp:include>
 			<jsp:include page="../incl/action.jsp">
 				<jsp:param name="type" value="cancel" />
 				<jsp:param name="key" value="Cancel" />
-				<jsp:param name="action" value="Store.do" />
+				<jsp:param name="action" value="StoreType.do" />
 				<jsp:param name="method" value="list" />
 			</jsp:include>
 		</div>
@@ -41,66 +41,37 @@
 							<table class="modify">
 								<caption>
 									<fmt:message key="Add" />
-									<fmt:message key="Store" />
+									<fmt:message key="StoreType" />
 								</caption>
 
 								<tbody>
 									<tr>
-										<td class="tl"><fmt:message key="StoreKey" /></td>
-										<td><input type="text" name="store.storeKey" size="6" maxlength="6" /><font class="fm">*</font></td>
+										<td class="tl"><fmt:message key="TypeKey" /></td>
+										<td><input type="text" name="storeType.typeKey" size="6" maxlength="6" /><font class="fm">*</font></td>
 									</tr>
 									
 									<tr>
-										<td class="tl"><fmt:message key="StoreName" /></td>
-										<td><input type="text" name="store.storeName"
+										<td class="tl"><fmt:message key="TypeName" /></td>
+										<td><input type="text" name="storeType.typeName"
 											size="30" maxlength="30" /><font class="fm">*</font></td>
 									</tr>
 
 									<tr>
-										<td class="tl"><fmt:message key="StoreAddress" /></td>
+										<td class="tl"><fmt:message key="TypeBankName" /></td>
 										<td><input type="text"
-											name="store.storeAddress" size="40" maxlength="40" /><font
+											name="storeType.typeBankName" size="40" maxlength="40" /><font
 											class="fm">*</font></td>
 									</tr>
 									<tr>
-										<td class="tl"><fmt:message key="StoreBankNo" /></td>
+										<td class="tl"><fmt:message key="TypeBankNo" /></td>
 										<td><input type="text"
-											name="store.storeBankNo" size="40" maxlength="40" /><font
-											class="fm">*</font></td>
-									</tr>
-									<tr>
-										<td class="tl"><fmt:message key="StoreBankName" /></td>
-										<td><input type="text"
-											name="store.storeBankName" size="40" maxlength="40" /><font
+											name="storeType.typeBankNo" size="40" maxlength="40" /><font
 											class="fm">*</font></td>
 									</tr>
 									
-									<tr>
-										<td class="tl"><fmt:message key="StoreType" /></td>
-										<td>
-										
-										<select name="storeType.storeTypeId" >
-											<c:forEach var="storeType" items="${storeType}" varStatus="s">
-													<option value="${storeType.id}"
-						
-													<c:if test="${storeType.id==param.storeType.id}">
-														selected="selected" 
-													</c:if>
-														>${storeType.typeName}
-													
-													</option>
-											</c:forEach>
-										</select>
-									</tr>
 									
 									
-									<tr>
-										<td class="tl"><fmt:message key="Product" /></td>
-										<td><c:forEach var="product" items="${products}"
-												varStatus="s">
-												<input type="checkbox" name="productId" value="${product.id }">${product.productName }
-											</c:forEach>
-									</tr></table>
+								</table>
 						</td>
 					</tr>
 

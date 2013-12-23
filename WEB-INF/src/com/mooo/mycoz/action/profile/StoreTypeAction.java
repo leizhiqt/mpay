@@ -14,7 +14,8 @@ import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
 import com.mooo.mycoz.dbobj.wineShared.Product;
-import com.mooo.mycoz.dbobj.wineShared.Store;
+import com.mooo.mycoz.dbobj.wineShared.StoreType;
+import com.mooo.mycoz.dbobj.wineShared.StoreType;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
@@ -27,26 +28,26 @@ public class StoreTypeAction extends BaseSupport {
 			HttpServletResponse response) {
 		String value = null;
 		try {
-			Store store = new Store();
+			StoreType storeType = new StoreType();
 			
-			value = request.getParameter("storeName");
+			value = request.getParameter("typeName");
 			if(!StringUtils.isNull(value)){
-				store.setLike("storeName", value);
+				storeType.setLike("typeName", value);
 			}
 			
-			value = request.getParameter("StoreKey");
+			value = request.getParameter("typeKey");
 			if(!StringUtils.isNull(value)){
-				store.setLike("storeKey", value);
+				storeType.setLike("typeKey", value);
 			}
 
-			store.addOrderBy("id DESC");
+			storeType.addOrderBy("id DESC");
 
 			Page page = new Page();
-			page.buildComponent(request,store.count());
-			store.setRecord(page.getOffset(), page.getPageSize());
-			List<?> stores = store.searchAndRetrieveList();
+			page.buildComponent(request,storeType.count());
+			storeType.setRecord(page.getOffset(), page.getPageSize());
+			List<?> storeTypes = storeType.searchAndRetrieveList();
 
-			request.setAttribute("stores", stores);
+			request.setAttribute("storeTypes", storeTypes);
 
 			if (log.isDebugEnabled())
 				log.debug("list success");
@@ -80,29 +81,13 @@ public class StoreTypeAction extends BaseSupport {
 		try {
 			tx.start();
 			
-			Store store=new Store();
-			ParamUtil.bindData(request,store,"store");
+			StoreType storeType=new StoreType();
+			ParamUtil.bindData(request,storeType,"storeType");
 			
-			int storeId = IDGenerator.getNextID(tx.getConnection(),Store.class);
-			store.setId(storeId);
+			int storeId = IDGenerator.getNextID(tx.getConnection(),StoreType.class);
+			storeType.setId(storeId);
 			
-			store.add(tx.getConnection());
-			
-			String[] productId =  request.getParameterValues("productId");
-
-			if(productId!=null && productId.length>0){
-				for(int i=0;i<productId.length;i++){
-					Integer id = new Integer(productId[i]);
-					
-					StoreProduct storeProduct = new StoreProduct();
-					storeProduct.setId(IDGenerator.getNextID(tx.getConnection(), StoreProduct.class));
-					storeProduct.setStoreId(store.getId());
-					storeProduct.setProductId(id);
-					
-					storeProduct.add(tx.getConnection());
-				}
-			}
-			
+			storeType.add(tx.getConnection());
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -126,18 +111,18 @@ public class StoreTypeAction extends BaseSupport {
 				
 			}
 			
-			Store store=new Store();
-			store.setId(new Integer(storeId));
-			store.retrieve();
+			StoreType storeType=new StoreType();
+			storeType.setId(new Integer(storeId));
+			storeType.retrieve();
 
-			request.setAttribute("store", store);
+			request.setAttribute("storeType", storeType);
 			
 			Product product = new Product();
 			product.setGreater("id", 0);
 			request.setAttribute("products", product.searchAndRetrieveList());
 			
 			StoreProduct storeProduct = new StoreProduct();
-			storeProduct.setStoreId(store.getId());
+			storeProduct.setStoreId(storeType.getId());
 			request.setAttribute("nowProducts", storeProduct.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
@@ -152,10 +137,10 @@ public class StoreTypeAction extends BaseSupport {
 		try{
 			tx.start();
 			
-			Store store=new Store();
-			ParamUtil.bindData(request, store, "store");
+			StoreType storeType=new StoreType();
+			ParamUtil.bindData(request, storeType, "storeType");
 			
-			store.update(tx.getConnection());
+			storeType.update(tx.getConnection());
 			
 			String[] productId =  request.getParameterValues("productId");
 
@@ -163,7 +148,7 @@ public class StoreTypeAction extends BaseSupport {
 				for(int i=0;i<productId.length;i++){
 					StoreProduct storeProduct = new StoreProduct();
 					storeProduct.setProductId(new Integer(productId[i]));
-					storeProduct.setStoreId(store.getId());
+					storeProduct.setStoreId(storeType.getId());
 					
 					if(storeProduct.count()<1){
 						storeProduct.setId(IDGenerator.getNextID(tx.getConnection(),StoreProduct.class));
@@ -172,7 +157,7 @@ public class StoreTypeAction extends BaseSupport {
 				}
 				
 				StoreProduct storeProduct = new StoreProduct();
-				storeProduct.setStoreId(store.getId());
+				storeProduct.setStoreId(storeType.getId());
 				
 				List<Object> products = storeProduct.searchAndRetrieveList(tx.getConnection());
 				for(Object bean:products){
@@ -195,7 +180,7 @@ public class StoreTypeAction extends BaseSupport {
 				}
 			}else{//delete all
 				StoreProduct storeProduct = new StoreProduct();
-				storeProduct.setStoreId(store.getId());
+				storeProduct.setStoreId(storeType.getId());
 				
 				List<Object> stores = storeProduct.searchAndRetrieveList(tx.getConnection());
 				for(Object bean:stores){
@@ -241,9 +226,9 @@ public class StoreTypeAction extends BaseSupport {
 					storeProduct.delete(tx.getConnection());
 				}
 				
-				Store store=new Store();
-				store.setId(id);
-				store.delete(tx.getConnection());
+				StoreType storeType=new StoreType();
+				storeType.setId(id);
+				storeType.delete(tx.getConnection());
 			}
 			
 			tx.commit();

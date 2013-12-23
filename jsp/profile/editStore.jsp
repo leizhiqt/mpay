@@ -70,7 +70,36 @@
 											value="${store.storeAddress }" size="40" maxlength="40" /><font
 											class="fm">*</font></td>
 									</tr>
-
+									
+									<tr>
+										<td class="tl"><fmt:message key="StoreBankNo" /></td>
+										<td><input type="text"
+											name="store.storeBankNo" value="${store.storeBankNo}"  size="40" maxlength="40" /><font
+											class="fm">*</font></td>
+									</tr>
+									<tr>
+										<td class="tl"><fmt:message key="StoreBankName" /></td>
+										<td><input type="text"
+											name="store.storeBankName" value="${store.storeBankName}" size="40" maxlength="40" /><font
+											class="fm">*</font></td>
+									</tr>
+									
+									<tr>
+										<td class="tl"><fmt:message key="StoreType" /></td>
+										<td>
+										
+										<select name="store.storeTypeId" >
+											<c:forEach var="storeType" items="${storeTypes}" varStatus="s">
+													<option value="${storeType.id}"
+						
+												
+														>${storeType.typeName}
+													
+													</option>
+											</c:forEach>
+										</select>
+									</tr>
+									
 									<tr>
 										<td class="tl"><fmt:message key="Product" /></td>
 										<td><c:forEach var="product" items="${products}" varStatus="s">

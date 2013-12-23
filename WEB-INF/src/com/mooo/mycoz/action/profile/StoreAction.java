@@ -11,10 +11,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
+import com.mooo.mycoz.db.MultiDBObject;
 import com.mooo.mycoz.db.Transaction;
 import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
 import com.mooo.mycoz.dbobj.wineShared.Product;
 import com.mooo.mycoz.dbobj.wineShared.Store;
+import com.mooo.mycoz.dbobj.wineShared.StoreType;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
 import com.mooo.mycoz.framework.util.ParamUtil;
@@ -27,26 +29,37 @@ public class StoreAction extends BaseSupport {
 			HttpServletResponse response) {
 		String value = null;
 		try {
-			Store store = new Store();
+			
+			
+			MultiDBObject dbobject = new MultiDBObject();
+			dbobject.addTable(Store.class, "store");
+			dbobject.addTable(StoreType.class, "storeType");
+			dbobject.setForeignKey("store", "storeTypeId", "storeType", "id");
+			dbobject.setRetrieveField("storeType", "typeName");
+			
+			dbobject.setRetrieveField("store", "id");
+			dbobject.setRetrieveField("store", "storeKey");
+			dbobject.setRetrieveField("store", "storeName");
+			dbobject.setRetrieveField("store", "storeAddress");
+			dbobject.setRetrieveField("store", "storeBankName");
+			dbobject.setRetrieveField("store", "storeBankNo");
+			
 			
 			value = request.getParameter("storeName");
 			if(!StringUtils.isNull(value)){
-				store.setLike("storeName", value);
+				dbobject.setLike("store", "storeName", value);
 			}
 			
 			value = request.getParameter("StoreKey");
 			if(!StringUtils.isNull(value)){
-				store.setLike("storeKey", value);
+				dbobject.setLike("store", "storeKey", value);
 			}
-
-			store.addOrderBy("id DESC");
-
 			Page page = new Page();
-			page.buildComponent(request,store.count());
-			store.setRecord(page.getOffset(), page.getPageSize());
-			List<?> stores = store.searchAndRetrieveList();
-
-			request.setAttribute("stores", stores);
+			page.buildComponent(request, dbobject.count());
+			dbobject.setRecord(page.getOffset(),page.getPageSize());
+			List<?> results = dbobject.searchAndRetrieveList();
+			
+			request.setAttribute("items", results);
 
 			if (log.isDebugEnabled())
 				log.debug("list success");
@@ -67,6 +80,11 @@ public class StoreAction extends BaseSupport {
 			Product product = new Product();
 			product.setGreater("id", 0);
 			request.setAttribute("products", product.searchAndRetrieveList());
+			StoreType storeType = new StoreType();
+			
+			product.setGreater("id", 0);
+			request.setAttribute("products", product.searchAndRetrieveList());
+			request.setAttribute("storeType", storeType.searchAndRetrieveList());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,9 +103,7 @@ public class StoreAction extends BaseSupport {
 			
 			int storeId = IDGenerator.getNextID(tx.getConnection(),Store.class);
 			store.setId(storeId);
-			
 			store.add(tx.getConnection());
-			
 			String[] productId =  request.getParameterValues("productId");
 
 			if(productId!=null && productId.length>0){
@@ -121,16 +137,20 @@ public class StoreAction extends BaseSupport {
 		try{
 			storeId = request.getParameter("id");
 			if(storeId==null){
-				request.setAttribute("error", "请选择商店！");
+				request.setAttribute("error", "请选择门店！");
 				return "list";
 				
 			}
 			
 			Store store=new Store();
+			System.out.println(">>>>>>>>>>>>>>>>>"+storeId+"dddddd");
 			store.setId(new Integer(storeId));
 			store.retrieve();
-
 			request.setAttribute("store", store);
+
+			StoreType  storeType=new StoreType();
+			storeType.setGreater("id", 0);;
+			request.setAttribute("storeTypes", storeType.searchAndRetrieveList());
 			
 			Product product = new Product();
 			product.setGreater("id", 0);
