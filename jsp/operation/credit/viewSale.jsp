@@ -549,7 +549,7 @@ change3(0);
 					<tr>
 					<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<td colspan="6">
-							<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
+							<c:forEach var="clientDoc" items="${docs}" varStatus="s">
 								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
 							</c:forEach>
 						</td>
