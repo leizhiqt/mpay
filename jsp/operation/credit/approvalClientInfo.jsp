@@ -576,16 +576,14 @@ table.tab_css_1 td.td_css{
 					<tbody>
 						<tr>
                         	<td width="100px"  rowspan="2" class="td_css"><strong>所在单位信息</strong></td>	
-							<td width="14%" align="right" class="td_css">
+							<td width="125px" align="right" class="td_css">
 								单位名称或大学名称:
-							</td>
-							
-											<td width="14%">
-												<c:out  value="${client.onShortName }"
-										    />
+							</td >
+							<td width="127px">
+												<c:out  value="${client.onShortName }"/>
 								</td>
 							
-				<td width="12%" align="right"  class="td_css">
+				<td width="125px" align="right"  class="td_css">
 					单位/学校/个体全称:
 				</td>
 				
@@ -1281,18 +1279,14 @@ table.tab_css_1 td.td_css{
 		</table>
 		 <table width="98%" class="tab_css_1">
           <tr>
-            <td class="td_css" align="right">CC</td>
-            <td width="300px">
-           		<input type="text" name="codeOne" size="6" value=""> &nbsp;	
-              </td>
-            <td class="td_css" align="right">OC</td>
+            <td  align="right"></td>
+            <td class="td_css" align="left" colspan="2">CC<input type="text" name="codeOne" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="codeOne" size="6" value=""> &nbsp;</td>
             <td>
-            	<input type="text" name="codeOne" size="6" value=""> &nbsp;
             </td>
           </tr>
           <tr>
             <td class="td_css" align="right">初审结果</td>
-            <td>
+            <td width="300px">
 				 <select name="clientJobTrack.jobTypeId" >
 							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
 								<option value="${jobType.id}"

@@ -6,8 +6,7 @@
 <head>
 <title><fmt:message key="Sale" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css"
-	type="text/css" rel="stylesheet" />
+<link id="skinCss" href="jsp/public/ISCSSobjects_style5.css" type="text/css" rel="stylesheet"/>   
 <script type="text/javascript" src="jsp/public/skin.js"></script>
 <script type="text/javascript" src="jsp/js/calendar.js"></script>
 <script type="text/javascript" src="jsp/js/pop-lookup.js"></script>
@@ -158,6 +157,25 @@ if(v)options[1].selected = true;
 if(++v<sk.length){change(v);}
 }
 }
+
+function change3(v){
+	var str="0";
+	for(i=0;i<v;i++){ str+=("_"+(document.getElementById(sv[i]).selectedIndex-1));};
+	var ss=document.getElementById(sv[v]);
+	with(ss){
+	length = 0;
+	options[0]=new Option(opt0[v],opt0[v]);
+	if(v && document.getElementById(sv[v-1]).selectedIndex>0 || !v)
+	{
+	if(dsy.Exists(str)){
+	ar = dsy.Items[str];
+	for(i=0;i<ar.length;i++)options[length]=new Option(ar[i],ar[i]);
+	if(v)options[1].selected = true;
+	}
+	}
+	if(++v<sv.length){change(v);}
+	}
+	}
 var dsy = new Dsy();
 
 dsy.add("0",["北京市","天津市","河北省","山西省","内蒙古","辽宁省","吉林省","黑龙江省","上海市","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西自治区","海南省","重庆市","四川省","贵州省","云南省","西藏自治区","陕西省","甘肃省","青海省","宁夏回族自治区","新疆维吾尔自治区","香港特别行政区","澳门特别行政区","台湾省","其它"]);
@@ -228,6 +246,14 @@ document.getElementById(sk[i]).onchange=new Function("change2("+(i+1)+")");
 change2(0);
 }
 
+var sv=["officeAddressBook","officeAddressBookcity"];
+var opt0 = ["请选择","请选择"];
+function setupsv()
+{
+for(i=0;i<sv.length-1;i++)
+document.getElementById(sv[i]).onchange=new Function("change3("+(i+1)+")");
+change3(0);
+}
 
 //##联动菜单结束-->
 </SCRIPT>
@@ -248,7 +274,7 @@ change2(0);
 			<%@ include file="../../incl/b_message.jsp"%>
 
 			<div>
-				<table border="1" class="lt" >
+				<table border="1" class="lt"  >
 					<tr height="10px" style="border: 1px solid #FFF;">
 
 						<td colspan="" align="right"  >销售顾问代码</td>
@@ -277,8 +303,8 @@ change2(0);
 					</tr>
 					<tr>
 
-						<td align="right"  ><b style="color:red">*</b> 姓名</td>
-						<td align="left"><input type="text" name="client.clientName" value="${client.clientName }" onblur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
+						<td align="right" ><b style="color:red">*</b> 姓名</td>
+						<td align="left" width="240px" ><input type="text" name="client.clientName" value="${client.clientName }" onblur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
 					    <td></td>
 						<td></td>
 						<td align="right"  ><b style="color:red">*</b> 身份证号码</td>
@@ -300,7 +326,7 @@ change2(0);
 					<tr>
 						<td align="right"  >SSI号码/学生号码</td>
 				    <td align="left"><input type="text" name="client.otherNo" value="${client.otherNo}"/></td>
-						<td align="right"  ><b style="color:red">*</b> 申请人年龄</td>
+						<td align="right" width="260px" ><b style="color:red">*</b> 申请人年龄</td>
 						<td align="left"><input type="text" name="client.age" maxlength="10" value="${client.age }" data="msg4"  id="ages" onblur="calc(this)" /> <b id="msg4"></b></td>
 						<td align="right"  ><b style="color:red">*</b>本人手机号</td>
 					    <td align="left"><input type="text" name="client.mobilePhone" value="${client.mobilePhone }" onblur="getphonearea(this.value)" /><b id="msg5"></b></td>
@@ -332,13 +358,21 @@ change2(0);
 				        <td align="left"><select id="housing" name="client.housing"
 							>
 								<option value="自有房">自有房</option>
-								<option value="租房">租房</option>
+								<option value="租住房">租住房</option>
+								<option value="父母房产">父母房产</option>
+								<option value="单位提供的福利房">单位提供的福利房</option>
+								<option value="集体宿舍">集体宿舍</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 						<td align="left"><select name="client.educationId" id="educationId"
 							>
-								<option value=1>大學</option>
-								<option value=2>高中</option>
+								<option value="小学">小学</option>
+								<option value="初中">初中</option>
+								<option value="高中">高中</option>
+								<option value="职高，中专，技术学校">职高，中专，技术学校</option>
+								<option value="大学">大学</option>
+								<option value="硕士及以上">硕士及以上</option>
+								
 						</select></td>
 					</tr>
 					<tr>
@@ -393,11 +427,7 @@ change2(0);
 							<option value="河北省">河北省</option>
 					    </select></td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
-			          <td align="left"><select  name="censusAddressBook.city" id="censusAddressBookcity" 
-						>
-							<option value="请选择">请选择</option>
-							<option value="內江市">內江市</option>
-					    </select></td>
+			          <td align="left"><input type="text" name="censusAddressBook.city" />
 					</tr>
 
 					<tr>
@@ -446,15 +476,12 @@ change2(0);
 					     <td align="left"><select  name="livingAddressBook.province"  id="livingAddressBookprovince"
 								>
 									<option value="四川省">四川省</option>
-									<option value="湖南省">湖南省</option>
+									<option value="湖南省">湖南省</option> 	 
 									<option value="河北省">河北省</option>
 							</select></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
-					      <td align="left"><select  name="livingAddressBook.city"  id="livingAddressBookcity"
-					   			>
-									<option value="请选择">请选择</option>
-									<option value="內江市">內江市</option>
-							</select></td>
+					      <td align="left"><input  name="livingAddressBook.city"  type="text"/>
+									</td>
 					</tr>
 
 					<tr>
@@ -499,8 +526,8 @@ change2(0);
                            
 						</select>
                         </td>
-					    <td align="right"  >家庭成员电话号</td>
-					    <td align="left"><input type="text" name="client.homeTelephone" value="${ client.homeTelephone}"/></td>
+					    <td align="right"  ><b style="color:red">*</b>家庭成员电话号</td>
+					    <td align="left"><input type="text" name="client.homeTelephone" value="${ client.homeTelephone}" onblur="calc(this)" data="msg40"/></td>
 					</tr>
 					<tr>
 						<td align="right"  >家庭成员地址与户籍地址相同</td>
@@ -524,11 +551,8 @@ change2(0);
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-				        <td align="left"><select id="homeAddressBookcity" name="homeAddressBook.city"
-							>
-								<option value="请选择">请选择</option>
-								<option value="內江市">內江市</option>
-						</select></td>
+				        <td align="left"><input type="text" name="homeAddressBook.city"/>
+							</td>
 					</tr>
 
 					<tr>
@@ -593,7 +617,7 @@ change2(0);
 					<tr>
 
 						<td width="60" align="right">身份证</td>
-				    <td align="left" width="272"><input type="file" name="contract.fIdCode" value="${ contract.fIdCode}"/></td>
+				   	 <td align="left" width="272"><input type="file" name="contract.fIdCode" value="${ contract.fIdCode}"/></td>
 
 						<td align="right">社保卡</td>
 						<td colspan="3" align="left"><input type="file" name="contract.fSocialCard" value="${contract.fSocialCard }"/></td>
@@ -629,7 +653,7 @@ change2(0);
 
 					  	<td align="right">大学学生证明（仅适用全日制大学学生)</td>
 
-						<td colspan="3" align="left"><input type="checkbox" name="contract.fUid" /></td>
+						<td colspan="3" align="left"><input type="file" name="contract.fUid" /></td>
 					</tr>
 					<tr>
 						<td align="right">银行存折</td>
@@ -644,8 +668,9 @@ change2(0);
 					    <td align="right">邮寄地址</td>
 						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
 							>
-					        <option value="请选择">请选择</option>
-						    <option value="重庆市">重庆市</option>
+					        <option value="户籍地址">户籍地址</option>
+						    <option value="家庭地址">家庭地址</option>
+						     <option value="现居地址">现居地址</option>
 				        </select></td>
 					</tr>
 
@@ -683,8 +708,11 @@ change2(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 单位名称或大学名称</td>
-						<td align="left"><input type="text" name="client.onShortName" value="${client.onShortName }"
-							maxlength="20" data="msg23"  id="college" onblur="calc(this)" /> <b id="msg23"></b></td>
+						<td align="left"><select id="onWorkTime" name="client.onShortName" >
+								<option value="公司或个人">公司或个人</option>
+								<option value="大学">大学</option>
+						</select>
+						</td>
 						<td align="right"  ><b style="color:red">*</b> 单位/学校/个体全称</td>
 				        <td align="left"><input type="text" name="client.onFullName" value="${client.onFullName }"
 							maxlength="20" data="msg24"  id="collegename" onblur="calc(this)" /> <b id="msg24"></b></td>
@@ -694,8 +722,7 @@ change2(0);
 					</tr>
 					<tr>
 						<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
-						<td align="left"><select id="onWorkTime" name="client.onWorkTime"
-							>
+						<td align="left"><select id="onWorkTime" name="client.onWorkTime">
 								<option value="0-1年">0-1年</option>
 								<option value="0-1年">1-2年</option>
 								<option value="0-1年">2-3年</option>
@@ -711,22 +738,58 @@ change2(0);
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 行业类别</td>
-						<td align="left"><select id="onWorkTime" name="client.onSector"
+						<td align="left"><select id="onWorkTime" name="client.onSector" style="width:50px"
 							>
-								<option value="IT">IT</option>
-								<option value="金融">金融</option>
+								<option value="餐饮，酒店，旅游，美容美发保健">餐饮，酒店，旅游，美容美发保健</option>
+								<option value="农业，林业，畜牧业和渔业">农业，林业，畜牧业和渔业</option>
+								<option value="建筑">建筑</option>
+								<option value="文化，运动，娱乐，传媒，广告设计">文化，运动，娱乐，传媒，广告设计</option>
+								<option value="教育">教育</option>
+								<option value="金融机构，专业性事务机构">金融机构，专业性事务机构</option>
+								<option value="政府机构，社会团体">政府机构，社会团体</option>
+								<option value="计算机，电信，通讯，互联网">计算机，电信，通讯，互联网</option>
+								<option value="制造，快速消费品，耐用消费品">制造，快速消费品，耐用消费品</option>
+								<option value="军队">军队</option>
+								<option value="电力，煤气，和水的生产和供应">电力，煤气，和水的生产和供应</option>
+								<option value="能源，化工，矿产">能源，化工，矿产</option>
+								<option value="个体，自营，退休，居住，家政和其他服务">个体，自营，退休，居住，家政和其他服务</option>
+								<option value="科研技术服务和地质勘探">科研技术服务和地质勘探</option>
+								<option value="事业单位，公共设施，医疗卫生，社会保障和社会福利">事业单位，公共设施，医疗卫生，社会保障和社会福利</option>
+								<option value="租赁和商业服务">租赁和商业服务</option>
+								<option value="交通，运输，仓储，邮电和物流">交通，运输，仓储，邮电和物流</option>
+								<option value="批发和零售贸品">批发和零售贸品</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
-				        <td align="left"><select id="onOffice" name="client.onOffice"
+				        <td align="left"><select id="onOffice" name="client.onOffice" style="width:50px"
 							>
-								<option value="经理">经理</option>
-								<option value="总监">总监</option>
+								<option value="高层管理人员/总监以上/局级以上干部">高层管理人员/总监以上/局级以上干部</option>
+								<option value="中层管理人员/经理以上/科级以上干部">中层管理人员/经理以上/科级以上干部</option>
+								<option value="基层管理人员/主管组长/科员">基层管理人员/主管组长/科员</option>
+								<option value="一般员工">一般员工</option>
+								<option value="工人（包括生产，加工，建筑和设备操作人员及有关人员）">工人（包括生产，加工，建筑和设备操作人员及有关人员）</option>
+								<option value="销售/中介/业务代表/促销">销售/中介/业务代表/促销</option>
+								<option value="商业，服务人员">商业，服务人员</option>
+								<option value="保安/治安/防损">保安/治安/防损</option>
+								<option value="农民">农民</option>
+								<option value="个体">个体</option>
+								<option value="专业技术人员">专业技术人员</option>
+								<option value="军人">军人</option>
+								<option value="司机">司机</option>
+								<option value="退休">退休</option>
+								<option value="其他">其他</option>
+								
 						</select></td>
 					    <td align="right"  >单位性质</td>
 						<td align="left"><select id="onFeature" name="client.onFeature"
 							>
 								<option value="国有企业">国有企业</option>
 								<option value="私有企业">私有企业</option>
+								<option value="个体">个体</option>
+								<option value="集体">集体</option>
+								<option value="外商独资">外商独资</option>
+								<option value="外商合资">外商合资</option>
+								<option value="其他">其他</option>
+								<option value="农民">农民</option>
 						</select></td>
 					</tr>
 
@@ -746,18 +809,15 @@ change2(0);
 						<td align="left"><input type="text" name="officeAddressBook.zipCode" value="${ officeAddressBook.zipCode}"
 							maxlength="20" /></td>
 						<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
-				        <td align="left"><select id="province4" name="officeAddressBook.province"
-							>
+				        <td align="left">
+				        <select name="officeAddressBook.province"  id="officeAddressBook">
 								<option value="四川省">四川省</option>
 								<option value="湖南省">湖南省</option>
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-						<td align="left"><select id="city4" name="officeAddressBook.city"
-						>
-								<option value="请选择">请选择</option>
-								<option value="內江市">內江市</option>
-						</select></td>
+						<td align="left"><input type="text" id="city4" name="officeAddressBook.city" />
+								</td>
 					</tr>
 
 					<tr>
@@ -791,7 +851,7 @@ change2(0);
 					</tr>
 					<tr>
 
-						<td align="right"  >商品1</td>
+						<td align="right"  ><b style="color:red">*</b> 商品1</td>
 						<td align="left"><input type="text" name="" /></td>
 						<td align="right"  >商品类型</td>
 				        <td align="left"><input type="text" name="" /></td>
@@ -841,7 +901,7 @@ change2(0);
 							<input type="text" name="clientJob.totalPrice"  value="${salePrice }" readonly />
 						</td>
 					  	<td align="right">贷款用途</td>
-						<td align="left"><select id="city4" name="clientJob.byUse" 
+						<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
 						>
 								<option value="请选择">请选择</option>
 								<option value="家用电器">家用电器</option>
@@ -856,7 +916,7 @@ change2(0);
 						<td align="right"  >自付金额(元)</td>
 						
 						<td align="left">
-							<input type="text" name="clientJob.selfAmount" value="${onePay }"/>
+							<c:out value="${onePay }"/>
 						</td>
 						<td align="right"  >分期期数</td>
 						
@@ -869,7 +929,7 @@ change2(0);
 					<tr>
 						
 						<td align="right"  >贷款本金(元)</td>
-						<td align="left"></td>
+						<td align="left"><c:out value="${salePrice-onePay } "/></td>
 						<td align="right"  ></td>
 						<td align="left"></td>
 						<td  align="right">每月还款日</td>
@@ -935,6 +995,9 @@ change2(0);
    </SCRIPT>
     <SCRIPT language="javascript">
    setupss()
+   </SCRIPT>
+    <SCRIPT language="javascript">
+    setupsv()
    </SCRIPT>
 </body>
 

@@ -33,8 +33,8 @@ public class ExampleXML2PDF {
 
 			// Setup input and output files
 			File xmlfile = new File(baseDir, "jsp/xslt/g.xml");
-			File xsltfile = new File(baseDir, "jsp/xslt/ht.xsl");
-			File pdffile = new File(outDir, "ht.pdf");
+			File xsltfile = new File(baseDir, "jsp/xslt/htcopy.xsl");
+			File pdffile = new File(outDir, "htcopy.pdf");
 //			File xsltfile = new File(baseDir, "jsp/xslt/New.xsl");
 //			File pdffile = new File(outDir, "New.pdf");
 
