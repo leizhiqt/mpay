@@ -79,7 +79,7 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="10" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>
@@ -94,7 +94,7 @@
 <th><fmt:message key="VouchRate"/></th>
 <th><fmt:message key="MinPayPercent"/></th>
 <th><fmt:message key="FinancialMax"/></th>
-
+<th><fmt:message key="FinancialMin"/></th>
 </tr>
 </thead>
 
@@ -110,6 +110,7 @@
 <td><fmt:formatNumber value="${financial.vouchRate }" type="percent" maxFractionDigits="5"/></td>
 <td><c:out value="${financial.minPayPercent }"/></td>
 <td><c:out value="${financial.financialMax }"/></td>
+<td><c:out value="${financial.financialMin }"/></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -117,7 +118,7 @@
 <tfoot>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="9" >
+<td colspan="10" >
 <%@ include file="../incl/pageNavigation.jsp"%>
 </td>
 </tr>

@@ -81,6 +81,11 @@
 </tr>
 
 <tr>
+<td class="tl"><fmt:message key="FinancialMin"/></td>
+<td><input type="text" name="financialProduct.financialMin" size="10" maxlength="10"/><font class="fm">*</font></td>
+</tr>
+
+<tr>
 <td class="tl"><fmt:message key="MinPayPercent"/></td>
 <td><input type="text" name="financialProduct.minPayPercent" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>

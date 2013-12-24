@@ -87,13 +87,23 @@
 <tr>
 <td class="tl"><fmt:message key="Store"/></td>
 <td>
-	<c:forEach var="store" items="${stores}" varStatus="s">
-		<input type="checkbox" name="storeId" value="${store.id }">${store.storeName }
-	</c:forEach>
+	
 </tr>
 
 </tbody>
 
+</table>
+<table style="font-size:12px;">
+	<c:forEach var="store" items="${stores}" varStatus="s">
+	<tr>
+		<td width="10px">
+		<input type="checkbox" name="storeId" value="${store.id }">
+		</td>
+		<td>
+		${store.storeName }
+		</td>
+	</tr>
+	</c:forEach>
 </table>
 </td>
 </tr>

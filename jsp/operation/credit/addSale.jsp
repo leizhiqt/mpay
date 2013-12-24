@@ -427,7 +427,7 @@ change3(0);
 							<option value="河北省">河北省</option>
 					    </select></td>
 				      <td align="right"  ><b style="color:red">*</b> 市</td>
-			          <td align="left"><input type="text" name="censusAddressBook.city" id="censusAddressBookcity" />
+			          <td align="left"><input type="text" name="censusAddressBook.city" value="${censusAddressBook.city }" id="censusAddressBookcity" />
 					</tr>
 
 					<tr>
@@ -436,7 +436,7 @@ change3(0);
 				          <td align="left"><input type="text" name="censusAddressBook.county" value="${censusAddressBook.county }" 
 							maxlength="20" data="msg17"  id="censusAddressBookcounty" onblur="calc(this)" /> <b id="msg17"></b></td>
 					      <td align="right"  >镇</td>
-				          <td align="left"><input type="text" name="censusAddressBook.town"
+				          <td align="left"><input type="text" name="censusAddressBook.town" value="${censusAddressBook.town }"
 							maxlength="20" id="censusAddressBooktown" /></td>
 					      <td align="right"  ><b style="color:red">*</b> 街道/路/村</td>
 					      <td align="left"><input type="text" name="censusAddressBook.street" value="${censusAddressBook.street }"
@@ -463,7 +463,7 @@ change3(0);
 						 <td align="left">
 							<input type="checkbox" id="ischange" name="isSameWitcensusAdd"/></td>
 				    	 <td align="right"  >你在现居住城市住了多久？</td>
-				    	 <td align="left"><input type="text" name="client.livingMonth" /></td>
+				    	 <td align="left"><input type="text" name="client.livingMonth" value="${client.livingMonth }"/></td>
 					     <td align="right"  >月</td>
 						 <td></td>
 					</tr>
@@ -480,7 +480,7 @@ change3(0);
 									<option value="河北省">河北省</option>
 							</select></td>
 				   		  <td align="right"  ><b style="color:red">*</b> 市</td>
-					      <td align="left"><input  name="livingAddressBook.city" id="livingAddressBookcity" type="text"/>
+					      <td align="left"><input  name="livingAddressBook.city" value="${livingAddressBook.city}"  id="livingAddressBookcity" type="text"/>
 									</td>
 					</tr>
 
@@ -523,7 +523,6 @@ change3(0);
 								<option value="儿子">儿子</option>
 								<option value="女儿">女儿</option>
 								<option value="其他">其他</option>
-                           
 						</select>
                         </td>
 					    <td align="right"  ><b style="color:red">*</b>家庭成员电话号</td>
@@ -551,7 +550,7 @@ change3(0);
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-				        <td align="left"><input type="text" name="homeAddressBook.city" id="homeAddressBookcity"/>
+				        <td align="left"><input type="text" name="homeAddressBook.city" name="${homeAddressBook.city }" id="homeAddressBookcity" value="${homeAddressBook.city }"/>
 							</td>
 					</tr>
 
@@ -818,7 +817,7 @@ change3(0);
 								<option value="河北省">河北省</option>
 						</select></td>
 					    <td align="right"  ><b style="color:red">*</b> 市</td>
-						<td align="left"><input type="text" id="city4" name="officeAddressBook.city" />
+						<td align="left"><input type="text" id="city4" name="officeAddressBook.city" value="${officeAddressBook.city }"/>
 								</td>
 					</tr>
 
@@ -854,18 +853,18 @@ change3(0);
 					<tr>
 
 						<td align="right"  ><b style="color:red">*</b> 商品1</td>
-						<td align="left"><input type="text" name="oSale.saleName" /></td>
+						<td align="left"><input type="text" name="oSale.saleName" value="${oSale.saleName }"/></td>
 						<td align="right"  >商品类型</td>
-				        <td align="left"><input type="text" name="" /></td>
+				        <td align="left"><input type="text" name="" value="${ }"/></td>
 					    <td align="right"  >价格（元）</td>
-						<td align="left"><input type="text" name="oSale.salePrice" /></td>
+						<td align="left"><input type="text" name="oSale.salePrice" value="${oSale.salePrice }"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >品牌</td>
-						<td align="left"><input type="text" name="oSale.brand" /></td>
+						<td align="left"><input type="text" name="oSale.brand" value="${oSale.brand }"/></td>
 						<td align="right"  >型号</td>
-				        <td align="left"><input type="text" name="oSale.modelNo" /></td>
+				        <td align="left"><input type="text" name="oSale.modelNo" value="${oSale.modelNo }"/></td>
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
@@ -876,18 +875,18 @@ change3(0);
 					<tr>
 
 						<td align="right"  >商品2</td>
-						<td align="left"><input type="text" name="tSale.saleName" /></td>
+						<td align="left"><input type="text" name="tSale.saleName" value="${tSale.saleName }"/></td>
 						<td align="right"  >商品类型</td>
 				        <td align="left"><input type="text" name="" /></td>
 					    <td align="right"  >价格（元）</td>
-						<td align="left"><input type="text" name="tSale.salePrice" /></td>
+						<td align="left"><input type="text" name="tSale.salePrice" value="${tSale.salePrice }"/></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >品牌</td>
-						<td align="left"><input type="text" name="tSale.brand" /></td>
+						<td align="left"><input type="text" name="tSale.brand" value="${tSale.brand }"/></td>
 						<td align="right"  >型号</td>
-				        <td align="left"><input type="text" name="tSale.modelNo" /></td>
+				        <td align="left"><input type="text" name="tSale.modelNo" value="${tSale.modelNo }"/></td>
 					    <td align="right"  ></td>
 						<td></td>
 					</tr>
@@ -943,22 +942,22 @@ change3(0);
 					<tr>
 					    
 						<td align="right"  ><b style="color:red">*</b> 客户银行卡号/账号</td>
-						<td align="left"><input type="text" name="oBank.debitCard"
+						<td align="left"><input type="text" name="oBank.debitCard" value="${oBank.debitCard }"
 							maxlength="24" /></td>
 						<td align="right"  ><b style="color:red">*</b> 客户开户银行</td>
-				        <td align="left"><input type="text" name="oBank.bankName"
+				        <td align="left"><input type="text" name="oBank.bankName" value="${oBank.bankName }"
 							maxlength="50" /></td>
 						<td  align="right">月花费(元/月)</td>
-						<td align="left"><input type="text" name="oBank.monthPay" /></td>
+						<td align="left"><input type="text" name="oBank.monthPay" value="${oBank.monthPay }"/></td>
 					
 					</tr>
 
 					<tr>
 						
 						<td align="right"  >第二银行卡号</td>
-						<td align="left"><input type="text" name="tBank.debitCard" /></td>
+						<td align="left"><input type="text" name="tBank.debitCard" value="${tBank.debitCard }"/></td>
 						<td align="right"  >第二银行卡开户银行</td>
-				    	<td align="left"><input type="text" name="tBank.bankName" /></td>
+				    	<td align="left"><input type="text" name="tBank.bankName" value="${tBank.bankName }"/></td>
 					</tr>
 
 				</table>

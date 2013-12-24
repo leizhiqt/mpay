@@ -119,6 +119,8 @@ public class SaleAction extends BaseSupport {
 				
 				FinancialProduct financialProduct = new FinancialProduct();
 				financialProduct.setGreaterEqual("financialMax", creditAmount);
+				financialProduct.setLessEqual("financialMin", creditAmount);
+
 				List<?> financials = financialProduct.searchAndRetrieveList();
 						
 				for(Object obj:financials){
