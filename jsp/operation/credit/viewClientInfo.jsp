@@ -191,9 +191,9 @@ table.tab_css_1 td.td_css{
 				<td align="left" id="guest_infoB"   ><c:out   value="${client.idNo}"/></td>
 		
 				<td align="right" class="td_css" >
-					
+					住宅电话登记人
 				</td>
-				<td align="left"  style="padding-left:4px;">6</td>
+				<td align="left"  style="padding-left:4px;"><c:out  value="${ client.homePhoneName}" /></td>
 				<td align="right"  class="td_css">
 					身份证截止日期:
 				</td>
@@ -1020,8 +1020,7 @@ table.tab_css_1 td.td_css{
 						<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
 							<td>
-							
-								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
+							<a href="${clientDoc.filepath}">附件${s.index }</a>
 							</td>
 							</c:forEach>
 						</tr>
@@ -1031,103 +1030,72 @@ table.tab_css_1 td.td_css{
 		</tr>
         </table>
         <table class="tab_css_1" width="98%" >
-					<tbody>
-						<tr>
-                        <td align="center" width="100px" class="td_css"><strong>
-			  商品1
-			</strong></td>
-							<td align="right" class="td_css">
-								商品:
-							</td>
-							<td align="left" id="guest_info52" style="padding-left:4px;">1</td>
-				<td align="right"  class="td_css">
-					商品类型:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;">2</td>
-				<td align="right"  class="td_css">
-					价格(元):
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;">3</td>
-				<td align="right"  class="td_css">
-					品牌:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;">4</td>
-				<td align="right"  class="td_css">
-					型号:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;">5</td>
-					  </tr>
-					</tbody>
-				</table>
-        	 <table class="tab_css_1" width="98%">
-					<tbody>
-						<tr>
-                        <td align="center" width="100px" class="td_css"><strong>
-			  商品2
-			</strong></td>
-							<td align="right"  class="td_css">
-								商品:
-							</td>
-							<td align="left" id="guest_info52" style="padding-left:4px;">1</td>
-				<td align="right" class="td_css">
-					商品类型:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;">2</td>
-				<td align="right" class="td_css">
-					价格(元):
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;">3</td>
-				<td align="right"  class="td_css">
-					品牌:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;">4</td>
-				<td align="right"  class="td_css">
-					型号:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;">5</td>
-					  </tr>
-					</tbody>
+        
+        					<c:forEach var="sale" items="${sales}" varStatus="s">
+								<tr  >
+									<th colspan="6" align="left" class="tr8"><strong>商品 ${s.index }</strong></th>
+								</tr>
+								<tr>
+			
+									<td align="right"  ><b style="color:red">*</b> 商品 ${s.index }</td>
+									<td align="left"><c:out value="${sale.saleName}"/></td>
+									<td align="right"  >商品类型</td>
+							        <td align="left"></td>
+								    <td align="right"  >价格（元）</td>
+									<td align="left"><c:out value="${sale.salePrice}"/></td>
+								</tr>
+								
+								<tr>
+
+									<td align="right"  >品牌</td>
+									<td align="left"><c:out value="${sale.brand}"/></td>
+									<td align="right"  >型号</td>
+							        <td align="left"><c:out value="${sale.modelNo}"/></td>
+								    <td align="right"  ></td>
+									<td></td>
+								</tr>
+							</c:forEach>
 				</table>
         	
             
         	<table class="tab_css_1" width="98%" >
 					<tbody>
 						<tr>
-                        	<td rowspan="3" width="100px" class="td_css"><strong> 信用信息 </strong></td>
+                        	<td rowspan="2" width="100px" class="td_css"><strong> 信用信息 </strong></td>
 							<td align="right"  class="td_css">
 								产品:
 							</td>
 							<td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${financialProduct.financialName }"/></td>
-				<td align="right"  class="td_css">
-					商品总价:
-				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out    value="${clientJob.totalPrice }"  /></td>
-				<td align="right" class="td_css">
-					贷款用途:
-				</td>
-			  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${clientJob.byUse }"/></td>
-				<td align="right"  class="td_css">
-					自付金额(元):
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${clientJob.selfAmount }"/></td>
-				<td align="right"  class="td_css">
-					分期期数:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out value="${financialProduct.cycleTotal }"/> </td>
+						<td align="right"  class="td_css">
+							商品总价:
+						</td>
+					  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out    value="${clientJob.totalPrice }"  /></td>
+						<td align="right" class="td_css">
+							贷款用途:
+						</td>
+					  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${clientJob.byUse }"/></td>
+						<td align="right"  class="td_css">
+							自付金额(元):
+						</td>
+					  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${clientJob.selfAmount }"/></td>
+						<td align="right"  class="td_css">
+							分期期数:
+						</td>
+					  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out value="${financialProduct.cycleTotal }"/> </td>
 		  </tr>
-		
-			<tr>
+								</tbody>
+							</table>
+		<table class="tab_css_1"  width="98%">
+				<tr>
+				<td rowspan="2" width="100px" class="td_css"><strong> 银行卡信息 </strong></td>
 				<td align="right"  class="td_css">
 					每月还款额(元):
 				</td>
 			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${clientJob.monthOfPay }"  /></td>
 				<td align="right"  class="td_css">
-					贷款本金(元):
+					贷款本金(元):<c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/>
 				</td>
-			  <td align="left" id="guest_info54" style="padding-left:4px;"></td>
-				<td align="right"  class="td_css">
-					首次还款日:
-				</td>
+				
 			  <td align="left" id="guest_info56" style="padding-left:4px;"></td>
 				<td align="right"  class="td_css">
 					每月还款日:
@@ -1144,125 +1112,35 @@ table.tab_css_1 td.td_css{
 		                                      					<input type="checkbox" name="contract.crAgentPay"
 										value="银行代扣还款" id="contract.crAgentPay-1"
 										checked="checked" disabled="disabled" size="10">
-		                                       </td>
+		        </td>
+		        <td></td><td></td>
 		  </tr>
 		
-			<tr>
-				<td align="right"   class="td_css">
+			
+
+				
+				<c:forEach var="bank" items="${banks}" varStatus="s">
+				<tr>
+								<td align="right"   class="td_css">
 					客户银行卡号/账号:
 				</td>
-			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out   value="${bank2.bankName }" /></td>
+			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out   value="${bank.debitCard }" /></td>
 							<td align="right" class="td_css">
 								客户开户银行:
 							</td>
-						  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out   value="${bank2.bankName }"
+						  <td align="left" id="guest_info54" style="padding-left:4px;"><c:out   value="${bank.bankName }"
 	 /></td>
 							<td align="right" class="td_css">
 								月花费(元/月):
 							</td>
-						  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-				<td align="right"  class="td_css">
-					第二银行卡号:
-				</td>
-			  <td align="left" id="guest_info58" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-		
-				<td align="right"  class="td_css">
-					第二银行卡开户银行:
-				</td>
-			  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out   value="${bank2.bankName }"/></td>
-		
-								  </tr>
-								</tbody>
-							</table>
-
-		  <table class="tab_css_1"  width="98%" >
-		<tbody>
-					<tr>
-					  <td rowspan="700" width="100px" align="center"  class="td_css">
-				    <strong>征信注记 </strong></td>
-						<td align="center"  class="td_css">
-							编号
-					  </td>
-						<td align="center"  class="td_css">
-							审查步骤
-						</td>
-						<td align="center"  class="td_css">
-							结果
-						</td>
-						<td align="left"  class="td_css" style="padding-left:4px;">
-			审查员
-		</td>
-		<td align="left"  class="td_css" style="padding-left:4px;">
-				审查时间
-			</td>
-		</tr>
-		
-				<c:forEach var="item" items="${jobChecks }"  varStatus="status">
-				<tr>
-					<td><c:out value="${status.index }"/> </td>
-					<td><c:out value="${item.jobCheck.checkType }"/></td>
-					<td><c:out value="${item.jobCheck.checkName }"/></td>
-					<td><c:out value="${item.clientJobCheck.checkRemark }"/></td>
-					<td><c:out value="${item.jobCheck.checkType }"/></td>
-				 </tr>
+						  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out   value="${bank.monthPay }"/></td>
+					</tr>	
 				</c:forEach>
-			</tbody>
+							
 		</table>
-		
-		 <table width="98%" class="tab_css_1">
-          <tr>
-            <td  align="right"></td>
-            <td class="td_css" align="left" colspan="2">CC<input type="text" name="codeOne" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="codeOne" size="6" value=""> &nbsp;</td>
-            <td>
-            </td>
-          </tr>
-          <tr>
-            <td class="td_css" align="right">初审结果</td>
-            <td width="600px">
-				 <select name="clientJobTrack.jobTypeId" >
-							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
-								<option value="${jobType.id}"
-						
-								<c:if test="${jobType.id==param.clientJobTrack.jobTypeId}">
-									selected="selected"
-								</c:if>
-									>
-								${jobType.jobKey}
-								</option>
-							--</c:forEach>
-						</select>&nbsp;
-				<input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-			</td>
-            <td class="td_css" align="right">原因：</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="td_css" align="right">复审结果</td>
-            <td>
-				<select name="clientJobTrack.jobTypeId" >
-							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
-								<option value="${jobType.id}"
-						
-								<c:if test="${jobType.id==param.clientJobTrack.jobTypeId}">
-									selected="selected" 
-								</c:if>
-									>
-								${jobType.jobKey}
-								</option>
-							</c:forEach>
-						</select>&nbsp;
-				<input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-			</td>
-            <td class="td_css" align="right">原因：</td>
-            <td>
-				 
-			</td>
-          </tr>
-        </table>
+
+		 
+		 
 		<table class="tab_css_1" width="100%" cellpadding="0" cellspacing="0"
 			style="display: none;">
 		
@@ -1284,6 +1162,7 @@ table.tab_css_1 td.td_css{
 				</tr>
 			</tbody>
 		</table>
+		
 		<table class="tab_css_1" width="98%" >
             		<tr>
 		
@@ -1302,7 +1181,49 @@ table.tab_css_1 td.td_css{
                 </td>
 				</tr>
             </table>
-		
+				<tbody>
+					<tr> 
+							<td> <center><strong><h2>审批日志</h2></strong></center></td>
+					</tr>
+				</tbody>
+			</table>
+		<table class="tab_css_1" width="98%">
+            <tbody>
+            <tr>
+					<td  class="textr"><fmt:message key="No."/></td>
+					<td  class="textr"><fmt:message key="UserName"/></td>
+					<td  class="textr"><fmt:message key="jobType"/></td>
+					<td  class="textr"><fmt:message key="JobRemark"/></td>
+					<td  class="textr"><fmt:message key="JobDate"/></td>
+					
+				</tr>
+				<c:forEach var="clientJobTracks" items="${clientJobTracks}" varStatus="status">
+				<tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
+				<td><c:out value="${clientJobTracks.clientJobTrack.id}"></c:out>  </td>
+				<td><c:out value="${clientJobTracks.user.name }"/></td>
+				<td><c:out value="${clientJobTracks.jobType.jobKey }"/></td>
+				<td><c:out value="${clientJobTracks.jobType.jobRemark }"/></td>
+				<td><fmt:formatDate value="${clientJobTracks.clientJobTrack.jobDate }" type="both" /></td>
+				</tr>
+				</c:forEach>
+				</tbody>
+		</table>
+		<table class="tab_css_1" width="98%" border="0" cellpadding="0" cellspacing="0"
+			id="tab2">
+			<tbody>
+				<tr>
+					<td width="52%" style="height: 22px;" >
+					<center>
+						<jsp:include page="../../incl/actionb.jsp" >
+							<jsp:param name="key" value="Confirm" />
+							<jsp:param name="action" value="ClientInfo.do" />
+							<jsp:param name="method" value="processApproval" />
+						</jsp:include>
+					</center>
+					</td>
+			</tr>
+		</tbody>
+					</table>
 				</form>
 </body>
 	</html>
