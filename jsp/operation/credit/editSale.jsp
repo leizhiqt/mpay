@@ -107,7 +107,7 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(s[i]).selectedIndex-1));};
 var ss=document.getElementById(s[v]);
 with(ss){
 length = 0;
-options[0]=new Option(opt0[v],opt0[v]);
+options[0]=new Option("<c:out value="${censusAddressBook.province}">",opt0[v]);
 if(v && document.getElementById(s[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -126,7 +126,7 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(st[i]).selectedIndex-1));};
 var ss=document.getElementById(st[v]);
 with(ss){
 length = 0;
-options[0]=new Option(opt0[v],opt0[v]);
+options[0]=new Option("<c:out value="${livingAddressBook.province}">",opt0[v]);
 if(v && document.getElementById(st[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -145,7 +145,7 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(sk[i]).selectedIndex-1));};
 var ss=document.getElementById(sk[v]);
 with(ss){
 length = 0;
-options[0]=new Option(opt0[v],opt0[v]);
+options[0]=new Option("<c:out value="${officeAddressBook.province}">",opt0[v]);
 if(v && document.getElementById(sk[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -164,7 +164,7 @@ function change3(v){
 	var ss=document.getElementById(sv[v]);
 	with(ss){
 	length = 0;
-	options[0]=new Option(opt0[v],opt0[v]);
+	options[0]=new Option("<c:out value="${censusAddressBookprovince}">",opt0[v]);
 	if(v && document.getElementById(sv[v-1]).selectedIndex>0 || !v)
 	{
 	if(dsy.Exists(str)){
