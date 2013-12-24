@@ -421,7 +421,14 @@ exclude-result-prefixes="fo">
 					<fo:table-cell  border="1pt solid black" >
 							<xsl:for-each select="Lookup">
 								<fo:block font-size="6pt" wrap-option="wrap" language="zh" text-align="start">
-									<xsl:value-of select="ProductPrice"/>
+									<xsl:value-of select="ProductModelNo"/>
+								</fo:block>
+				  			</xsl:for-each>
+					</fo:table-cell>
+					<fo:table-cell  border="1pt solid black" >
+							<xsl:for-each select="Lookup">
+								<fo:block font-size="6pt" wrap-option="wrap" language="zh" text-align="start">
+									<xsl:value-of select="ProductBrand"/>
 								</fo:block>
 				  			</xsl:for-each>
 					</fo:table-cell>
@@ -435,14 +442,7 @@ exclude-result-prefixes="fo">
 					<fo:table-cell  border="1pt solid black" >
 							<xsl:for-each select="Lookup">
 								<fo:block font-size="6pt" wrap-option="wrap" language="zh" text-align="start">
-									<xsl:value-of select="ProductModelNo"/>
-								</fo:block>
-				  			</xsl:for-each>
-					</fo:table-cell>
-					<fo:table-cell  border="1pt solid black" >
-							<xsl:for-each select="Lookup">
-								<fo:block font-size="6pt" wrap-option="wrap" language="zh" text-align="start">
-									<xsl:value-of select="ProductBrand"/>
+									<xsl:value-of select="ProductPrice"/>
 								</fo:block>
 				  			</xsl:for-each>
 					</fo:table-cell>
@@ -453,9 +453,9 @@ exclude-result-prefixes="fo">
 						<fo:block font-size="6pt"    >
 							3、 消费者购买本合同约定产品应向销售方支付_______元价款，于签订本合同时支付首付款________元，余款采用按月分期付款方式支付，<fo:block text-indent="0.2in">共分为_________期（以《还款指引》为准）。销售方委托消费者将应付首付款直接支付与__________门店。</fo:block>
 						
-						4、 销售方所供的产品须符合国家技术规范和质量标准，须为经国家“三C”认证或检验的合格产品。
+							4、 销售方所供的产品须符合国家技术规范和质量标准，须为经国家“三C”认证或检验的合格产品。
 						
-						5、 本合同签订后，销售方向消费者当场交付所购产品，消费者验收后出具收据。
+							5、 本合同签订后，销售方向消费者当场交付所购产品，消费者验收后出具收据。
 						
 							6、 销售方向消费者交付产品时，须同时向消费者提供产品使用说明书、质量保证书、三包凭证等相关资料和原配的附件（如有）。
 						
@@ -465,11 +465,11 @@ exclude-result-prefixes="fo">
 						
 							9、 违约责任
 						
-						 9.1  消费者应当按期支付货款，如有迟延，销售方有权要求消费者限期一次性支付剩余价款，并有权要求消费者按照价款总额的20%支付违约金。
+								 9.1  消费者应当按期支付货款，如有迟延，销售方有权要求消费者限期一次性支付剩余价款，并有权要求消费者按照价款总额的20%支付违约金。
 						
-						9.2消费者使用所购产品遭受损失的，销售方应当赔偿。
+								 9.2消费者使用所购产品遭受损失的，销售方应当赔偿。
 						
-						 10、 争议由销售方所在地人民法院管辖。
+						 	10、 争议由销售方所在地人民法院管辖。
 						 </fo:block>
 						
 		

@@ -1074,27 +1074,29 @@ public class SaleAction extends BaseSupport {
 			store.setId(clientJob.getStoreId());
 			store.retrieve();
 			
+			//处理商品
+			ClientJobSale clientJobSale = new ClientJobSale();
+			clientJobSale.setClientJobId(clientJob.getId());
+			
+			List sales = clientJobSale.searchAndRetrieveList();
+			
+			for(Object obj:sales){
+				clientJobSale = (ClientJobSale)obj;
+				
+				buffer.append("<Lookup>\n");
+				buffer.append("<ProductName>"+clientJobSale.getSaleName()+"</ProductName>\n");
+				buffer.append("<ProductPrice>"+clientJobSale.getSalePrice()+"</ProductPrice>\n");
+				buffer.append("<ProductQuantity>"+"1"+"</ProductQuantity>\n");
+				buffer.append("<ProductModelNo>"+clientJobSale.getModelNo()+"</ProductModelNo>\n");
+				buffer.append("<ProductBrand>"+clientJobSale.getBrand()+"</ProductBrand>\n");
+				buffer.append("</Lookup>\n");
+			}
+			
 			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
 			buffer.append("<ClientID>"+client.getIdNo()+"</ClientID>\n");
-			
 			buffer.append("<JobDate>"+ddf.format(clientJob.getJobDate())+"</JobDate>\n");
+			buffer.append("<SelfAmount>"+clientJob.getSelfAmount()+"</SelfAmount>\n");
 			
-			buffer.append("<Lookup>\n");
-			buffer.append("<ProductName>"+""+"</ProductName>\n");
-			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
-			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
-			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
-			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
-			buffer.append("</Lookup>\n");
-	
-			buffer.append("<Lookup>\n");
-			buffer.append("<ProductName>"+""+"</ProductName>\n");
-			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
-			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
-			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
-			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
-			buffer.append("</Lookup>\n");
-		
 		}catch(Exception e){
 			request.setAttribute("error", e.getMessage());
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());

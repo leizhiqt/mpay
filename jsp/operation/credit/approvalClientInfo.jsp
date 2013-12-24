@@ -191,9 +191,9 @@ table.tab_css_1 td.td_css{
 				<td align="left" id="guest_infoB"   ><c:out   value="${client.idNo}"/></td>
 		
 				<td align="right" class="td_css" >
-					
+					住宅电话登记人
 				</td>
-				<td align="left"  style="padding-left:4px;">6</td>
+				<td align="left"  style="padding-left:4px;"><c:out  value="${ client.homePhoneName}" /></td>
 				<td align="right"  class="td_css">
 					身份证截止日期:
 				</td>

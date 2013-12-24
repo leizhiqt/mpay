@@ -26,7 +26,7 @@ exclude-result-prefixes="fo">
 			(一式三份）
 		</fo:block>
 			
-		<fo:block font-size="8pt"   text-align="left" space-before="5mm">本人<xsl:value-of select="ClientName"/>（身份证号 <xsl:value-of select="ClientID"/>）于______年___月___日与成都汉易联信非融资性担保有限公司</fo:block>
+		<fo:block font-size="8pt"   text-align="left" space-before="5mm">本人<xsl:value-of select="ClientName"/>（身份证号 <xsl:value-of select="ClientID"/>）于<xsl:value-of select="JobDate"/>与成都汉易联信非融资性担保有限公司</fo:block>
         <fo:block font-size="8pt"   text-align="left" space-before="1mm" space-after="5mm">签订分期付款消费合同，购买商品:___________________________________商品信息描述如下：</fo:block>
 		
 		<!-- 1 table -->
@@ -36,46 +36,32 @@ exclude-result-prefixes="fo">
 		<fo:table-column column-width="4cm"/>
 		<fo:table-column column-width="4cm"/>
 		
-
-		
 		<fo:table-body>
+		<xsl:for-each select="Lookup">
 		  <fo:table-row>
 		    <fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"   text-align="left" space-before="1mm" >商品类型1： </fo:block>
+		      <fo:block font-size="8pt"   text-align="left" space-before="1mm" >商品名称：<xsl:value-of select="ProductName"/> </fo:block>
 		    </fo:table-cell>
 		    <fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"    text-align="left" space-before="1mm">品牌1：</fo:block>
-		    </fo:table-cell>
-		      <fo:table-cell  border="1pt solid black">
-		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">商品型号1：</fo:block>
-		      </fo:table-cell>
-	 		<fo:table-cell  border="1pt solid black">
-		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">价格1：</fo:block>
-		      </fo:table-cell>
-		  </fo:table-row>
-		  		  <fo:table-row>
-		    <fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"   text-align="left" space-before="1mm" >商品类型2： </fo:block>
-		    </fo:table-cell>
-		    <fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"    text-align="left" space-before="1mm">品牌2：</fo:block>
+		      <fo:block font-size="8pt"    text-align="left" space-before="1mm">品牌：<xsl:value-of select="ProductBrand"/> </fo:block>
 		    </fo:table-cell>
 		      <fo:table-cell  border="1pt solid black">
-		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">商品型号2：</fo:block>
+		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">商品型号：<xsl:value-of select="ProductModelNo"/> </fo:block>
 		      </fo:table-cell>
 	 		<fo:table-cell  border="1pt solid black">
-		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">价格2：</fo:block>
+		      	<fo:block font-size="8pt"    text-align="left" space-before="1mm">价格：<xsl:value-of select="ProductPrice"/> </fo:block>
 		      </fo:table-cell>
 		  </fo:table-row>
-		   <fo:table-row>
-		    <fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"    text-align="right" space-before="1mm"  >总货款金额： </fo:block>
-		  	</fo:table-cell>
+		  </xsl:for-each>
+		  <fo:table-row>
+		  <fo:table-cell  border="1pt solid black">
+		      	<fo:block font-size="8pt"  text-align="left" space-before="1mm"  >总货款金额：</fo:block>
+		    </fo:table-cell>
 	 		<fo:table-cell  border="1pt solid black">
 		      	<fo:block font-size="8pt"  text-align="left" space-before="1mm"  >10000</fo:block>
 		    </fo:table-cell>
 		  	<fo:table-cell  border="1pt solid black">
-		      <fo:block font-size="8pt"    text-align="right" space-before="1mm"   >自付款金额： </fo:block>
+		      <fo:block font-size="8pt"    text-align="right" space-before="1mm"   >自付金额： </fo:block>
 		  	</fo:table-cell>
 		  	<fo:table-cell  border="1pt solid black">
 		      <fo:block font-size="8pt"    text-align="left" space-before="1mm"  >2000000</fo:block>
@@ -88,7 +74,7 @@ exclude-result-prefixes="fo">
  
       	<fo:block font-size="8pt"  text-align="left" space-before="1mm">（1）以上商品描述准确； </fo:block>
    
-      	<fo:block font-size="8pt"  text-align="left" space-before="1mm">（2）客户已支付_____________元金首付款，该首付款已由成都汉易联信非融资性担保有限公司委托客户直接支付______________</fo:block>
+      	<fo:block font-size="8pt"  text-align="left" space-before="1mm">（2）客户已支付<xsl:value-of select="SelfAmount"/> 元首付款，该首付款已由成都汉易联信非融资性担保有限公司委托客户直接支付______________</fo:block>
       	
       	<fo:block font-size="8pt"  text-align="left" space-before="1mm">（3）成都汉易联信非融资性担保有限公司已通过商家将货物直接交付与客户； </fo:block>
    
