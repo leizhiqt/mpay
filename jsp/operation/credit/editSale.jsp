@@ -107,7 +107,7 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(s[i]).selectedIndex-1));};
 var ss=document.getElementById(s[v]);
 with(ss){
 length = 0;
-options[0]=new Option(${censusAddressBook.province},opt0[v]);
+
 if(v && document.getElementById(s[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -126,7 +126,6 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(st[i]).selectedIndex-1));};
 var ss=document.getElementById(st[v]);
 with(ss){
 length = 0;
-options[0]=new Option(${livingAddressBook.province},opt0[v]);
 if(v && document.getElementById(st[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -145,7 +144,7 @@ for(i=0;i<v;i++){ str+=("_"+(document.getElementById(sk[i]).selectedIndex-1));};
 var ss=document.getElementById(sk[v]);
 with(ss){
 length = 0;
-options[0]=new Option(${officeAddressBook.province},opt0[v]);
+
 if(v && document.getElementById(sk[v-1]).selectedIndex>0 || !v)
 {
 if(dsy.Exists(str)){
@@ -164,7 +163,7 @@ function change3(v){
 	var ss=document.getElementById(sv[v]);
 	with(ss){
 	length = 0;
-	options[0]=new Option(${censusAddressBookprovince},opt0[v]);
+
 	if(v && document.getElementById(sv[v-1]).selectedIndex>0 || !v)
 	{
 	if(dsy.Exists(str)){
@@ -369,6 +368,7 @@ change3(0);
 			    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 				<td align="left"><select name="client.educationId" id="educationId"
 					>	
+					<option value="${client.educationId}"><c:out value="${client.educationId}"/></option>
 						<option value="小学">小学</option>
 						<option value="初中">初中</option>
 						<option value="高中">高中</option>
@@ -425,6 +425,7 @@ change3(0);
 		      <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 	          <td align="left"><select  name="censusAddressBook.province"  id="censusAddressBookprovince"
 				>
+				<option value="${censusAddressBook.province}"><c:out value="${censusAddressBook.province}"/></option>
 					<option value="四川省">四川省</option>
 					<option value="湖南省">湖南省</option>
 					<option value="河北省">河北省</option>
@@ -478,6 +479,8 @@ change3(0);
 				 <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 			     <td align="left"><select  name="livingAddressBook.province"  id="livingAddressBookprovince"
 						>
+						<option value="${livingAddressBook.province}"><c:out value="${livingAddressBook.province}"/></option>
+			
 							<option value="四川省">四川省</option>
 							<option value="湖南省">湖南省</option> 	 
 							<option value="河北省">河北省</option>
@@ -518,7 +521,7 @@ change3(0);
 			    <td align="right"  ><b style="color:red">*</b> 家庭成员类型</td>
 		        <td align="left">
                       <select  name="client.homeType" >
-						<option value="请选择">请选择</option>                        
+			<option value="${client.homeType}"><c:out value="${client.homeType}"/></option>                      
 						<option value="父亲">父亲</option>
 						<option value="母亲">母亲</option>
 						<option value="兄弟">兄弟</option>
@@ -549,6 +552,7 @@ change3(0);
 			    <td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 		        <td align="left"><select  name="homeAddressBook.province" id="homeAddressBookprovince"
 					>
+						<option value="${homeAddressBook.province}"><c:out value="${homeAddressBook.province}"/></option>                      
 						<option value="四川省">四川省</option>
 						<option value="湖南省">湖南省</option>
 						<option value="河北省">河北省</option>
@@ -593,7 +597,7 @@ change3(0);
 			    <td align="right"  >与申请人关系</td>
 		        <td align="left"><select id="otherNexus" name="client.otherNexus"
 					>
-                          	<option value="请选择">请选择</option>
+						<option value="${client.otherNexus}"><c:out value="${client.otherNexus}"/></option>                      
 						<option value="配偶">配偶</option>
 						<option value="父母">父母</option>
 						<option value="子女">子女</option>
@@ -671,6 +675,7 @@ change3(0);
 			    <td align="right">邮寄地址</td>
 				<td colspan="3" align="left"><select id="postAddress" name="postAddress"
 					>
+				<option value="${postAddress}"><c:out value="${postAddress}"/></option>                      
 			        <option value="户籍地址">户籍地址</option>
 				    <option value="家庭地址">家庭地址</option>
 				     <option value="现居地址">现居地址</option>
@@ -726,6 +731,7 @@ change3(0);
 			<tr>
 				<td align="right"  ><b style="color:red">*</b> 总共工作经脸/总共大学学习时间</td>
 				<td align="left"><select id="onWorkTime" name="client.onWorkTime">
+					<option value="${client.onWorkTime}"><c:out value="${client.onWorkTime}"/></option>                      
 						<option value="0-1年">0-1年</option>
 						<option value="0-1年">1-2年</option>
 						<option value="0-1年">2-3年</option>
@@ -785,6 +791,8 @@ change3(0);
 			    <td align="right"  >单位性质</td>
 				<td align="left"><select id="onFeature" name="client.onFeature"
 					>
+				<option value="${client.onFeature}"><c:out value="${client.onFeature}"/></option>                      
+				
 						<option value="国有企业">国有企业</option>
 						<option value="私有企业">私有企业</option>
 						<option value="个体">个体</option>
@@ -814,6 +822,8 @@ change3(0);
 				<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
 		        <td align="left">
 		        <select name="officeAddressBook.province"  id="officeAddressBook">
+		        				<option value="${officeAddressBook.province}"><c:out value="${officeAddressBook.province}"/></option>                      
+		        
 						<option value="四川省">四川省</option>
 						<option value="湖南省">湖南省</option>
 						<option value="河北省">河北省</option>
@@ -906,7 +916,7 @@ change3(0);
 			  	<td align="right">贷款用途</td>
 				<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
 				>
-						<option value="请选择">请选择</option>
+						<option value="${clientJob.byUse}"><c:out value="${clientJob.byUse}"/></option>                      
 						<option value="家用电器">家用电器</option>
                               <option value="家具及住宅装饰用品">家具及住宅装饰用品</option>
                               <option value="计算机与办公室通讯（私人用途）">计算机与办公室通讯（私人用途）</option>
