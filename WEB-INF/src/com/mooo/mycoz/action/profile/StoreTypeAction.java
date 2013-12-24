@@ -39,8 +39,7 @@ public class StoreTypeAction extends BaseSupport {
 			if(!StringUtils.isNull(value)){
 				storeType.setLike("typeKey", value);
 			}
-
-			storeType.addOrderBy("id DESC");
+			storeType.addOrderBy("typeKey");
 
 			Page page = new Page();
 			page.buildComponent(request,storeType.count());

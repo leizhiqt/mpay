@@ -43,7 +43,7 @@ public class StoreAction extends BaseSupport {
 			dbobject.setRetrieveField("store", "storeAddress");
 			dbobject.setRetrieveField("store", "storeBankName");
 			dbobject.setRetrieveField("store", "storeBankNo");
-			
+			dbobject.setOrderBy("store", "storeKey");
 			
 			value = request.getParameter("storeName");
 			if(!StringUtils.isNull(value)){

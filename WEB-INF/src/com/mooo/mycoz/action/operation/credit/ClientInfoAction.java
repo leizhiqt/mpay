@@ -171,7 +171,6 @@ public class ClientInfoAction extends BaseSupport {
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())
 			log.debug("promptApproval");
-		Integer sessionId = ActionSession.getInteger(request, ActionSession.USER_SESSION_KEY);
 
 		String clientJobId=request.getParameter("id");
 		String value = null;
@@ -335,38 +334,7 @@ public class ClientInfoAction extends BaseSupport {
 			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:"+clientJobId);
-			
-			//审核中状态处理
-			
-			clientJobTrack = new ClientJobTrack();
-			clientJobTrack.setClientJobId(clientJob.getId());
-			clientJobTrack.setProcessId(0);
-			clientJobTrack.setJobTypeId(2);
-			
-			int checkCount = clientJobTrack.count(tx.getConnection());
-			
-			if(checkCount < 1 ){
-				ClientJobTrack orgTrack = new ClientJobTrack();
-				orgTrack.setClientJobId(clientJob.getId());
-				int jobCount = orgTrack.count(tx.getConnection());
 				
-				orgTrack.setProcessId(0);
-				orgTrack.retrieve(tx.getConnection());
-				
-				orgTrack.setProcessId(jobCount);
-				orgTrack.update(tx.getConnection());
-				
-				clientJobTrack = new ClientJobTrack();
-				clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-				clientJobTrack.setUserId(sessionId);
-				clientJobTrack.setJobDate(new Date());
-				clientJobTrack.setJobRemark(orgTrack.getJobRemark());
-				clientJobTrack.setProcessId(0);
-				clientJobTrack.setClientJobId(clientJob.getId());
-				clientJobTrack.setJobTypeId(2);
-				clientJobTrack.add(tx.getConnection());
-			}
-			
 			//封装审批结果及过程（按照时间先后顺序与展示）
 			
 			MultiDBObject dbobject10 = new MultiDBObject();
@@ -559,8 +527,6 @@ public class ClientInfoAction extends BaseSupport {
 				
 				JobType jobType = new JobType();
 				jobType.setJobCategory("A");
-				jobType.setNotEqual("jobKey", "W");
-				
 				request.setAttribute("jobTypes",jobType.searchAndRetrieveList());
 				
 				JobCheck jobCheck = new JobCheck();
@@ -578,37 +544,6 @@ public class ClientInfoAction extends BaseSupport {
 				
 				if (log.isDebugEnabled())
 					log.debug("clientJobId:"+clientJobId);
-				
-				//审核中状态处理
-				
-				clientJobTrack = new ClientJobTrack();
-				clientJobTrack.setClientJobId(clientJob.getId());
-				clientJobTrack.setProcessId(0);
-				clientJobTrack.setJobTypeId(2);
-				
-				int checkCount = clientJobTrack.count(tx.getConnection());
-				
-				if(checkCount < 1 ){
-					ClientJobTrack orgTrack = new ClientJobTrack();
-					orgTrack.setClientJobId(clientJob.getId());
-					int jobCount = orgTrack.count(tx.getConnection());
-					
-					orgTrack.setProcessId(0);
-					orgTrack.retrieve(tx.getConnection());
-					
-					orgTrack.setProcessId(jobCount);
-					orgTrack.update(tx.getConnection());
-					
-					clientJobTrack = new ClientJobTrack();
-					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
-					clientJobTrack.setUserId(sessionId);
-					clientJobTrack.setJobDate(new Date());
-					clientJobTrack.setJobRemark(orgTrack.getJobRemark());
-					clientJobTrack.setProcessId(0);
-					clientJobTrack.setClientJobId(clientJob.getId());
-					clientJobTrack.setJobTypeId(2);
-					clientJobTrack.add(tx.getConnection());
-				}
 				
 				//封装审批结果及过程（按照时间先后顺序与展示）
 				
@@ -673,8 +608,7 @@ public class ClientInfoAction extends BaseSupport {
 			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(new Integer(clientJobId));
-			clientJobTrack.setProcessId(0);
-			clientJobTrack.setJobTypeId(2);
+			clientJobTrack.setProcessId(-1);
 			
 			int checkCount = clientJobTrack.count();
 			int nextId=0;
@@ -732,31 +666,36 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.update(tx.getConnection());
 
 				//写入日志文件
+				ClientJobTrack orgTrack = new ClientJobTrack();
+				orgTrack.setClientJobId(new Integer(clientJobId));
+				int jobCount = orgTrack.count(tx.getConnection());
+				
+				orgTrack.setProcessId(0);
+				orgTrack.retrieve();
+				
+				orgTrack.setProcessId(jobCount);
+				orgTrack.update(tx.getConnection());
+				
 				ClientJobTrack clientJobTrack = new ClientJobTrack();
 				clientJobTrack.setClientJobId(new Integer(clientJobId));
+				clientJobTrack.setProcessId(-1);
 				
 				int checkCount = clientJobTrack.count(tx.getConnection());
 				if(checkCount > 0 ){
-					ClientJobTrack orgTrack = new ClientJobTrack();
-					orgTrack.setClientJobId(new Integer(clientJobId));
-					int jobCount = orgTrack.count(tx.getConnection());
-					
-					orgTrack.setProcessId(0);
-					orgTrack.retrieve();
-					
-					orgTrack.setProcessId(jobCount);
-					orgTrack.update(tx.getConnection());
-					
 					clientJobTrack.retrieve();
 					ParamUtil.bindData(request, clientJobTrack, "clientJobTrack");
 					
+					clientJobTrack.setUserId(sessionId);
+					clientJobTrack.setJobDate(new Date());
+					clientJobTrack.setProcessId(0);
+					clientJobTrack.update(tx.getConnection());
+				}else{
 					clientJobTrack.setId(IDGenerator.getNextID(tx.getConnection(), ClientJobTrack.class));
 					clientJobTrack.setUserId(sessionId);
 					clientJobTrack.setJobDate(new Date());
 					clientJobTrack.setProcessId(0);
 					clientJobTrack.add(tx.getConnection());
 				}
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 				tx.rollback();
