@@ -295,30 +295,29 @@ change3(0);
 						<th align="left" colspan="6" class="tr8"  ><strong>客户资料</strong></th>
 					</tr>
 					<tr>
-						<td align="right"  ><b style="color:red">*</b> 客户照片上传</td>
-						<td align="left" colspan="2"><input type="file" name="clientPhoto" /> </td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
 
 						<td align="right" ><b style="color:red">*</b> 姓名</td>
-						<td align="left" width="240px" ><input type="text" name="client.clientName" value="${client.clientName }" onblur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
-					    <td></td>
-						<td></td>
+						<td align="left" width="240px" ><input type="text" name="client.clientName" value="${client.clientName }" onBlur="calc(this)" data="msg1" maxlength="10" id="name"   /> <b id="msg1"></b></td>
+					    <td align="right"><b style="color:red">*</b> 申请人年龄</td>
+					  <td align="left"><input type="text" name="client.age" maxlength="10" value="${client.age }" data="msg4"  id="ages" onBlur="calc(this)" /> <b id="msg4"></b></td>
 						<td align="right"  ><b style="color:red">*</b> 身份证号码</td>
-						<td align="left"><input type="text" name="client.idNo"  value="${client.idNo }" onblur="calcIdCard()" id="card" /> <b id="msg2"></b></td>
+						<td align="left"><input type="text" name="client.idNo"  value="${client.idNo }" onBlur="calcIdCard()" id="card" /> <b id="msg2"></b></td>
 					</tr>
 					<tr>
 
 
 						<td align="right"  >身份证截止日期</td>
-						<td align="left"><input type="text" name="client.idEndDate" id="validity" value='<fmt:formatDate value="${client.idEndDate}" type="date" pattern="yyyy-MM-dd"/>'
+						<td align="left"><input type="text" name="client.idEndDate" id="validity" value='<fmt:formatDate value="${clientJob.monthOfDate}" type="date" pattern="yyyy-MM-dd"/>'
 							onclick="displayCalendar(this,'yyyy-MM-dd');" /></td>
-					    <td></td>
-						<td></td>
-						<td align="right"  ><b style="color:red">*</b> 发证机关</td>
+					    <td align="right"><b style="color:red">*</b> 婚姻状况</td>
+						<td align="left"><select name="client.marry" id="marry"
+							>
+								<option value="未婚">未婚</option>
+								<option value="已婚">已婚</option>
+								<option value="离异">离异</option>
+								<option value="丧偶">丧偶</option>
+	          </select></td>
+					  <td align="right"  ><b style="color:red">*</b> 发证机关</td>
 						<td align="left"><input type="text" name="client.idAuthority" maxlength="50" value="${client.idAuthority }" onblur="calc(this)" data="msg3" maxlength="20" id="msg" /> <b id="msg3"></b></td>
 					</tr>
 
@@ -326,10 +325,17 @@ change3(0);
 					<tr>
 						<td align="right"  >SSI号码/学生号码</td>
 				    <td align="left"><input type="text" name="client.otherNo" value="${client.otherNo}"/></td>
-						<td align="right" width="260px" ><b style="color:red">*</b> 申请人年龄</td>
-						<td align="left"><input type="text" name="client.age" maxlength="10" value="${client.age }" data="msg4"  id="ages" onblur="calc(this)" /> <b id="msg4"></b></td>
+						<td align="right" width="260px" ><b style="color:red">*</b> 住房</td>
+						<td align="left"><select id="housing" name="client.housing"
+							>
+						  <option value="自有房">自有房</option>
+						  <option value="租住房">租住房</option>
+						  <option value="父母房产">父母房产</option>
+						  <option value="单位提供的福利房">单位提供的福利房</option>
+						  <option value="集体宿舍">集体宿舍</option>
+				      </select></td>
 						<td align="right"  ><b style="color:red">*</b>本人手机号</td>
-					    <td align="left"><input type="text" name="client.mobilePhone" value="${client.mobilePhone }" onblur="getphonearea(this.value)" /><b id="msg5"></b></td>
+					    <td align="left"><input type="text" onBlur="oncb()" name="client.mobilePhone" value="${client.mobilePhone }" id="mkoblep" onBlur="getphonearea(this.value)" /><b id="msg5"></b></td>
 					</tr>
 					<tr>
 
@@ -339,30 +345,17 @@ change3(0);
 								<option value="男">男</option>
 								<option value="女">女</option>
 						</select></td>
-					    <td align="right"  ><b style="color:red">*</b> 婚姻状况</td>
-						<td align="left"><select name="client.marry" id="marry"
-							>
-								<option value="未婚">未婚</option>
-								<option value="已婚">已婚</option>
-								<option value="离异">离异</option>
-								<option value="丧偶">丧偶</option>
-						</select></td>
+					    <td align="right"  >住宅/宿舍电话</td>
+						<td align="left"><input type="text" name="client.homePhone" value="${client.homePhone }"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 手机号码归属地</td>
-					    <td align="left"><input type="text" name="client.mobileAddress" data="msg6" value="${client.mobileAddress }"  id="addr" onblur="calc(this)" /> <b id="msg6"></b></td>
+					    <td align="left"><input type="text" name="client.mobileAddress" data="msg6" value="${client.mobileAddress }"  id="addr" onBlur="calc(this)" /> <b id="msg6"></b></td>
 					</tr>
 					<tr>
 
 						<td align="right"  >子女数目</td>
 				        <td align="left"><input type="text" name="client.childs" value="${client.childs }"/></td>
-					    <td align="right"  ><b style="color:red">*</b> 住房</td>
-				        <td align="left"><select id="housing" name="client.housing"
-							>
-								<option value="自有房">自有房</option>
-								<option value="租住房">租住房</option>
-								<option value="父母房产">父母房产</option>
-								<option value="单位提供的福利房">单位提供的福利房</option>
-								<option value="集体宿舍">集体宿舍</option>
-						</select></td>
+					    <td align="right"  >QQ:</td>
+				        <td align="left"><input type="text" name="client.qq" value="${client.qq }"/></td>
 					    <td align="right"  ><b style="color:red">*</b> 教育程度</td>
 						<td align="left"><select name="client.educationId" id="educationId"
 							>
@@ -379,8 +372,8 @@ change3(0);
 						<td align="right"  >住宅电话登记人</td>
 						<td align="left"><input type="text" name="client.homePhoneName" value="${ client.homePhoneName}"
 							maxlength="20" /></td>
-					    <td align="right"  >住宅/宿舍电话</td>
-				        <td align="left"><input type="text" name="client.homePhone" value="${client.homePhone }"/></td>
+					    <td align="right"  >淘宝账号：</td>
+				        <td align="left"><input type="text" name="client.tbao" value="${client.tbao }"/></td>
 					    <td align="right"  >电子邮箱</td>
 					    <td align="left"><input type="text" name="client.email" value="${client.email}"/></td>
 					</tr>
