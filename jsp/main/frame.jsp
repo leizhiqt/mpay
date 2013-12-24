@@ -10,14 +10,14 @@
 <meta http-equiv="expires" content="0">
 <meta name="google-site-verification"	content="_TP8q1T6i81iSMGf29l2wIeBhUBR8bXzfBB3tc1H2e4" />
 
-<meta name="description" content="汉易资本">
-<meta name="keywords" content="汉易资本">
+<meta name="description" content="汉易联信">
+<meta name="keywords" content="汉易联信">
 
-<meta name="Author" content="成都艾因特">
-<meta name="Copyright" content="成都艾因特iinte.com 版权所有">
+<meta name="Author" content="汉易联信">
+<meta name="Copyright" content="汉易联信 版权所有">
 <link rel="Shortcut Icon" type="image/x-icon" href="../images/favicon.ico"> 
 <link rel="Bookmark" href="../images/favicon.ico">
-<title>汉易资本首页</title>
+<title>汉易联信首页</title>
 <script language="JavaScript" type="text/JavaScript">
 <!--
 function MM_reloadPage(init) {  //reloads the window if Nav4 resized

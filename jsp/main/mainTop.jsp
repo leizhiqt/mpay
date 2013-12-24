@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>汉易联信</title>
 
 <link id="skinCss" href="jsp/public/ISCSSobjects_style4.css" type="text/css" rel="stylesheet">   
 <script TYPE="text/javascript" language="JavaScript" src="../public/util.js">  </script> 
@@ -35,11 +35,11 @@ function addfavorite()
 {
    if (document.all)
    {
-      window.external.addFavorite('http://','汉易资本首页');
+      window.external.addFavorite('http://','汉易联信首页');
    }
    else if (window.sidebar)
    {
-      window.sidebar.addPanel('汉易资本首页', 'http://', "");
+      window.sidebar.addPanel('汉易联信首页', 'http://', "");
    }
 } 
 	
@@ -173,58 +173,7 @@ document.getElementById("sw_div").style.display="block";
         </ul>
       </div>
     </div>
-    <!--<div id="Inf_Alarm">
-      <ul>
-        <li class="a_l_li"></li>
-        <li class="a_ml_li"></li>
-        <li class="a_mc_li" title="详细列表">
-          <script language="JavaScript" type="text/javascript">
-var marqueeContent=new Array();
-marqueeContent[0]="<a>原酒数量: </a>";
-marqueeContent[1]="<a>待处理事务: </a>";
-
-
-var marqueeInterval=new Array();
-var marqueeId=0;
-var marqueeDelay=3000;
-var marqueeHeight=26;
-function initMarquee() {
-	var str=marqueeContent[0];
-	document.write('<div id="marqueeBox" class="a_mc_li1" onmouseover="clearInterval(marqueeInterval[0])" onmouseout="marqueeInterval[0]=setInterval(\'startMarquee()\',marqueeDelay)"><div>'+str+'</div></div>');
-	marqueeId++;
-	marqueeInterval[0]=setInterval("startMarquee()",marqueeDelay);
-}
-function startMarquee() {
-	var str=marqueeContent[marqueeId];
-	marqueeId++;
-	if(marqueeId>=marqueeContent.length) marqueeId=0;
-	if(document.getElementById("marqueeBox").childNodes.length==1) {
-	var nextLine=document.createElement('DIV');
-	nextLine.innerHTML=str;
-	document.getElementById("marqueeBox").appendChild(nextLine);
-	}
-	else {
-		document.getElementById("marqueeBox").childNodes[0].innerHTML=str;
-		document.getElementById("marqueeBox").appendChild(document.getElementById("marqueeBox").childNodes[0]);
-		document.getElementById("marqueeBox").scrollTop=0;
-	}
-	clearInterval(marqueeInterval[1]);
-	marqueeInterval[1]=setInterval("scrollMarquee()",20);
-}
-function scrollMarquee() {
-	document.getElementById("marqueeBox").scrollTop++;
-	if(document.getElementById("marqueeBox").scrollTop%marqueeHeight==(marqueeHeight-0)){
-	clearInterval(marqueeInterval[1]);
-	}
-}
-initMarquee();
-  </script>
-        </li>
-        <li class="a_mr_li"></li>
-        <li class="split1"></li>
-       
-      </ul>
-    </div>-->
+  
   </div>
   <div id="top_logo">
  

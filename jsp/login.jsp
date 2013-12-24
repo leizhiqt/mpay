@@ -15,7 +15,7 @@
 <fmt:bundle basename="MessageBundle">
 <html>
 <head>
-	<title>汉易资本</title>
+	<title>汉易联信</title>
 	<meta name="keywords" content="汉易资本,门户,资讯" />
 	<meta name="description" content="汉易资本,多方位立体服务用户体验" />
 	<meta name="application-name" content="汉易资本首页"/>
@@ -55,7 +55,7 @@
 	<c:param name="method">promptRegister</c:param>
 </c:url>
 
-<c:url value="skins/office/default/images/logo.gif" var="logURL"/>
+<c:url value="skins/office/default/images/logo.png" var="logURL"/>
 
 <c:url value="/Index.do" var="homeURL"/>
 
@@ -67,7 +67,7 @@
 <center>
 
 <p><br>
-<a href="${homeURL }"><img src="${logURL }" width="420" height="46"/></a>
+<a href="${homeURL }"><img src="${logURL }" width="420" height="100"/></a>
 
 <table border="0" cellspacing="0" cellpadding="1" width="420" bgcolor="#999999">
 <tr><td bgcolor="#009900" align="right" height="25">&nbsp;

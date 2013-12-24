@@ -758,10 +758,12 @@ change3(0);
 								<option value="租赁和商业服务">租赁和商业服务</option>
 								<option value="交通，运输，仓储，邮电和物流">交通，运输，仓储，邮电和物流</option>
 								<option value="批发和零售贸品">批发和零售贸品</option>
+								<option value="学生">学生</option>
 						</select></td>
 						<td align="right"  ><b style="color:red">*</b> 职位</td>
 				        <td align="left"><select id="onOffice" name="client.onOffice" style="width:50px"
 							>
+								<option value="学生">学生</option>
 								<option value="高层管理人员/总监以上/局级以上干部">高层管理人员/总监以上/局级以上干部</option>
 								<option value="中层管理人员/经理以上/科级以上干部">中层管理人员/经理以上/科级以上干部</option>
 								<option value="基层管理人员/主管组长/科员">基层管理人员/主管组长/科员</option>
