@@ -1083,11 +1083,8 @@ table.tab_css_1 td.td_css{
 						</td>
 					  <td align="left" id="guest_info60" style="padding-left:4px;"><c:out value="${financialProduct.cycleTotal }"/> </td>
 		  </tr>
-								</tbody>
-							</table>
-		<table class="tab_css_1"  width="98%">
-				<tr>
-				<td rowspan="2" width="100px" class="td_css"><strong> 银行卡信息 </strong></td>
+		  <tr>
+				
 				<td align="right"  class="td_css">
 					每月还款额(元):
 				</td>
@@ -1115,10 +1112,12 @@ table.tab_css_1 td.td_css{
 		        </td>
 		        <td></td><td></td>
 		  </tr>
-		
-			
-
-				
+								</tbody>
+							</table>
+		<table class="tab_css_1"  width="98%">
+		<tr>
+			<td  colspan="6" width="100px" class="td_css"><strong> 银行卡信息 </strong></td>
+			</tr>
 				<c:forEach var="bank" items="${banks}" varStatus="s">
 				<tr>
 								<td align="right"   class="td_css">

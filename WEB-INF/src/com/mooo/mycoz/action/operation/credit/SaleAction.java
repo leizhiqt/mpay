@@ -794,16 +794,22 @@ public class SaleAction extends BaseSupport {
 			clientDoc.setClientId(client.getId());
 			request.setAttribute("clientDoc",clientDoc.searchAndRetrieveList());
 
+			
+			//封装审批端的备注信息和自己的备注信息
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(clientJob.getId());
-			clientJobTrack.setProcessId(0);
-			clientJobTrack.retrieve();
 			
-			request.setAttribute("clientJobTrack",clientJobTrack);
+			request.setAttribute("clientJobTrack",clientJobTrack.searchAndRetrieveList());
 
 			JobType jobType = new JobType();
 			jobType.setId(clientJobTrack.getJobTypeId());
 			jobType.retrieve();
+			
+			
+			
+			
+			
+			
 			request.setAttribute("jobType",jobType);
 		} catch (Exception e) {
 			e.printStackTrace();

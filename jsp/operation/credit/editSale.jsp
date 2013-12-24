@@ -273,7 +273,23 @@ change3(0);
 	<%@ include file="../../incl/b_message.jsp"%>
 
 	<div>
+	<table border="1" class="lt">
+		<tr>
+			<td>记录</td>
+			<td> 备注信息</td>
+			<td> 时间</td>
+		</tr>
+	
+		<c:forEach var="clientJobTrack" items="${clientJobTrack}" varStatus="status">
+				<tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
+				<td><c:out value="${index+1}"/></td>
+				<td><c:out value="${clientJobTrack.jobRemark }"/></td>
+				<td><fmt:formatDate value="${clientJobTrack.jobDate }" type="both" /></td>
+				</tr>
+		</c:forEach>
+	</table>
 		<table border="1" class="lt"  >
+
 			<tr height="10px" style="border: 1px solid #FFF;">
 
 				<td colspan="" align="right"  >销售顾问代码</td>
