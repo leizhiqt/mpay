@@ -1343,24 +1343,21 @@ table.tab_css_1 td.td_css{
 			</table>
 		<table class="tab_css_1" width="98%">
             <tbody>
-            <tr>
-					<td  class="textr"><fmt:message key="userId"/></td>
+            <tr>	<td  class="textr"><fmt:message key="No."/></td>
 					<td  class="textr"><fmt:message key="UserName"/></td>
+					<td  class="textr"><fmt:message key="NextState"/></td>
 					<td  class="textr"><fmt:message key="jobType"/></td>
 					<td  class="textr"><fmt:message key="JobRemark"/></td>
-					<td  class="textr"><fmt:message key="OC"/></td>
-					<td  class="textr"><fmt:message key="CC"/></td>
 					<td  class="textr"><fmt:message key="JobDate"/></td>
 					
 				</tr>
 				<c:forEach var="clientJobTracks" items="${clientJobTracks}" varStatus="status">
 				<tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-				<td><c:out value="${clientJobTracks.clientJobTrack.id}"></c:out>  </td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.id }"/></td>
 				<td><c:out value="${clientJobTracks.user.name }"/></td>
+				<td><c:out value="${clientJobTracks.jobType.nextState }"/></td>
 				<td><c:out value="${clientJobTracks.jobType.jobKey }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.nbf }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.nbs }"/></td>
-				<td><c:out value="${clientJobTracks.clientJobTrack.nbc }"/></td>
+				<td><c:out value="${clientJobTracks.clientJobTrack.jobRemark }"/></td>
 				<td><fmt:formatDate value="${clientJobTracks.clientJobTrack.jobDate }" type="both" /></td>
 				</tr>
 				</c:forEach>

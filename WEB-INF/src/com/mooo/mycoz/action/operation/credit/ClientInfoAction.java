@@ -373,11 +373,13 @@ public class ClientInfoAction extends BaseSupport {
 			dbobject10.setRetrieveField("user", "name");
 			
 			dbobject10.setRetrieveField("jobType", "jobKey");
+			dbobject10.setRetrieveField("jobType", "nextState");
 			dbobject10.setRetrieveField("clientJobTrack", "jobRemark");
 			dbobject10.setRetrieveField("clientJobTrack", "processId");
 			dbobject10.setRetrieveField("clientJobTrack", "jobDate");
 			dbobject10.setRetrieveField("clientJobTrack", "jobTypeId");
 			dbobject10.setRetrieveField("clientJobTrack", "nbs");
+			dbobject10.setRetrieveField("clientJobTrack", "id");
 			dbobject10.setRetrieveField("clientJobTrack", "nbf");
 			dbobject10.setRetrieveField("clientJobTrack", "nbc");
 			dbobject10.setRetrieveField("clientJobTrack", "nbc");
