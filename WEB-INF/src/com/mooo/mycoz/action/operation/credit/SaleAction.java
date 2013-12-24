@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1019,17 +1020,86 @@ public class SaleAction extends BaseSupport {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		buffer.append("<SN>\n");
-		buffer.append("</SN>\n");
 		
+		try {
+			String id = request.getParameter("id");
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			
+
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			
+			FinancialProduct financialProduct = new FinancialProduct();
+			financialProduct.setId(clientJob.getFinancialProductId());
+			financialProduct.retrieve();
+			
+			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
+			buffer.append("<TotalMoney>"+clientJob.getMonthOfPay()*financialProduct.getCycleTotal()+"</TotalMoney>\n");
+			buffer.append("<MonthOfDate>"+clientJob.getMonthOfPay()+"</MonthOfDate>\n");
+			buffer.append("<CycleTotal>"+financialProduct.getCycleTotal()+"</CycleTotal>\n");
+			
+			}catch(Exception e){
+				request.setAttribute("error", e.getMessage());
+				if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+			}
+		buffer.append("</SN>\n");
 		return buffer.toString();
 	}
-	
+	private static SimpleDateFormat ddf=new SimpleDateFormat("yyyy年MM月dd日");
 	public String xmlSPJF(HttpServletRequest request,HttpServletResponse response) {
 		
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		buffer.append("<SN>\n");
-		buffer.append("</SN>\n");		
+		try {
+			String id = request.getParameter("id");
+			
+			ClientJob clientJob = new ClientJob();
+			clientJob.setId(new Integer(id));
+			clientJob.retrieve();
+			
+			Client client = new Client();
+			client.setId(clientJob.getClientId());
+			client.retrieve();
+			
+			AddressBook addressBook = new AddressBook();
+			addressBook.setId(client.getLivingAddressBookId());
+			addressBook.retrieve();
+			
+			Store store = new Store();
+			store.setId(clientJob.getStoreId());
+			store.retrieve();
+			
+			buffer.append("<ClientName>"+client.getClientName()+"</ClientName>\n");
+			buffer.append("<ClientID>"+client.getIdNo()+"</ClientID>\n");
+			
+			buffer.append("<JobDate>"+ddf.format(clientJob.getJobDate())+"</JobDate>\n");
+			
+			buffer.append("<Lookup>\n");
+			buffer.append("<ProductName>"+""+"</ProductName>\n");
+			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
+			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
+			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
+			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
+			buffer.append("</Lookup>\n");
+	
+			buffer.append("<Lookup>\n");
+			buffer.append("<ProductName>"+""+"</ProductName>\n");
+			buffer.append("<ProductPrice>"+""+"</ProductPrice>\n");
+			buffer.append("<ProductQuantity>"+""+"</ProductQuantity>\n");
+			buffer.append("<ProductModelNo>"+""+"</ProductModelNo>\n");
+			buffer.append("<ProductBrand>"+""+"</ProductBrand>\n");
+			buffer.append("</Lookup>\n");
+		
+		}catch(Exception e){
+			request.setAttribute("error", e.getMessage());
+			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
+		}
+		buffer.append("</SN>\n");
 		return buffer.toString();
 	}
 }

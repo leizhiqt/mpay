@@ -31,7 +31,7 @@ exclude-result-prefixes="fo">
 			(一式两份)
 		</fo:block>
 		<fo:block  space-before="1mm" font-size="8pt"   text-align="left">		
-			尊敬的___________
+			尊敬的：<xsl:value-of select="ClientName"/>
 		</fo:block>
 		<fo:block  space-before="1mm" font-size="8pt"   text-align="left" margin-left="5mm" >		
 			非常感谢您选择分期付款这一最新的消费方式。希望我们的服务在提高您生活质量的同时，能让您的生活更加时尚，更加现代化。
@@ -48,13 +48,13 @@ exclude-result-prefixes="fo">
 		<fo:table-header>
 		  <fo:table-row>
 		    <fo:table-cell  border="1pt solid black" >
-		      <fo:block  space-before="1mm"  text-align="left" padding-left="2mm" font-size="8pt">应付总金额（元）:________￥ </fo:block>
+		      <fo:block  space-before="1mm"  text-align="left" padding-left="2mm" font-size="8pt">应付总金额（元）:<xsl:value-of select="TotalMoney"/>￥ </fo:block>
 		    </fo:table-cell>
 		    <fo:table-cell  border="1pt solid black" font-size="8pt">
-		      <fo:block  space-before="1mm" text-align="left" padding-left="2mm" >每月还款额:_________￥ </fo:block>
+		      <fo:block  space-before="1mm" text-align="left" padding-left="2mm" >每月还款额:<xsl:value-of select="MonthOfDate"/>￥ </fo:block>
 		    </fo:table-cell>
 		      <fo:table-cell  border="1pt solid black" font-size="8pt">
-		      	<fo:block  space-before="1mm"  text-align="left" padding-left="2mm">分期期数：________</fo:block>
+		      	<fo:block  space-before="1mm"  text-align="left" padding-left="2mm">分期期数：<xsl:value-of select="CycleTotal"/></fo:block>
 		      </fo:table-cell>
 		  </fo:table-row>
 		</fo:table-header>
