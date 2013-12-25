@@ -72,6 +72,8 @@ table.tab_css_1 td.td_css{
 			</jsp:include>
 		</div>
 		
+		<%@ include file="../../incl/b_message.jsp"%>
+		
 				<table class="tab_css_1" width="98%" >
             		<tr>
 		

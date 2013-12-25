@@ -628,7 +628,7 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.retrieve();
 			request.setAttribute("clientJob", clientJob);
 			
-			if(clientJob.getUnLock()!=null || clientJob.getUnLock().equals("Y") ){
+			if(clientJob.getJobLock()!=null && clientJob.getJobLock().equals("Y") ){
 				throw new Exception("此合同已经上锁");
 			}
 			
@@ -699,7 +699,7 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.retrieve(tx.getConnection());
 				request.setAttribute("clientJob", clientJob);
 				
-				if(clientJob.getUnLock()!=null || clientJob.getUnLock().equals("Y") ){
+				if(clientJob.getJobLock()!=null && clientJob.getJobLock().equals("Y") ){
 					throw new Exception("此合同已经上锁");
 				}
 				
@@ -747,7 +747,7 @@ public class ClientInfoAction extends BaseSupport {
 				clientJobCheck.setCheckTime(new Date());
 				clientJobCheck.add(tx.getConnection());
 				
-				clientJob.setUnLock("Y");
+				clientJob.setJobLock("Y");
 				clientJob.update(tx.getConnection());
 				
 				tx.commit();

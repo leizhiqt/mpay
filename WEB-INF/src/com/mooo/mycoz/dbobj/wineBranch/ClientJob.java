@@ -22,7 +22,7 @@ public class ClientJob extends DBObject {
 	private String saleRemark;
 	private String cc;
 	private String oc;
-	private String unLock;
+	private String jobLock;
 	
 	public Integer getId() {
 		return id;
@@ -160,11 +160,11 @@ public class ClientJob extends DBObject {
 		this.oc = oc;
 	}
 
-	public String getUnLock() {
-		return unLock;
+	public String getJobLock() {
+		return jobLock;
 	}
 
-	public void setUnLock(String unLock) {
-		this.unLock = unLock;
+	public void setJobLock(String jobLock) {
+		this.jobLock = jobLock;
 	}
 }

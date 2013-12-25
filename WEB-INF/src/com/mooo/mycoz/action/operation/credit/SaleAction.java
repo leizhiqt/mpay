@@ -300,6 +300,14 @@ public class SaleAction extends BaseSupport {
 				user.retrieve();
 				
 				rowm.put("seller", user.getName());
+				
+				
+				clientJobTrack = new ClientJobTrack();
+				clientJobTrack.setClientJobId(clientJob.getId());
+				clientJobTrack.setProcessId(0);
+				clientJobTrack.retrieve();
+				
+				rowm.put("nowJobTime", CalendarUtils.dtformat(clientJobTrack.getJobDate()));
 			}
 			
 			request.setAttribute("clients", clients);
@@ -1141,13 +1149,12 @@ public class SaleAction extends BaseSupport {
 
 			SimpleDateFormat dformat = new SimpleDateFormat("yyyy年MM月dd日");
 			Date vDate = clientJob.getMonthOfDate();
+			
 			buffer.append("<MonthOfDate>"+dformat.format(vDate)+"</MonthOfDate>\n");
+			buffer.append("<PayFirst>"+dformat.format(vDate)+"</PayFirst>\n");
 			
 			vDate = clientJob.getJobDate();
 			buffer.append("<JobDate>"+dformat.format(vDate)+"</JobDate>\n");
-			
-			vDate = clientJob.getJobDate();
-			buffer.append("<PayFirst>"+dformat.format(vDate)+"</PayFirst>\n");
 			
 			dformat = new SimpleDateFormat("dd日");
 			vDate = clientJob.getMonthOfDate();

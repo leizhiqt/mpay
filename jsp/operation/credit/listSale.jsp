@@ -125,67 +125,65 @@
 <thead>
 <!-- 分页 -->
 <tr class="lp">
-<td colspan="12" >
+<td colspan="13" >
 <%@ include file="../../incl/pageNavigation.jsp"%>
 </td>
 </tr>
 
 <tr>
 <th></th>
-<th>店铺</th>
 <th>合同号</th>
-<th>合同日期</th>
+<th>合同时间</th>
 <th>状态</th>
+<th>状态时间</th>
 <th>身份证号</th>
 <th>客户名称</th>
 <th>贷款本金</th>
 <th>分期数</th>
 <th>月付</th>
 <th>销售代表</th>
-<th>操作</th>
+<th>店铺</th>
 </tr>
 </thead>
 
 <tbody>
 <c:forEach var="item" items="${clients}" varStatus="status">
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
-<td><input type="checkbox" name="id" value="${item.clientJob.id }"></td>
-<td><c:out value="${item.store.storeName }"/></td>
-<td><c:out value="${item.clientJob.jobNo }"/></td>
+
+<c:url value="/Sale.do" var="viewURL">
+	<c:param name="method">promptView</c:param>
+	<c:param name="id">${item.clientJob.id }</c:param>
+</c:url>
+
+<c:url value="/Sale.do" var="removeURL">
+	<c:param name="method">list</c:param>
+	<c:param name="id">${item.clientJob.id }</c:param>
+</c:url>
+
+<c:url value="/Sale.do" var="editURL">
+	<c:param name="method">promptEdit</c:param>
+	<c:param name="id">${item.clientJob.id }</c:param>
+</c:url>
+
+<td>
+<input type="checkbox" name="id" value="${item.clientJob.id }">
+<c:if test="${item.jobType.jobKey=='T'}">
+	<a href="${editURL }"><fmt:message key="Edit"/></a>
+</c:if>
+</td>
+
+<td><a href="${viewURL }"><c:out value="${item.clientJob.jobNo }"/></a></td>
+
 <td><fmt:formatDate value="${item.clientJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>
-<td><c:out value="${item.client.idNo }"/></td>
+<td><fmt:formatDate value="${item.clientJob.jobDate }" type="both" /></td>
+<td><c:out value="${item.nowJobTime }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>
 <td><c:out value="${item.clientJob.totalPrice-item.clientJob.selfAmount }"/></td>
 <td><c:out value="${item.financialProduct.cycleTotal }"/></td>
 <td><c:out value="${item.clientJob.monthOfPay }"/></td>
 <td><c:out value="${item.seller}"/></td>
-
-<td>
-	<c:url value="/Sale.do" var="viewURL">
-		<c:param name="method">promptView</c:param>
-		<c:param name="id">${item.clientJob.id }</c:param>
-	</c:url>
-	
-	<c:url value="/Sale.do" var="removeURL">
-		<c:param name="method">list</c:param>
-		<c:param name="id">${item.clientJob.id }</c:param>
-	</c:url>
-	
-	<c:url value="/Sale.do" var="editURL">
-		<c:param name="method">promptEdit</c:param>
-		<c:param name="id">${item.clientJob.id }</c:param>
-	</c:url>
-	
-	<a href="${viewURL }"><fmt:message key="View"/></a>
-	
-	<c:if test="${item.jobType.jobKey=='T'}">
-		<a href="${editURL }"><fmt:message key="Edit"/></a>
-	</c:if>
-	<%--
-	<a href="${removeURL }"><fmt:message key="Delete"/></a>
-	 --%>
-</td>
+<td><c:out value="${item.store.storeName }"/></td>
 
 </tr>
 </c:forEach>
