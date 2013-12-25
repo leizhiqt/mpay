@@ -60,7 +60,11 @@ table.tab_css_1 td.td_css{
 </head>
 
 <body>
-			<form method="post">${clientJob.id }
+<c:url value="/ClientInfo.do" var="defURL">
+	<c:param name="method">promptApproval</c:param>
+</c:url>
+
+			<form method="post"  action="${defURL }">
 			<input type="hidden" name="id" value="${clientJob.id }">
 			
 		<div id="gtop">
