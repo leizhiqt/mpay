@@ -708,61 +708,97 @@ change3(0);
 					<tr>
 
 						<td width="60" align="right">身份证</td>
-				   	 <td align="left" width="272"><input type="file" name="contract.fIdCode" value="${ contract.fIdCode}"/></td>
+				   	 <td align="left" width="272">
+				   	 <input type="checkbox" name="docType" value="身份证"  />
+				   	 </td>
 
 						<td align="right">社保卡</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fSocialCard" value="${contract.fSocialCard }"/></td>
+						<td colspan="3" align="left">
+										   	 <input type="checkbox" name="docType" value="社保卡"/>
+						
+						</td>
 
 				    </tr>
 					<tr>
 
 						<td align="right">银行卡</td>
-				    <td align="left"><input type="file" name="contract.fBankCard" /></td>
+				    <td align="left">
+				 	<input type="checkbox" name="docType" value="银行卡" />
+				    
+				    </td>
 
 						<td align="right">银行对账单</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fBankStatement" /></td>
+						<td colspan="3" align="left">
+							<input type="checkbox" name="docType" value="银行对账单"  />
+						
+						</td>
 
 				    </tr>
 					<tr>
 						<td align="right">户口本</td>
-						<td align="left"><input type="file" name="contract.fResidenceBooklet" /></td>
+						<td align="left">
+						<input type="checkbox" name="docType" value="户口本"/>
+						
+						</td>
 
 						<td align="right">大学学生证</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fSid" />					  
+						<td colspan="3" align="left">
+
+						<input type="checkbox" name="docType" value="大学学生证"  />
+						
+						</td>					  
 					</tr>
 					<tr>
 
 						<td align="right">房产证</td>
-				    <td align="left"><input type="file" name="contract.fHouseCard" /></td>
+				    <td align="left">
+				    	<input type="checkbox" name="docType" value="房产证" />
+				    
+				    </td>
 						<td align="right">行驶证</td>
-						<td colspan="3" align="left"><input type="file" name="contract.fDirvingCard" /></td>
+						<td colspan="3" align="left">
+						<input type="checkbox" name="docType" value="行驶证"  />
+						
+						</td>
 				    </tr>
 					<tr>
 
 						<td align="right">工卡</td>
-					    <td align="left"><input type="file" name="contract.fWorkCard" /></td>
+					    <td align="left">
+					   		<input type="checkbox" name="docType" value="工卡" />
+						</td>
 
 					  	<td align="right">大学学生证明（仅适用全日制大学学生)</td>
 
-						<td colspan="3" align="left"><input type="file" name="contract.fUid" /></td>
+						<td colspan="3" align="left">
+
+						<input type="checkbox" name="docType" value="大学学生证明（仅适用全日制大学学生)" />
+						
+						</td>
 					</tr>
 					<tr>
 						<td align="right">银行存折</td>
-						<td align="left"><input type="file" name="contract.fBankDeposit" /></td>
+						<td align="left">
+
+						<input type="checkbox" name="docType" value="银行存折" />
+						
+						</td>
 					    <td align="right">驾驶证</td>
-                        <td colspan="3" align="left"><input type="file" name="contract.fDirverCard" /></td>
+                        <td colspan="3" align="left">
+                        <input type="checkbox" name="docType" value="驾驶证" />
+                        
+                        </td>
 					</tr>
 					<tr>
 
 						<td align="right"  >其它</td>
-						<td align="left"><input type="file" name="contract.fOther" value="${contract.fOther }"/></td>
-					    <td align="right">邮寄地址</td>
-						<td colspan="3" align="left"><select id="postAddress" name="postAddress"
-							>
-							<option value="现居地址">现居地址</option>
-					        <option value="户籍地址">户籍地址</option>
-						    <option value="家庭地址">家庭地址</option>
-				        </select></td>
+						<td align="left">
+
+						<input type="checkbox" name="docType" value="其它"   />
+						
+						</td>
+					    
+						<td colspan="4" align="center"><input type="file" name="clientFile" /></td>
 					</tr>
 
 
@@ -1024,7 +1060,7 @@ change3(0);
 						<td align="left">
 							<c:out value="${totalPrice }"/><input type="hidden" name="clientJob.totalPrice"  value="${totalPrice }"/>
 						</td>
-					  	<td align="right">贷款用途</td>
+					  	<td align="right"><b style="color:red">*</b>贷款用途</td>
 						<td align="left"><select id="city4" name="clientJob.byUse"  style="width:70px;"
 						>
 								<option value="请选择" <c:if test="${clientJob.byUse=='请选择' }">selected</c:if> >请选择</option>
@@ -1081,6 +1117,13 @@ change3(0);
 						<td align="left"><input type="text" name="tBank.debitCard" value="${tBank.debitCard }"/></td>
 						<td align="right"  >第二银行卡开户银行</td>
 				    	<td align="left"><input type="text" name="tBank.bankName" value="${tBank.bankName }"/></td>
+				    	<td  align="right">邮件地址</td>
+						<td align="left"><select id="postAddress" name="postAddress"
+							>
+							<option value="现居地址">现居地址</option>
+					        <option value="户籍地址">户籍地址</option>
+						    <option value="家庭地址">家庭地址</option>
+				        </select></td>
 					</tr>
 
 				</table>

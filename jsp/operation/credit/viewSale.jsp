@@ -553,14 +553,20 @@ change3(0);
 
 					</tr>
 					<tr>
-					<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<td colspan="6">
+							
 							<c:forEach var="clientDoc" items="${docs}" varStatus="s">
-								<img src="${clientDoc.filepath}" class="pimg" width="120" height="120">
+								<c:out value="${clientDoc.docType}"></c:out>
 							</c:forEach>
 						</td>
 					</tr>
-
+					<tr>
+						<td colspan="6">
+							<c:forEach var="clientDoc" items="${docs}" varStatus="s">
+								<a href="${clientDoc.filepath}" >文件下传</a>
+							</c:forEach>
+						</td>
+					</tr>
 					<tr  >
 						<th colspan="6" align="left" class="tr8"><strong>收入资料</strong></th>
 

@@ -60,7 +60,7 @@ table.tab_css_1 td.td_css{
 </head>
 
 <body>
-			<form method="post">
+			<form method="post">${clientJob.id }
 			<input type="hidden" name="id" value="${clientJob.id }">
 			
 		<div id="gtop">
@@ -101,10 +101,10 @@ table.tab_css_1 td.td_css{
 			  			</td>
 			  			<td>
 			  			<c:forEach var="selfIdNoList" items="${selfIdNoList}" varStatus="s">
-								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${selfIdNoList.clientJob.id }' ><c:out value="${selfIdNoList.clientJob.jobNo }"/>&nbsp;</a>
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${selfIdNoList.clientJob.id }' target="_blank" ><c:out value="${selfIdNoList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>	
 						<c:forEach var="spuseIdNoList" items="${spuseIdNoList}" varStatus="s">
-								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${spuseIdNoList.clientJob.id }' ><c:out value="${spuseIdNoList.clientJob.jobNo }"/></a>
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${spuseIdNoList.clientJob.id }' target="_blank"><c:out value="${spuseIdNoList.clientJob.jobNo }"/></a>
 						</c:forEach>	
 						</td>			
 					</tr>
@@ -115,10 +115,10 @@ table.tab_css_1 td.td_css{
 						</td>
 						<td>
 			  			<c:forEach var="selfPhoneList" items="${selfPhoneList}" varStatus="s">
-								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${selfPhoneList.clientJob.id }"><c:out value="${selfPhoneList.clientJob.jobNo }"/>&nbsp;</a>
+								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${selfPhoneList.clientJob.id }" target="_blank"><c:out value="${selfPhoneList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>
 						<c:forEach var="spusePhoneNoList" items="${spusePhoneNoList}" varStatus="s">
-								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${spusePhoneNoList.clientJob.id }"><c:out value="${spusePhoneNoList.clientJob.jobNo }"/>&nbsp;</a>
+								<a href="/mpay/ClientInfo.do?method=promptApproval&id=${spusePhoneNoList.clientJob.id }" target="_blank"><c:out value="${spusePhoneNoList.clientJob.jobNo }"/>&nbsp;</a>
 						</c:forEach>
 						</td>
 					</tr>
@@ -128,7 +128,7 @@ table.tab_css_1 td.td_css{
 					</td>
 					<td>
 			  			<c:forEach var="homePhoneNoList" items="${homePhoneNoList}" varStatus="s">
-								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${homePhoneNoList.clientJob.id }' ><c:out value="${homePhoneNoList.clientJob.jobNo }"/></a>
+								<a href='/mpay/ClientInfo.do?method=promptApproval&id=${homePhoneNoList.clientJob.id }' target="_blank"><c:out value="${homePhoneNoList.clientJob.jobNo }"/></a>
 						</c:forEach>
 					</td>
 					</tr>
@@ -717,305 +717,11 @@ table.tab_css_1 td.td_css{
              <table class="tab_css_1" width="98%" >
 					<tbody>
 						<tr>
-                        	<td rowspan="2" width="100px" class="td_css"><strong> 文件</strong></td>
-							<td id="guest_infoM">
-								<table class="tab_css_1">
-		
-									<tbody>
-										<tr>
-											<td>
-												<input type="checkbox" name="contract.fIdCode"
-													value="身份证" id="contract.fIdCode-1" checked="checked"
-													disabled="disabled">
-												<label for="contract.fIdCode-1" class="checkboxLabel">
-													身份证
-												</label>
-												<input type="hidden"
-													id="__multiselect_verifyForm_contract_fIdCode"
-													name="__multiselect_contract.fIdCode" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fSocialCard"
-										value="社保卡" id="contract.fSocialCard-1"
-										checked="checked" disabled="disabled">
-									<label for="contract.fSocialCard-1"
-										class="checkboxLabel">
-										社保卡
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fSocialCard"
-										name="__multiselect_contract.fSocialCard" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fWorkCard"
-										value="工卡" id="contract.fWorkCard-1" checked="checked"
-										disabled="disabled">
-									<label for="contract.fWorkCard-1" class="checkboxLabel">
-										工卡
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fWorkCard"
-										name="__multiselect_contract.fWorkCard" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fBankCard"
-										value="银行卡" id="contract.fBankCard-1"
-										checked="checked" disabled="disabled">
-									<label for="contract.fBankCard-1" class="checkboxLabel">
-										银行卡
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fBankCard"
-										name="__multiselect_contract.fBankCard" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-		
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fBankStatement"
-										value="银行对账单" id="contract.fBankStatement-1"
-										disabled="disabled">
-									<label for="contract.fBankStatement-1"
-										class="checkboxLabel">
-										银行对账单
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fBankStatement"
-										name="__multiselect_contract.fBankStatement" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fBankDeposit"
-										value="银行存折" id="contract.fBankDeposit-1"
-										disabled="disabled">
-									<label for="contract.fBankDeposit-1"
-										class="checkboxLabel">
-										银行存折
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fBankDeposit"
-										name="__multiselect_contract.fBankDeposit" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox"
-										name="contract.fResidenceBooklet" value="户口本"
-										id="contract.fResidenceBooklet-1" checked="checked"
-										disabled="disabled">
-									<label for="contract.fResidenceBooklet-1"
-										class="checkboxLabel">
-										户口本
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fResidenceBooklet"
-										name="__multiselect_contract.fResidenceBooklet"
-										value="${client.otherPhone}" disabled="disabled">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-		
-			</tr>
-			<tr>
-				<td id="guest_infoM">
-					<table >
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fSid"
-										value="大学学生证" id="contract.fSid-1" disabled="disabled">
-									<label for="contract.fSid-1" class="checkboxLabel">
-										大学学生证
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fSid"
-										name="__multiselect_contract.fSid" value="${client.otherPhone}"
-										disabled="disabled">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fUid"
-										value="大学学生证明" id="contract.fUid-1"
-										disabled="disabled">
-									<label for="contract.fUid-1" class="checkboxLabel">
-										大学学生证明（仅适用全日制大学学生）
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fUid"
-										name="__multiselect_contract.fUid" 
-										disabled="disabled">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fHouseCard"
-										value="${bank2.bankName }" id="contract.fHouseCard-1"
-										disabled="disabled">
-									<label for="contract.fHouseCard-1"
-										class="checkboxLabel">
-										房产证
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fHouseCard"
-										name="__multiselect_contract.fHouseCard" value="${bank2.bankName }"
-										disabled="disabled">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fDirvingCard"
-										value="${bank2.bankName }" id="contract.fDirvingCard-1"
-										checked="checked" disabled="disabled">
-									<label for="contract.fDirvingCard-1"
-										class="checkboxLabel">
-										行驶证
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fDirvingCard"
-										name="__multiselect_contract.fDirvingCard" value="${bank2.bankName }"
-										disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-		
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fDirverCard" value="${bank2.bankName }"
-										 id="contract.fDirverCard-1"
-										checked="checked" disabled="disabled">
-									<label for="contract.fDirverCard-1"
-										class="checkboxLabel">
-										驾驶证
-									</label>
-									<input type="hidden" value="${bank2.bankName }"
-										id="__multiselect_verifyForm_contract_fDirverCard"
-										name="__multiselect_contract.fDirverCard" 															disabled="disabled">
-								</td>
-							</tr>
-		
-		
-						</tbody>
-					</table>
-				</td>
-				<td id="guest_infoM">
-					<table class="tab_css_1">
-						<tbody>
-							<tr>
-								<td>
-									<input type="checkbox" name="contract.fOther" value="${bank2.bankName }"
-										value="其它" id="contract.fOther-1" disabled="disabled">
-									<label for="contract.fOther-1" class="checkboxLabel">
-										其它
-									</label>
-									<input type="hidden"
-										id="__multiselect_verifyForm_contract_fOther"
-										name="__multiselect_contract.fOther" value="${bank2.bankName }"
-													disabled="disabled">
-											</td>
-										</tr>
-		
-		
-									</tbody>
-								</table>
-							</td>
-							<td id="guest_infoM"></td>
+						<td align="center">
+                        	<c:forEach var="clientDoc" items="${docs}" varStatus="s">
+								<c:out value="${clientDoc.docType}"></c:out>
+							</c:forEach>
+						</td>
 						</tr>
 					</tbody>
 				</table>   
@@ -1029,7 +735,6 @@ table.tab_css_1 td.td_css{
 		
 					<tbody>
 						<tr>
-						<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;"><div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="" /></div></div>
 						<c:forEach var="clientDoc" items="${clientDocs}" varStatus="s">
 							<td>
 							<a href="${clientDoc.filepath}">附件${s.index }</a>

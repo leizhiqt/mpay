@@ -426,7 +426,7 @@ public class SaleAction extends BaseSupport {
 				ActionSession.BRANCH_SESSION_KEY);
 		Integer sessionId = ActionSession.getInteger(request,
 				ActionSession.USER_SESSION_KEY);
-
+		String value = null;
 		Transaction tx = null;
 		try {
 			tx = new Transaction();
@@ -649,6 +649,10 @@ public class SaleAction extends BaseSupport {
 				throw new Exception("身份证非法输入");
 			}
 
+			if(clientJob.getByUse().equals("请选择")){
+				throw new Exception("请选择贷款用途");
+			}
+
 			int censusAddressBookId = IDGenerator.getNextID(tx.getConnection(),
 					AddressBook.class);
 			censusAddressBook.setId(censusAddressBookId);
@@ -724,15 +728,27 @@ public class SaleAction extends BaseSupport {
 	
 				client.add(tx.getConnection());
 			}
+			String docType[] = uf.getParameters("docType");
 			// 处理文件图片
 			for (int i = 1; i < pictureName.length; i++) {
-				System.out.println("pictureName" + pictureName[i]);
 
 				ClientDoc clientDoc = new ClientDoc();
 				int clientDocId = IDGenerator.getNextID(tx.getConnection(),
 						ClientDoc.class);
 				clientDoc.setClientId(clientId);
-				clientDoc.setDocTypeId(1);
+				
+				value = "";
+				if(docType!=null && docType.length>0){
+					for(int j=0;j<docType.length;j++){
+						value += docType[j]+",";
+					}
+				}
+				
+				if(value.lastIndexOf(",")>0)
+					value = value.substring(0,value.lastIndexOf(","));
+				
+				clientDoc.setDocType(value);
+
 				clientDoc.setFilepath(sPath + pictureName[i]);
 				clientDoc.setId(clientDocId);
 				clientDoc.add(tx.getConnection());
@@ -1318,15 +1334,27 @@ public class SaleAction extends BaseSupport {
 
 			client.update(tx.getConnection());
 
+			String docType[] = uf.getParameters("docType");
 			// 处理文件图片
 			for (int i = 1; i < pictureName.length; i++) {
-				System.out.println("pictureName" + pictureName[i]);
 
 				ClientDoc clientDoc = new ClientDoc();
 				int clientDocId = IDGenerator.getNextID(tx.getConnection(),
 						ClientDoc.class);
-				clientDoc.setClientId(clientJob.getClientId());
-				clientDoc.setDocTypeId(1);
+				clientDoc.setClientId(client.getId());
+				
+				value = "";
+				if(docType!=null && docType.length>0){
+					for(int j=0;j<docType.length;j++){
+						value += docType[j]+",";
+					}
+				}
+				
+				if(value.lastIndexOf(",")>0)
+					value = value.substring(0,value.lastIndexOf(","));
+				
+				clientDoc.setDocType(value);
+
 				clientDoc.setFilepath(sPath + pictureName[i]);
 				clientDoc.setId(clientDocId);
 				clientDoc.add(tx.getConnection());

@@ -8,6 +8,7 @@ alter table ClientJob add  CONSTRAINT `ClientJob_ibfk_5` FOREIGN KEY (`sessionId
 //Pay System Database Version1.0
 
 alter table ClientJob add `jobLock` char(1) DEFAULT 'N';
+alter table ClientDoc change `docTypeId`  `docType`  varchar(64) DEFAULT NULL;
 
 delete  from ClientJobSale  where  clientJobId IN (select id from ClientJob where id<29);
 delete from ClientJobCheck  where jobTrackId IN (select id  from ClientJobTrack  where  clientJobId IN (select id from ClientJob where id<29));

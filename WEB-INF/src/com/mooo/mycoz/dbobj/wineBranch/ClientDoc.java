@@ -5,7 +5,7 @@ import com.mooo.mycoz.db.DBObject;
 public class ClientDoc extends DBObject {
 	private Integer id;
 	private Integer clientId;
-	private Integer docTypeId;
+	private String docType;
 	private String filepath;
 	private Integer branchId;
 
@@ -25,12 +25,12 @@ public class ClientDoc extends DBObject {
 		this.clientId = clientId;
 	}
 
-	public Integer getDocTypeId() {
-		return docTypeId;
+	public String getDocType() {
+		return docType;
 	}
 
-	public void setDocTypeId(Integer docTypeId) {
-		this.docTypeId = docTypeId;
+	public void setDocType(String docType) {
+		this.docType = docType;
 	}
 
 	public String getFilepath() {
