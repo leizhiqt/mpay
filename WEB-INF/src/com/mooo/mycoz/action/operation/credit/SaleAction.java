@@ -318,11 +318,6 @@ public class SaleAction extends BaseSupport {
 			}
 			
 			request.setAttribute("clients", clients);
-			
-
-			dbobject.setRecord(page.getOffset(), page.getPageSize());
-
-			request.setAttribute("clients", dbobject.searchAndRetrieveList());
 		} catch (Exception e) {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
