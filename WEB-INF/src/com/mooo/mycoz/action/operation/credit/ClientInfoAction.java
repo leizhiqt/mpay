@@ -58,7 +58,6 @@ public class ClientInfoAction extends BaseSupport {
 			String endDate = request.getParameter("EndDate");
 			if(endDate==null){
 				now.add(Calendar.YEAR, 1);
-				now.add(Calendar.DAY_OF_MONTH, 1);
 				endDate = CalendarUtils.dtformat(now.getTime());
 			}
 			request.setAttribute("EndDate", endDate);
@@ -629,6 +628,10 @@ public class ClientInfoAction extends BaseSupport {
 			clientJob.retrieve();
 			request.setAttribute("clientJob", clientJob);
 			
+			if(clientJob.getUnLock()!=null || clientJob.getUnLock().equals("Y") ){
+				throw new Exception("此合同已经上锁");
+			}
+			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(new Integer(clientJobId));
 			clientJobTrack.setProcessId(-1);
@@ -695,8 +698,11 @@ public class ClientInfoAction extends BaseSupport {
 				clientJob.setId(new Integer(clientJobId));
 				clientJob.retrieve(tx.getConnection());
 				request.setAttribute("clientJob", clientJob);
-				clientJob.update(tx.getConnection());
-
+				
+				if(clientJob.getUnLock()!=null || clientJob.getUnLock().equals("Y") ){
+					throw new Exception("此合同已经上锁");
+				}
+				
 				//写入日志文件
 				ClientJobTrack orgTrack = new ClientJobTrack();
 				orgTrack.setClientJobId(new Integer(clientJobId));
@@ -740,6 +746,9 @@ public class ClientInfoAction extends BaseSupport {
 				clientJobCheck.setJobTrackId(clientJobTrack.getId());
 				clientJobCheck.setCheckTime(new Date());
 				clientJobCheck.add(tx.getConnection());
+				
+				clientJob.setUnLock("Y");
+				clientJob.update(tx.getConnection());
 				
 				tx.commit();
 			} catch (Exception e) {

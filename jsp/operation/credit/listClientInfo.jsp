@@ -146,7 +146,7 @@
 <tr <c:if test="${status.index%2==0 }">bgcolor="#ffffff"</c:if>  onMouseOver="trMouseOver(this);" onMouseOut="trMouseOut(this);">
 <td><c:out value="${item.store.storeName }"/></td>
 <td><c:out value="${item.clientJob.jobNo }"/></td>
-<td><fmt:formatDate value="${item.clientJobTrack.jobDate }" type="both" /></td>
+<td><fmt:formatDate value="${item.clientJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>
 <td><c:out value="${item.client.idNo }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>

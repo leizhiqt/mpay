@@ -654,19 +654,42 @@ public class SaleAction extends BaseSupport {
 			officeAddressBook.add(tx.getConnection());
 			
 			// 处理基本信息
-			int clientId = IDGenerator.getNextID(tx.getConnection(),
-					Client.class);
-			client.setId(clientId);
-			client.setLivingAddressBookId(livingAddressBookId);
-			client.setOfficeAddressBookId(officeAddressBookId);
-			client.setHomeAddressBookId(homeAddressBookId);
-			client.setCensusAddressBookId(censusAddressBookId);
-			client.setBranchId(branchId);
-			if(pictureName!=null && pictureName.length>0 )
-				client.setPhotoPath(sPath + pictureName[0]);
 
-			client.add(tx.getConnection());
+			Client existClient = new Client();
+			existClient.setIdNo(client.getIdNo());
+			
+			int count = existClient.count(tx.getConnection());
+			int clientId = 0;
+			if(count>0){
+				clientId = existClient.getId();
+				client.setId(clientId);
+				if(livingAddressBook.getStreet()!=null)
+				client.setLivingAddressBookId(livingAddressBookId);
+				if(officeAddressBook.getStreet()!=null)
+				client.setOfficeAddressBookId(officeAddressBookId);
+				if(homeAddressBook.getStreet()!=null)
+				client.setHomeAddressBookId(homeAddressBookId);
+				if(censusAddressBook.getStreet()!=null)
+				client.setCensusAddressBookId(censusAddressBookId);
+				client.setBranchId(branchId);
+				if(pictureName!=null && pictureName.length>0 )
+					client.setPhotoPath(sPath + pictureName[0]);
 
+				client.update(tx.getConnection());
+			}else {
+				clientId = IDGenerator.getNextID(tx.getConnection(),
+						Client.class);
+				client.setId(clientId);
+				client.setLivingAddressBookId(livingAddressBookId);
+				client.setOfficeAddressBookId(officeAddressBookId);
+				client.setHomeAddressBookId(homeAddressBookId);
+				client.setCensusAddressBookId(censusAddressBookId);
+				client.setBranchId(branchId);
+				if(pictureName!=null && pictureName.length>0 )
+					client.setPhotoPath(sPath + pictureName[0]);
+	
+				client.add(tx.getConnection());
+			}
 			// 处理文件图片
 			for (int i = 1; i < pictureName.length; i++) {
 				System.out.println("pictureName" + pictureName[i]);

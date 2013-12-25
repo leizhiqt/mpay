@@ -153,7 +153,6 @@ document.getElementById("sw_div").style.display="block";
             <fmt:message key="IP"/>:<c:out value="${IP }"/>
             <fmt:message key="Online"/>:<%=SessionCounter.getCount() %>
           </li>
-          <li class='Style_sw_li' onmouseover="this.className='Style_sw_li_a'" onmouseout="this.className='Style_sw_li'" onclick="sw_click()"  title="配色"></li>
           <li class='btn_Collection_li' onmouseover="this.className='btn_Collection_li_a';" onmouseout="this.className='btn_Collection_li';"  title="收藏" onclick="addfavorite();"><a href="#"></a></li>
           <li class='btn_off_li' onmouseover="this.className='btn_off_li_a';" onmouseout="this.className='btn_off_li';"  title="注销" onclick="logout();"><a href="#"></a></li>
           <li class='btn_quit_li' onmouseover="this.className='btn_quit_li_a';" onmouseout="this.className='btn_quit_li';"  title="退出" onclick="closeWin();"><a href="#"></a></li>
@@ -179,22 +178,7 @@ document.getElementById("sw_div").style.display="block";
  
   
   </div>
-            <div id="sw_div1">
-              <ul id="sw_div" class="sw_div_li"  onmouseover="sw_over()" onmouseout="sw_out()" onclick="">
-<!--                <li class="sd_ico"></li>-->
-                <li class="sd_l"></li>          
-                <li class="sd_Blue_li" onmouseover="this.className='sd_Blue_li_a';" onmouseout="this.className='sd_Blue_li';"  title="蓝色" onclick="setSkinColor('ISCSSobjects_style0');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_gold_li" onmouseover="this.className='sd_gold_li_a';" onmouseout="this.className='sd_gold_li';"  title="金色" onclick="setSkinColor('ISCSSobjects');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_Silver_li" onmouseover="this.className='sd_Silver_li_a';" onmouseout="this.className='sd_Silver_li';"  title="银灰色" onclick="setSkinColor('ISCSSobjects_style1');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_Azure_li" onmouseover="this.className='sd_Azure_li_a';" onmouseout="this.className='sd_Azure_li';"  title="天蓝色" onclick="setSkinColor('ISCSSobjects_style2');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_green_li" onmouseover="this.className='sd_green_li_a';" onmouseout="this.className='sd_green_li';"  title="草绿色" onclick="setSkinColor('ISCSSobjects_style3');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_pink_li" onmouseover="this.className='sd_pink_li_a';" onmouseout="this.className='sd_pink_li';"  title="粉红色" onclick="setSkinColor('ISCSSobjects_style4');window.parent.location.reload(true)"><a href="#"></a></li>
-                <li class="sd_green_li" onmouseover="this.className='sd_green_li_a';" onmouseout="this.className='sd_green_li';"  title="绿色" onclick="setSkinColor('ISCSSobjects_style5');top.location.reload(true)"><a href="#"></a></li> 
-                <li class="sd_r"></li> 
-              </ul>
-            </div>        
 
-</div>
 </body>
 <script language="javascript">
 mover(1);

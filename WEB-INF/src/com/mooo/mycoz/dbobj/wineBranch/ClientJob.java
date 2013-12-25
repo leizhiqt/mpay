@@ -22,7 +22,8 @@ public class ClientJob extends DBObject {
 	private String saleRemark;
 	private String cc;
 	private String oc;
-
+	private String unLock;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -157,5 +158,13 @@ public class ClientJob extends DBObject {
 
 	public void setOc(String oc) {
 		this.oc = oc;
+	}
+
+	public String getUnLock() {
+		return unLock;
+	}
+
+	public void setUnLock(String unLock) {
+		this.unLock = unLock;
 	}
 }
