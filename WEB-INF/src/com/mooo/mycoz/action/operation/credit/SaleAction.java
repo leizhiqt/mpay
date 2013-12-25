@@ -759,7 +759,7 @@ public class SaleAction extends BaseSupport {
 			clientJob.setStoreId(store.getId());
 			clientJob.setBranchId(branchId);
 			clientJob.setJobDate(new Date());
-			clientJob.update(tx.getConnection());
+			clientJob.add(tx.getConnection());
 
 			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
 					ClientJobTrack.class);
@@ -1165,140 +1165,140 @@ public class SaleAction extends BaseSupport {
 			request.setAttribute("oBank", oBank);
 
 			// check
-			// if(pictureName==null || pictureName.length<2){
-			// throw new Exception("请上传头像或图片");
-			// }
-			//
-			// if(client.getAge()==null || client.getAge()==0){
-			// throw new Exception("请填写客户年龄");
-			// }
-			// if(StringUtils.isNull(client.getIdAuthority())){
-			// throw new Exception("请填写发证机关");
-			// }
-			// if(StringUtils.isNull(client.getMobilePhone())){
-			// throw new Exception("请填写本人手机号或格式错误");
-			// }
-			// if(StringUtils.isNull(client.getMobileAddress())){
-			// throw new Exception("请填写手机号码归属地");
-			// }
-			// if(client.getHousing().equals("已婚")){
-			// if(StringUtils.isNull(client.getSpuseName())){
-			// throw new Exception("请填写配偶姓名和电话");
-			// }
-			// }
-			// if(censusAddressBook.getProvince().equals("请选择")){
-			// throw new Exception("请输入户籍地址的省");
-			// }
-			// if(StringUtils.isNull(censusAddressBook.getCity())){
-			// throw new Exception("请输入户籍地址的市");
-			// }
-			// if(StringUtils.isNull(censusAddressBook.getCounty())){
-			// throw new Exception("请输入户籍地址的区");
-			// }
-			// if(StringUtils.isNull(censusAddressBook.getStreet())){
-			// throw new Exception("请输入户籍地址的街道");
-			// }
-			// if(StringUtils.isNull(censusAddressBook.getCommunity())){
-			// throw new Exception("请输入户籍地址的小区");
-			// }
-			//
-			// if(livingAddressBook.getProvince().equals("请选择")){
-			// throw new Exception("请输入现居地址的省");
-			// }
-			// if(StringUtils.isNull(livingAddressBook.getCity())){
-			// throw new Exception("请输入现居地址的市");
-			// }
-			// if(StringUtils.isNull(livingAddressBook.getCounty())){
-			// throw new Exception("请输入现居地址的区");
-			// }
-			// if(StringUtils.isNull(livingAddressBook.getStreet())){
-			// throw new Exception("请输入现居地址的街道");
-			// }
-			//
-			// if(StringUtils.isNull(livingAddressBook.getCommunity())){
-			// throw new Exception("请输入现居地址的小区");
-			// }
-			//
-			// if(homeAddressBook.getProvince().equals("请选择")){
-			// throw new Exception("请输入家庭信息的省");
-			// }
-			// if(StringUtils.isNull(homeAddressBook.getCity())){
-			// throw new Exception("请输入家庭信息的市");
-			// }
-			// if(StringUtils.isNull(homeAddressBook.getCounty())){
-			// throw new Exception("请输入家庭信息的区");
-			// }
-			// if(StringUtils.isNull(homeAddressBook.getStreet())){
-			// throw new Exception("请输入家庭信息的街道");
-			// }
-			//
-			// if(StringUtils.isNull(homeAddressBook.getCommunity())){
-			// throw new Exception("请输入家庭信息的小区");
-			// }
-			//
-			//
-			// if(officeAddressBook.getProvince().equals("请选择")){
-			// throw new Exception("请输入所在单位信息的省");
-			// }
-			// if(StringUtils.isNull(officeAddressBook.getCity())){
-			// throw new Exception("请输入所在单位信息的市");
-			// }
-			// if(StringUtils.isNull(officeAddressBook.getCounty())){
-			// throw new Exception("请输入所在单位信息的区");
-			// }
-			// if(StringUtils.isNull(officeAddressBook.getStreet())){
-			// throw new Exception("请输入所在单位信息的街道");
-			// }
-			// if(StringUtils.isNull(officeAddressBook.getCommunity())){
-			// throw new Exception("请输入所在单位信息的小区");
-			// }
-			//
-			// if(StringUtils.isNull(client.getHomeName())){
-			// throw new Exception("请输入家庭成员名称");
-			// }
-			// if(client.getHomeType().equals("请选择")){
-			// throw new Exception("请输入家庭成员类型");
-			// }
-			//
-			// if(StringUtils.isNull(client.getClientName())){
-			// throw new Exception("请输入申请人名字");
-			// }
-			// if(StringUtils.isNull(client.getOtherContacts())){
-			// throw new Exception("请输入其他联系名字");
-			// }
-			// if(StringUtils.isNull(client.getOtherPhone())){
-			// throw new Exception("请输入其他联系电话");
-			// }
-			// if(client.getHomeInMonth() == null){
-			// throw new Exception("请输入家庭月收入");
-			// }
-			// if(client.getOnFullName() == null){
-			// throw new Exception("请输入单位/学校/个体全称");
-			// }
-			// if(client.getOnDivision() == null){
-			// throw new Exception("请输入任职部门或班级");
-			// }
-			// if(client.getOnDivision() == null){
-			// throw new Exception("请输入任职部门或班级");
-			// }
-			//
-			// if(oBank.getBankName() == null){
-			// throw new Exception("请输入银行开户名");
-			// }
-			//
-			// if(oBank.getDebitCard()== null){
-			// throw new Exception("请输入银行卡号");
-			// }
-			//
-			// if(oSale.getSaleName() == null){
-			// throw new Exception("请输入商品名称");
-			// }
-			//
-			// if(client.getIdNo()==null || (client.getIdNo().length()!=15 &&
-			// client.getIdNo().length()!=18)){
-			// throw new Exception("身份证非法输入");
-			// }
-			//
+			 if(pictureName==null || pictureName.length<2){
+			 throw new Exception("请上传头像或图片");
+			 }
+			
+			 if(client.getAge()==null || client.getAge()==0){
+			 throw new Exception("请填写客户年龄");
+			 }
+			 if(StringUtils.isNull(client.getIdAuthority())){
+			 throw new Exception("请填写发证机关");
+			 }
+			 if(StringUtils.isNull(client.getMobilePhone())){
+			 throw new Exception("请填写本人手机号或格式错误");
+			 }
+			 if(StringUtils.isNull(client.getMobileAddress())){
+			 throw new Exception("请填写手机号码归属地");
+			 }
+			 if(client.getHousing().equals("已婚")){
+			 if(StringUtils.isNull(client.getSpuseName())){
+			 throw new Exception("请填写配偶姓名和电话");
+			 }
+			 }
+			 if(censusAddressBook.getProvince().equals("请选择")){
+			 throw new Exception("请输入户籍地址的省");
+			 }
+			 if(StringUtils.isNull(censusAddressBook.getCity())){
+			 throw new Exception("请输入户籍地址的市");
+			 }
+			 if(StringUtils.isNull(censusAddressBook.getCounty())){
+			 throw new Exception("请输入户籍地址的区");
+			 }
+			 if(StringUtils.isNull(censusAddressBook.getStreet())){
+			 throw new Exception("请输入户籍地址的街道");
+			 }
+			 if(StringUtils.isNull(censusAddressBook.getCommunity())){
+			 throw new Exception("请输入户籍地址的小区");
+			 }
+			
+			 if(livingAddressBook.getProvince().equals("请选择")){
+			 throw new Exception("请输入现居地址的省");
+			 }
+			 if(StringUtils.isNull(livingAddressBook.getCity())){
+			 throw new Exception("请输入现居地址的市");
+			 }
+			 if(StringUtils.isNull(livingAddressBook.getCounty())){
+			 throw new Exception("请输入现居地址的区");
+			 }
+			 if(StringUtils.isNull(livingAddressBook.getStreet())){
+			 throw new Exception("请输入现居地址的街道");
+			 }
+			
+			 if(StringUtils.isNull(livingAddressBook.getCommunity())){
+			 throw new Exception("请输入现居地址的小区");
+			 }
+			
+			 if(homeAddressBook.getProvince().equals("请选择")){
+			 throw new Exception("请输入家庭信息的省");
+			 }
+			 if(StringUtils.isNull(homeAddressBook.getCity())){
+			 throw new Exception("请输入家庭信息的市");
+			 }
+			 if(StringUtils.isNull(homeAddressBook.getCounty())){
+			 throw new Exception("请输入家庭信息的区");
+			 }
+			 if(StringUtils.isNull(homeAddressBook.getStreet())){
+			 throw new Exception("请输入家庭信息的街道");
+			 }
+			
+			 if(StringUtils.isNull(homeAddressBook.getCommunity())){
+			 throw new Exception("请输入家庭信息的小区");
+			 }
+			
+			
+			 if(officeAddressBook.getProvince().equals("请选择")){
+			 throw new Exception("请输入所在单位信息的省");
+			 }
+			 if(StringUtils.isNull(officeAddressBook.getCity())){
+			 throw new Exception("请输入所在单位信息的市");
+			 }
+			 if(StringUtils.isNull(officeAddressBook.getCounty())){
+			 throw new Exception("请输入所在单位信息的区");
+			 }
+			 if(StringUtils.isNull(officeAddressBook.getStreet())){
+			 throw new Exception("请输入所在单位信息的街道");
+			 }
+			 if(StringUtils.isNull(officeAddressBook.getCommunity())){
+			 throw new Exception("请输入所在单位信息的小区");
+			 }
+			
+			 if(StringUtils.isNull(client.getHomeName())){
+			 throw new Exception("请输入家庭成员名称");
+			 }
+			 if(client.getHomeType().equals("请选择")){
+			 throw new Exception("请输入家庭成员类型");
+			 }
+			
+			 if(StringUtils.isNull(client.getClientName())){
+			 throw new Exception("请输入申请人名字");
+			 }
+			 if(StringUtils.isNull(client.getOtherContacts())){
+			 throw new Exception("请输入其他联系名字");
+			 }
+			 if(StringUtils.isNull(client.getOtherPhone())){
+			 throw new Exception("请输入其他联系电话");
+			 }
+			 if(client.getHomeInMonth() == null){
+			 throw new Exception("请输入家庭月收入");
+			 }
+			 if(client.getOnFullName() == null){
+			 throw new Exception("请输入单位/学校/个体全称");
+			 }
+			 if(client.getOnDivision() == null){
+			 throw new Exception("请输入任职部门或班级");
+			 }
+			 if(client.getOnDivision() == null){
+			 throw new Exception("请输入任职部门或班级");
+			 }
+			
+			 if(oBank.getBankName() == null){
+			 throw new Exception("请输入银行开户名");
+			 }
+			
+			 if(oBank.getDebitCard()== null){
+			 throw new Exception("请输入银行卡号");
+			 }
+			
+//			 if(oSale.getSaleName() == null){
+//			 throw new Exception("请输入商品名称");
+//			 }
+			
+			 if(client.getIdNo()==null || (client.getIdNo().length()!=15 &&
+			 client.getIdNo().length()!=18)){
+			 throw new Exception("身份证非法输入");
+			 }
+			
 			int censusAddressBookId = client.getCensusAddressBookId();
 			censusAddressBook.setId(censusAddressBookId);
 			censusAddressBook.setBranchId(branchId);
