@@ -261,6 +261,7 @@
 			<result name="promptApproval">/jsp/operation/credit/approvalClientInfo.jsp</result>
 			<result name="processApproval"></result>
 			<result name="processAddCheck"></result>
+			<result name="handleCheckResult"></result>
 		</action>
 		
 		<action	name="Audit" default="list"
