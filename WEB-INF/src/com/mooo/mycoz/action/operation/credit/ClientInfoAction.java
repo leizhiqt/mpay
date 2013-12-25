@@ -674,7 +674,10 @@ public class ClientInfoAction extends BaseSupport {
 		}
 		return "promptApproval";
 	}
-	
+	public String handleCheckResult(HttpServletRequest request,
+			HttpServletResponse response){
+		return "success";
+	}
 	public String processApproval(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (log.isDebugEnabled())

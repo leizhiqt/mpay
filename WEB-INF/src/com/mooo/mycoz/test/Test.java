@@ -49,9 +49,9 @@ public class Test {
 //		System.out.println("count expends:   " + hours + ":" + minutes + ":" + seconds);
 		
 		
-		Test t = new Test();
-//		t.dbTools();
-		t.test();
+		//		Test t = new Test();
+		new Test().dbTools();
+		//		t.test();
 	}
 
     /** 
@@ -239,7 +239,7 @@ public class Test {
 //		bd.dbToBean("payBranch","StoreUser");
 
 //		bd.dbToBean("payShared","JobCheck");
-		bd.dbToBean("payBranch","Bank");
+		bd.dbToBean("payBranch","FinancialCategory");
 
 //		bd.dbToBean("payShared","Store");
 //		bd.dbToBean("payShared","StoreType");

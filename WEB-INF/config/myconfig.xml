@@ -250,6 +250,8 @@
 			<result name="promptView">/jsp/operation/credit/viewSale.jsp</result>
 			<result name="export"></result>
 			<result name="print"></result>
+			<result name="queryFinancialProductByID"></result>
+			<result name="test"></result>
 		</action>
 		
 		<action	name="ClientInfo" default="list"
