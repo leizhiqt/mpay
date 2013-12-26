@@ -950,9 +950,13 @@ public class SaleAction extends BaseSupport {
 
 			// check
 			if (StringUtils.isNull(id)) {
-				throw new Exception("无效的合同号");
+				id = (String) request.getAttribute("id");
 			}
 
+			if (StringUtils.isNull(id)) {
+				throw new Exception("无效的合同号");
+			}
+			
 			ClientJob clientJob = new ClientJob();
 			clientJob.setId(new Integer(id));
 			clientJob.retrieve();
@@ -1083,10 +1087,11 @@ public class SaleAction extends BaseSupport {
 
 			// 先查询出原来合同信息
 			clientJobId = new Integer(value);
+			request.setAttribute("id", value);
+
 			ClientJob clientJob = new ClientJob();
 			clientJob.setId(clientJobId);
 			clientJob.retrieve();
-			
 
 			tx = new Transaction();
 			tx.start();
@@ -1155,19 +1160,22 @@ public class SaleAction extends BaseSupport {
 			List<?> list = bank.searchAndRetrieveList();
 			if (list.size() > 1) {
 				Bank tBank = (Bank) list.get(1);
-				uf.bindData(tBank, "oBank");
+				uf.bindData(tBank, "tBank");
+				tBank.setClientId(client.getId());
 				tBank.update(tx.getConnection());
 				request.setAttribute("tBank", tBank);
 			}
 			Bank oBank = (Bank) list.get(0);
 			uf.bindData(oBank, "oBank");
+			oBank.setClientId(client.getId());
 			oBank.update(tx.getConnection());
+			
 			request.setAttribute("oBank", oBank);
 
 			// check
-			 if(pictureName==null || pictureName.length<2){
-			 throw new Exception("请上传头像或图片");
-			 }
+//			 if(pictureName==null || pictureName.length<2){
+//			 throw new Exception("请上传头像或图片");
+//			 }
 			
 			 if(client.getAge()==null || client.getAge()==0){
 			 throw new Exception("请填写客户年龄");
@@ -1324,12 +1332,15 @@ public class SaleAction extends BaseSupport {
 			client.setId(clientJob.getClientId());
 			client.setBranchId(branchId);
 			uf.bindData(clientJob, "clientJob");
+			request.setAttribute("clientJob", clientJob);
 			if (pictureName != null && pictureName.length > 0)
 				client.setPhotoPath(sPath + pictureName[0]);
 
 			client.update(tx.getConnection());
 
 			String docType[] = uf.getParameters("docType");
+			
+		
 			// 处理文件图片
 			for (int i = 1; i < pictureName.length; i++) {
 
@@ -1357,6 +1368,16 @@ public class SaleAction extends BaseSupport {
 
 			clientJob.setStoreId(store.getId());
 			clientJob.setJobDate(new Date());
+			clientJob.setJobLock("N");
+			//设置金融产品
+			FinancialProduct financialProduct=new FinancialProduct();
+			uf.bindData(financialProduct, "financialProduct");
+			request.setAttribute("financialProduct", financialProduct);
+			
+			if(financialProduct.getId()==null)
+				throw new Exception("请选择金融产品");
+			
+			clientJob.setFinancialProductId( new Integer(financialProduct.getId()));
 			clientJob.update(tx.getConnection());
 
 			int clientJobTrackId = IDGenerator.getNextID(tx.getConnection(),
@@ -1374,7 +1395,6 @@ public class SaleAction extends BaseSupport {
 			orgTrack.setProcessId(jobCount);
 			orgTrack.update(tx.getConnection());
 			
-			
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setId(clientJobTrackId);
 			clientJobTrack.setClientJobId(clientJob.getId());
@@ -1384,6 +1404,7 @@ public class SaleAction extends BaseSupport {
 			clientJobTrack.setUserId(sessionId);
 			clientJobTrack.setBranchId(branchId);
 			clientJobTrack.add(tx.getConnection());
+			
 			ClientJobSale clientJobSale = new ClientJobSale();
 			clientJobSale.setClientJobId(clientJob.getId());
 			List<?> list2 = clientJobSale.searchAndRetrieveList();
@@ -1406,11 +1427,6 @@ public class SaleAction extends BaseSupport {
 				oSale1.update(tx.getConnection());
 				request.setAttribute("tSale", oSale1);
 			}
-						
-			
-			
-			//处理金融产品
-			
 
 			tx.commit();
 		} catch (Exception e) {
@@ -1419,8 +1435,9 @@ public class SaleAction extends BaseSupport {
 			if (log.isDebugEnabled())
 				log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
+			request.setAttribute("isLoad", "Y");
 
-			return "success";
+			return "promptEdit";
 		} finally {
 			tx.end();
 		}
@@ -1499,6 +1516,11 @@ public class SaleAction extends BaseSupport {
 
 			request.setAttribute("clientJobTrack", clientJobTrack);
 
+			User user = new User();
+			user.setId(clientJobTrack.getUserId());
+			user.retrieve();
+			request.setAttribute("user", user);
+			
 			JobType jobType = new JobType();
 			jobType.setId(clientJobTrack.getJobTypeId());
 			jobType.retrieve();

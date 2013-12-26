@@ -107,6 +107,19 @@
 										<td><input type="text" name="financialProduct.minPayPercent"
 											value="${financialProduct.minPayPercent }" size="4" maxlength="4" /></td>
 									</tr>
+									<tr>
+										<td class="tl"><fmt:message key="Product" /></td>
+										<td>
+											<ul>
+												<c:forEach var="products" items="${products}" varStatus="s">
+													<li> <input type="checkbox" name="productId" value="${products.id }"
+													<c:forEach var="result" items="${result}" varStatus="s">
+														<c:if test="${products.id==result.product.id }"> checked</c:if>
+													</c:forEach>>${products.productName }
+													</li>											
+												</c:forEach>
+											</ul>
+									</tr>
 							</table>
 						</td>
 					</tr>

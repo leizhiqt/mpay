@@ -42,12 +42,6 @@
 <caption><fmt:message key="Add"/> <fmt:message key="FinancialProduct"/></caption>
 
 <tbody>
-<tr>
-
-<td>
-
-</td>
-</tr>
 
 <tr>
 <td class="tl"><fmt:message key="Name"/></td>
@@ -90,7 +84,16 @@
 <td><input type="text" name="financialProduct.minPayPercent" size="10" maxlength="10"/><font class="fm">*</font></td>
 </tr>
 
-
+	
+<tr>
+	<td class="tl"><fmt:message key="Product" /></td>
+	<td>
+	<ul>
+		<c:forEach var="product" items="${products}" varStatus="s">
+			<li><input type="checkbox" name="productId" value="${product.id }">${product.productName }</li>
+		</c:forEach>
+	</ul>
+</tr>
 
 </table>
 </td>

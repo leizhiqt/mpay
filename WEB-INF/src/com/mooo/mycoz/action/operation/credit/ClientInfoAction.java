@@ -370,7 +370,7 @@ public class ClientInfoAction extends BaseSupport {
 			jobType.setNotEqual("jobKey", "W");
 
 			request.setAttribute("jobTypes", jobType.searchAndRetrieveList());
-
+			//审批选项
 			JobCheck jobCheck = new JobCheck();
 			jobCheck.setJobCategory("A");
 			jobCheck.addGroupBy("checkType");
@@ -557,8 +557,9 @@ public class ClientInfoAction extends BaseSupport {
 			ClientJobTrack clientJobTrack = new ClientJobTrack();
 			clientJobTrack.setClientJobId(clientJob.getId());
 			clientJobTrack.setProcessId(0);
-			clientJobTrack.setJobTypeId(2);
 
+
+			
 			if (clientJobTrack.count() > 0) {
 				clientJobTrack.retrieve();
 
@@ -578,6 +579,11 @@ public class ClientInfoAction extends BaseSupport {
 
 				request.setAttribute("jobChecks",
 						dbobject.searchAndRetrieveList());
+				
+				User user = new User();
+				user.setId(clientJobTrack.getUserId());
+				user.retrieve();
+				request.setAttribute("user", user);
 			}
 
 			AddressBook censusAddressBook = new AddressBook();
@@ -679,6 +685,8 @@ public class ClientInfoAction extends BaseSupport {
 				ActionSession.USER_SESSION_KEY);
 
 		String clientJobId = request.getParameter("id");
+		String jobCheckId = request.getParameter("jobCheckId");
+		String checkRemark = request.getParameter("checkRemark");
 		Transaction tx = null;
 		try {
 			tx = new Transaction();
@@ -721,19 +729,31 @@ public class ClientInfoAction extends BaseSupport {
 			}
 
 			ClientJobCheck clientJobCheck = new ClientJobCheck();
-			ParamUtil.bindData(request, clientJobCheck, "clientJobCheck");
 
 			nextId = IDGenerator.getNextID(tx.getConnection(),
 					ClientJobCheck.class);
 			clientJobCheck.setId(nextId);
 			clientJobCheck.setJobTrackId(clientJobTrack.getId());
 			clientJobCheck.setCheckTime(new Date());
+			clientJobCheck.setJobCheckId(new Integer(clientJobId));
+			clientJobCheck.setCheckRemark(checkRemark);
 			clientJobCheck.add(tx.getConnection());
-
+			
 			if (log.isDebugEnabled())
 				log.debug("clientJobId:" + clientJobId);
+			JSONObject js=new JSONObject();
+			js.put("reslut", "1");
+			response.getWriter().write(js.toString());
 			tx.commit();
 		} catch (Exception e) {
+			JSONObject js=new JSONObject();
+			js.put("reslut", "0");
+			try {
+				response.getWriter().write(js.toString());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 			tx.rollback();
 			if (log.isDebugEnabled())
@@ -743,7 +763,7 @@ public class ClientInfoAction extends BaseSupport {
 		} finally {
 			tx.end();
 		}
-		return "promptApproval";
+		return "success";
 	}
 	/**
 	 * 转码
@@ -764,25 +784,23 @@ public class ClientInfoAction extends BaseSupport {
 	public String handleCheckResult(HttpServletRequest request,
 			HttpServletResponse response){
 		
-		String checkType=null;
-		try {
-			request.setCharacterEncoding("ISO8859-1");   
-			checkType = ChangeToString(request.getParameter("checkType"));
-			System.out.println(">>>>>>>>>>>>>>>>"+checkType);
-		} catch (UnsupportedEncodingException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
+		String id =request.getParameter("jobCheckid"); 
 		JSONObject js=null;
 		try {
-			if(StringUtils.isNull(checkType)){
+			if(StringUtils.isNull(id)){
 				throw new Exception("请选择业务类型");
 			}
 			JobCheck jobCheck=new JobCheck();
-			jobCheck.setCheckType(checkType);
+			jobCheck.setId(new Integer(id));
+			jobCheck.retrieve();
+			
+			JobCheck jobCheck1=new JobCheck();
+			jobCheck1.setCheckType(jobCheck.getCheckType());;
+			jobCheck1.setJobCategory("A");
 			js=new JSONObject();
-			js.put("results", jobCheck.searchAndRetrieveList());
+			js.put("size", jobCheck1.count());
+			js.put("results", jobCheck1.searchAndRetrieveList());
+			
 			response.getWriter().write(js.toString());
 			
 		} catch (Exception e) {

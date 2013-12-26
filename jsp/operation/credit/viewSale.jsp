@@ -283,7 +283,7 @@ change3(0);
 					<tr height="10px" style="border: 1px solid #FFF;">
 
 						<td colspan="" align="right"  >销售顾问代码</td>
-						<td><c:out value="${UserName} "/>
+						<td><c:out value="${user.name} "/> <c:out value="${user.alias}"/></td>
 						<td align="right"  ><b style="color:red">*</b> 内部代码</td>
 						<td> <c:out value="${clientJob.privateKey} "/></td>
 						<td></td>

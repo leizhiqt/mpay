@@ -36,11 +36,12 @@ function fun(){
 			//var d = eval("("+data+")");//将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
 			//得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
 			//alert(data.financialProduct[0]);
-			//$("#canp").empty();
+			$("#canp").empty();
 			var i=0;
+			$("#canp").html("<option >金融产品选择</option>");
 			for(i=0;i<data.size;i++){
-			$("#canp").html("<option value='"+data.financialProducts[i].id+"'>"+data.financialProducts[i].financialName+"</option>");
-			}
+				$("#canp").append("<option value='"+data.financialProducts[i].id+"'>"+data.financialProducts[i].financialName+"</option>");
+				}
 			},
 		error:function(){
 			//alert("ciuo");
@@ -69,6 +70,7 @@ function chenge(){
 			//alert("12");
 			$('#zqx').val(data.totlaTime);
 			$('#yuef').val(data.monthPay);
+			$('#fid').val(data.financialProductId);
 			//$("#canp").empty();			
 		},
 		error:function(){
@@ -977,7 +979,7 @@ change3(0);
 						<td align="right"  >邮编</td>
 						<td align="left"><input type="text" name="officeAddressBook.zipCode" value="${ officeAddressBook.zipCode}"
 							maxlength="20" /></td>
-						<td align="right"  ><b style="color:red">*</b> 省/直辖市</td>
+						<td align="right"  ><b style="color:red">*</b> 省/直辖市<input type="hidden" id="fid" name="financialProduct.id"/></td>
 				        <td align="left">
 				        <select name="officeAddressBook.province" id="officeAddressBook">
 				           <option value="北京市" <c:if test="${officeAddressBook.province=='北京市' }">selected</c:if> >北京市</option>
@@ -1137,8 +1139,8 @@ change3(0);
 						<td align="right">金融产品</td>
 						
 					    <td align="left">
-								<select name="i"  onchange="chenge()" onclick="fun()">
-										<option id="canp" >金融产品选择</option>
+								<select name="i"  onchange="chenge()" onclick="fun()" id="canp">
+										<option >金融产品选择</option>
 										
 								</select>
 						</td>

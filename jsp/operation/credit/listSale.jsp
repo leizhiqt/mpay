@@ -176,8 +176,8 @@
 
 <td><fmt:formatDate value="${item.clientJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.jobType.nextState }"/></td>
-<td><fmt:formatDate value="${item.clientJob.jobDate }" type="both" /></td>
 <td><c:out value="${item.nowJobTime }"/></td>
+<td><c:out value="${item.client.idNo }"/></td>
 <td><c:out value="${item.client.clientName }"/></td>
 <td><c:out value="${item.clientJob.totalPrice-item.clientJob.selfAmount }"/></td>
 <td><c:out value="${item.financialProduct.cycleTotal }"/></td>

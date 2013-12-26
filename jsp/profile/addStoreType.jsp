@@ -69,7 +69,16 @@
 											class="fm">*</font></td>
 									</tr>
 									
-									
+									<tr>
+										<td class="tl"><fmt:message key="Store" /></td>
+										<td>
+										<ul>
+											<c:forEach var="store" items="${stores}" varStatus="s">
+												<li><input type="checkbox" name="storeId" value="${store.id }">${store.storeName }</li>
+											</c:forEach>
+										</ul>
+										</td>
+									</tr>
 									
 								</table>
 						</td>

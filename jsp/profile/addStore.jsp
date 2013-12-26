@@ -96,10 +96,12 @@
 									
 									<tr>
 										<td class="tl"><fmt:message key="Product" /></td>
-										<td><c:forEach var="product" items="${products}"
-												varStatus="s">
-												<input type="checkbox" name="productId" value="${product.id }">${product.productName }
+										<td>
+										<ul>
+											<c:forEach var="product" items="${products}" varStatus="s">
+												<li><input type="checkbox" name="productId" value="${product.id }">${product.productName }</li>
 											</c:forEach>
+										</ul>
 									</tr></table>
 						</td>
 					</tr>

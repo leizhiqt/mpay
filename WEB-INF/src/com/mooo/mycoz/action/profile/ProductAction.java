@@ -51,6 +51,7 @@ public class ProductAction extends BaseSupport {
 			dbobject.setRetrieveField("product", "modelNo");
 
 			dbobject.setOrderBy("product", "id","DESC");
+			dbobject.setGreater("product", "id", 0);
 			
 			Page page = new Page();
 			page.buildComponent(request, dbobject.count());

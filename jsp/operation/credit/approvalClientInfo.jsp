@@ -12,7 +12,86 @@
 <script type="text/javascript" src="jsp/js/jquery-1.9.0.js"></script>
 <script type="text/javascript" src="jsp/js/myhy.js"></script>
 <script type="text/javascript" src="jsp/js/util.js"></script>
+<script type="text/javascript">
 
+function fun(){
+	//alert("12");
+	$.ajax({
+		type:"post",
+		url:"ClientInfo.do",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+		data:{//设置数据源
+			method:"handleCheckResult",
+			jobCheckid:$('#chekOne').val()		
+		},
+		dataType:"json",//设置需要返回的数据类型
+		success:function(data){
+			//var d = eval("("+data+")");//将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
+			//得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
+			//alert(data.financialProduct[0]);
+			$("#canp").empty();
+			//var i=0;
+			for(i=0;i<data.size;i++){
+			$("#canp").append("<option value='"+data.results[i].id+"'>"+data.results[i].checkName+"</option>");
+			}
+			},
+		error:function(){
+			//alert("ciuo");
+			//window.location.href="companycome.jsp";
+		}//这里不要加","
+	});
+}
+function sut(){
+
+	//alert('123');
+	$.ajax({
+		type:"post",
+		url:"ClientInfo.do",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+		data:{//设置数据源
+			method:"processAddCheck",
+			jobCheckId:'2',
+			id:'1',
+			checkRemark:'d的'
+		},
+		dataType:"json",//设置需要返回的数据类型
+		success:function(data){
+			//var d = eval("("+data+")");//将数据转换成json类型，可以把data用alert()输出出来看看到底是什么样的结构
+			//得到的d是一个形如{"key":"value","key1":"value1"}的数据类型，然后取值出来
+			//alert(data.financialProduct[0]);
+			//$("#canp").empty();
+			//var i=0;
+			 var chekOne=$("#chekOne").find("option:selected").text();  //获取Select选择的Text
+			 var capp=$("#canp").find("option:selected").text(); 
+			 var now= new Date();  
+
+		        var year=now.getYear()+1900;  
+
+		        var month=now.getMonth()+1;  
+
+		        var day=now.getDate();  
+
+		        var hour=now.getHours();  
+
+		        var minute=now.getMinutes();  
+
+		        var second=now.getSeconds();  
+
+		        var nowTime=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;    
+			if(data.reslut==1){
+				$("#pp").append('<tr><td  width="100px" align="center"  class="td_css"><strong>记录</strong></td><td align="center"  class="td_css"></td><td align="center"  class="td_css">'+chekOne+'</td><td align="center"  class="td_css">'+capp+'</td><td align="left"  class="td_css" style="padding-left:4px;">'+$('#remake').val()+'</td><td align="left"  class="td_css" style="padding-left:4px;">'+nowTime+'</td></tr>');
+
+			}else{
+					alert("失败！");
+				}
+			},
+		error:function(){
+			//alert("ciuo");
+			//window.location.href="companycome.jsp";
+		}//这里不要加","
+	});
+
+	
+}
+</script>
 
 <style>
 	td{
@@ -570,7 +649,7 @@ table.tab_css_1 td.td_css{
 			</tr>
 			<tr>
 			  <td align="right"  class="td_css">
-					办公电话&nbsp;:
+					办公电话&nbsp;
 			  </td>
 			  <td align="left" id="guest_infoB" style="padding-left:4px;"><c:out   value="${client.onOfficePhone }"/></td>
 							<td align="right"  class="td_css">
@@ -679,7 +758,7 @@ table.tab_css_1 td.td_css{
 											<td>
 												<label id="verifyForm_contract_xxStartTime"
 													   >
-													60
+													<c:out value="${client.nowWorkingTime }"/>
 												</label>
 											</td>
 						</tr>
@@ -811,10 +890,10 @@ table.tab_css_1 td.td_css{
 				</td>
 			  <td align="left" id="guest_info52" style="padding-left:4px;"><c:out value="${clientJob.monthOfPay }"  /></td>
 				<td align="right"  class="td_css">
-					贷款本金(元):<c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/>
+					贷款本金(元):
 				</td>
 				
-			  <td align="left" id="guest_info56" style="padding-left:4px;"></td>
+			  <td align="left" id="guest_info56" style="padding-left:4px;"><c:out value="${clientJob.totalPrice-clientJob.selfAmount } "/></td>
 				<td align="right"  class="td_css">
 					每月还款日:
 				</td>
@@ -879,7 +958,7 @@ table.tab_css_1 td.td_css{
 		<td align="left"  class="td_css" style="padding-left:4px;">
 				审查时间
 			</td>
-		</tr>
+			</tr>
 		
 				<c:forEach var="item" items="${jobChecks }"  varStatus="status">
 				<tr>
@@ -892,6 +971,9 @@ table.tab_css_1 td.td_css{
 				</c:forEach>
 			</tbody>
 		</table>
+		<table class="tab_css_1"  width="98%" id="pp">
+		
+		</table>
 		<table class="tab_css_1" width="98%" border="1" cellpadding="0" cellspacing="0"
 			id="tab2">
 			<tbody>
@@ -900,9 +982,9 @@ table.tab_css_1 td.td_css{
 		      <strong>添加新注记 </strong></td>
 				  <td width="6%"  align="right" class="td_css">审查步骤:</td>
 					<td width="36%" align="left">
-									<select name="checkType" onchange="document.forms[0].submit();">
+									<select name="checkType" id="chekOne" onChange="fun()" >
 										<c:forEach var="items" items="${checkTypes}" varStatus="s">
-											<option value="${items.checkType}"
+											<option value="${items.id}"
 									
 											<c:if test="${items.checkType==param.checkType}">
 												selected="selected"
@@ -916,7 +998,7 @@ table.tab_css_1 td.td_css{
 					
 		<td width="15%" align="right" class="td_css" >结果：</td>
 		<td width="27%"  align="left" >
-		      					<select name="clientJobCheck.jobCheckId">
+		      					<select name="clientJobCheck.jobCheckId" id="canp">
 										<c:forEach var="items" items="${checkNames}" varStatus="s">
 											<option value="${items.id}"
 									
@@ -938,7 +1020,7 @@ table.tab_css_1 td.td_css{
 				备注
 			:</td>
 			<td  colspan="3">
-				<input type="text" name="clientJobCheck.checkRemark" size="120" value="${clientJobCheck.checkRemark}">
+				<input type="text" name="clientJobCheck.checkRemark" size="120" value="${clientJobCheck.checkRemark}" id="remake" />
 		  </td>
 		
 		 <td id="guest_info75" >
@@ -948,12 +1030,7 @@ table.tab_css_1 td.td_css{
 		<tr>
 			<td height="25px" colspan="7"
 				align="center"  >
-				
-						<jsp:include page="../../incl/actionb.jsp">
-							<jsp:param name="key" value="Add" />
-							<jsp:param name="action" value="ClientInfo.do" />
-							<jsp:param name="method" value="processAddCheck" />
-						</jsp:include>
+				<input type="button" onclick="sut()" value="添加"/>
 					</td>
 		
 				</tr>
@@ -962,7 +1039,7 @@ table.tab_css_1 td.td_css{
 		 <table width="98%" class="tab_css_1">
           <tr>
             <td  align="right"></td>
-            <td class="td_css" align="left" colspan="2">CC<input type="text" name="clientJob.cc" size="6" value=""> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="clientJob.oc" size="6" value=""> &nbsp;</td>
+            <td class="td_css" align="left" colspan="2">CC<input type="text" name="clientJob.cc" maxlength="2" value="" size="6"> &nbsp;&nbsp;&nbsp;&nbsp;OC<input type="text" name="clientJob.oc" maxlength="2" size="6" value=""> &nbsp;</td>
             <td>
             </td>
           </tr>
@@ -981,9 +1058,9 @@ table.tab_css_1 td.td_css{
 								</option>
 							--</c:forEach>
 						</select>&nbsp;
-				<input type="text" name="clientJobTrack.nbf"  size="6" value=""> 
-                <input type="text" name="clientJobTrack.nbs"  size="6" value=""> 
-                <input type="text" name="clientJobTrack.nbc"  size="6" value=""> 
+				<input type="text" name="clientJobTrack.nbf"  size="6" maxlength="2" value=""> 
+                <input type="text" name="clientJobTrack.nbs"  size="6" maxlength="2" value=""> 
+                <input type="text" name="clientJobTrack.nbc"  size="6" maxlength="2" value=""> 
 			</td>
             <td class="td_css" align="right">原因：</td>
             <td>
@@ -993,7 +1070,7 @@ table.tab_css_1 td.td_css{
           <tr>
             <td class="td_css" align="right">复审结果</td>
             <td>
-				<select name="clientJobTrack.jobTypeId" >
+				<select name="clientJobTrack.jobTypeId"  >
 							<c:forEach var="jobType" items="${jobTypes}" varStatus="s">
 								<option value="${jobType.id}"
 						
@@ -1005,9 +1082,9 @@ table.tab_css_1 td.td_css{
 								</option>
 							</c:forEach>
 						</select>&nbsp;
-				<input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
-                <input type="text" name="codeOne" size="6" value=""> 
+				<input type="text" name="codeOne" size="6" maxlength="2" value=""> 
+                <input type="text" name="codeOne" size="6" maxlength="2" value=""> 
+                <input type="text" name="codeOne" size="6" maxlength="2" value=""> 
 			</td>
             <td class="td_css" align="right">原因：</td>
             <td>

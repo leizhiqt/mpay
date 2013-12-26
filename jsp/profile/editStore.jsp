@@ -92,7 +92,7 @@
 											<c:forEach var="storeType" items="${storeTypes}" varStatus="s">
 													<option value="${storeType.id}"
 						
-													<c:if test="${storeType.id==param.store.storeTypeId}">
+													<c:if test="${storeType.id==store.storeTypeId}">
 														selected="selected" 
 													</c:if>
 														>${storeType.typeName}
@@ -104,12 +104,16 @@
 									
 									<tr>
 										<td class="tl"><fmt:message key="Product" /></td>
-										<td><c:forEach var="product" items="${products}" varStatus="s">
-												<input type="checkbox" name="productId" value="${product.id }"
+										<td>
+										<ul>
+											<c:forEach var="product" items="${products}" varStatus="s">
+												<li><input type="checkbox" name="productId" value="${product.id }"
 													<c:forEach var="nowProduct" items="${nowProducts}" varStatus="s">
 														<c:if test="${product.id==nowProduct.productId }"> checked</c:if>
 													</c:forEach>>${product.productName }
+													</li>
 											</c:forEach>
+										</ul>
 									</tr>
 							</table>
 						</td>

@@ -78,6 +78,22 @@
 											class="fm">*</font></td>
 									</tr>
 									
+																		<tr>
+									<td class="tl"><fmt:message key="Store" /></td>
+										<td>
+										<ul>
+											<c:forEach var="store" items="${stores}" varStatus="s">
+												<li>
+												
+													<input type="checkbox" name="storeId" value="${store.id }"
+													<c:forEach var="orgStore" items="${orgStores}" varStatus="s">
+														<c:if test="${store.id==orgStore.id }"> checked</c:if>
+													</c:forEach>>${store.storeName }
+													</li>
+											</c:forEach>
+										</ul>
+										</td>
+									</tr>
 							</table>
 						</td>
 					</tr>

@@ -12,9 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import com.mooo.mycoz.action.BaseSupport;
 import com.mooo.mycoz.common.StringUtils;
 import com.mooo.mycoz.db.Transaction;
-import com.mooo.mycoz.dbobj.wineBranch.StoreProduct;
-import com.mooo.mycoz.dbobj.wineShared.Product;
-import com.mooo.mycoz.dbobj.wineShared.StoreType;
+import com.mooo.mycoz.dbobj.wineShared.Store;
 import com.mooo.mycoz.dbobj.wineShared.StoreType;
 import com.mooo.mycoz.framework.component.Page;
 import com.mooo.mycoz.framework.util.IDGenerator;
@@ -64,9 +62,10 @@ public class StoreTypeAction extends BaseSupport {
 		
 		if (log.isDebugEnabled())log.debug("promptAdd");
 		try {
-			Product product = new Product();
-			product.setGreater("id", 0);
-			request.setAttribute("products", product.searchAndRetrieveList());
+			Store store = new Store();
+			store.setGreater("id", 0);
+			store.addOrderBy("storeName");
+			request.setAttribute("stores", store.searchAndRetrieveList());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,10 +82,22 @@ public class StoreTypeAction extends BaseSupport {
 			StoreType storeType=new StoreType();
 			ParamUtil.bindData(request,storeType,"storeType");
 			
-			int storeId = IDGenerator.getNextID(tx.getConnection(),StoreType.class);
-			storeType.setId(storeId);
-			
+			int nextId = IDGenerator.getNextID(tx.getConnection(),StoreType.class);
+			storeType.setId(nextId);
 			storeType.add(tx.getConnection());
+			
+			String[] storeId =  request.getParameterValues("storeId");
+
+			if(storeId!=null && storeId.length>0){
+				for(int i=0;i<storeId.length;i++){
+					Store store = new Store();
+					store.setId(new Integer(storeId[i]));
+					store.setStoreTypeId(storeType.getId());
+					
+					store.add(tx.getConnection());
+				}
+			}
+			
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -107,7 +118,6 @@ public class StoreTypeAction extends BaseSupport {
 			if(storeId==null){
 				request.setAttribute("error", "请选择商店！");
 				return "list";
-				
 			}
 			
 			StoreType storeType=new StoreType();
@@ -116,13 +126,15 @@ public class StoreTypeAction extends BaseSupport {
 
 			request.setAttribute("storeType", storeType);
 			
-			Product product = new Product();
-			product.setGreater("id", 0);
-			request.setAttribute("products", product.searchAndRetrieveList());
+			Store store = new Store();
+			store.setGreater("id", 0);
+			store.addOrderBy("storeName");
+			request.setAttribute("stores", store.searchAndRetrieveList());
 			
-			StoreProduct storeProduct = new StoreProduct();
-			storeProduct.setStoreId(storeType.getId());
-			request.setAttribute("nowProducts", storeProduct.searchAndRetrieveList());
+			Store orgStore = new Store();
+			orgStore.setStoreTypeId(storeType.getId());
+			request.setAttribute("orgStores", orgStore.searchAndRetrieveList());
+
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) log.debug("Exception Load error of: " + e.getMessage());
 			request.setAttribute("error", e.getMessage());
@@ -141,50 +153,53 @@ public class StoreTypeAction extends BaseSupport {
 			
 			storeType.update(tx.getConnection());
 			
-			String[] productId =  request.getParameterValues("productId");
+			String[] storeId =  request.getParameterValues("storeId");
 
-			if(productId!=null){
-				for(int i=0;i<productId.length;i++){
-					StoreProduct storeProduct = new StoreProduct();
-					storeProduct.setProductId(new Integer(productId[i]));
-					storeProduct.setStoreId(storeType.getId());
-					
-					if(storeProduct.count()<1){
-						storeProduct.setId(IDGenerator.getNextID(tx.getConnection(),StoreProduct.class));
-						storeProduct.add(tx.getConnection());
+			if(storeId!=null){
+				for(int i=0;i<storeId.length;i++){
+					Store store = new Store();
+					store.setId(new Integer(storeId[i]));
+					if(store.count()<1){
+						store.setId(IDGenerator.getNextID(tx.getConnection(),Store.class));
+						store.add(tx.getConnection());
+					}else {
+						store.setStoreTypeId(storeType.getId());
+						store.update(tx.getConnection());
 					}
 				}
+					
+				Store store = new Store();
+				store.setStoreTypeId(storeType.getId());
 				
-				StoreProduct storeProduct = new StoreProduct();
-				storeProduct.setStoreId(storeType.getId());
-				
-				List<Object> products = storeProduct.searchAndRetrieveList(tx.getConnection());
-				for(Object bean:products){
-					storeProduct=(StoreProduct)bean;
+				List<Object> stores = store.searchAndRetrieveList(tx.getConnection());
+				for(Object bean:stores){
+					store=(Store)bean;
 
 					boolean remove = false;
 					
-					for(int i=0;i<productId.length;i++){
-						int dId = new Integer(productId[i]); 
+					for(int i=0;i<storeId.length;i++){
+						int dId = new Integer(storeId[i]); 
 						
-						if(dId==storeProduct.getProductId()){
+						if(dId==store.getId()){
 							remove = true;
 							break;
 						}
 					}
 					
 					if(!remove){
-						storeProduct.delete(tx.getConnection());
+						store.setStoreTypeId(0);
+						store.update(tx.getConnection());
 					}
 				}
 			}else{//delete all
-				StoreProduct storeProduct = new StoreProduct();
-				storeProduct.setStoreId(storeType.getId());
+				Store store = new Store();
+				store.setStoreTypeId(storeType.getId());
 				
-				List<Object> stores = storeProduct.searchAndRetrieveList(tx.getConnection());
+				List<Object> stores = store.searchAndRetrieveList(tx.getConnection());
 				for(Object bean:stores){
-					storeProduct=(StoreProduct)bean;
-					storeProduct.delete(tx.getConnection());
+					store=(Store)bean;
+					store.setStoreTypeId(0);
+					store.update(tx.getConnection());
 				}
 			}
 			
@@ -216,13 +231,13 @@ public class StoreTypeAction extends BaseSupport {
 			for(int i=0;i<ids.length;i++){
 				Integer id = new Integer(ids[i]);
 				
-				StoreProduct storeProduct = new StoreProduct();
-				storeProduct.setStoreId(id);
+				Store store = new Store();
+				store.setId(id);
 
-				List<Object> stores = storeProduct.searchAndRetrieveList(tx.getConnection());
+				List<Object> stores = store.searchAndRetrieveList(tx.getConnection());
 				for(Object bean:stores){
-					storeProduct=(StoreProduct)bean;
-					storeProduct.delete(tx.getConnection());
+					store=(Store)bean;
+					store.delete(tx.getConnection());
 				}
 				
 				StoreType storeType=new StoreType();
